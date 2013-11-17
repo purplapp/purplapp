@@ -7,12 +7,23 @@ You can find more info at [the wiki](http://appdotnetwiki.net/w/index.php?title=
 
 Purplapp is being developed by [@charl](http://app.net/charl).
 
-### config.php
+### A Start
+
+You can see some very basic elements of Purplapp at [this site](http://charl.jvim.de/posts).
+
+Features: postcounts, and also PCA stuff. Check it out.
+
+### config.ph 
+
+p
 
 You need a config.php file that contains the following:
 
 ```
 <?php
+ 
+ 
+ 
 
 define('ACCESS_TOKEN', 'ACCESS_TOKEN_HERE');
 
