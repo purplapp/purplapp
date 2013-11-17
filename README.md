@@ -13,9 +13,9 @@ You can see some very basic elements of Purplapp at [this site](http://charl.jvi
 
 Features: postcounts, and also PCA stuff. Check it out.
 
-### config.ph 
+PHP assistance and hosting by [@jvimedia](http://app.net/jvimedia)
 
-p
+### config.ph 
 
 You need a config.php file that contains the following:
 
