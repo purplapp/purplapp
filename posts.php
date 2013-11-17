@@ -3,16 +3,24 @@
 
 <head>
 <?php
-$c=$_GET[cd];
-$c++;
-$id=$_GET["id"];
-if(!$id){ $id="@charl";}elseif($id=="Infinite Stratos"){ 
-echo "Ohai!<br>";
-$id="@charl";
- }
- if ($c > 1000){echo "$c Cheater";}
 
- if ($id[0]!="@"){ $id="@".$id;}
+$c = $_GET['cd'];
+$c++;
+
+$id = $_GET["id"];
+
+if(!$id) {
+	$id = "@charl";
+} elseif($id == "Infinite Stratos") { 
+	echo "Ohai!<br>";
+	$id = "@charl";
+}
+
+if ($c > 1000){echo "$c Cheater";}
+
+if ($id[0]!="@") { 
+	$id = "@".$id;
+}
 
 ?>
 
