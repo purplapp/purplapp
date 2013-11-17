@@ -15,7 +15,7 @@ Features: postcounts, and also PCA stuff. Check it out.
 
 PHP assistance and hosting by [@jvimedia](http://app.net/jvimedia)
 
-### config.ph 
+### config.php 
 
 You need a config.php file that contains the following:
 
