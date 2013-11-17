@@ -7,14 +7,16 @@ You can find more info at [the wiki](http://appdotnetwiki.net/w/index.php?title=
 
 Purplapp is being developed by [@charl](http://app.net/charl).
 
-==config.php==
+### config.php
 
 You need a config.php file that contains the following:
 
-'<?php
+```
+<?php
 
 define('ACCESS_TOKEN', 'ACCESS_TOKEN_HERE');
 
-?>'
+?>
+```
 
-You can get an accesstoken from [Dev Lite](http://dev-lite.jonathonduerig.com)
+You can get an access token from [@duerig's Dev Lite](http://dev-lite.jonathonduerig.com)
