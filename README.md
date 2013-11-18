@@ -5,7 +5,7 @@ purplapp
 
 You can find more info at [the wiki](http://appdotnetwiki.net/w/index.php?title=Purplapp).
 
-Purplapp is being developed by [@charl](http://app.net/charl).
+Purplapp is being developed by [@charl](http://app.net/charl), [@hu](http://app.net/hu) and [@jvimedia](http://app.net/jvimedia).
 
 ### A Start
 
