@@ -23,9 +23,9 @@ $data = $posts->user_data;
 <html>
 <head>
   <title>User Information for <? echo $data->name; ?></title>
-  <meta name="description" content="A test.">
-  <meta name="keywords" content="Test,PHP">
-  <meta name="author" content="Charl and Johannes">
+  <meta name="description" content="Purplapp - A Start.">
+  <meta name="keywords" content="Purplapp,ADN,app">
+  <meta name="author" content="@charl, @jvimedia, @hu">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
   <style>
@@ -99,13 +99,11 @@ $data = $posts->user_data;
   <!--Profile URL-->
   <p class="url"><a class="url" href="<?php echo $data->canonical_url; ?>">Profile URL</a>
     
-    -
-    
   <!--Authorised URL-->  
   <?php
 
   if($data->verified_domain) {
-    echo "<a class='url' href='http://".$data->verified_domain."'>Verified Domain:  \"".$data->verified_domain."\"</a>";
+    echo "- <a class='url' href='http://".$data->verified_domain."'>Verified Domain:  \"".$data->verified_domain."\"</a>";
   }
 
   ?>
@@ -139,15 +137,15 @@ $data = $posts->user_data;
       <td><?php echo $data->counts->followers; ?></td>
     </tr>
     <tr>
-      <td>Account Type</td>
+      <td>Account Type:</td>
       <td><?php echo $data->type; ?></td>
     </tr>
     <tr>
-      <td>User Location</td>
+      <td>User Location:</td>
       <td><?php echo $data->timezone; ?></td>
     </tr>
     <tr>
-      <td>User Number</td>
+      <td>User Number:</td>
       <td><?php echo $data->id; ?></td>
     </tr>
   </table>
