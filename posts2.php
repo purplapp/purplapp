@@ -20,7 +20,8 @@ $posts->getClubs();
 	<input type='text' name='u' />
 	<input type='submit' />
 </form>
-<b><?php echo $posts->user_id; ?></b> is a member of the following clubs:<br />
+<?php if($posts->getPosts() !== false) { ?>
+<b><?php echo $posts->user_id; ?></b> has <b><?php echo $posts->posts; ?></b> posts and is a member of the following clubs:<br />
 <ul>
 	<?php 
 
@@ -30,3 +31,4 @@ $posts->getClubs();
 
 	?>
 </ul>
+<?php } else { echo "No user found"; } ?>

@@ -44,15 +44,26 @@ class Posts {
 		if(!preg_match('/^@[a-zA-Z0-9]+$/', $get)) {
 			$this->user_id = "@".$get;
 		} else {
-			echo $this->user_id = $get;
+			$this->user_id = $get;
 		}
+	}
+
+	public function get_http_response_code($url) {
+		$headers = get_headers($url);
+		return substr($headers[0], 9, 3);
 	}
 
 	public function getPosts() {
 		$id = $this->user_id;
-		$json = file_get_contents('https://alpha-api.app.net/stream/0/users/'.$id.'?access_token='.ACCESS_TOKEN.'&include_user_annotations=1?callback=awesome?jsonp=parseResponse');
-		$obj = json_decode($json); 
-		$this->posts = $obj->data->counts->posts;
+		$url = "https://alpha-api.app.net/stream/0/users/".$id."?access_token=".ACCESS_TOKEN."&include_user_annotations=1?callback=awesome?jsonp=parseResponse";
+		
+		$json = @file_get_contents($url);
+		if($json == false) {
+			return false;
+		} else {
+			$obj = json_decode($json); 
+			$this->posts = $obj->data->counts->posts;	
+		}
 	}
 
 	public function getClubs() {
