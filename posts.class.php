@@ -7,7 +7,7 @@ class Posts {
 	public $posts = null;
 	public $clubs = array( 
 			 "RollClub" => 500
-			,"CrumptedClub" => 1000
+			,"CrumpetClub" => 1000
 			,"BitesizeCookieClub" => 2000
 			,"CrunchClub" => 2600
 			,"MysteryScienceClub" => 3000
