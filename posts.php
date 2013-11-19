@@ -91,6 +91,8 @@ $data = $posts->user_data;
       <br>
   </div>
 
+  <br>
+
   <form method='GET' action=''>
     <input type='text' name='u' value="<?php echo $data->username; ?>"/>
     <input type='submit' />
@@ -113,6 +115,7 @@ $data = $posts->user_data;
     <?php echo $data->description->html; ?>
   </p>
 
+  <hr>
 
   <!--Info-->
   <table class="">
@@ -141,7 +144,7 @@ $data = $posts->user_data;
       <td><?php echo $data->type; ?></td>
     </tr>
     <tr>
-      <td>User Location:</td>
+      <td>Location:</td>
       <td><?php echo $data->timezone; ?></td>
     </tr>
     <tr>
@@ -149,6 +152,8 @@ $data = $posts->user_data;
       <td><?php echo $data->id; ?></td>
     </tr>
   </table>
+
+  <hr>
 
   <h3>Post Count Achievements</h3>
   <?php if($posts->getPosts() !== false) { ?>
