@@ -164,4 +164,15 @@ $data = $posts->user_data;
     ?>
   </ul>
   <?php } else { echo "No user found"; } ?>
-</div>
+
+  <p class="credits">
+  Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.
+  <br>
+  Hosted by <a href="http://jvimedia.org">jvimedia.org</a>.
+  <br>
+  November 2013
+  </p>
+
+</div> 
+</body>
+</html>
