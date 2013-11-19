@@ -155,7 +155,7 @@ $data = $posts->user_data;
 
   <hr>
 
-  <h3>Post Count Achievements</h3>
+  <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements"> Post Count Achievements</a></h3>
   <?php if($posts->getPosts() !== false) { ?>
   <ul>
     <?php 
@@ -168,6 +168,8 @@ $data = $posts->user_data;
   </ul>
   <?php } else { echo "No user found"; } ?>
 
+  <hr>
+  
   <p class="credits">
   Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.
   <br>
