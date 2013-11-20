@@ -28,6 +28,9 @@ $data = $posts->user_data;
   <meta name="author" content="Charl and Johannes">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+  <link rel="stylesheet" href="bootstrap.min.css"/>
+  <link rel="stylesheet" href="http://bootstrap-fugue.azurewebsites.net/css/bootstrap-fugue-min.css"/>
+
   <style>
     body { font-family: Arial, sans-serif; }
     h1 { font-family: Arial, sans-serif;}
@@ -168,7 +171,7 @@ $data = $posts->user_data;
   <?php } else { echo "Data not loaded: bots aren't humans!"; } ?>
 
   <p class="credits">
-  Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.
+  Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>. <a href='http://p.yusukekamiyamane.com/' target='_blank'>Icons</a>
   <br>
   Hosted by <a href="http://jvimedia.org">jvimedia.org</a>.
   <br>

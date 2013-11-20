@@ -6,37 +6,37 @@ class Posts {
 	public $user_id = null;
 	public $posts = null;
 	public $clubs = array( 
-			 "Roll Club" => 500
-			,"Crumpted Club" => 1000
-			,"BitesizeCookie Club" => 2000
-			,"Crunch Club" => 2600
-			,"MysteryScience Club" => 3000
-			,"LDR Club" => 5000
-			,"IBMPC Club" => 8088
-			,"Cookie Club" => 10000
-			,"SpinalTap Club" => 11000
-			,"Breakfast Club" => 20000
-			,"Carat Club" => 24000
-			,"Peshawar Club" => 25000
-			,"MileHigh Club" => 30000
-			,"Pi Club" => 31416
-			,"Towel Club" => 42000
-			,"Bacon Club" => 50000
-			,"Commodore Club" => 64000
-			,"Motorola Club" => 68000
-			,"Trombone Club" => 76000
-			,"WiFi Club" => 80211
-			,"Tower Of Babble Club" => 100000
-			,"Mac Club" => 128000
-			,"TwitterLeaver Club" => 144000
-			,"GetALifeNoSrsly Club" => 200000
-			,"MeaninglessPostCount Club" => 231568
-			,"ADN Club" => 256000
-			,"Pensioners Club" => 401000
-			,"Laughter Club" => 555000
-			,"Gates Club" => 640000
-			,"JoyLuck Club" => 888000
-			,"Millionaires Club" => 1000000
+			 "<i class='icon-f-bread'></i> Roll Club" => 500
+			,"<i class='icon-f-cake-plain'></i> Crumpet Club" => 1000
+			,"<i class='icon-f-telephone-handset'></i> BitesizeCookie Club" => 2000
+			,"<i class='icon-f-breads'></i> Crunch Club" => 2600
+			,"<i class='icon-f-magnifier-left'></i> MysteryScience Club" => 3000
+			,"<i class='icon-f-shoe'></i> LDR Club" => 5000
+			,"<i class='icon-f-computer'></i> IBMPC Club" => 8088
+			,"<i class='icon-f-cookie-bite'></i> Cookie Club" => 10000
+			,"<i class='icon-f-pipette'></i> SpinalTap Club" => 11000
+			,"<i class='icon-f-cup'></i> Breakfast Club" => 20000
+			,"<i class='icon-f-diamond'></i> Carat Club" => 24000
+			,"<i class='icon-f-compass'></i> Peshawar Club" => 25000
+			,"<i class='icon-f-paper-plane'></i> MileHigh Club" => 30000
+			,"<i class='icon-f-chart-pie-separate'></i> Pi Club" => 31416
+			,"<i class='icon-f-water'></i> Towel Club" => 42000
+			,"<i class='icon-f-hamburger'></i> Bacon Club" => 50000
+			,"<i class='icon-f-crown'></i> Commodore Club" => 64000
+			,"<i class='icon-f-globe'></i> Motorola Club" => 68000
+			,"<i class='icon-f-music-beam-16'></i> Trombone Club" => 76000
+			,"<i class='icon-f-network-clouds'></i> WiFi Club" => 80211
+			,"<i class='icon-f-language'></i> Tower Of Babble Club" => 100000
+			,"<i class='icon-f-mac-os'></i> Mac Club" => 128000
+			,"<i class='icon-f-balloon-twitter'></i> TwitterLeaver Club" => 144000
+			,"<i class=''></i> GetALifeNoSrsly Club" => 200000
+			,"<i class=''></i> MeaninglessPostCount Club" => 231568
+			,"<i class=''></i> ADN Club" => 256000
+			,"<i class=''></i> Pensioners Club" => 401000
+			,"<i class=''></i> Laughter Club" => 555000
+			,"<i class=''></i> Gates Club" => 640000
+			,"<i class=''></i> JoyLuck Club" => 888000
+			,"<i class=''></i> Millionaires Club" => 1000000
 			);
 	public $memberclubs = array();
 
