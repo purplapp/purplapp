@@ -6,37 +6,37 @@ class Posts {
 	public $user_id = null;
 	public $posts = null;
 	public $clubs = array( 
-			 "RollClub" => 500
-			,"CrumptedClub" => 1000
-			,"BitesizeCookieClub" => 2000
-			,"CrunchClub" => 2600
-			,"MysteryScienceClub" => 3000
-			,"LDRClub" => 5000
-			,"IBMPCClub" => 8088
-			,"CookieClub" => 10000
-			,"SpinalTapClub" => 11000
-			,"BreakfastClub" => 20000
-			,"CaratClub" => 24000
-			,"PeshawarClub" => 25000
-			,"MileHighClub" => 30000
-			,"PiClub" => 31416
-			,"TowelClub" => 42000
-			,"BaconClub" => 50000
-			,"CommodoreClub" => 64000
-			,"MotorolaClub" => 68000
-			,"TromboneClub" => 76000
-			,"WiFiClub" => 80211
-			,"TowerOfBabble" => 100000
-			,"MacClub" => 128000
-			,"TwitterLeaverClub" => 144000
-			,"GetALifeNoSrslyClub" => 200000
-			,"MeaninglessPostCountClub" => 231568
-			,"ADNClub" => 256000
-			,"PensionersClub" => 401000
-			,"LaughterClub" => 555000
-			,"GatesClub" => 640000
-			,"JoyLuckClub" => 888000
-			,"MillionairesClub" => 1000000
+			 "Roll Club" => 500
+			,"Crumpted Club" => 1000
+			,"BitesizeCookie Club" => 2000
+			,"Crunch Club" => 2600
+			,"MysteryScience Club" => 3000
+			,"LDR Club" => 5000
+			,"IBMPC Club" => 8088
+			,"Cookie Club" => 10000
+			,"SpinalTap Club" => 11000
+			,"Breakfast Club" => 20000
+			,"Carat Club" => 24000
+			,"Peshawar Club" => 25000
+			,"MileHigh Club" => 30000
+			,"Pi Club" => 31416
+			,"Towel Club" => 42000
+			,"Bacon Club" => 50000
+			,"Commodore Club" => 64000
+			,"Motorola Club" => 68000
+			,"Trombone Club" => 76000
+			,"WiFi Club" => 80211
+			,"Tower Of Babble Club" => 100000
+			,"Mac Club" => 128000
+			,"TwitterLeaver Club" => 144000
+			,"GetALifeNoSrsly Club" => 200000
+			,"MeaninglessPostCount Club" => 231568
+			,"ADN Club" => 256000
+			,"Pensioners Club" => 401000
+			,"Laughter Club" => 555000
+			,"Gates Club" => 640000
+			,"JoyLuck Club" => 888000
+			,"Millionaires Club" => 1000000
 			);
 	public $memberclubs = array();
 
@@ -46,11 +46,6 @@ class Posts {
 		} else {
 			$this->user_id = $get;
 		}
-	}
-
-	public function get_http_response_code($url) {
-		$headers = get_headers($url);
-		return substr($headers[0], 9, 3);
 	}
 
 	public function getPosts() {
@@ -75,7 +70,11 @@ class Posts {
 			return false;
 		} else {
 			$obj = json_decode($json); 
-			$this->user_data = $obj->data;
+			if($obj->data->type == "human") {
+				$this->user_data = $obj->data;
+			} else {
+				return false;
+			}
 		}
 	}
 

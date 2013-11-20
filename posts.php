@@ -76,6 +76,8 @@ $data = $posts->user_data;
 
 <body>
 <div id="divMain">
+<?php if($posts->getData() !== false) { ?>
+<?php if($data->counts->posts !== 0) { ?>
   <h1><?php echo $data->name ?></h1>
 
   <!--Avatar Image-->
@@ -153,7 +155,6 @@ $data = $posts->user_data;
   </table>
 
   <h3>Post Count Achievements</h3>
-  <?php if($posts->getPosts() !== false) { ?>
   <ul>
     <?php 
 
@@ -163,7 +164,8 @@ $data = $posts->user_data;
 
     ?>
   </ul>
-  <?php } else { echo "No user found"; } ?>
+  <?php } else { echo "That user doesn't have any posts! :("; } ?>
+  <?php } else { echo "Data not loaded: bots aren't humans!"; } ?>
 
   <p class="credits">
   Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.
