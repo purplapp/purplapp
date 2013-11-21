@@ -66,7 +66,7 @@ $usertype = ucfirst($data->type);
       margin: 0 auto;
       width: 700px; /* if you want the width to be fixed, set to whatever you want */
     }
-
+    
     table {
       margin: 0 auto;
     }
@@ -76,7 +76,8 @@ $usertype = ucfirst($data->type);
     }
 
   </style>
-
+  <script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//d2zh9g63fcvyrq.cloudfront.net/adn.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'adn-button-js'));</script>
+  <script type="text/javascript" src="midway.min.js"></script>
 </head>
 
 <body>
@@ -178,7 +179,7 @@ $usertype = ucfirst($data->type);
   <?php } else { echo "Data not loaded: this account isn't marked as a human."; } ?>
 
   <hr>
-  
+
   <p class="credits">
   Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.<br><a href='http://p.yusukekamiyamane.com/' target='_blank'>PCA Icons</a>
   <br>
@@ -186,6 +187,9 @@ $usertype = ucfirst($data->type);
   <br>
   November 2013
   </p>
+
+  <div class="midway-horizontal midway"><p><span>Broadcast</span><br><a href='https://alpha.app.net/intent/subscribe/?channel_id=34622' class='adn-button' target='_blank' data-type='subscribe' data-width='141' data-height='21' data-size='11' data-channel-id='34622' >Subscribe on App.net</a></p>
+</div>
 
 </div> 
 </body>
