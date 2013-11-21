@@ -28,6 +28,9 @@ $data = $posts->user_data;
   <meta name="author" content="@charl, @jvimedia, @hu">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+  <link rel="stylesheet" href="bootstrap.min.css"/>
+  <link rel="stylesheet" href="http://bootstrap-fugue.azurewebsites.net/css/bootstrap-fugue-min.css"/>
+
   <style>
     body { font-family: Arial, sans-serif; }
     h1 { font-family: Arial, sans-serif;}
@@ -76,6 +79,8 @@ $data = $posts->user_data;
 
 <body>
 <div id="divMain">
+<?php if($posts->getData() !== false) { ?>
+<?php if($data->counts->posts !== 0) { ?>
   <h1><?php echo $data->name ?></h1>
 
   <!--Avatar Image-->
@@ -153,10 +158,14 @@ $data = $posts->user_data;
     </tr>
   </table>
 
+<<<<<<< HEAD
   <hr>
 
   <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements"> Post Count Achievements</a></h3>
   <?php if($posts->getPosts() !== false) { ?>
+=======
+  <h3>Post Count Achievements</h3>
+>>>>>>> 071b6ad1c9396e07075ed0deafe614f75caeecbf
   <ul>
     <?php 
 
@@ -166,12 +175,13 @@ $data = $posts->user_data;
 
     ?>
   </ul>
-  <?php } else { echo "No user found"; } ?>
+  <?php } else { echo "That user doesn't have any posts! :("; } ?>
+  <?php } else { echo "Data not loaded: bots aren't humans!"; } ?>
 
   <hr>
   
   <p class="credits">
-  Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.
+  Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>. <a href='http://p.yusukekamiyamane.com/' target='_blank'>Icons</a>
   <br>
   Hosted by <a href="http://jvimedia.org">jvimedia.org</a>.
   <br>
