@@ -17,6 +17,7 @@ $posts->getClubs();
 $posts->getData();
 
 $data = $posts->user_data;
+$usertype = ucfirst($data->type);
 
 ?>
 <!DOCTYPE html>
@@ -96,20 +97,22 @@ $data = $posts->user_data;
       <br>
   </div>
 
+  <br>
+
+  <!--Username Search Box-->
   <form method='GET' action=''>
     <input type='text' name='u' value="<?php echo $data->username; ?>"/>
     <input type='submit' />
   </form>
 
   <!--Profile URL-->
-  <p class="url"><a class="url" href="<?php echo $data->canonical_url; ?>">Profile URL</a>
-    
-    -
+  <p class="url"><a class="url" href="<?php echo $data->canonical_url; ?>"><?php echo $data->name; ?>'s Profile URL</a>
     
   <!--Authorised URL-->  
   <?php
 
   if($data->verified_domain) {
+    echo "- ";
     echo "<a class='url' href='http://".$data->verified_domain."'>Verified Domain:  \"".$data->verified_domain."\"</a>";
   }
 
@@ -120,6 +123,7 @@ $data = $posts->user_data;
     <?php echo $data->description->html; ?>
   </p>
 
+  <hr>
 
   <!--Info-->
   <table class="">
@@ -145,10 +149,10 @@ $data = $posts->user_data;
     </tr>
     <tr>
       <td>Account Type</td>
-      <td><?php echo $data->type; ?></td>
+      <td><?php echo $usertype; ?></td>
     </tr>
     <tr>
-      <td>User Location</td>
+      <td>Location</td>
       <td><?php echo $data->timezone; ?></td>
     </tr>
     <tr>
@@ -157,7 +161,9 @@ $data = $posts->user_data;
     </tr>
   </table>
 
-  <h3>Post Count Achievements</h3>
+  <hr>
+
+  <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements"> Post Count Achievements</a></h3>
   <ul>
     <?php 
 
@@ -171,7 +177,7 @@ $data = $posts->user_data;
   <?php } else { echo "Data not loaded: bots aren't humans!"; } ?>
 
   <p class="credits">
-  Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>. <a href='http://p.yusukekamiyamane.com/' target='_blank'>Icons</a>
+  Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.<br><a href='http://p.yusukekamiyamane.com/' target='_blank'>PCA Icons</a>
   <br>
   Hosted by <a href="http://jvimedia.org">jvimedia.org</a>.
   <br>
