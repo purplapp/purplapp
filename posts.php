@@ -20,6 +20,7 @@ $data = $posts->user_data;
 $usertype = ucfirst($data->type);
 
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -148,15 +149,15 @@ $usertype = ucfirst($data->type);
       <td><?php echo $data->counts->followers; ?></td>
     </tr>
     <tr>
-      <td>Account Type</td>
+      <td>Account Type:</td>
       <td><?php echo $usertype; ?></td>
     </tr>
     <tr>
-      <td>Location</td>
+      <td>Location:</td>
       <td><?php echo $data->timezone; ?></td>
     </tr>
     <tr>
-      <td>User Number</td>
+      <td>User Number:</td>
       <td><?php echo $data->id; ?></td>
     </tr>
   </table>
@@ -173,9 +174,11 @@ $usertype = ucfirst($data->type);
 
     ?>
   </ul>
-  <?php } else { echo "That user doesn't have any posts! :("; } ?>
-  <?php } else { echo "Data not loaded: bots aren't humans!"; } ?>
+  <?php } else { echo "This user doesn't have any posts!"; } ?>
+  <?php } else { echo "Data not loaded: this account isn't marked as a human."; } ?>
 
+  <hr>
+  
   <p class="credits">
   Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.<br><a href='http://p.yusukekamiyamane.com/' target='_blank'>PCA Icons</a>
   <br>
