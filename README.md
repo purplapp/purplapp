@@ -9,7 +9,7 @@ Purplapp is being developed by [@charl](http://app.net/charl), [@hu](http://app.
 
 ### A Start
 
-You can see some very basic elements of Purplapp at [this site](http://charl.jvim.de/posts).
+You can see some very basic elements of Purplapp at [this site](http://charl.jvim.de/posts.php).
 
 Features: postcounts, and also PCA stuff. Check it out.
 
