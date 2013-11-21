@@ -6,39 +6,6 @@ class Posts {
 	public $user_id = null;
 	public $posts = null;
 	public $clubs = array( 
-<<<<<<< HEAD
-			"🍞 - RollClub" => 500
-			,"🍰 - CrumpetClub" => 1000
-			,"🍥 - BitesizeCookieClub" => 2000
-			,"☎️ - CrunchClub" => 2600
-			,"📡 - MysteryScienceClub" => 3000
-			,"👟 - LDRClub" => 5000
-			,"💻 - IBMPCClub" => 8088
-			,"🍪 - CookieClub" => 10000
-			,"💉 - SpinalTapClub" => 11000
-			,"🍳 - BreakfastClub" => 20000
-			,"💎 - CaratClub" => 24000
-			,"🍛 - PeshawarClub" => 25000
-			,"✈️ - MileHighClub" => 30000
-			,"⭕️ - PiClub" => 31416
-			,"🐳 - TowelClub" => 42000
-			,"🐷 - BaconClub" => 50000
-			,"🔱 - CommodoreClub" => 64000
-			,"Ⓜ️ - MotorolaClub" => 68000
-			,"🎶 - TromboneClub" => 76000
-			,"📶 - WiFiClub" => 80211
-			,"🗼 - TowerOfBabble" => 100000
-			,"MacClub" => 128000
-			,"TwitterLeaverClub" => 144000
-			,"GetALifeNoSrslyClub" => 200000
-			,"MeaninglessPostCountClub" => 231568
-			,"ADNClub" => 256000
-			,"PensionersClub" => 401000
-			,"LaughterClub" => 555000
-			,"GatesClub" => 640000
-			,"JoyLuckClub" => 888000
-			,"MillionairesClub" => 1000000
-=======
 			 "<i class='icon-f-bread'></i> Roll Club - 500" => 500
 			,"<i class='icon-f-cake-plain'></i> Crumpet Club - 1000" => 1000
 			,"<i class='icon-f-telephone-handset'></i> BitesizeCookie Club - 2000" => 2000
@@ -70,7 +37,6 @@ class Posts {
 			,"<i class=''></i> Gates Club - 640000" => 640000
 			,"<i class=''></i> JoyLuck Club - 888000" => 888000
 			,"<i class=''></i> Millionaires Club - 1000000" => 1000000
->>>>>>> 071b6ad1c9396e07075ed0deafe614f75caeecbf
 			);
 	public $memberclubs = array();
 
