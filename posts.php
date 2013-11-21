@@ -23,9 +23,9 @@ $data = $posts->user_data;
 <html>
 <head>
   <title>User Information for <? echo $data->name; ?></title>
-  <meta name="description" content="Purplapp - A Start.">
-  <meta name="keywords" content="Purplapp,ADN,app">
-  <meta name="author" content="@charl, @jvimedia, @hu">
+  <meta name="description" content="A test.">
+  <meta name="keywords" content="Test,PHP">
+  <meta name="author" content="Charl and Johannes">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
   <link rel="stylesheet" href="bootstrap.min.css"/>
@@ -96,8 +96,6 @@ $data = $posts->user_data;
       <br>
   </div>
 
-  <br>
-
   <form method='GET' action=''>
     <input type='text' name='u' value="<?php echo $data->username; ?>"/>
     <input type='submit' />
@@ -106,11 +104,13 @@ $data = $posts->user_data;
   <!--Profile URL-->
   <p class="url"><a class="url" href="<?php echo $data->canonical_url; ?>">Profile URL</a>
     
+    -
+    
   <!--Authorised URL-->  
   <?php
 
   if($data->verified_domain) {
-    echo "- <a class='url' href='http://".$data->verified_domain."'>Verified Domain:  \"".$data->verified_domain."\"</a>";
+    echo "<a class='url' href='http://".$data->verified_domain."'>Verified Domain:  \"".$data->verified_domain."\"</a>";
   }
 
   ?>
@@ -120,7 +120,6 @@ $data = $posts->user_data;
     <?php echo $data->description->html; ?>
   </p>
 
-  <hr>
 
   <!--Info-->
   <table class="">
@@ -145,27 +144,20 @@ $data = $posts->user_data;
       <td><?php echo $data->counts->followers; ?></td>
     </tr>
     <tr>
-      <td>Account Type:</td>
+      <td>Account Type</td>
       <td><?php echo $data->type; ?></td>
     </tr>
     <tr>
-      <td>Location:</td>
+      <td>User Location</td>
       <td><?php echo $data->timezone; ?></td>
     </tr>
     <tr>
-      <td>User Number:</td>
+      <td>User Number</td>
       <td><?php echo $data->id; ?></td>
     </tr>
   </table>
 
-<<<<<<< HEAD
-  <hr>
-
-  <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements"> Post Count Achievements</a></h3>
-  <?php if($posts->getPosts() !== false) { ?>
-=======
   <h3>Post Count Achievements</h3>
->>>>>>> 071b6ad1c9396e07075ed0deafe614f75caeecbf
   <ul>
     <?php 
 
@@ -178,8 +170,6 @@ $data = $posts->user_data;
   <?php } else { echo "That user doesn't have any posts! :("; } ?>
   <?php } else { echo "Data not loaded: bots aren't humans!"; } ?>
 
-  <hr>
-  
   <p class="credits">
   Built by <a href="https://app.net/charl">@charl<a/> with assistance from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>. <a href='http://p.yusukekamiyamane.com/' target='_blank'>Icons</a>
   <br>
