@@ -74,6 +74,7 @@ $usertype = ucfirst($data->type);
     ul {
       list-style-type: none;
     }
+
     div#midway-horizontal{ 
     text-align: center;
     }
@@ -191,9 +192,8 @@ $usertype = ucfirst($data->type);
   November 2013
   </p>
 
-  <div class="midway-horizontal midway"><p><span>Broadcast</span><br><a href='https://alpha.app.net/intent/subscribe/?channel_id=34622' class='adn-button' target='_blank' data-type='subscribe' data-width='141' data-height='21' data-size='11' data-channel-id='34622' >Subscribe on App.net</a></p>
-</div>
-
+  <a href='https://alpha.app.net/intent/subscribe/?channel_id=34622' class='adn-button' target='_blank' data-type='subscribe' data-width='141' data-height='21' data-size='11' data-channel-id='34622' >Subscribe for Purlapp news on App.net</a><br>
+  <a href='https://alpha.app.net/purplapp' class='adn-button' target='_blank' data-type='follow' data-width='277' data-height='27' data-user-id='@purplapp' data-show-username='1' rel='me'>Follow @purplapp on App.net</a>
 </div> 
 </body>
 </html>
