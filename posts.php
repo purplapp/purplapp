@@ -190,6 +190,8 @@ $usertype = ucfirst($data->type);
   Hosted by <a href="http://jvimedia.org">jvimedia.org</a>.
   <br>
   November 2013
+  <br>
+  If you want to see your PCA clubs simply, check out <a href="http://charl.jvim.de/pca.php?id=<?php echo $userID?>">pca.php</a> instead.
   </p>
 
   <a href='https://alpha.app.net/intent/subscribe/?channel_id=34622' class='adn-button' target='_blank' data-type='subscribe' data-width='141' data-height='21' data-size='11' data-channel-id='34622' >Subscribe for Purlapp news on App.net</a><br>
