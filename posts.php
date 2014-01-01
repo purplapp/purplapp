@@ -189,7 +189,6 @@ $usertype = ucfirst($data->type);
   <br>
   Hosted by <a href="http://jvimedia.org">jvimedia.org</a>.
   <br>
-  November 2013
   <br>
   If you want to see your PCA clubs simply, check out <a href="http://charl.jvim.de/pca.php?id=<?php echo $userID?>">pca.php</a> instead.
   </p>
