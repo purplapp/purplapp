@@ -71,14 +71,29 @@ $usertype = ucfirst($data->type);
       margin: 0 auto;
     }
 
-    ul {
-      list-style-type: none;
-    }
-
     div#midway-horizontal{ 
-    text-align: center;
+		text-align: center;
     }
 
+	div#pca {
+        width: 600px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0;
+    }
+    
+    ul.pcatable {
+        margin: auto;
+        line-height: 1.4;
+        padding: 0;
+    }
+    
+    .pcatable li {
+        display: block;
+        text-align: center;
+        padding: 0;
+    }
+    
   </style>
   <script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//d2zh9g63fcvyrq.cloudfront.net/adn.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'adn-button-js'));</script>
   <script type="text/javascript" src="midway.min.js"></script>
@@ -132,7 +147,7 @@ $usertype = ucfirst($data->type);
   <hr>
 
   <!--Info-->
-  <table class="">
+  <table class="table">
     <tr>
       <td></td>
       <td></td>
@@ -170,15 +185,16 @@ $usertype = ucfirst($data->type);
   <hr>
 
   <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements"> Post Count Achievements</a></h3>
-  <ul>
-    <?php 
-
-    foreach($posts->memberclubs as $club) {
-      echo "<li>".$club."</li>";
-    }
-
-    ?>
-  </ul>
+  <div class="pca">
+	  <ul class="pcatable">
+	    <?php 
+			foreach($posts->memberclubs as $club){
+				echo "<li>".$club."</li>";
+	    	}
+	    ?>
+	  </ul>
+  </div>
+  
   <?php } else { echo "This user doesn't have any posts!"; } ?>
   <?php } else { echo "Data not loaded: this account isn't marked as a human."; } ?>
 
