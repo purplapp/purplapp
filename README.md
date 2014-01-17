@@ -9,15 +9,15 @@ Purplapp is being developed by [@charl](http://app.net/charl), [@hu](http://app.
 
 ### A Start
 
-You can see some very basic elements of Purplapp at [this site](http://charl.jvim.de/posts.php).
+You can see Purplapp at [purplapp.eu](http://purplapp.eu).
 
 Features: postcounts, and also PCA stuff. Check it out.
 
-PHP assistance and hosting by [@jvimedia](http://app.net/jvimedia)
+PHP assistance and hosting by [@jvimedia](http://app.net/jvimedia).
 
 ### config.php 
 
-You need a config.php file that contains the following:
+You need to change the config.php file to include an access token:
 
 ```
 <?php
