@@ -28,9 +28,9 @@ $dateresult = $date->format('Y-m-d H:i:s');
 <html>
 <head>
   <title>User Information for @<? echo $data->username; ?></title>
-  <meta name="description" content="A test.">
-  <meta name="keywords" content="Test,PHP">
-  <meta name="author" content="Charl and Johannes">
+  <meta name="description" content="Purplapp is an app.net app for stats. Here is the page for user information stats.">
+  <meta name="keywords" content="appdotnet,ADN,app.net,app,pca,clubs">
+  <meta name="author" content="Charl Dunois">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
   <link rel="stylesheet" href="bootstrap.min.css"/>
@@ -107,7 +107,7 @@ $dateresult = $date->format('Y-m-d H:i:s');
 <?php if($posts->getData() !== false) { ?>
 <?php if($data->counts->posts !== 0) { ?>
   <h1><?php echo $data->name ?></h1>
-  <h3><?php echo "<a class='url' href='http://".$data->canonical_url."'>@".$data->username."</a>" ?></h3>
+  <h3><?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?></h3>
 
   <!--Avatar Image-->
   <img class="avatar" src="<?php echo $data->avatar_image->url; ?>" alt="avatar" width="180" height="180"/> 
@@ -212,7 +212,7 @@ $dateresult = $date->format('Y-m-d H:i:s');
   Hosted by <a href="http://jvimedia.org">jvimedia.org</a>.
   <br>
   <br>
-  If you want to see your PCA clubs simply, check out <a href="http://charl.jvim.de/pca.php?id=<?php echo $userID?>">pca.php</a> instead.
+  If you want to see your PCA clubs simply, check out <a href="/pca.php?id=<?php echo $userID?>">pca.php</a> instead.
   </p>
   <a href='https://app.net/c/2zdw' class='adn-button' target='_blank' data-type='subscribe' data-width='139' data-height='21' data-size='11' data-channel-id='34622' >Subscribe on App.net</a>
   <br>
