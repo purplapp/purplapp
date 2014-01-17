@@ -22,6 +22,7 @@ class Posts {
 			,"<i class='icon-f-chart-pie'></i> - Pi Club - 31416" => 31416
 			,"<i class='icon-f-water'></i> - Towel Club - 42000" => 42000
 			,"<i class='icon-f-piggy-bank-empty'></i> - Bacon Club - 50000" => 50000
+			,"<i class='icon-f-rocket-fly'></i> - BrowncoatClub - 57000" => 57000
 			,"<i class='icon-f-crown'></i> - Commodore Club - 64000" => 64000
 			,"<i class='icon-f-globe'></i> - Motorola Club - 68000" => 68000
 			,"<i class='icon-f-music-beam-16'></i> - Trombone Club - 76000" => 76000
