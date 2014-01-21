@@ -1,0 +1,14 @@
+body { font-family: Arial, sans-serif; }
+body {
+      text-align: center; /* for ie6- */
+    }
+
+div#container {
+      text-align: left; /* fix alignment for ie */
+      margin: 0 auto;
+      width: 700px; /* if you want the width to be fixed, set to whatever you want */
+    }
+    
+</style>
+
+<script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//d2zh9g63fcvyrq.cloudfront.net/adn.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'adn-button-js'));</script>

@@ -34,39 +34,7 @@ $userID=$obj->data->username;
 
 ?>
 
-<style>
-  h1 { font-family: Arial, sans-serif;}
-  p.url { font-family: Arial, sans-serif;}
-  p.authurl { font-family: Arial, sans-serif;}
-  p.charljvim { font-family: Arial, sans-serif;}
-  p.bio { font-family: Arial; font-style: italic; sans-serif;}
-  p.bioheader { font-family: Arial, sans-serif;}
-  p.counts { font-family: Arial, sans-serif;}
-  p.pca { font-family: Arial, sans-serif;}
-  p.credits {font-family: Arial; font-style: italic; color:#808080; font-size:10px; sans-serif}
-
-  a:link {text-decoration:none;}
-  a:visited {text-decoration:none;}
-  a:hover {text-decoration:none;}
-  a:active {text-decoration:none;}
-
-  div.sub, iframe {
-      width: 280px;
-      height: 30px;
-      margin: 0 auto;
-      background-color: #FFFFFF;
-  }
-
-  body {
-    text-align: center; /* for ie6- */
-  }
-
-  div#container {
-    text-align: left; /* fix alignment for ie */
-    margin: 0 auto;
-    width: 700px; /* if you want the width to be fixed, set to whatever you want */
-  }
-</style>
+<link rel="stylesheet" type="text/css" href="pca.css" />
 
 </head>
 
