@@ -36,7 +36,7 @@ $dateresult = $date->format('Y-m-d H:i:s');
   <link rel="stylesheet" href="bootstrap.min.css"/>
   <link rel="stylesheet" href="http://bootstrap-fugue.azurewebsites.net/css/bootstrap-fugue-min.css"/>
 
-  <link rel="stylesheet" type="text/css" href="posts.css" />
+  <link rel="stylesheet" type="text/css" href="css/posts.css" />
 
   <script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//d2zh9g63fcvyrq.cloudfront.net/adn.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'adn-button-js'));</script>
   <script type="text/javascript" src="midway.min.js"></script>

@@ -34,7 +34,7 @@ $userID=$obj->data->username;
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="pca.css" />
+<link rel="stylesheet" type="text/css" href="css/pca.css" />
 
 </head>
 
