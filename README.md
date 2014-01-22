@@ -1,23 +1,27 @@
-purplapp
+Purplapp
 ========
 
-[Purplapp](http://app.net/purplapp) is an app.net statistics application.
+[Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
-You can find more info at [the wiki](http://appdotnetwiki.net/w/index.php?title=Purplapp).
+### Current Features
 
-Purplapp is being developed by [@charl](http://app.net/charl), [@hu](http://app.net/hu) and [@jvimedia](http://app.net/jvimedia).
+Here are some things you can do with Purplapp at the moment:
 
-### A Start
+* [Want to get some details on your account? Want to find out more about the PCA clubs you're in?](http://purplapp.eu/posts.php)
+* [Want to see the PCA clubs you're in - in a format great to just copy into your bio?](http://purplapp.eu/pca.php)
 
-You can see Purplapp at [purplapp.eu](http://purplapp.eu).
+### Future Features
 
-Features: postcounts, and also PCA stuff. Check it out.
+Here are some future things we plan to develop in order:
 
-PHP assistance and hosting by [@jvimedia](http://app.net/jvimedia).
+1. Auto updating bio with your latest PCA clubs? Fully customisable (maybe)?
+2. Want notifications on people about to hit CookieClub? What about other clubs too?
 
-### config.php 
+### Configuration
 
-You need to change the config.php file to include an access token:
+Put it on a server with PHP. :)
+
+However, you will need to change the config.php file to include an access token:
 
 ```
 <?php
@@ -25,4 +29,11 @@ define('ACCESS_TOKEN', 'ACCESS_TOKEN_HERE');
 ?>
 ```
 
-You can get an access token from [@duerig's Dev Lite](http://dev-lite.jonathonduerig.com)
+Make sure you don't share this access token with anyone. You can get an access token from [@duerig's Dev Lite](http://dev-lite.jonathonduerig.com).
+
+### Credits
+
+* Lead Developer: [@charl](http://app.net/charl)
+* Assistant Developer - PHP Speciality: [@jvimedia](http://app.net/jvimedia).
+* Assistant Developer - Backend Speciality: [@hu](http://app.net/hu)
+* Hosting: [@jvimedia](http://app.net/jvimedia)
