@@ -33,7 +33,7 @@ $dateresult = $date->format('Y-m-d H:i:s');
   <meta name="author" content="Charl Dunois">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-  <link rel="stylesheet" href="bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
   <link rel="stylesheet" href="http://bootstrap-fugue.azurewebsites.net/css/bootstrap-fugue-min.css"/>
 
   <link rel="stylesheet" type="text/css" href="css/posts.css" />
@@ -87,44 +87,44 @@ $dateresult = $date->format('Y-m-d H:i:s');
   <!--Info-->
   <table class="table">
     <tr>
-      	<td></td>
-      	<td></td>
+        <td></td>
+        <td></td>
     </tr>
     <tr>
-      	<td>Posts:</td>
-      	<td><?php echo $data->counts->posts; ?></td>
+        <td>Posts:</td>
+        <td><?php echo $data->counts->posts; ?></td>
     </tr>
     <tr>
-      	<td>Starred:</td>
-      	<td><?php echo $data->counts->stars; ?></td>
+        <td>Starred:</td>
+        <td><?php echo $data->counts->stars; ?></td>
     </tr>
     <tr>
-      	<td>Following:</td>
-      	<td><?php echo $data->counts->following; ?></td>
+        <td>Following:</td>
+        <td><?php echo $data->counts->following; ?></td>
     </tr>
     <tr>
-      	<td>Followers:</td>
-      	<td><?php echo $data->counts->followers; ?></td>
+        <td>Followers:</td>
+        <td><?php echo $data->counts->followers; ?></td>
     </tr>
     <tr>
-      	<td>Account Type:</td>
-      	<td><?php echo $usertype; ?></td>
+        <td>Account Type:</td>
+        <td><?php echo $usertype; ?></td>
     </tr>
     <tr>
-      	<td>Location:</td>
-      	<td><?php echo $data->timezone; ?></td>
+        <td>Location:</td>
+        <td><?php echo $data->timezone; ?></td>
     </tr>
     <tr>
-      	<td>User Number:</td>
-      	<td><?php echo $data->id; ?></td>
+        <td>User Number:</td>
+        <td><?php echo $data->id; ?></td>
     </tr>
     <tr>
-    	<td>Joined:</td>
-    	<td><?php echo $dateresult; ?></td>
+      <td>Joined:</td>
+      <td><?php echo $dateresult; ?></td>
     </tr> 
     <tr>
-    	<td>Locale:</td>
-    	<td><?php echo $data->locale; ?></td>
+      <td>Locale:</td>
+      <td><?php echo $data->locale; ?></td>
     </tr>
   </table>
 
@@ -132,13 +132,13 @@ $dateresult = $date->format('Y-m-d H:i:s');
 
   <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements"> Post Count Achievements</a></h3>
   <div class="pca">
-	  <ul class="pcatable">
-	    <?php 
-			foreach($posts->memberclubs as $club){
-				echo "<li>".$club."</li>";
-	    	}
-	    ?>
-	  </ul>
+    <ul class="pcatable">
+      <?php 
+      foreach($posts->memberclubs as $club){
+        echo "<li>".$club."</li>";
+        }
+      ?>
+    </ul>
   </div>
   
   <?php } else { echo "This user doesn't have any posts!"; } ?>
