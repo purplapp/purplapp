@@ -8,7 +8,7 @@ if(!empty($_GET['u'])) {
 } else {
   $userID = "@charl";
 }
-
+date_default_timezone_set('utc');
 $posts = new Posts;
 
 $posts->setUserID($userID);
@@ -17,6 +17,7 @@ $posts->getClubs();
 $posts->getData();
 
 $data = $posts->user_data;
+$anno = $data->annotations;
 $usertype = ucfirst($data->type);
 
 $date = new DateTime($data->created_at);
@@ -46,7 +47,10 @@ $dateresult = $date->format('Y-m-d H:i:s');
 <div id="divMain">
 <?php if($posts->getData() !== false) { ?>
 <?php if($data->counts->posts !== 0) { ?>
+
   <?php //var_dump($data); ?>
+
+  <a href="/index.html">Go Home</a>
   <h1><?php echo $data->name ?></h1>
   <h3><?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?></h3>
 
@@ -56,9 +60,6 @@ $dateresult = $date->format('Y-m-d H:i:s');
   <!--Cover Image-->
   <img class="cover" src="<?php echo $data->cover_image->url; ?>" alt="cover" height="180" /> 
 
-  <!--Follow Icon-->
-  <br>
-
   <!--Username Search Box-->
   <form method='GET' action=''>
     <input type='text' name='u' value="<?php echo $data->username; ?>"/>
@@ -66,8 +67,6 @@ $dateresult = $date->format('Y-m-d H:i:s');
   </form>
   
   <br>
-  
-  <!--Profile URL-->
   
   <!--Authorised URL-->  
   <?php
@@ -127,13 +126,25 @@ $dateresult = $date->format('Y-m-d H:i:s');
       <td>Locale:</td>
       <td><?php echo $data->locale; ?></td>
     </tr>
+    <tr>
+      <?php
+      foreach($anno as $annoC){
+          $type = $annoC->type;
+          if (strpos($type,"core.directory.blog") != false){
+          	$blogurl=$annoC->value->url;
+            echo "<td>Blog:</td>";
+            echo "<td>";
+            echo "<a href=\"$blogurl\">$blogurl</a>";
+            echo "</td>"; }}
+      ?>
+    </tr>
   </table>
+
+  
 
   <hr>
 
-  <?php //echo $data->['annotations']['com.appnetizens.userinput.birthday']['value']['birthday']); ?>
-
-  <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements"> Post Count Achievements</a></h3>
+  <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements">Post Count Achievements</a></h3>
   <div class="pca">
     <ul class="pcatable">
       <?php 
