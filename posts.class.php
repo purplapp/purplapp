@@ -65,7 +65,7 @@ class Posts {
 
 	public function getData() {
 		$id = $this->user_id;
-		$url = "https://alpha-api.app.net/stream/0/users/".$id."?access_token=".ACCESS_TOKEN."&include_user_annotations=1?callback=awesome?jsonp=parseResponse";
+		$url = "https://alpha-api.app.net/stream/0/users/".$id."/?access_token=".ACCESS_TOKEN."&include_user_annotations=1&jsonp=parseResponse";
 
 		$json = @file_get_contents($url);
 		if($json == false) {
@@ -90,5 +90,5 @@ class Posts {
 	}
 
 }
-
+//var_dump($user_data);
 ?>

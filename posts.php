@@ -46,6 +46,7 @@ $dateresult = $date->format('Y-m-d H:i:s');
 <div id="divMain">
 <?php if($posts->getData() !== false) { ?>
 <?php if($data->counts->posts !== 0) { ?>
+  <?php //var_dump($data); ?>
   <h1><?php echo $data->name ?></h1>
   <h3><?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?></h3>
 
@@ -129,6 +130,8 @@ $dateresult = $date->format('Y-m-d H:i:s');
   </table>
 
   <hr>
+
+  <?php //echo $data->['annotations']['com.appnetizens.userinput.birthday']['value']['birthday']); ?>
 
   <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements"> Post Count Achievements</a></h3>
   <div class="pca">
