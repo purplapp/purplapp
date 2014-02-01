@@ -134,6 +134,9 @@ $ppd = $data->counts->posts / $interval->days
       <td><?php echo $dateresult; ?></td>
     </tr> 
     <tr>
+      <td>ADN Age:</td>
+      <td><?php echo $interval->days; ?></td>
+    <tr>
       <td>Locale:</td>
       <td><?php echo $data->locale; ?></td>
     </tr>
