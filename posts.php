@@ -142,7 +142,7 @@ $ppd = $data->counts->posts / $interval->days
     </tr>
     <tr>
       <td>Posts Per Day:
-      <td><?php echo intval($ppd); ?></td>    
+      <td><?php echo round($ppd, 0, PHP_ROUND_HALF_UP); ?></td>    
     </tr>
     <tr>
       <?php

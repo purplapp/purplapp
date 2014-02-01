@@ -14,7 +14,6 @@ $id="@charl";
 
 ?>
 
-
 <title>Is <? echo $id; ?> a spammer?</title>
 <meta name="description" content="Purplapp is an app.net app for stats. Here is the page for post count stats.">
 <meta name="keywords" content="appdotnet,ADN,app.net,app,pca,clubs">
@@ -32,17 +31,23 @@ $obj = json_decode($json);
 $posts=$obj->data->counts->posts;
 $userID=$obj->data->username;
 
+//Set Default Timezone as UTC
 date_default_timezone_set('utc');
 
+//Calculate Today's Date and the Date Created
 $today = date('Y-m-d');
 $createdat= $obj->data->created_at;
 
+//Calculate how long user has been on ADN
 $date1 = new DateTime($createdat);
 $date2 = new DateTime($today);
 $interval = $date1->diff($date2);
 
+//Calculate posts per day
 $ppd = $posts / $interval->days
 
+//For testing floating point rounding.
+//$ppd = 100.5
 
 ?>
 
@@ -77,7 +82,7 @@ $ppd = $posts / $interval->days
   
   <!--Account Info-->
   <p class="stats">
-  <?php echo $id; ?> is a <?php echo $obj->data->type; ?> with <?php echo $obj->data->counts->posts; ?> posts in <?php echo $interval->days; ?> days. That means that <?php echo $id; ?> has an average of <?php echo intval($ppd); ?> posts per day.
+  <?php echo $id; ?> is a <?php echo $obj->data->type; ?> with <?php echo $obj->data->counts->posts; ?> posts in <?php echo $interval->days; ?> days. That means that <?php echo $id; ?> has an average of <?php echo round($ppd, 0, PHP_ROUND_HALF_UP); ?> posts per day.
   </p>
   
   <?php 
