@@ -1,7 +1,7 @@
 <?php
 //Required files
 require('config.php');
-require('posts.class.php');
+require('posts2.class.php');
 
 if(!empty($_GET['u'])) {
   $userID = $_GET['u'];
