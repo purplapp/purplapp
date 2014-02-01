@@ -24,14 +24,16 @@ $usertype = ucfirst($data->type);
 $date = new DateTime($data->created_at);
 $dateresult = $date->format('Y-m-d H:i:s');
 
-//calculating posts per day
+//calculate current date and date created (again)
 $today = date('Y-m-d');
 $createdat= $data->created_at;
 
+//calculate number of days on ADN
 $date1 = new DateTime($createdat);
 $date2 = new DateTime($today);
 $interval = $date1->diff($date2);
 
+//calculate posts per day
 $ppd = $data->counts->posts / $interval->days
 
 ?>

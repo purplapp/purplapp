@@ -51,7 +51,7 @@ $ppd = $posts / $interval->days
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="css/pca.css" />
+<link rel="stylesheet" type="text/css" href="css/spam.css" />
 
 </head>
 
@@ -83,20 +83,22 @@ $ppd = $posts / $interval->days
   <!--Account Info-->
   <p class="stats">
   <?php echo $id; ?> is a <?php echo $obj->data->type; ?> with <?php echo $obj->data->counts->posts; ?> posts in <?php echo $interval->days; ?> days. That means that <?php echo $id; ?> has an average of <?php echo round($ppd, 0, PHP_ROUND_HALF_UP); ?> posts per day.
-  </p>
   
+  <br><br>
+
   <?php 
   if ($ppd < 200) {
   	echo "This is not a spam user.";
   }
   else {
   	echo "This is a spam user.";
-  	echo "<br>";
+  	echo "<br><br>";
   	if ($obj->data->type = "human") {
   		echo "This user is incorrectly marked as a human. It should be marked as a feed. <br> Do you want to let ADN Support know about this user? <a href='https://alpha.app.net/intent/post/?text=%40adnsupport%20I%20think%20that%20this%20user%20". $id. "%20is%20marked%20incorrectly%20as%20a%20human'>Here's a post template for you to use.</a>";
   	}
   }
   ?>
+  </p>
   
   <p class="credits">
     Built by <a href="https://app.net/charl">@charl<a/>.
