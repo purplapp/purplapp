@@ -149,6 +149,10 @@ $userID=$obj->data->username;
         echo "🐳 &nbsp;";}else{ echo "";
       } 
 
+      if ($posts > 47000) {
+      	echo "🔪 &nbsp;";}else{ echo "";
+      }
+
       if ($posts > 50000) {
         echo "🐷 &nbsp;";}else{ echo "";
       } 
@@ -160,6 +164,10 @@ $userID=$obj->data->username;
       if ($posts > 64000) {
         echo "🔱 &nbsp;";}else{ echo "";
       } 
+
+      if ($posts > 68000) {
+      	echo "Ⓜ️ &nbsp;";}else{echo "";
+      }
 
       if ($posts > 76000) {
         echo "🎶 &nbsp;";}else{ echo "";
@@ -230,6 +238,10 @@ $userID=$obj->data->username;
       echo "🐳 &nbsp;";}else{ echo "";
     } 
 
+	if ($posts > 47000) {
+      	echo "🔪 &nbsp;";}else{ echo "";
+    }
+
     if ($posts > 50000) {
       echo "🐷 &nbsp;";}else{ echo "";
     } 
@@ -241,6 +253,10 @@ $userID=$obj->data->username;
     if ($posts > 64000) {
       echo "🔱 &nbsp;";}else{ echo "";
     } 
+
+    if ($posts > 68000) {
+      	echo "Ⓜ️ &nbsp;";}else{echo "";
+    }
 
     if ($posts > 76000) {
       echo "🎶 &nbsp;";}else{ echo "";
