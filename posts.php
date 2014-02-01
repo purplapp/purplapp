@@ -20,8 +20,19 @@ $data = $posts->user_data;
 $anno = $data->annotations;
 $usertype = ucfirst($data->type);
 
+//calculating date created
 $date = new DateTime($data->created_at);
 $dateresult = $date->format('Y-m-d H:i:s');
+
+//calculating posts per day
+$today = date('Y-m-d');
+$createdat= $data->created_at;
+
+$date1 = new DateTime($createdat);
+$date2 = new DateTime($today);
+$interval = $date1->diff($date2);
+
+$ppd = $data->counts->posts / $interval->days
 
 ?>
 
@@ -127,6 +138,10 @@ $dateresult = $date->format('Y-m-d H:i:s');
       <td><?php echo $data->locale; ?></td>
     </tr>
     <tr>
+      <td>Posts Per Day:
+      <td><?php echo intval($ppd); ?></td>    
+    </tr>
+    <tr>
       <?php
       foreach($anno as $annoC){
           $type = $annoC->type;
@@ -138,10 +153,32 @@ $dateresult = $date->format('Y-m-d H:i:s');
             echo "</td>"; }}
       ?>
     </tr>
+    <tr>
+      <?php
+      foreach($anno as $annoC){
+          $type = $annoC->type;
+          if (strpos($type,"core.directory.facebook") != false){
+          	$faceurl=$annoC->value->id;
+            echo "<td>Facebook ID:</td>";
+            echo "<td>";
+            echo "<a href=\"http://facebook.com/$faceurl\">$faceurl</a>";
+            echo "</td>"; }}
+      ?>
+    </tr>
+    <tr>
+      <?php
+      foreach($anno as $annoC){
+          $type = $annoC->type;
+          if (strpos($type,"core.directory.twitter") != false){
+          	$twiturl=$annoC->value->username;
+            echo "<td>Twitter Handle:</td>";
+            echo "<td>";
+            echo "<a href=\"http://twitter.com/$twiturl\">$twiturl</a>";
+            echo "</td>"; }}
+      ?>
+    </tr>
   </table>
-
   
-
   <hr>
 
   <h3><a href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements">Post Count Achievements</a></h3>
