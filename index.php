@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -51,6 +51,10 @@
 
 <h3>Other cool things coming soon too.</h3>
 <p>In the meantime, check us out on <a href="http://github.com/charldunois/purplapp">Github!</a></p>
+
+<hr>
+<p>It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently.<br>Help us improve ADN by donating! :)</p>
+<?php include("./other_plugins/Donatdex.html"); ?>
 
 <hr>
 
