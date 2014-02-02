@@ -1,5 +1,5 @@
 <?php
 
-define('ACCESS_TOKEN', 'ACCESS_TOKEN_HERE');
+define('ACCESS_TOKEN', 'AQAAAAAABMGnofam7mLUNZNqU17gMABwmslQMvapRNb82xDSkaCWfTs6BWTu3yibZumyu9z13W--5nybJQyrL25V5RZOSPXRQg');
 
 ?>

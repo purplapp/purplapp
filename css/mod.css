@@ -1,0 +1,78 @@
+.navbar-default {
+  background-color: rgb(128, 86, 214);
+  border-color: rgb(173, 140, 222);
+}
+.navbar-default .navbar-brand {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  color: rgb(173, 140, 222);
+}
+.navbar-default .navbar-text {
+  color: rgb(173, 140, 222);
+}
+.navbar-default .navbar-nav > li > a {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: rgb(203, 170, 252);
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #FFF;
+  background-color: rgb(173, 140, 222);
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: #cc92f8;
+  background-color: rgb(203, 170, 252);
+}
+.navbar-default .navbar-toggle {
+  border-color: rgb(173, 140, 222);
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: rgb(173, 140, 222);
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #ecf0f1;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #ecf0f1;
+}
+.navbar-default .navbar-link {
+  color: #ecf0f1;
+}
+.navbar-default .navbar-link:hover {
+  color: #cc92f8;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ecf0f1;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #cc92f8;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #cc92f8;
+    background-color: rgb(173, 140, 222);
+  }
+}
+
+.btn-primary {
+  background-color: rgb(116, 104, 212);
+  border-color: rgb(116, 104, 212);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  background-color: rgb(86, 74, 182);
+  border-color: rgb(203, 170, 252);
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {   
+    border-color: rgba(128, 86, 214, 0.8);
+    box-shadow: 0 1px 1px rgba(128, 86, 214, 0.075) inset, 0 0 8px rgba(128, 86, 214, 0.6);
+    outline: 0 none;
+}
