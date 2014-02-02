@@ -82,7 +82,7 @@ $ppd = $posts / $interval->days
   
   <!--Account Info-->
   <p class="stats">
-  <?php echo $id; ?> is a <?php echo $obj->data->type; ?> with <?php echo $obj->data->counts->posts; ?> posts in <?php echo $interval->days; ?> days. That means that <?php echo $id; ?> has an average of <?php echo round($ppd, 0, PHP_ROUND_HALF_UP); ?> posts per day.
+  <?php echo $id; ?> is a <?php echo $obj->data->type; ?> with <?php echo $obj->data->counts->posts; ?> posts in <?php echo $interval->days; ?> days. That means that <?php echo $id; ?> has an average of <?php echo round($ppd, 2); ?> posts per day.
   
   <br><br>
 
