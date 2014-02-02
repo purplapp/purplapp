@@ -52,7 +52,7 @@
 	<hr>
 
 	<h3>Other cool things coming soon too.</h3>
-	<p>In the meantime, check us out on <a href="http://github.com/charldunois/purplapp">Github!</a></p>
+	<p>In the meantime, check us out on <a href="http://github.com/purplapp">Github!</a></p>
 
 	<hr>
 
