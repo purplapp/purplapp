@@ -76,3 +76,11 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
     box-shadow: 0 1px 1px rgba(128, 86, 214, 0.075) inset, 0 0 8px rgba(128, 86, 214, 0.6);
     outline: 0 none;
 }
+
+a {
+  color: rgb(128, 86, 214);
+}
+
+a:hover {
+  color: rgba(128, 86, 214, 0.8);
+}
