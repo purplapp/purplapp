@@ -82,12 +82,15 @@
 		<br><br>
 
 		<!--Search Box-->
-		<form name="form1" method="GET" action="">
-			<p>
-				<input name="id" type="text" id="id" value="<?php echo $id ?>">
-				<input type="submit" name="send" id="send" value="Check">
-			</p>
-		</form>
+		<div class="row">
+	        <form role="form">
+	          <div class="col-xs-2">
+	            <input type='text' class="form-control" name='id' id="id" value="<?php echo $id; ?>"/>
+	          </div>
+	            <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
+	        </form>
+      	</div>
+
 	</div>
   
 	<div class="col-md-6">

@@ -87,11 +87,14 @@
 
       <br><br>
 
-      <!--Username Search Box-->
-      <form method='GET' action=''>
-        <input type='text' name='u' value="<?php echo $data->username; ?>"/>
-        <input type='submit' />
-      </form>
+      <div class="row">
+        <form role="form">
+          <div class="col-xs-2">
+            <input type='text' class="form-control" name='u' value="<?php echo $data->username; ?>"/>
+          </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+      </div>
       
       <br>
       
