@@ -27,48 +27,42 @@
     $obj = json_decode($json); 
     $posts=$obj->data->counts->posts;
     $userID=$obj->data->username;
-    $data=$obj->data
   ?>
 
-  <!-- header.php -->
-  <?php include "include/header.php"; ?>
-
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/navbar-static-top.css" rel="stylesheet">
-
-  <!-- Modifications -->
-  <link href="css/mod.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/pca.css" />
 </head>
 
 <body>
-<div class="container"> 
+<div id="container"> 
+  <a href="/">Go Home</a>
+
   <div class="col-md-12">
-    <h1><?php echo $data->name ?></h1>
-    <h3><?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?></h3>
+    <h1>
+      <span id="myData">
+        <?php
+          echo $obj->data->name;
+        ?>
+      </span>
+    </h1>
 
     <!--Avatar Image-->
-    <img class="avatar" src="<?php echo $data->avatar_image->url; ?>" alt="avatar" width="180" height="180"/> 
+    <img class="avatar" src="<?php echo $obj->data->avatar_image->url; ?>" alt="avatar" width="180" height="180"/> 
 
     <!--Cover Image-->
-    <img class="cover" src="<?php echo $data->cover_image->url; ?>" alt="cover" height="180" /> 
+    <img class="cover" src="<?php echo $obj->data->cover_image->url; ?>" alt="cover" height="180" /> 
 
-    <br><br>
-
-    <!--Username Search Box-->
-    <form method='GET' action=''>
-      <input type='text' name='u' value="<?php echo $data->username; ?>"/>
-      <input type='submit' />
+    <!--Search Box-->
+    <form name="form1" method="GET" action="">
+      <p>
+        <input name="id" type="text" id="id" value="<?php echo $id ?>">
+        <input type="submit" name="send" id="send" value="Check">
+      </p>
     </form>
   </div>
-
 
   <!--Post Count Achievements-->
   <div class="col-md-6">
     <p class="pca">
-      <br>
       <a class="pca" href="http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements">All PCA Clubs:</a>
       <br><br>
       <?php
@@ -76,7 +70,7 @@
         $type = $obj->data->type;
 
         if ($posts == 0) {
-          echo "No Posts";
+        	echo "No Posts";
         }
 
         if ($posts < 500 AND $posts > 0) {
@@ -144,7 +138,7 @@
         } 
 
         if ($posts > 47000) {
-          echo "🔪 &nbsp;";}else{ echo "";
+        	echo "🔪 &nbsp;";}else{ echo "";
         }
 
         if ($posts > 50000) {
@@ -160,7 +154,7 @@
         } 
 
         if ($posts > 68000) {
-          echo "Ⓜ️ &nbsp;";}else{echo "";
+        	echo "Ⓜ️ &nbsp;";}else{echo "";
         }
 
         if ($posts > 76000) {
@@ -180,7 +174,7 @@
         }
 
         if ($posts > 500) {
-          echo "<hr>";
+        	echo "<hr>";
         }
         
         echo "</a>";
@@ -230,8 +224,8 @@
           echo "🐳 &nbsp;";}else{ echo "";
         } 
 
-      if ($posts > 47000) {
-            echo "🔪 &nbsp;";}else{ echo "";
+    	if ($posts > 47000) {
+          	echo "🔪 &nbsp;";}else{ echo "";
         }
 
         if ($posts > 50000) {
@@ -247,7 +241,7 @@
         } 
 
         if ($posts > 68000) {
-            echo "Ⓜ️ &nbsp;";}else{echo "";
+          	echo "Ⓜ️ &nbsp;";}else{echo "";
         }
 
         if ($posts > 76000) {
@@ -265,13 +259,14 @@
         if ($posts > 100000) {
           echo "🗼 &nbsp;";}else{ echo "";
         }
+
+        if ($posts > 500) {
+          echo "<hr>";
+        }
         echo "</a>";
       ?>
     </p>
   </div>
-
-  <!-- footer.php -->
-  <?php include "include/posts_footer.php"; ?>
 </div> 
 </body>
 </html>
@@ -281,5 +276,5 @@
     echo "<img src=\"$url\" alt=\"\"/>";} 
       
   function linker($at,$id) {
-    echo "<a href=\"./posts?id=".$id."&".$at."\">";}
+  	echo "<a href=\"./posts?id=".$id."&".$at."\">";}
 ?>

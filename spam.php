@@ -45,84 +45,86 @@
     //For testing floating point rounding.
     //$ppd = 100.5
   ?>
+  <!-- header.php -->
+  <?php include "include/header.php"; ?>
 
-  <link rel="stylesheet" type="text/css" href="css/spam.css" />
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/navbar-static-top.css" rel="stylesheet">
+
+  <!-- Modifications -->
+  <link href="css/mod.css" rel="stylesheet">
 </head>
 
 <body>
-<div id="divMain"> 
-  <h1>
-    <span id="myData">
-      <?php
-        echo $obj->data->name;
-      ?>
-    </span>
-  </h1>
+<div class="container"> 
+	<div class="col-md-12">
+		<h1>
+			<?php
+				echo $obj->data->name;
+			?>
+		</h1>
 
-  <h4>
-    <?php 
-      echo "<a class='url' href=".$obj->data->canonical_url.">@".$obj->data->username."</a>" 
-    ?>
-  </h4>
+		<h4>
+			<?php 
+				echo "<a class='url' href=".$obj->data->canonical_url.">@".$obj->data->username."</a>" 
+			?>
+		</h4>
+
+		<!--Avatar Image-->
+		<img class="avatar" src="<?php echo $obj->data->avatar_image->url; ?>" alt="avatar" width="180" height="180"/> 
+
+		<!--Cover Image-->
+		<img class="cover" src="<?php echo $obj->data->cover_image->url; ?>" alt="cover" height="180"/> 
+
+		<br><br>
+
+		<!--Search Box-->
+		<form name="form1" method="GET" action="">
+			<p>
+				<input name="id" type="text" id="id" value="<?php echo $id ?>">
+				<input type="submit" name="send" id="send" value="Check">
+			</p>
+		</form>
+	</div>
   
-  <!--Avatar Image-->
-  <img class="avatar" src="<?php echo $obj->data->avatar_image->url; ?>" alt="avatar" width="180" height="180"/> 
+	<div class="col-md-6">
+		<p class="stats">
+			<?php 
+				echo $id; 
+				echo " is a ";
+				echo $obj->data->type;
+				echo " with ";
+				echo $obj->data->counts->posts;
+				echo " posts in ";
+				echo $interval->days;
+				echo " days. That means that ";
+				echo $id;
+				echo " has an average ";
+				echo round($ppd, 2);
+				echo " posts per day.";
+			?> 
 
-  <!--Cover Image-->
-  <img class="cover" src="<?php echo $obj->data->cover_image->url; ?>" alt="cover" height="180"/> 
+			<br><br>
 
-  <!--Search Box-->
-  <form name="form1" method="GET" action="">
-    <p>
-      <input name="id" type="text" id="id" value="<?php echo $id ?>">
-      <input type="submit" name="send" id="send" value="Check">
-    </p>
-  </form>
-  
-  <!--Account Info-->
-  <p class="stats">
-    <?php 
-      echo $id; 
-      echo " is a ";
-      echo $obj->data->type;
-      echo " with ";
-      echo $obj->data->counts->posts;
-      echo " posts in ";
-      echo $interval->days;
-      echo " days. That means that ";
-      echo $id;
-      echo " has an average ";
-      echo round($ppd, 2);
-      echo " posts per day.";
-    ?> 
-
-    <br><br>
-
-    <?php 
-      if ($ppd < 200) {
-      	echo "This is not a spam user.";
-      }
-      else {
-      	echo "This is a spam user.";
-      	echo "<br><br>";
-      	if ($obj->data->type = "human") {
-      		echo "This user is incorrectly marked as a human. It should be marked as a feed. <br> Do you want to let ADN Support know about this user? <a href='https://alpha.app.net/intent/post/?text=%40adnsupport%20I%20think%20that%20this%20user%20". $id. "%20is%20marked%20incorrectly%20as%20a%20human'>Here's a post template for you to use.</a>";
-      	}
-      }
-    ?>
-  </p>
-
-  <hr>
-  
-  <!--Credits-->
-  <p class="credits">
-    Built by <a href="https://app.net/charl">@charl<a/>.
-    <br>
-    Hosted by <a href="http://jvimedia.org">jvimedia.org</a>.
-    <br>
-    <a href="/">Return to Homepage.</a>
-  </p>
-
+			<?php 
+				if ($ppd < 200) {
+					echo "This is not a spam user.";
+				}
+				else {
+					echo "This is a spam user.";
+					echo "<br><br>";
+					if ($obj->data->type = "human") {
+						echo "This user is incorrectly marked as a human. It should be marked as a feed. <br> Do you want to let ADN Support know about this user? <a href='https://alpha.app.net/intent/post/?text=%40adnsupport%20I%20think%20that%20this%20user%20". $id. "%20is%20marked%20incorrectly%20as%20a%20human'>Here's a post template for you to use.</a>";
+					}
+				}
+			?>
+		</p>
+	</div>
+	<!-- footer.php -->
+	<?php include "include/posts_footer.php"; ?>
 </div> 
 </body>
 </html>
