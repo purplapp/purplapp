@@ -24,8 +24,7 @@
 
   <!-- header.php -->
   <?php $title = "PCA Information for " . $id . ""; include "include/header.php"; ?>
-</head>
-<body>
+
   <div class="col-md-12">
     <h1>
       <?php echo $data->name; ?>

@@ -3,11 +3,13 @@
     require('config.php');
     require('posts.class.php');
 
-    if(!empty($_GET['u'])) {
-      $userID = $_GET['u'];
+    if(!empty($_GET['id'])) {
+      $userID = $_GET['id'];
     } else {
       $userID = "@charl";
     }
+
+    $id=$userID;
 
     //Set Default Timezone
     date_default_timezone_set('utc');
@@ -51,8 +53,13 @@
   <?php if($posts->getData() !== false) { ?>
   <?php if($data->counts->posts !== 0) { ?>
     <div class="col-md-12">
-      <h1><?php echo $data->name ?></h1>
-      <h3><?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?></h3>
+      <h1>
+        <?php echo $data->name ?>
+      </h1>
+
+      <h3>
+        <?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?>
+      </h3>
 
       <!--Avatar Image-->
       <img class="avatar" src="<?php echo $data->avatar_image->url; ?>" alt="avatar" width="180" height="180"/> 
@@ -62,15 +69,16 @@
 
       <br><br>
 
+      <!--Search Box-->
       <div class="row">
         <form role="form">
-          <div class="col-xs-2">
-            <input type='text' class="form-control" name='u' value="<?php echo $data->username; ?>"/>
-          </div>
-            <button type="submit" class="btn btn-primary">Search</button>
+            <div class="col-xs-2">
+              <input type='text' class="form-control" name='id' id="id" value="<?php echo $id; ?>"/>
+            </div>
+          <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
         </form>
       </div>
-      
+  
       <br>
       
       <!--User Bio-->
