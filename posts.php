@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="description" content="Purplapp is an app.net app for stats. Here is the page for user information stats.">
-  <meta name="keywords" content="ADN,appdotnet,app.net,posts,pca,purplapp">
-  <meta name="author" content="Purplapp">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta charset="utf-8">
-
-  <!--Grab Stylesheets-->
-  <link rel="stylesheet" href="css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="http://bootstrap-fugue.azurewebsites.net/css/bootstrap-fugue-min.css"/>
-
-  <?php
+<?php
     //Required files
     require('config.php');
     require('posts.class.php');
@@ -53,26 +40,14 @@
     $interval = $date1->diff($date2);
 
     //calculate posts per day
-    $ppd = $data->counts->posts / $interval->days
+    $ppd = $data->counts->posts / $interval->days;
+
+    //Header
+    $title = "User Information for @" . $data->username . "";
+    include('include/header.php');
   ?>
 
-  <title>User Information for @<? echo $data->username; ?></title>
 
-  <!-- header.php -->
-  <?php include "include/header.php"; ?>
-
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/navbar-static-top.css" rel="stylesheet">
-
-  <!-- Modifications -->
-  <link href="css/mod.css" rel="stylesheet">
-</head>
-
-<body>
-<div class="container">
   <?php if($posts->getData() !== false) { ?>
   <?php if($data->counts->posts !== 0) { ?>
     <div class="col-md-12">

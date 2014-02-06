@@ -10,15 +10,7 @@
      }
 
      if ($id[0]!="@"){ $id="@".$id;}
-  ?>
 
-  <title>PCA Information for <? echo $id; ?></title>
-  <meta name="description" content="Purplapp is an app.net app for stats. Here is the page for post count stats.">
-  <meta name="keywords" content="appdotnet,ADN,app.net,app,pca,clubs">
-  <meta name="author" content="Charl Dunois">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-  <?php
     //require config.php
     require('config.php');
      
@@ -31,20 +23,8 @@
   ?>
 
   <!-- header.php -->
-  <?php include "include/header.php"; ?>
-
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="css/navbar-static-top.css" rel="stylesheet">
-
-  <!-- Modifications -->
-  <link href="css/mod.css" rel="stylesheet">
-</head>
-
-<body>
-<div class="container"> 
+  <?php $title = "PCA Information for " . $id . ""; include "include/header.php"; ?>
+  
   <div class="col-md-12">
     <h1><?php echo $data->name ?></h1>
     <h3><?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?></h3>
