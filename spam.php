@@ -20,7 +20,7 @@
     $userID=$obj->data->username;
 
     //Set Default Timezone as UTC
-    date_default_timezone_set('utc');
+    date_default_timezone_set('UTC');
 
     //Calculate Today's Date and the Date Created
     $today = date('Y-m-d');
@@ -40,17 +40,15 @@
     $title = "Is " . $id . " a spammer?";
     include('include/header.php');
   ?>
+</head>
+<body>
 	<div class="col-md-12">
 		<h1>
-			<?php
-				echo $obj->data->name;
-			?>
+			<?php echo $obj->data->name; ?>
 		</h1>
 
 		<h4>
-			<?php 
-				echo "<a class='url' href=".$obj->data->canonical_url.">@".$obj->data->username."</a>" 
-			?>
+			<?php echo "<a class='url' href=".$obj->data->canonical_url.">@".$obj->data->username."</a>"; ?>
 		</h4>
 
 		<!--Avatar Image-->
@@ -64,13 +62,14 @@
 		<!--Search Box-->
 		<div class="row">
 	        <form role="form">
-	          <div class="col-xs-2">
-	            <input type='text' class="form-control" name='id' id="id" value="<?php echo $id; ?>"/>
-	          </div>
-	            <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
+	          	<div class="col-xs-2">
+	            	<input type='text' class="form-control" name='id' id="id" value="<?php echo $id; ?>"/>
+	          	</div>
+	        	<button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
 	        </form>
       	</div>
 
+      	<br>
 	</div>
   
 	<div class="col-md-6">
