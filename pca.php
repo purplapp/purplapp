@@ -24,7 +24,7 @@
 
   <!-- header.php -->
   <?php $title = "PCA Information for " . $id . ""; include "include/header.php"; ?>
-  
+
   <div class="col-md-12">
     <h1><?php echo $data->name ?></h1>
     <h3><?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?></h3>
@@ -255,9 +255,6 @@
 
   <!-- footer.php -->
   <?php include "include/posts_footer.php"; ?>
-</div> 
-</body>
-</html>
 
 <?php 
   function echo_img($url) {

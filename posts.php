@@ -192,7 +192,3 @@
 
   <!-- footer.php -->
   <?php include "include/posts_footer.php"; ?>
-  
-</div> 
-</body>
-</html>
