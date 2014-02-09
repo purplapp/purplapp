@@ -43,11 +43,15 @@
 
     <!--Search Box-->
     <div class="row">
-      <form role="form">
-          <div class="col-xs-2">
-            <input type='text' class="form-control" name='id' id="id" value="<?php echo $id; ?>"/>
+      <form role="form" class="form-inline">
+          <div class="col-lg-3">
+            <div class="input-group">
+              <input type='text' class="form-control" name='id' id="id" value="<?php echo $id; ?>"/>
+              <span class="input-group-btn">
+                <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
+              </span>
+            </div>
           </div>
-        <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
       </form>
     </div>
 
