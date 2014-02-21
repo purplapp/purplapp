@@ -19,25 +19,23 @@
 
 <body>
 <div id="divMain">
-	<h1>Purplapp is a stats app for App.net.</h1>
-	<h4>It's developed by <a href="https://app.net/charl">@charl</a>, with help from <a href="https://app.net/jvimedia">@jvimedia</a> and <a href="https://app.net/hu">@hu</a>.</h4>
-
-	<h5>We have a number of features currently - some of which are more useful than others. Here they are.</h5>
+	<h2>We no longer update this stuff. Check out the proper Purplapp <a href="http://purplapp.eu">here</a>.<br>
+	<small>Also, this stuff is probably totally broken.</small></h2>
 
 	<hr>
 
 	<p>Want to get some details on your account? Want to find out more about the PCA clubs you're in?</p>
-	<h3><a href="/bstrap.purplapp/posts.php">This is the place for you.</a></h3>
+	<h3><a href="posts.php">This is the place for you.</a></h3>
 
 	<hr>
 
 	<p>Want to see the PCA clubs you're in - in a format great to just copy into your bio?</p>
-	<h3><a href="/bstrap.purplapp/pca.php">We have something for that too!</a></h3>
+	<h3><a href="pca.php">We have something for that too!</a></h3>
 
 	<hr>
 
 	<p>Want to see some whether we think a user's a spammer or not?</p>
-	<h3><a href="/bstrap.purplapp/spam.php">We built some stuff for that.</a></h3>
+	<h3><a href="spam.php">We built some stuff for that.</a></h3>
 
 	<hr>
 
