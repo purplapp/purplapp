@@ -7,10 +7,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon-precomposed.png"/>
 
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="http://bootstrap-fugue.azurewebsites.net/css/bootstrap-fugue-min.css"/>
+
+    <link rel="author" href="humans.txt"/>
   
     <title><?php echo $title; ?></title>
 
@@ -32,7 +36,7 @@
             <li><a href="http://github.com/purplapp">Github</a></li>
             <li><a href="https://alpha.app.net/intent/follow/?user_id=%40purplapp">Follow @purplapp on App.net</a></li>
             <li><a href="https://alpha.app.net/intent/subscribe/?channel_id=34622">Subscribe</a></li>
-            <!-- <li><a href="donate.php">Donate</a></li> -->
+            <li><a href="donate.php">Donate</a></li>
             <!--<li><a href="#about">About</a></li>-->
           </ul>
           <!--<ul class="nav navbar-nav navbar-right">
@@ -67,5 +71,4 @@
   </head>
 
   <body>
-
         <div class="container">

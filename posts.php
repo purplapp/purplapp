@@ -175,6 +175,30 @@
         </tr>
         <tr>
           <?php
+          foreach($anno as $annoC){
+              $type = $annoC->type;
+              if (strpos($type,"appnetizens.userinput.birthday") != false){
+              	$bday=$annoC->value->birthday;
+                echo "<td>Birthday:</td>";
+                echo "<td>";
+                echo $bday;
+                echo "</td>"; }}
+          ?>
+        </tr>
+        <tr>
+          <?php
+          foreach($anno as $annoC){
+              $type = $annoC->type;
+              if (strpos($type,"appnetizens.userinput.gender") != false){
+              	$mf=$annoC->value->gender;
+                echo "<td>Gender:</td>";
+                echo "<td>";
+                echo ucwords($mf);
+                echo "</td>"; }}
+          ?>
+        </tr>
+        <tr>
+          <?php
             if($data->verified_domain) {
               echo "<td>Verified Domain:</td>";
               echo "<td>";

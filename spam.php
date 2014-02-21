@@ -59,7 +59,6 @@
 
 		<br><br>
 
-<<<<<<< HEAD
 	    <!--Search Box-->
 	    <div class="row">
 	      <form role="form" class="form-inline">
@@ -73,21 +72,6 @@
 	          </div>
 	      </form>
 	    </div>
-=======
-		<!--Search Box-->
-      	<div class="row">
-        <form role="form" class="form-inline">
-            <div class="col-lg-3">
-              <div class="input-group">
-                <input type='text' class="form-control" name='id' id="id" value="<?php echo $id; ?>"/>
-                <span class="input-group-btn">
-                  <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
-                </span>
-              </div>
-            </div>
-        </form>
-      </div>
->>>>>>> 90a8e5dbbe712403ddb79be8d867622341b252a9
 
       	<br>
 	</div>
