@@ -8,7 +8,7 @@
     } else {
       $userID = "@charl";
     }
-
+    
     $id=$userID;
 
     //Set Default Timezone
@@ -21,28 +21,41 @@
     $posts->getPosts();
     $posts->getClubs();
     $posts->getData();
+    $posts->getUserPosts();
 
     $data = $posts->user_data;
+    $userposts = $posts->user_posts;
     $anno = $data->annotations;
 
     //Declaring UserType
     $usertype = ucfirst($data->type);
 
-    //calculating date created
+    //calculating date created for output
     $date = new DateTime($data->created_at);
     $dateresult = $date->format('Y-m-d H:i:s');
 
-    //calculate current date and date created (again)
+    //calculate current date for day calc
     $today = date('Y-m-d');
-    $createdat= $data->created_at;
+    
+    //calculate date created for day calc
+    $createdat= new DateTime($data->created_at);
+    $adnjoin = $createdat->format('Y-m-d');
 
     //calculate number of days on ADN
-    $date1 = new DateTime($createdat);
+    $date1 = new DateTime($adnjoin);
     $date2 = new DateTime($today);
     $interval = $date1->diff($date2);
 
     //calculate posts per day
     $ppd = $data->counts->posts / $interval->days;
+
+    //calculate date of last post
+    foreach($userposts as $userpostsC){
+      $created_at = new DateTime($userpostsC->created_at);
+      $lastpost = $created_at->format('Y-m-d H:i:s');
+
+      $lastpostlink = $userpostsC->canonical_url;
+    }    
 
     //Header
     $title = "User Information for @" . $data->username . "";
@@ -53,6 +66,12 @@
   <?php if($posts->getData() !== false) { ?>
   <?php if($data->counts->posts !== 0) { ?>
     <div class="col-md-12">
+<!--       <?php 
+        print "<pre>"; 
+        print_r($userposts); 
+        print "</pre>\>"; 
+      ?>
+ -->
       <h1>
         <?php echo $data->name ?>
       </h1>
@@ -74,7 +93,7 @@
         <form role="form" class="form-inline">
             <div class="col-lg-3">
               <div class="input-group">
-                <input type='text' class="form-control" name='id' id="id" value="<?php echo $id; ?>"/>
+                <input type="text" class="form-control" name="id" id="id" value="<?php echo $id; ?>"/>
                 <span class="input-group-btn">
                   <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
                 </span>
@@ -134,9 +153,12 @@
           <td><?php echo $data->locale; ?></td>
         </tr>
         <tr>
-          <td>Posts Per Day:
+          <td>Posts Per Day:</td>
           <td><?php echo round($ppd, 2); ?></td>    
         </tr>
+        <tr>
+          <td>Last Post:</td>
+          <td><a href="<?php echo $lastpostlink; ?>"><?php echo $lastpost; ?></a></td>
         <tr>
           <?php
           foreach($anno as $annoC){
