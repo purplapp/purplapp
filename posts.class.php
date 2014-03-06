@@ -90,5 +90,17 @@ class Posts {
 		}
 	}
 
-}
+	public function getUserPosts() {
+		$id = $this->user_id;
+		$url = "https://alpha-api.app.net/stream/0/users/".$id."/posts?access_token=".ACCESS_TOKEN."&count=1";
+
+		$json = @file_get_contents($url);
+		if($json == false) {
+			return false;
+		} else {
+			$obj = json_decode($json); 
+			$this->user_posts = $obj->data;
+		}
+	}
+	}
 ?>
