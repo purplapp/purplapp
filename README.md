@@ -21,7 +21,7 @@ Here are some future things we plan to develop in order:
 
 Put it on a server with PHP. :)
 
-However, you will need to change the config.php file to include an access token:
+However, you will need to rename config.default.php file to config.php and include an access token:
 
 ```
 <?php
