@@ -44,11 +44,7 @@ class Posts {
 	public $memberclubs = array();
 
 	public function setUserID($get) {
-		if(!preg_match('/^@[a-zA-Z0-9]+$/', $get)) {
-			$this->user_id = $get;
-		} else {
-			$this->user_id = $get;
-		}
+		$this->user_id = preg_replace('/^@?([a-zA-Z0-9_]+)$/', '@$1', $get);
 	}
 
 	public function getPosts() {
