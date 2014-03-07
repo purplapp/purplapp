@@ -8,8 +8,11 @@
     } else {
       $userID = "@charl";
     }
-    
-    $id=$userID;
+
+    //Check to see if the @ is included, if not, add it!
+    if(substr($userID, 0, 1) !== "@") {
+      $userID = "@" . $userID;
+    }
 
     //Set Default Timezone
     date_default_timezone_set('utc');
@@ -93,7 +96,7 @@
         <form role="form" class="form-inline">
             <div class="col-lg-3">
               <div class="input-group">
-                <input type="text" class="form-control" name="id" id="id" value="<?php echo $id; ?>"/>
+                <input type="text" class="form-control" name="id" id="id" value="<?php echo $userID; ?>"/>
                 <span class="input-group-btn">
                   <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
                 </span>
@@ -164,7 +167,7 @@
           foreach($anno as $annoC){
               $type = $annoC->type;
               if (strpos($type,"core.directory.blog") != false){
-              	$blogurl=$annoC->value->url;
+                $blogurl=$annoC->value->url;
                 echo "<td>Blog:</td>";
                 echo "<td>";
                 echo "<a href=\"$blogurl\">$blogurl</a>";
@@ -176,7 +179,7 @@
           foreach($anno as $annoC){
               $type = $annoC->type;
               if (strpos($type,"core.directory.facebook") != false){
-              	$faceurl=$annoC->value->id;
+                $faceurl=$annoC->value->id;
                 echo "<td>Facebook ID:</td>";
                 echo "<td>";
                 echo "<a href=\"http://facebook.com/$faceurl\">$faceurl</a>";
@@ -188,7 +191,7 @@
           foreach($anno as $annoC){
               $type = $annoC->type;
               if (strpos($type,"core.directory.twitter") != false){
-              	$twiturl=$annoC->value->username;
+                $twiturl=$annoC->value->username;
                 echo "<td>Twitter Handle:</td>";
                 echo "<td>";
                 echo "<a href=\"http://twitter.com/$twiturl\">@$twiturl</a>";
@@ -200,7 +203,7 @@
           foreach($anno as $annoC){
               $type = $annoC->type;
               if (strpos($type,"appnetizens.userinput.birthday") != false){
-              	$bday=$annoC->value->birthday;
+                $bday=$annoC->value->birthday;
                 echo "<td>Birthday:</td>";
                 echo "<td>";
                 echo $bday;
@@ -212,7 +215,7 @@
           foreach($anno as $annoC){
               $type = $annoC->type;
               if (strpos($type,"appnetizens.userinput.gender") != false){
-              	$mf=$annoC->value->gender;
+                $mf=$annoC->value->gender;
                 echo "<td>Gender:</td>";
                 echo "<td>";
                 echo ucwords($mf);
