@@ -8,7 +8,7 @@
   <h1>Features</h1>
   <h3>Current Features</h3>
   <ul>
-    <li><a href='posts.php'>Find details on your account and your PCA Clubs.</a></li>
+    <li><a href='user.php'>Find details on your account and your PCA Clubs.</a></li>
     <li><a href='pca.php'>Your PCA Clubs - formatted to easily copy into your bio.</a></li>
     <li><a href='spam.php'>Spammer Check - check if we think that a user is a spammer.</a></li>
   </ul>
@@ -28,9 +28,7 @@
   allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
   <iframe src="http://ghbtns.com/github-btn.html?user=purplapp&repo=purplapp&type=fork&count=true"
   allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
-  <iframe src="http://ghbtns.com/github-btn.html?user=purplapp&type=follow&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>
-  <p>It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently. You can help us improve ADN by donating! :)</p></h1>
+  <p>It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently. You can help us improve ADN by <a href='./donate.php'>donating!</a> :)</p></h1>
 </div>
 
 <?php include('include/footer.php'); ?>

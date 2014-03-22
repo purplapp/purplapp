@@ -56,7 +56,7 @@ class Posts {
 			return false;
 		} else {
 			$obj = json_decode($json); 
-			$this->posts = $obj->data->counts->posts;	
+			$this->posts = $obj->data->counts->posts;
 		}
 	}
 
@@ -71,6 +71,7 @@ class Posts {
 			$obj = json_decode($json); 
 			if($obj->data->type == "human") {
 				$this->user_data = $obj->data;
+				$this->user_number = $obj->data->id;
 			} else {
 				return false;
 			}
@@ -78,7 +79,6 @@ class Posts {
 	}
 
 	public function getClubs() {
-
 		foreach($this->clubs as $club => $count) {
 			if($this->posts > $count) {
 				$this->memberclubs[] = $club;
@@ -98,5 +98,31 @@ class Posts {
 			$this->user_posts = $obj->data;
 		}
 	}
+
+	public function getUserBroadcasts() {
+		$user_number = $this->user_number;
+		$url = "https://alpha-api.app.net/stream/0/channels/search?creator_id=".$user_number."&type=net.app.core.broadcast&include_annotations=1&include_user_annotations=0&order=activity";
+
+		$json = @file_get_contents($url);
+		if($json == false) {
+			return false;
+		} else {
+			$obj = json_decode($json); 
+			$this->user_broadcasts = $obj->data;
+		}
 	}
+
+	public function getUserPatter() {
+		$user_number = $this->user_number;
+		$url = "https://alpha-api.app.net/stream/0/channels/search?creator_id=".$user_number."&type=net.patter-app.room&include_annotations=1&include_user_annotations=0&order=activity";
+
+		$json = @file_get_contents($url);
+		if($json == false) {
+			return false;
+		} else {
+			$obj = json_decode($json); 
+			$this->user_patter = $obj->data;
+		}
+	}	
+}
 ?>

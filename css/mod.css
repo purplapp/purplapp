@@ -84,3 +84,12 @@ a {
 a:hover {
   color: rgba(128, 86, 214, 0.8);
 }
+
+.cover {
+  display: inline-block !important;
+}
+@media (max-width: 767px) {
+  .cover {
+      display: none!important;
+  }
+}
