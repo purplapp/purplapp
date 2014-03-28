@@ -7,7 +7,7 @@ Purplapp
 
 Here are some things you can do with Purplapp at the moment:
 
-* [Want to get some details on your account? Want to find out more about the PCA clubs you're in?](http://purplapp.eu/posts.php)
+* [Want to get some details on your account? Want to find out more about the PCA clubs you're in?](http://purplapp.eu/user.php)
 * [Want to see the PCA clubs you're in - in a format great to just copy into your bio?](http://purplapp.eu/pca.php)
 
 ### Future Features
