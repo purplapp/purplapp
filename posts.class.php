@@ -101,7 +101,7 @@ class Posts {
 
 	public function getUserBroadcasts() {
 		$user_number = $this->user_number;
-		$url = "https://alpha-api.app.net/stream/0/channels/search?creator_id=".$user_number."&type=net.app.core.broadcast&include_annotations=1&include_user_annotations=0&order=activity";
+		$url = "https://alpha-api.app.net/stream/0/channels/search?creator_id=".$user_number."&type=net.app.core.broadcast&include_annotations=1";
 
 		$json = @file_get_contents($url);
 		if($json == false) {
@@ -114,7 +114,7 @@ class Posts {
 
 	public function getUserPatter() {
 		$user_number = $this->user_number;
-		$url = "https://alpha-api.app.net/stream/0/channels/search?creator_id=".$user_number."&type=net.patter-app.room&include_annotations=1&include_user_annotations=0&order=activity";
+		$url = "https://alpha-api.app.net/stream/0/channels/search?creator_id=".$user_number."&type=net.patter-app.room&include_annotations=1";
 
 		$json = @file_get_contents($url);
 		if($json == false) {

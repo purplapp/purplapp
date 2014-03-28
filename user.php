@@ -74,12 +74,16 @@
   <?php if($posts->getData() !== false) { ?>
   <?php if($data->counts->posts !== 0) { ?>
     <div class="col-md-12">
-<!--       <?php 
+<!-- 	  <?php 
         print "<pre>"; 
-        print_r($userbroadcasts); 
+        print_r($userpatter); 
         print "</pre>"; 
-      ?> -->
-     
+      ?>
+ -->     
+	  <div class="alert alert-warning alert-dismissable">
+	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Information -</strong> we are aware of the page load times being high. We are investigating the issue.
+	  </div> 
       <h1>
         <?php echo $data->name ?>
       </h1>
@@ -255,19 +259,87 @@
           echo "</div>";
       }
       ?>
+
       <?php
-        if ($userbroadcasts != false) {
+      	if ($userbroadcasts != false) {
           echo "<h3>Broadcast Channels</h3>";
           echo "<div class='pca'>";
           echo "<ul class='list-unstyled'>";
-          echo "<li><a href='".$userbroadcasts[0]->annotations[2]->value->url."'>".$userbroadcasts[0]->annotations[0]->value->title."</a></li>";
-          echo "<li><a href='".$userbroadcasts[1]->annotations[2]->value->url."'>".$userbroadcasts[1]->annotations[0]->value->title."</a></li>";
-          echo "<li><a href='".$userbroadcasts[2]->annotations[2]->value->url."'>".$userbroadcasts[2]->annotations[0]->value->title."</a></li>";
-          echo "<li><a href='".$userbroadcasts[3]->annotations[2]->value->url."'>".$userbroadcasts[3]->annotations[0]->value->title."</a></li>";
+          echo "<li>";
+          foreach($userbroadcasts[0]->annotations as $userbroadcastsC){
+              $type = $userbroadcastsC->type;     
+              if (strpos($type,"core.fallback_url") != false){
+                $fallback_url=$userbroadcastsC->value->url;
+                echo "<a class='url' href='".$fallback_url."'>".$userbroadcasts[0]->annotations[0]->value->title."</a> ";
+              }
+          }
+          foreach($userbroadcasts[0]->annotations as $userbroadcastsC){
+              $type = $userbroadcastsC->type;
+              if (strpos($type,"core.broadcast.freq") != false){
+              	$avg_freq = $userbroadcastsC->value->avg_freq;
+              	echo "(".$avg_freq.")";
+              }
+          }
+          echo "</li>";
+          echo "<li>";
+          if ($userbroadcasts[1] != false) {
+	          foreach($userbroadcasts[1]->annotations as $userbroadcastsC){
+	              $type = $userbroadcastsC->type;     
+	              if (strpos($type,"core.fallback_url") != false){
+	                $fallback_url=$userbroadcastsC->value->url;
+	                echo "<a class='url' href='".$fallback_url."'>".$userbroadcasts[1]->annotations[0]->value->title."</a> ";
+	              }
+	          }
+	          foreach($userbroadcasts[1]->annotations as $userbroadcastsC){
+	              $type = $userbroadcastsC->type;
+	              if (strpos($type,"core.broadcast.freq") != false){
+	              	$avg_freq = $userbroadcastsC->value->avg_freq;
+	              	echo "(".$avg_freq.")";
+	              }
+	          }
+	      }
+          echo "</li>";
+          echo "<li>";
+          if ($userbroadcasts[2] != false) {
+	          foreach($userbroadcasts[2]->annotations as $userbroadcastsC){
+	              $type = $userbroadcastsC->type;     
+	              if (strpos($type,"core.fallback_url") != false){
+	                $fallback_url=$userbroadcastsC->value->url;
+	                echo "<a class='url' href='".$fallback_url."'>".$userbroadcasts[2]->annotations[0]->value->title."</a> ";
+	              }
+	          }
+	          foreach($userbroadcasts[2]->annotations as $userbroadcastsC){
+	              $type = $userbroadcastsC->type;
+	              if (strpos($type,"core.broadcast.freq") != false){
+	              	$avg_freq = $userbroadcastsC->value->avg_freq;
+	              	echo "(".$avg_freq.")";
+	              }
+	          }
+	      }
+          echo "</li>";
+          echo "<li>";
+          if ($userbroadcasts[3] != false) {        
+	          foreach($userbroadcasts[3]->annotations as $userbroadcastsC){
+	              $type = $userbroadcastsC->type;     
+	              if (strpos($type,"core.fallback_url") != false){
+	                $fallback_url=$userbroadcastsC->value->url;
+	                echo "<a class='url' href='".$fallback_url."'>".$userbroadcasts[3]->annotations[0]->value->title."</a> ";
+	              }
+	          }
+	          foreach($userbroadcasts[3]->annotations as $userbroadcastsC){
+	              $type = $userbroadcastsC->type;
+	              if (strpos($type,"core.broadcast.freq") != false){
+	              	$avg_freq = $userbroadcastsC->value->avg_freq;
+	              	echo "(".$avg_freq.")";
+	              }
+	          }
+	      }
+          echo "</li>";
           echo "</ul>";
-          echo "</div>";
-        }
+          echo "</div>";  
+        }          
       ?>
+
       <?php
         if ($userpatter != false) {
           echo "<h3>Patter Rooms</h3>";
