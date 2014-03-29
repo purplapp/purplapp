@@ -8,6 +8,7 @@ class Posts {
 	public $clubs = array( 
 			 "<i class='icon-f-bread'></i> - Roll Club - 500" => 500
 			,"<i class='icon-f-cake'></i> - Crumpet Club - 1 000" => 1000
+			,"<i class='icon-f-clock'></i> - Noon Club - 1 200" => 1200
 			,"<i class='icon-f-telephone-handset'></i> - BitesizeCookie Club - 2 000" => 2000
 			,"<i class='icon-f-breads'></i> - Crunch Club - 2 600" => 2600
 			,"<i class='icon-f-magnifier-left'></i> - MysteryScience Club - 3 000" => 3000
@@ -96,6 +97,31 @@ class Posts {
 		} else {
 			$obj = json_decode($json); 
 			$this->user_posts = $obj->data;
+		}
+	}
+
+	public function getFirstPost() {
+		$user_number = $this->user_number;
+		$url = "https://alpha-api.app.net/stream/0/posts/search?access_token=".ACCESS_TOKEN."&creator_id=".$user_number."&count=-1";
+
+		$json = @file_get_contents($url);
+		if($json == false) {
+			return false;
+		} else {
+			$obj = json_decode($json); 
+			$this->first_user_post = $obj->data;
+		}
+	}
+
+	public function getFirstMention() {
+		$user_number = $this->user_number;
+		$url = "https://alpha-api.app.net/stream/0/users/".$user_number."/mentions?access_token=".ACCESS_TOKEN."&count=-1";
+		$json = @file_get_contents($url);
+		if($json == false) {
+			return false;
+		} else {
+			$obj = json_decode($json); 
+			$this->first_user_mention = $obj->data;
 		}
 	}
 

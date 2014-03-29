@@ -79,7 +79,11 @@
 
         if ($posts > 1000) {
           echo "🍰 &nbsp;";}else{ echo "";
-        } 
+        }
+
+        if ($posts > 1200) {
+          echo "🕛 &nbsp;";}else{ echo "";
+        }
 
         if ($posts > 2000) {
           echo "🍥 &nbsp;";}else{ echo "";

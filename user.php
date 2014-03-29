@@ -27,9 +27,13 @@
     $posts->getUserPosts();
     $posts->getUserBroadcasts();
     $posts->getUserPatter();
+    $posts->getFirstPost();
+    $posts->getFirstMention();
 
     $data = $posts->user_data;
     $userposts = $posts->user_posts;
+    $firstpost = $posts->first_user_post;
+    $firstmention = $posts->first_user_mention;
     $anno = $data->annotations;
     $userbroadcasts = $posts->user_broadcasts;
     $userpatter = $posts->user_patter;
@@ -65,6 +69,18 @@
       $lastpostlink = $userpostsC->canonical_url;
     }
 
+    //calculate date of first post
+    foreach($firstpost as $firstpostC){
+      $first_post_c_at = new DateTime($firstpostC->created_at);
+      $firstpost_created_at = $first_post_c_at->format('Y-m-d H:i:s');
+    }
+
+    //calculate date of first post
+    foreach($firstmention as $firstmentionC){
+      $first_mention_c_at = new DateTime($firstmentionC->created_at);
+      $firstmention_created_at = $first_mention_c_at->format('Y-m-d H:i:s');
+    }
+
     //Header
     $title = "User Information for @" . $data->username . "";
     include('include/header.php');
@@ -74,20 +90,23 @@
   <?php if($posts->getData() !== false) { ?>
   <?php if($data->counts->posts !== 0) { ?>
     <div class="col-md-12">
-<!-- 	  <?php 
+      <!-- <?php 
         print "<pre>"; 
         print_r($userpatter); 
         print "</pre>"; 
-      ?>
- -->     
-	  <div class="alert alert-warning alert-dismissable">
-	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<strong>Information -</strong> we are aware of the page load times being high. We are investigating the issue.
-	  </div> 
+      ?> -->
+
+  	  <div class="alert alert-warning alert-dismissable">
+  	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  		  <strong>Information -</strong> we are aware of the page load times being high. We are investigating the issue.
+  	  </div> 
+
+      <!-- User Name -->
       <h1>
         <?php echo $data->name ?>
       </h1>
 
+      <!-- @username -->
       <h3>
         <?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?>
       </h3>
@@ -117,7 +136,7 @@
       </div>
   
       <br>
-      
+
       <!--User Bio-->
       <p class="bio">
         <?php echo $data->description->html; ?>
@@ -244,9 +263,70 @@
           ?>
         </tr>
       </table>
+
+      <!-- First Post / Mention -->
+      <div class="panel-group" id="accordion">
+        <!-- First Post -->
+        <div class="panel panel-purple" id="panel1">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-target="#collapseOne" href="#collapseOne">
+                First Post
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <table class="table">
+                <tr>
+                  <td>Text:</td>
+                  <td>"<?php echo $firstpost[0]->html; ?>"</td>
+                </tr>
+                <tr>
+                  <td>Time:</td>
+                  <td><a href="<?php echo $firstpost[0]->canonical_url; ?>"><?php echo $firstpost_created_at; ?></a></td>
+                </tr>
+                <tr>
+                  <td>Client:</td>
+                  <td><a href="<?php echo $firstpost[0]->source->link; ?>"><?php echo $firstpost[0]->source->name; ?></a>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- First Mention -->
+        <div class="panel panel-purple" id="panel2">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
+              First Mention
+            </a>
+          </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">
+              <table class="table">
+                <tr>
+                  <td>Text:</td>
+                  <td>"<?php echo $firstmention[0]->html; ?>"</td>
+                </tr>
+                <tr>
+                  <td>User:</td>
+                  <td><a href="<?php echo $firstmention[0]->user->canonical_url; ?>">@<?php echo $firstmention[0]->user->username; ?></a></td>
+                </tr>                
+                <tr>
+                  <td>Time:</td>
+                  <td><a href="<?php echo $firstmention[0]->canonical_url; ?>"><?php echo $firstmention_created_at; ?></a></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>        
+      </div>
+      <br>
     </div>
 
     <div class="col-md-6">
+      <!-- PCA Clubs -->
       <?php
         if ($posts->memberclubs != false) {
           echo "<h3 style='margin-top: -3px;''><a href='http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements'>Post Count Achievements</a></h3>";
@@ -260,6 +340,7 @@
       }
       ?>
 
+      <!-- User Broadcasts -->
       <?php
       	if ($userbroadcasts != false) {
           echo "<h3>Broadcast Channels</h3>";
@@ -297,7 +378,7 @@
 	              	echo "(".$avg_freq.")";
 	              }
 	          }
-	      }
+	        }
           echo "</li>";
           echo "<li>";
           if ($userbroadcasts[2] != false) {
@@ -315,7 +396,7 @@
 	              	echo "(".$avg_freq.")";
 	              }
 	          }
-	      }
+	        }
           echo "</li>";
           echo "<li>";
           if ($userbroadcasts[3] != false) {        
@@ -333,13 +414,15 @@
 	              	echo "(".$avg_freq.")";
 	              }
 	          }
-	      }
+	        }
           echo "</li>";
           echo "</ul>";
           echo "</div>";  
         }          
       ?>
 
+      <!-- User Patter -->
+      <div id="Patter">
       <?php
         if ($userpatter != false) {
           echo "<h3>Patter Rooms</h3>";
@@ -352,7 +435,8 @@
           echo "</ul>";
           echo "</div>";
         }
-      ?>      
+      ?>
+      </div>       
     </div>
     
   <?php } else { echo "This user doesn't have any posts!"; } ?>
