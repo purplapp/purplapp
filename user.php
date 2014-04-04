@@ -88,7 +88,6 @@
 
 
   <?php if($posts->getData() !== false) { ?>
-  <?php if($data->counts->posts !== 0) { ?>
     <div class="col-md-12">
       <!-- <?php 
         print "<pre>"; 
@@ -263,7 +262,8 @@
           ?>
         </tr>
       </table>
-
+    
+      <?php if($data->counts->posts !== 0) { ?>
       <!-- First Post / Mention -->
       <div class="panel-group" id="accordion">
         <!-- First Post -->
@@ -323,6 +323,7 @@
         </div>        
       </div>
       <br>
+      <?php } else { echo ""; } ?>
     </div>
 
     <div class="col-md-6">
@@ -438,9 +439,7 @@
       ?>
       </div>       
     </div>
-    
-  <?php } else { echo "This user doesn't have any posts!"; } ?>
-  <?php } else { echo "Data not loaded: this account doesn't exist or isn't marked as a human."; } ?>
+  <?php } else { echo "Data not loaded: this account doesn't exist or isn't marked as a human. <a href=\"javascript:history.go(-1)\">Go back to the previous page.</a>"; } ?>
 
   <!-- footer.php -->
   <?php include "include/posts_footer.php"; ?>

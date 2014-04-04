@@ -70,12 +70,8 @@ class Posts {
 			return false;
 		} else {
 			$obj = json_decode($json); 
-			if($obj->data->type == "human") {
-				$this->user_data = $obj->data;
-				$this->user_number = $obj->data->id;
-			} else {
-				return false;
-			}
+			$this->user_data = $obj->data;
+			$this->user_number = $obj->data->id;
 		}
 	}
 
