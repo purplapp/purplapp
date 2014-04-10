@@ -15,7 +15,7 @@
     }
 
     //Set Default Timezone
-    date_default_timezone_set('utc');
+    date_default_timezone_set('UTC');
 
     //Pulling From posts.class.php and Interpreting
     $posts = new Posts;
