@@ -5,6 +5,13 @@ class Posts {
 	public $user_data = null;
 	public $user_id = null;
 	public $posts = null;
+	public $user_number = null;
+	public $user_posts = null;
+	public $user_broadcasts = null;
+	public $user_patter = null;
+	public $first_user_mention = null;
+	public $first_user_post = null;
+	
 	public $clubs = array( 
 			 "<i class='icon-f-bread'></i> - Roll Club - 500" => 500
 			,"<i class='icon-f-cake'></i> - Crumpet Club - 1 000" => 1000

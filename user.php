@@ -17,7 +17,7 @@
     //Set Default Timezone
     date_default_timezone_set('UTC');
 
-    //Pulling From posts.class.php and Interpreting
+    //Pulling From posts.class.php and interpreting
     $posts = new Posts;
 
     $posts->setUserID($userID);
@@ -37,7 +37,6 @@
     $anno = $data->annotations;
     $userbroadcasts = $posts->user_broadcasts;
     $userpatter = $posts->user_patter;
-
 
     //Declaring UserType
     $usertype = ucfirst($data->type);

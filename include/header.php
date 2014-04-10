@@ -33,9 +33,10 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Home</a></li>
-            <li><a href="http://github.com/purplapp">Github</a></li>
-            <li><a href="https://alpha.app.net/intent/follow/?user_id=%40purplapp">Follow @purplapp on App.net</a></li>
-            <li><a href="https://alpha.app.net/intent/subscribe/?channel_id=34622">Subscribe</a></li>
+            <li><a href="http://github.com/purplapp">GitHub</a></li>
+            <li><a href="https://alpha.app.net/purplapp">App.net</a></li>
+            <li><a href="http://patter-app.net/room.html?channel=27355">Patter Room</a></li>
+            <li><a href="https://broadcast.app.net/34622/purplapp-news/">Broadcast</a></li>
             <li><a href="donate.php">Donate</a></li>
             <!--<li><a href="#about">About</a></li>-->
           </ul>
