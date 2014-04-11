@@ -11,44 +11,45 @@ class Posts {
 	public $user_patter = null;
 	public $first_user_mention = null;
 	public $first_user_post = null;
-	
-	public $clubs = array( 
-			 "<i class='icon-f-bread'></i> - Roll Club - 500" => 500
-			,"<i class='icon-f-cake'></i> - Crumpet Club - 1 000" => 1000
-			,"<i class='icon-f-clock'></i> - Noon Club - 1 200" => 1200
-			,"<i class='icon-f-telephone-handset'></i> - BitesizeCookie Club - 2 000" => 2000
-			,"<i class='icon-f-breads'></i> - Crunch Club - 2 600" => 2600
-			,"<i class='icon-f-magnifier-left'></i> - MysteryScience Club - 3 000" => 3000
-			,"<i class='icon-f-shoe'></i> - LDR Club - 5 000" => 5000
-			,"<i class='icon-f-television'></i> - IBMPC Club - 8 088" => 8088
-			,"<i class='icon-f-cookie'></i> - Cookie Club - 10 000" => 10000
-			,"<i class='icon-f-pipette'></i> - SpinalTap Club - 11 000" => 11000
-			,"<i class='icon-f-cup'></i> - Breakfast Club - 20 000" => 20000
-			,"<i class='icon-f-diamond'></i> - Carat Club - 24 000" => 24000
-			,"<i class='icon-f-compass'></i> - Peshawar Club - 25 000" => 25000
-			,"<i class='icon-f-paper-plane'></i> - MileHigh Club - 30 000" => 30000
-			,"<i class='icon-f-chart-pie'></i> - Pi Club - 31 416" => 31416
-			,"<i class='icon-f-water'></i> - Towel Club - 42 000" => 42000
-			,"<i class='icon-f-cutlery-knife'></i> - Hitman Club - 47 000" => 47000
-			,"<i class='icon-f-piggy-bank-empty'></i> - Bacon Club - 50 000" => 50000
-			,"<i class='icon-f-rocket-fly'></i> - BrowncoatClub - 57 000" => 57000
-			,"<i class='icon-f-crown'></i> - Commodore Club - 64 000" => 64000
-			,"<i class='icon-f-globe'></i> - Motorola Club - 68 000" => 68000
-			,"<i class='icon-f-music-beam-16'></i> - Trombone Club - 76 000" => 76000
-			,"<i class='icon-f-transmitter'></i> - WiFi Club - 80 211" => 80211
-			,"<i class='icon-f-money'></i> - Pajama Club - 90 000" => 90000
-			,"<i class='icon-f-language'></i> - Tower Of Babble Club - 100 000" => 100000
-			,"<i class='icon-f-mac-os'></i> - Mac Club - 128 000" => 128000
-			,"<i class='icon-f-balloon-twitter'></i> - TwitterLeaver Club - 144 000" => 144000
-			,"<i class=''></i> GetALifeNoSrsly Club - 200 000" => 200000
-			,"<i class=''></i> MeaninglessPostCount Club - 231 568" => 231568
-			,"<i class=''></i> ADN Club - 256 000" => 256000
-			,"<i class=''></i> Pensioners Club - 401 000" => 401000
-			,"<i class=''></i> Laughter Club - 555 000" => 555000
-			,"<i class=''></i> Gates Club - 640 000" => 640000
-			,"<i class=''></i> JoyLuck Club - 888 000" => 888000
-			,"<i class=''></i> Millionaires Club - 1 000 000" => 1000000
-			);
+
+	public $clubs = array(
+		array("icon" => "bread", "name" => "Roll Club", "count" => "500")
+		,array("icon" => "cake", "name" => "Crumpet Club", "count" => "1 000")
+		,array("icon" => "clock", "name" => "Noon Club", "count" => "1 200")
+		,array("icon" => "telephone-handset", "name" => "BitesizeCookie Club", "count" => "2 000")
+		,array("icon" => "breads", "name" => "Crunch Club", "count" => "2 600")
+		,array("icon" => "magnifier-left", "name" => "MysteryScience Club", "count" => "3 000")
+		,array("icon" => "shoe", "name" => "LDR Club", "count" => "5 000")
+		,array("icon" => "television", "name" => "IBMPC Club", "count" => "8 088")
+		,array("icon" => "cookie", "name" => "Cookie Club", "count" => "10 000")
+		,array("icon" => "pipette", "name" => "SpinalTap Club", "count" => "11 000")
+		,array("icon" => "cup", "name" => "Breakfast Club", "count" => "20 000")
+		,array("icon" => "diamond", "name" => "Carat Club", "count" => "24 000")
+		,array("icon" => "compass", "name" => "Peshawar Club", "count" => "25 000")
+		,array("icon" => "paper-plane", "name" => "MileHigh Club", "count" => "30 000")
+		,array("icon" => "chart-pie", "name" => "Pi Club", "count" => "31 416")
+		,array("icon" => "water", "name" => "Towel Club", "count" => "42 000")
+		,array("icon" => "cutlery-knife", "name" => "Hitman Club", "count" => "47 000")
+		,array("icon" => "piggy-bank-empty", "name" => "Bacon Club", "count" => "50 000")
+		,array("icon" => "rocket-fly", "name" => "BrowncoatClub Club", "count" => "57 000")
+		,array("icon" => "crown", "name" => "Commodore Club", "count" => "64 000")
+		,array("icon" => "globe", "name" => "Motorola Club", "count" => "68 000")
+		,array("icon" => "music-beam-16", "name" => "Trombone Club", "count" => "76 000")
+		,array("icon" => "transmitter", "name" => "WiFi Club", "count" => "80 211")
+		,array("icon" => "money", "name" => "Pajama Club", "count" => "90 000")
+		,array("icon" => "language", "name" => "Tower Of Babble Club", "count" => "100 000")
+		,array("icon" => "mac-os", "name" => "Mac Club", "count" => "128 000")
+		,array("icon" => "balloon-twitter", "name" => "TwitterLeaver Club", "count" => "144 000")
+		,array("icon" => "", "name" => "GetALifeNoSrsly Club", "count" => "200 000")
+		,array("icon" => "", "name" => "GetALifeNoSrsly Club", "count" => "231 568")
+		,array("icon" => "", "name" => "ADN Club", "count" => "256 000")
+		,array("icon" => "", "name" => "Pensioners Club", "count" => "401 000")
+		,array("icon" => "", "name" => "Laughter Club", "count" => "555 000")
+		,array("icon" => "", "name" => "Gates Club", "count" => "640 000")
+		,array("icon" => "", "name" => "JoyLuck Club", "count" => "888 000")
+		,array("icon" => "", "name" => "Millionaires Club", "count" => "1 000 000")
+		);
+
 	public $memberclubs = array();
 
 	public function setUserID($get) {
@@ -83,9 +84,9 @@ class Posts {
 	}
 
 	public function getClubs() {
-		foreach($this->clubs as $club => $count) {
-			if($this->posts > $count) {
-				$this->memberclubs[] = $club;
+		foreach($this->clubs as $club) {
+			if($this->posts > preg_replace("/[^0-9,.]/", "", $club['count'])) {
+				$this->memberclubs[] = "<i class='icon-f-{$club[icon]}'></i> - {$club[name]} - <b>{$club[count]}</b>";
 			}
 		}
 	}
