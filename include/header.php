@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="http://bootstrap-fugue.azurewebsites.net/css/bootstrap-fugue-min.css"/>
 
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
     <link rel="author" href="humans.txt"/>
   
     <title><?php echo $title; ?></title>
@@ -33,11 +35,11 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Home</a></li>
-            <li><a href="http://github.com/purplapp">GitHub</a></li>
-            <li><a href="https://alpha.app.net/purplapp">App.net</a></li>
+            <li><a href="http://github.com/purplapp"><i class="fa fa-github-square fa-fw"></i>GitHub</a></li>
+            <li><a href="https://alpha.app.net/purplapp"><i class="fa fa-adn fa-fw"></i>App.net</a></li>
             <li><a href="http://patter-app.net/room.html?channel=27355">Patter Room</a></li>
             <li><a href="https://broadcast.app.net/34622/purplapp-news/">Broadcast</a></li>
-            <li><a href="donate.php">Donate</a></li>
+            <li><a href="donate.php"><i class="fa fa-btc fa-fw"></i>Donate</a></li>
             <!--<li><a href="#about">About</a></li>-->
           </ul>
           <!--<ul class="nav navbar-nav navbar-right">

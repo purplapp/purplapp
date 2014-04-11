@@ -444,4 +444,4 @@
   <?php } else { echo "Data not loaded: this account doesn't exist or isn't marked as a human. <a href=\"javascript:history.go(-1)\">Go back to the previous page.</a>"; } ?>
 
   <!-- footer.php -->
-  <?php include "include/posts_footer.php"; ?>
+  <?php include "include/footer.php"; ?>

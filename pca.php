@@ -1,29 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <?php
+<?php
+    // error_reporting(E_ALL);
+    // ini_set("display_errors", 1); 
+
     $c=$_GET[cd];
     $c++;
     $id=$_GET["id"];
     if(!$id){ $id="@charl";}elseif($id==""){echo "";
     $id="@charl";
-     }
+    }
 
-     if ($id[0]!="@"){ $id="@".$id;}
+    if ($id[0]!="@"){ $id="@".$id;}
 
     //require config.php
     require('config.php');
-     
+
     //Use the access token
-    $json = file_get_contents('https://alpha-api.app.net/stream/0/users/'.$id.'?access_token='.ACCESS_TOKEN.'&include_user_annotations=1?callback=awesome?jsonp=parseResponse');
+    $json = file_get_contents('https://api.app.net/users/'.$id.'?access_token='.ACCESS_TOKEN.'&include_user_annotations=1?callback=awesome?jsonp=parseResponse');
     $obj = json_decode($json); 
     $posts=$obj->data->counts->posts;
     $userID=$obj->data->username;
-    $data=$obj->data
-  ?>
+    $data=$obj->data;
 
-  <!-- header.php -->
-  <?php $title = "PCA Information for " . $id . ""; include "include/header.php"; ?>
+    $title = "PCA Information for " . $id . ""; include "include/header.php"; 
+?>
 
   <div class="col-md-12">
     <h1>
@@ -264,12 +263,10 @@
     </p>
   </div>
 
-  <!-- footer.php -->
-  <?php include "include/posts_footer.php"; ?>
-</div>
-</body>
-</html>
+<!-- footer.php -->
 <?php 
+  include "include/footer.php";
+  
   function echo_img($url) {
     echo "<img src=\"$url\" alt=\"\"/>";} 
       
