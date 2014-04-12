@@ -1,99 +1,98 @@
 <?php
-    // error_reporting(E_ALL);
-    // ini_set("display_errors", 1);   
+  // error_reporting(E_ALL);
+  // ini_set("display_errors", 1);   
 
-    //Required files
-    require('config.php');
-    require('posts.class.php');
+  //Required files
+  require('config.php');
+  require('posts.class.php');
 
-    if(!empty($_GET['id'])) {
-      $userID = $_GET['id'];
-    } else {
-      $userID = "@charl";
-    }
+  if(!empty($_GET['id'])) {
+    $userID = $_GET['id'];
+  } else {
+    $userID = "@charl";
+  }
 
-    //Check to see if the @ is included, if not, add it!
-    if(substr($userID, 0, 1) !== "@") {
-      $userID = "@" . $userID;
-    }
+  //Check to see if the @ is included, if not, add it!
+  if(substr($userID, 0, 1) !== "@") {
+    $userID = "@" . $userID;
+  }
 
-    //Set Default Timezone
-    date_default_timezone_set('UTC');
+  //Set Default Timezone
+  date_default_timezone_set('UTC');
 
-    //Pulling From posts.class.php and interpreting
-    $posts = new Posts;
+  //Pulling From posts.class.php and interpreting
+  $posts = new Posts;
 
-    $posts->setUserID($userID);
-    $posts->getPosts();
-    $posts->getClubs();
-    $posts->getData();
-    $posts->getUserPosts();
-    $posts->getUserBroadcasts();
-    $posts->getUserPatter();
-    $posts->getFirstPost();
-    $posts->getFirstMention();
+  $posts->setUserID($userID);
+  $posts->getPosts();
+  $posts->getClubs();
+  $posts->getUserPosts();
+  // $posts->getUserBroadcasts();
+  // $posts->getUserPatter();
+  // $posts->getFirstPost();
+  // $posts->getFirstMention();
 
-    $data = $posts->user_data;
-    $userposts = $posts->user_posts;
-    $firstpost = $posts->first_user_post;
-    $firstmention = $posts->first_user_mention;
-    $anno = $data->annotations;
-    $userbroadcasts = $posts->user_broadcasts;
-    $userpatter = $posts->user_patter;
+  $data = $posts->user_data;
+  $userposts = $posts->user_posts;
+  $anno = $data->annotations;
+  // $firstpost = $posts->first_user_post;
+  // $firstmention = $posts->first_user_mention;
+  // $userbroadcasts = $posts->user_broadcasts;
+  // $userpatter = $posts->user_patter;
 
-    //Declaring UserType
-    $usertype = ucfirst($data->type);
+  //Declaring UserType
+  $usertype = ucfirst($data->type);
 
-    //calculating date created for output
-    $date = new DateTime($data->created_at);
-    $dateresult = $date->format('Y-m-d H:i:s');
+  //calculating date created for output
+  $date = new DateTime($data->created_at);
+  $dateresult = $date->format('Y-m-d H:i:s');
 
-    //calculate current date for day calc
-    $today = date('Y-m-d');
-    
-    //calculate date created for day calc
-    $createdat= new DateTime($data->created_at);
-    $adnjoin = $createdat->format('Y-m-d');
+  //calculate current date for day calc
+  $today = date('Y-m-d');
 
-    //calculate number of days on ADN
-    $date1 = new DateTime($adnjoin);
-    $date2 = new DateTime($today);
-    $interval = $date1->diff($date2);
+  //calculate date created for day calc
+  $createdat= new DateTime($data->created_at);
+  $adnjoin = $createdat->format('Y-m-d');
 
-    //calculate posts per day
-    $ppd = $data->counts->posts / $interval->days;
+  //calculate number of days on ADN
+  $date1 = new DateTime($adnjoin);
+  $date2 = new DateTime($today);
+  $interval = $date1->diff($date2);
 
-    //calculate date of last post
-    foreach($userposts as $userpostsC){
-      $created_at = new DateTime($userpostsC->created_at);
-      $lastpost = $created_at->format('Y-m-d H:i:s');
+  //calculate posts per day
+  $ppd = $data->counts->posts / $interval->days;
 
-      $lastpostlink = $userpostsC->canonical_url;
-    }
+  //calculate date of last post
+  foreach($userposts as $userpostsC){
+    $created_at = new DateTime($userpostsC->created_at);
+    $lastpost = $created_at->format('Y-m-d H:i:s');
 
-    //calculate date of first post
-    foreach($firstpost as $firstpostC){
-      $first_post_c_at = new DateTime($firstpostC->created_at);
-      $firstpost_created_at = $first_post_c_at->format('Y-m-d H:i:s');
-    }
+    $lastpostlink = $userpostsC->canonical_url;
+  }
 
-    //calculate date of first post
-    foreach($firstmention as $firstmentionC){
-      $first_mention_c_at = new DateTime($firstmentionC->created_at);
-      $firstmention_created_at = $first_mention_c_at->format('Y-m-d H:i:s');
-    }
+  //calculate date of first post
+  foreach($firstpost as $firstpostC){
+    $first_post_c_at = new DateTime($firstpostC->created_at);
+    $firstpost_created_at = $first_post_c_at->format('Y-m-d H:i:s');
+  }
 
-    //Header
-    $title = "User Information for @" . $data->username . "";
-    include('include/header.php');
-  ?>
+  //calculate date of first post
+  foreach($firstmention as $firstmentionC){
+    $first_mention_c_at = new DateTime($firstmentionC->created_at);
+    $firstmention_created_at = $first_mention_c_at->format('Y-m-d H:i:s');
+  }
+
+  //Header
+  $title = "User Information for @" . $data->username . "";
+  include('include/header.php');
+?>
 
 
-  <?php if($posts->getData() !== false) { ?>
+  <?php if($posts->getPosts() !== false) { ?>
     <div class="col-md-12">
       <!-- <?php 
         print "<pre>"; 
-        print_r($userpatter); 
+        print_r($data); 
         print "</pre>"; 
       ?> -->
 
@@ -103,14 +102,15 @@
   	  </div> 
 
       <!-- User Name -->
-      <h1>
-        <?php echo $data->name ?>
-      </h1>
-
-      <!-- @username -->
-      <h3>
-        <?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?>
-      </h3>
+      <div class="page-header">
+        <h4>User Lookup</h4>
+        <h1>
+          <?php echo $data->name ?>
+          <small>
+            <?php echo "<a class='url' href=".$data->canonical_url.">@".$data->username."</a>" ?>
+          </small>
+        </h1>
+      </div>
 
       <!--Avatar Image-->
       <img class="avatar" src="<?php echo $data->avatar_image->url; ?>" alt="avatar" width="180" height="180"/> 
@@ -265,10 +265,9 @@
         </tr>
       </table>
     
-      <?php if($data->counts->posts !== 0) { ?>
+      <!-- <?php if($data->counts->posts !== 0) { ?> -->
       <!-- First Post / Mention -->
-      <div class="panel-group" id="accordion">
-        <!-- First Post -->
+      <!-- <div class="panel-group" id="accordion">
         <div class="panel panel-purple" id="panel1">
           <div class="panel-heading">
             <h4 class="panel-title">
@@ -294,9 +293,9 @@
               </table>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- First Mention -->
-        <div class="panel panel-purple" id="panel2">
+        <!-- <div class="panel panel-purple" id="panel2">
           <div class="panel-heading">
             <h4 class="panel-title">
             <a data-toggle="collapse" data-target="#collapseTwo" href="#collapseTwo" class="collapsed">
@@ -324,8 +323,8 @@
           </div>
         </div>        
       </div>
-      <br>
-      <?php } else { echo ""; } ?>
+      <br> -->
+      <!-- <?php } else { echo ""; } ?> -->    
     </div>
 
     <div class="col-md-6">
@@ -344,7 +343,7 @@
       ?>
 
       <!-- User Broadcasts -->
-      <?php
+      <!-- <?php
       	if ($userbroadcasts != false) {
           echo "<h3>Broadcast Channels</h3>";
           echo "<div class='pca'>";
@@ -422,10 +421,10 @@
           echo "</ul>";
           echo "</div>";  
         }          
-      ?>
+      ?> -->
 
       <!-- User Patter -->
-      <div id="Patter">
+      <!-- <div id="Patter">
       <?php
         if ($userpatter != false) {
           echo "<h3>Patter Rooms</h3>";
@@ -438,7 +437,7 @@
           echo "</ul>";
           echo "</div>";
         }
-      ?>
+      ?> -->
       </div>       
     </div>
   <?php } else { echo "Data not loaded: this account doesn't exist or isn't marked as a human. <a href=\"javascript:history.go(-1)\">Go back to the previous page.</a>"; } ?>

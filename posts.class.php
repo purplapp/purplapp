@@ -7,10 +7,10 @@ class Posts {
 	public $posts = null;
 	public $user_number = null;
 	public $user_posts = null;
-	public $user_broadcasts = null;
-	public $user_patter = null;
-	public $first_user_mention = null;
-	public $first_user_post = null;
+	// public $user_broadcasts = null;
+	// public $user_patter = null;
+	// public $first_user_mention = null;
+	// public $first_user_post = null;
 
 	public $clubs = array(
 		array("icon" => "bread", "name" => "Roll Club", "count" => "500")
@@ -58,7 +58,7 @@ class Posts {
 
 	public function getPosts() {
 		$id = $this->user_id;
-		$url = "https://alpha-api.app.net/stream/0/users/".$id."?access_token=".ACCESS_TOKEN."&include_user_annotations=1?callback=awesome?jsonp=parseResponse";
+		$url = "https://api.app.net/users/".$id."?access_token=".ACCESS_TOKEN."&include_user_annotations=1";
 		
 		$json = @file_get_contents($url);
 		if($json == false) {
@@ -66,20 +66,8 @@ class Posts {
 		} else {
 			$obj = json_decode($json); 
 			$this->posts = $obj->data->counts->posts;
-		}
-	}
-
-	public function getData() {
-		$id = $this->user_id;
-		$url = "https://alpha-api.app.net/stream/0/users/".$id."/?access_token=".ACCESS_TOKEN."&include_user_annotations=1&jsonp=parseResponse";
-
-		$json = @file_get_contents($url);
-		if($json == false) {
-			return false;
-		} else {
-			$obj = json_decode($json); 
 			$this->user_data = $obj->data;
-			$this->user_number = $obj->data->id;
+			$this->user_number = $obj->data->id;			
 		}
 	}
 
@@ -93,7 +81,7 @@ class Posts {
 
 	public function getUserPosts() {
 		$id = $this->user_id;
-		$url = "https://alpha-api.app.net/stream/0/users/".$id."/posts?access_token=".ACCESS_TOKEN."&count=1";
+		$url = "https://api.app.net/users/".$id."/posts?access_token=".ACCESS_TOKEN."&count=1";
 
 		$json = @file_get_contents($url);
 		if($json == false) {
@@ -106,7 +94,7 @@ class Posts {
 
 	public function getFirstPost() {
 		$user_number = $this->user_number;
-		$url = "https://alpha-api.app.net/stream/0/posts/search?access_token=".ACCESS_TOKEN."&creator_id=".$user_number."&count=-1";
+		$url = "https://api.app.net/posts/search?access_token=".ACCESS_TOKEN."&creator_id=".$user_number."&count=-1";
 
 		$json = @file_get_contents($url);
 		if($json == false) {
@@ -119,7 +107,7 @@ class Posts {
 
 	public function getFirstMention() {
 		$user_number = $this->user_number;
-		$url = "https://alpha-api.app.net/stream/0/users/".$user_number."/mentions?access_token=".ACCESS_TOKEN."&count=-1";
+		$url = "https://api.app.net/users/".$user_number."/mentions?access_token=".ACCESS_TOKEN."&count=-1";
 		$json = @file_get_contents($url);
 		if($json == false) {
 			return false;
@@ -131,7 +119,7 @@ class Posts {
 
 	public function getUserBroadcasts() {
 		$user_number = $this->user_number;
-		$url = "https://alpha-api.app.net/stream/0/channels/search?creator_id=".$user_number."&type=net.app.core.broadcast&include_annotations=1";
+		$url = "https://api.app.net/channels/search?creator_id=".$user_number."&type=net.app.core.broadcast&include_message_annotations=1";
 
 		$json = @file_get_contents($url);
 		if($json == false) {
@@ -144,7 +132,7 @@ class Posts {
 
 	public function getUserPatter() {
 		$user_number = $this->user_number;
-		$url = "https://alpha-api.app.net/stream/0/channels/search?creator_id=".$user_number."&type=net.patter-app.room&include_annotations=1";
+		$url = "https://api.app.net/channels/search?creator_id=".$user_number."&type=net.patter-app.room&include_message_annotations=1";
 
 		$json = @file_get_contents($url);
 		if($json == false) {
