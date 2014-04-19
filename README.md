@@ -3,19 +3,9 @@ Purplapp
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
-### Current Features
+### Features
 
-Here are some things you can do with Purplapp at the moment:
-
-* [Want to get some details on your account? Want to find out more about the PCA clubs you're in?](http://purplapp.eu/posts.php)
-* [Want to see the PCA clubs you're in - in a format great to just copy into your bio?](http://purplapp.eu/pca.php)
-
-### Future Features
-
-Here are some future things we plan to develop in order:
-
-1. Auto updating bio with your latest PCA clubs? Fully customisable (maybe)?
-2. Want notifications on people about to hit CookieClub? What about other clubs too?
+Find them in our [features.md file](https://github.com/purplapp/purplapp/blob/master/features.md). :)
 
 ### Configuration
 
