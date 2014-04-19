@@ -54,6 +54,9 @@
   $createdat= new DateTime($data->created_at);
   $adnjoin = $createdat->format('Y-m-d');
 
+  //test
+  // $locale = locale_get_display_language($data->locale, 'en');
+
   //calculate number of days on ADN
   $date1 = new DateTime($adnjoin);
   $date2 = new DateTime($today);
@@ -70,17 +73,17 @@
     $lastpostlink = $userpostsC->canonical_url;
   }
 
-  //calculate date of first post
-  foreach($firstpost as $firstpostC){
-    $first_post_c_at = new DateTime($firstpostC->created_at);
-    $firstpost_created_at = $first_post_c_at->format('Y-m-d H:i:s');
-  }
+  // //calculate date of first post
+  // foreach($firstpost as $firstpostC){
+  //   $first_post_c_at = new DateTime($firstpostC->created_at);
+  //   $firstpost_created_at = $first_post_c_at->format('Y-m-d H:i:s');
+  // }
 
-  //calculate date of first post
-  foreach($firstmention as $firstmentionC){
-    $first_mention_c_at = new DateTime($firstmentionC->created_at);
-    $firstmention_created_at = $first_mention_c_at->format('Y-m-d H:i:s');
-  }
+  // //calculate date of first mention
+  // foreach($firstmention as $firstmentionC){
+  //   $first_mention_c_at = new DateTime($firstmentionC->created_at);
+  //   $firstmention_created_at = $first_mention_c_at->format('Y-m-d H:i:s');
+  // }
 
   //Header
   $title = "User Information for @" . $data->username . "";
@@ -92,7 +95,7 @@
     <div class="col-md-12">
       <!-- <?php 
         print "<pre>"; 
-        print_r($data); 
+        print_r($anno); 
         print "</pre>"; 
       ?> -->
 
@@ -197,7 +200,7 @@
           <?php
           foreach($anno as $annoC){
               $type = $annoC->type;
-              if (strpos($type,"core.directory.blog") != false){
+              if (strpos($type,"core.directory.blog") == true){
                 $blogurl=$annoC->value->url;
                 echo "<td>Blog:</td>";
                 echo "<td>";
@@ -209,7 +212,7 @@
           <?php
           foreach($anno as $annoC){
               $type = $annoC->type;
-              if (strpos($type,"core.directory.facebook") != false){
+              if (strpos($type,"core.directory.facebook") == true){
                 $faceurl=$annoC->value->id;
                 echo "<td>Facebook ID:</td>";
                 echo "<td>";
@@ -221,7 +224,7 @@
           <?php
           foreach($anno as $annoC){
               $type = $annoC->type;
-              if (strpos($type,"core.directory.twitter") != false){
+              if (strpos($type,"core.directory.twitter") == true){
                 $twiturl=$annoC->value->username;
                 echo "<td>Twitter Handle:</td>";
                 echo "<td>";
@@ -233,7 +236,7 @@
           <?php
           foreach($anno as $annoC){
               $type = $annoC->type;
-              if (strpos($type,"appnetizens.userinput.birthday") != false){
+              if (strpos($type,"appnetizens.userinput.birthday") == true){
                 $bday=$annoC->value->birthday;
                 echo "<td>Birthday:</td>";
                 echo "<td>";
@@ -245,7 +248,7 @@
           <?php
           foreach($anno as $annoC){
               $type = $annoC->type;
-              if (strpos($type,"appnetizens.userinput.gender") != false){
+              if (strpos($type,"appnetizens.userinput.gender") == true){
                 $mf=$annoC->value->gender;
                 echo "<td>Gender:</td>";
                 echo "<td>";
@@ -330,7 +333,7 @@
     <div class="col-md-6">
       <!-- PCA Clubs -->
       <?php
-        if ($posts->memberclubs != false) {
+        if ($posts->memberclubs == true) {
           echo "<h3 style='margin-top: -3px;''><a href='http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements'>Post Count Achievements</a></h3>";
           echo "<div class='pca'>";
           echo "<ul class='list-unstyled'>";
@@ -344,38 +347,38 @@
 
       <!-- User Broadcasts -->
       <!-- <?php
-      	if ($userbroadcasts != false) {
+      	if ($userbroadcasts == true) {
           echo "<h3>Broadcast Channels</h3>";
           echo "<div class='pca'>";
           echo "<ul class='list-unstyled'>";
           echo "<li>";
           foreach($userbroadcasts[0]->annotations as $userbroadcastsC){
               $type = $userbroadcastsC->type;     
-              if (strpos($type,"core.fallback_url") != false){
+              if (strpos($type,"core.fallback_url") == true){
                 $fallback_url=$userbroadcastsC->value->url;
                 echo "<a class='url' href='".$fallback_url."'>".$userbroadcasts[0]->annotations[0]->value->title."</a> ";
               }
           }
           foreach($userbroadcasts[0]->annotations as $userbroadcastsC){
               $type = $userbroadcastsC->type;
-              if (strpos($type,"core.broadcast.freq") != false){
+              if (strpos($type,"core.broadcast.freq") == true){
               	$avg_freq = $userbroadcastsC->value->avg_freq;
               	echo "(".$avg_freq.")";
               }
           }
           echo "</li>";
           echo "<li>";
-          if ($userbroadcasts[1] != false) {
+          if ($userbroadcasts[1] == true) {
 	          foreach($userbroadcasts[1]->annotations as $userbroadcastsC){
 	              $type = $userbroadcastsC->type;     
-	              if (strpos($type,"core.fallback_url") != false){
+	              if (strpos($type,"core.fallback_url") == true){
 	                $fallback_url=$userbroadcastsC->value->url;
 	                echo "<a class='url' href='".$fallback_url."'>".$userbroadcasts[1]->annotations[0]->value->title."</a> ";
 	              }
 	          }
 	          foreach($userbroadcasts[1]->annotations as $userbroadcastsC){
 	              $type = $userbroadcastsC->type;
-	              if (strpos($type,"core.broadcast.freq") != false){
+	              if (strpos($type,"core.broadcast.freq") == true){
 	              	$avg_freq = $userbroadcastsC->value->avg_freq;
 	              	echo "(".$avg_freq.")";
 	              }
@@ -383,17 +386,17 @@
 	        }
           echo "</li>";
           echo "<li>";
-          if ($userbroadcasts[2] != false) {
+          if ($userbroadcasts[2] == true) {
 	          foreach($userbroadcasts[2]->annotations as $userbroadcastsC){
 	              $type = $userbroadcastsC->type;     
-	              if (strpos($type,"core.fallback_url") != false){
+	              if (strpos($type,"core.fallback_url") == true){
 	                $fallback_url=$userbroadcastsC->value->url;
 	                echo "<a class='url' href='".$fallback_url."'>".$userbroadcasts[2]->annotations[0]->value->title."</a> ";
 	              }
 	          }
 	          foreach($userbroadcasts[2]->annotations as $userbroadcastsC){
 	              $type = $userbroadcastsC->type;
-	              if (strpos($type,"core.broadcast.freq") != false){
+	              if (strpos($type,"core.broadcast.freq") == true){
 	              	$avg_freq = $userbroadcastsC->value->avg_freq;
 	              	echo "(".$avg_freq.")";
 	              }
@@ -401,17 +404,17 @@
 	        }
           echo "</li>";
           echo "<li>";
-          if ($userbroadcasts[3] != false) {        
+          if ($userbroadcasts[3] == true) {        
 	          foreach($userbroadcasts[3]->annotations as $userbroadcastsC){
 	              $type = $userbroadcastsC->type;     
-	              if (strpos($type,"core.fallback_url") != false){
+	              if (strpos($type,"core.fallback_url") == true){
 	                $fallback_url=$userbroadcastsC->value->url;
 	                echo "<a class='url' href='".$fallback_url."'>".$userbroadcasts[3]->annotations[0]->value->title."</a> ";
 	              }
 	          }
 	          foreach($userbroadcasts[3]->annotations as $userbroadcastsC){
 	              $type = $userbroadcastsC->type;
-	              if (strpos($type,"core.broadcast.freq") != false){
+	              if (strpos($type,"core.broadcast.freq") == true){
 	              	$avg_freq = $userbroadcastsC->value->avg_freq;
 	              	echo "(".$avg_freq.")";
 	              }
@@ -426,7 +429,7 @@
       <!-- User Patter -->
       <!-- <div id="Patter">
       <?php
-        if ($userpatter != false) {
+        if ($userpatter == true) {
           echo "<h3>Patter Rooms</h3>";
           echo "<div class='pca'>";
           echo "<ul class='list-unstyled'>";

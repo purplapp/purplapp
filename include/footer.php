@@ -5,7 +5,7 @@
           <p>
           	&copy; Purplapp 2014. 
             <br>
-            <a href="/about.php">About Us</a> &nbsp;&nbsp; <a href="/images/imprint.png">Imprint</a>
+            <a href="/about.php">About Us</a> &nbsp; - &nbsp; <a href="/images/imprint.png">Imprint</a>
           </p>
           </p>
         </div>

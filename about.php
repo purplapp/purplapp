@@ -63,7 +63,7 @@
 				<div class="caption">
 					<h3><?php echo $obj->data[2]->name;?></h3>
 					<p>Hugo customised the Bootstrap, and writes a lot of the backend stuff.</p>
-					<p><a href="<?php echo $obj->data[2]->canonical_url;?>" class="btn btn-primary" role="button">App.net</a> <a href="http://github.com/jvimedia" class="btn btn-success" role="button">GitHub</a> <a href="<?php echo $obj->data[2]->verified_link;?>" class="btn btn-info" role="button">Site</a></p>
+					<p><a href="<?php echo $obj->data[2]->canonical_url;?>" class="btn btn-primary" role="button">App.net</a> <a href="http://github.com/humd" class="btn btn-success" role="button">GitHub</a> <a href="<?php echo $obj->data[2]->verified_link;?>" class="btn btn-info" role="button">Site</a></p>
 				</div>
 			</div>
 		</div>
