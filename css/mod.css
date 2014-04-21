@@ -78,11 +78,11 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
     outline: 0 none;
 }
 
-a {
+a:hover {
   color: rgb(128, 86, 214);
 }
 
-a:hover {
+a {
   color: rgba(128, 86, 214, 0.8);
 }
 

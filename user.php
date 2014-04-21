@@ -104,6 +104,8 @@
   		  <strong>Information -</strong> we are aware of the page load times being high. We are investigating the issue.
   	  </div> 
 
+      <em><a href="/account.php"><i class="fa fa-chevron-left fa-fw"></i>Go Back</a></em>
+
       <!-- User Name -->
       <div class="page-header">
         <h4>User Lookup</h4>

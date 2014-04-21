@@ -40,7 +40,7 @@
             <li><a href="/donate.php"><i class="fa fa-bitcoin fa-fw"></i>Donate</a></li>
             <li><a href="/about.php"><i class="fa fa-info fa-fw"></i>About</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <!-- <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Elsewhere<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -49,7 +49,7 @@
                 <li><a href="https://broadcast.app.net/34622/purplapp-news/"><i class="fa fa-bolt fa-fw"></i>Broadcast Channel</a></li>
               </ul>
             </li>
-          </ul>
+          </ul> -->
         </div><!--/.nav-collapse -->
       </div>
     </div>

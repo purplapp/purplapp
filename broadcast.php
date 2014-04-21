@@ -1,5 +1,6 @@
 <?php $title = "Tools for Broadcast Channels"; include('include/header.php'); ?>
 
+<em><a href="/index.php"><i class="fa fa-chevron-left fa-fw"></i>Go Back</a></em>
 <div class="col-md-12">
 	<div class="page-header">
 		<h1>Tools for Broadcast Channels <span class="label label-primary">New</span></h1>

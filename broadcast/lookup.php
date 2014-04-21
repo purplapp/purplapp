@@ -1,6 +1,6 @@
 <?php 
-	// error_reporting(E_ALL);
-	// ini_set("display_errors", 1);   
+	error_reporting(E_ALL);
+	ini_set("display_errors", 1);   
 
 	//Required files
 	require('../config.php');
@@ -44,7 +44,8 @@
 		print_r($channel_lookup); 
 		print "</pre>";
     ?>   -->
-    
+
+    <em><a href="/broadcast.php"><i class="fa fa-chevron-left fa-fw"></i>Go Back</a></em>
 	<div class="page-header">
 		<h4>Broadcast Channel Lookup <span class="label label-primary">New</span></h4>
 		<h1>
@@ -115,7 +116,6 @@
 		          <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
 		        </span>
 		      </div>
-		      <span class="help-block">Please enter the Channel ID - the five numbers which you can find in the Broadcast URL.</span>
 		    </div>
 		</form>
 	</div>
@@ -136,42 +136,37 @@
 	<br><br>
 
 	<?php
-		$type = $channel_annotationsC->type;
-        if (strpos($type,"core.broadcast.metadata") != false){
-			foreach ($channel_posts as $channel_postsC) {
-			    $created_at = new DateTime($channel_postsC->created_at);
-	    		$date_message_created = $created_at->format('Y-m-d H:i:s');
+		foreach ($channel_posts as $channel_postsC) {
+			$created_at = new DateTime($channel_postsC->created_at);
+    		$date_message_created = $created_at->format('Y-m-d H:i:s');
 
-				echo "<div class='panel panel-default'>";
-					$channel_posts_annotations = $channel_postsC->annotations;
+			echo "<div class='panel panel-default'>";
+				$channel_posts_annotations = $channel_postsC->annotations;
+				foreach($channel_posts_annotations as $channel_posts_annotationsC){
+		            $type = $channel_posts_annotationsC->type;
+		            if (strpos($type,"core.broadcast.message.metadata") != false){
+		            	$post_title=$channel_posts_annotationsC->value->subject;
+		            	echo "<div class='panel-heading'>";
+						echo "<h3 class='panel-title'>";
+		            	echo $post_title;
+		            	echo "</h3>";
+						echo "</div>";		            	
+		            }
+		        }
+	  			echo "<div class='panel-body'>";
+					echo $channel_postsC->html;
+				echo "</div>";
+				echo "<div class='panel-footer'>";
+					echo $date_message_created;
 					foreach($channel_posts_annotations as $channel_posts_annotationsC){
 			            $type = $channel_posts_annotationsC->type;
-			            if (strpos($type,"core.broadcast.message.metadata") != false){
-			            	$post_title=$channel_posts_annotationsC->value->subject;
-			            	echo "<div class='panel-heading'>";
-							echo "<h3 class='panel-title'>";
-			            	echo $post_title;
-			            	echo "</h3>";
-							echo "</div>";		            	
-			            }
-			        }
-		  			echo "<div class='panel-body'>";
-						echo $channel_postsC->html;
-					echo "</div>";
-					echo "<div class='panel-footer'>";
-						echo $date_message_created;
-						foreach($channel_posts_annotations as $channel_posts_annotationsC){
-				            $type = $channel_posts_annotationsC->type;
-							if (strpos($type,"core.crosspost") != false){
-								$post_crosspost=$channel_posts_annotationsC->value->canonical_url;
-								echo "&nbsp - &nbsp<a class='url' href='".$post_crosspost."'>Read more on ".parse_url($post_crosspost, PHP_URL_HOST)."</a>";
-							}
+						if (strpos($type,"core.crosspost") != false){
+							$post_crosspost=$channel_posts_annotationsC->value->canonical_url;
+							echo "&nbsp - &nbsp<a class='url' href='".$post_crosspost."'>Read more on ".parse_url($post_crosspost, PHP_URL_HOST)."</a>";
 						}
-					echo "</div>";
+					}
 				echo "</div>";
-			}
-		} else {
-			echo "Data not loaded: this channel doesn't exist or isn't marked as a Broadcast channel. <a href=\"javascript:history.go(-1)\">Go back to the previous page.</a>";
+			echo "</div>";
 		}
 	?>
 </div>
