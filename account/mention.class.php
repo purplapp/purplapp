@@ -14,13 +14,13 @@ class Mention {
 	public $usermention2to1annot = null;
 	
 	public function setUserID1($get) {
-		$this->userID1 = preg_replace('/^@?([a-zA-Z0-9_]+)$/', '@$1', $get);
-		$this->mentionid1 = preg_replace('/^@?([a-zA-Z0-9_]+)$/', '$1', $get);
+		$this->userID1 = strtolower(preg_replace('/^@?([a-zA-Z0-9_]+)$/', '@$1', $get));
+		$this->mentionid1 = strtolower(preg_replace('/^@?([a-zA-Z0-9_]+)$/', '$1', $get));
 	}
 
 	public function setUserID2($get) {
-		$this->userID2 = preg_replace('/^@?([a-zA-Z0-9_]+)$/', '@$1', $get);
-		$this->mentionid2 = preg_replace('/^@?([a-zA-Z0-9_]+)$/', '$1', $get);
+		$this->userID2 = strtolower(preg_replace('/^@?([a-zA-Z0-9_]+)$/', '@$1', $get));
+		$this->mentionid2 = strtolower(preg_replace('/^@?([a-zA-Z0-9_]+)$/', '$1', $get));
 	}
 	
 	public function getUserInfo1() {
