@@ -15,7 +15,7 @@
     if(!empty($_GET['id2'])) {
       $userID2 = $_GET['id2'];
     } else {
-      $userID2 = "redqueencoder";
+      $userID2 = "chucker";
     }
 
 	//Set Default Timezone
@@ -105,7 +105,7 @@
 				echo "<a class='url' href=".$user1_mentions2->canonical_url." target='_blank'><i class='fa fa-clock-o fa-fw'></i>".$date_message_created_1."</a>";
 				if ($user1_mentions2->reply_to) {
 					echo "&nbsp - &nbsp";
-					echo "<a class='url' href='".$user1_mentions2->canonical_url."#".$user1_mentions2->reply_to." target='_blank''><i class='fa fa-comments fa-fw'></i></a>";
+					echo "<a class='url' href='".$user1_mentions2->canonical_url."#".$user1_mentions2->reply_to."' target='_blank''><i class='fa fa-comments fa-fw'></i></a>";
 				} else {}
 				echo "&nbsp - &nbsp";
 				echo "<a class='url' href=".$user1_mentions2->source->link." target='_blank'><i class='fa fa-external-link fa-fw'></i> via ".$user1_mentions2->source->name."</a>";
@@ -135,7 +135,7 @@
 				echo "<a class='url' href=".$user2_mentions1->canonical_url." target='_blank'><i class='fa fa-clock-o fa-fw'></i>".$date_message_created_2."</a>";
 				if ($user2_mentions1->reply_to) {
 					echo "&nbsp - &nbsp";
-					echo "<a class='url' href='".$user2_mentions1->canonical_url."#".$user2_mentions1->reply_to." target='_blank''><i class='fa fa-comments fa-fw'></i></a>";
+					echo "<a class='url' href='".$user2_mentions1->canonical_url."#".$user2_mentions1->reply_to."' target='_blank''><i class='fa fa-comments fa-fw'></i></a>";
 				} else {}
 				echo "&nbsp - &nbsp";
 				echo "<a class='url' href=".$user2_mentions1->source->link." target='_blank'><i class='fa fa-external-link fa-fw'></i> via ".$user2_mentions1->source->name."</a>";
