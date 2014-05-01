@@ -12,47 +12,13 @@
     <link rel="apple-touch-icon" href="/images/apple-touch-icon-precomposed.png"/>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="http://bootstrap-fugue.azurewebsites.net/css/bootstrap-fugue-min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-fugue-min.css"/>
 
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
 
     <link rel="author" href="/humans.txt"/>
   
-    <title><?php echo $title; ?></title>
-
-    <!-- Static navbar -->
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Purplapp</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/index.php"><i class="fa fa-home fa-fw"></i>Home</a></li>
-            <li><a href="/account.php"><i class="fa fa-user fa-fw"></i>Account Tools</a></li>
-            <li><a href="/broadcast.php"><i class="fa fa-bolt fa-fw"></i>Broadcast Tools</a></li>
-            <li><a href="/donate.php"><i class="fa fa-bitcoin fa-fw"></i>Donate</a></li>
-            <li><a href="/about.php"><i class="fa fa-info fa-fw"></i>About</a></li>
-          </ul>
-          <!-- <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Elsewhere<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="https://alpha.app.net/purplapp"><i class="fa fa-adn fa-fw"></i>App.net</a></li>
-                <li><a href="https://github.com/purplapp"><i class="fa fa-github fa-fw"></i>GitHub</a></li>
-                <li><a href="https://broadcast.app.net/34622/purplapp-news/"><i class="fa fa-bolt fa-fw"></i>Broadcast Channel</a></li>
-              </ul>
-            </li>
-          </ul> -->
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+    <title><?php echo $title; ?></title>   
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -62,9 +28,6 @@
 
     <!-- Modifications -->
     <link href="/css/mod.css" rel="stylesheet">
-
-    <!--adnjs-->
-    <script>(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='//d2zh9g63fcvyrq.cloudfront.net/adn.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'adn-button-js'));</script>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -77,4 +40,37 @@
   </head>
 
   <body>
+  		<!-- Static navbar -->
+	    <div class="navbar navbar-default navbar-static-top" role="navigation">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="/">Purplapp</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	            <li><a href="/index.php"><i class="fa fa-home fa-fw"></i>Home</a></li>
+	            <li><a href="/account.php"><i class="fa fa-user fa-fw"></i>Account Tools</a></li>
+	            <li><a href="/broadcast.php"><i class="fa fa-bolt fa-fw"></i>Broadcast Tools</a></li>
+	            <li><a href="/donate.php"><i class="fa fa-bitcoin fa-fw"></i>Donate</a></li>
+	            <li><a href="/about.php"><i class="fa fa-info fa-fw"></i>About</a></li>
+	          </ul>
+	          <!-- <ul class="nav navbar-nav navbar-right">
+	            <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Elsewhere<b class="caret"></b></a>
+	              <ul class="dropdown-menu">
+	                <li><a href="https://alpha.app.net/purplapp"><i class="fa fa-adn fa-fw"></i>App.net</a></li>
+	                <li><a href="https://github.com/purplapp"><i class="fa fa-github fa-fw"></i>GitHub</a></li>
+	                <li><a href="https://broadcast.app.net/34622/purplapp-news/"><i class="fa fa-bolt fa-fw"></i>Broadcast Channel</a></li>
+	              </ul>
+	            </li>
+	          </ul> -->
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </div>
         <div class="container">
