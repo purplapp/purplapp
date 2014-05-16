@@ -1,39 +1,102 @@
-<?php $title = "Purplapp"; include('include/header.php'); ?>
+<?php 
+  $title = "Purplapp"; 
+
+  require_once './ADN_php/EZAppDotNet.php';
+  $app = new EZAppDotNet();
+
+  if ($app->getSession()) {
+    include('./include/header_auth.php'); 
+?>
 
 <!-- Left Column -->
+<div class="jumbotron">
+  <h1>Welcome!</h1>
+  <p>Purplapp is an app for App.net statistics.</p>
+</div>
+
 <div class="col-md-6">
-  <h1>What is Purplapp?</h1>
-  <p>Purplapp is an app for App.net statistics. Find our story <a href="about.php">here</a>, or look at our current features below.</p>
-
   <h1>Features</h1>
-
-  <h3>Account Features</h3>
+  <h2>Account Features</h2>
+  <p>
+    <ul>
+      <li><a href='./account/user.php'>Find details on your account and your PCA Clubs.</a></li>
+      <li><a href='./account/mention.php'>Find the first mentions between two users.</a></li>
+    </ul>
+  </p>
+  <h2>Broadcast Features</h2>
   <ul>
-    <li><a href='user.php'>Find details on your account and your PCA Clubs.</a></li>
-    <li><a href='account/pca.php'>Your PCA Clubs - formatted to easily copy into your bio.</a></li>
-    <li><a href='account/mention.php'>Find the first mentions between two users.</a></li>
+    <li><a href='./broadcast/lookup.php'>See the most recent 5 updates in any Broadcast channel.</a></li>
   </ul>
-
-  <h3>Broadcast Features</h3>
-  <ul>
-    <li><a href='broadcast/lookup.php'>See the most recent 5 updates in any Broadcast channel.</a></li>
-  </ul>
-
-<!--   <h3>Upcoming Features</h3>
-  <ul>
-    <li>Auto-update your bio with current clubs you're in.</li>
-    <li>Notifications from clubs you're in and on users who are close to joining clubs.</li>
-  </ul> -->
 </div>
 
 <!-- Right Column -->
 <div class="col-md-6">
   <h1>Like what we've done?</h1>
-  <p>Check us out on <a href='http://github.com/purplapp'>Github</a>!</p>
-  <iframe src="/include/github-btn.html?user=purplapp&repo=purplapp&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
-  <iframe src="/include/github-btn.html?user=purplapp&repo=purplapp&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
-  <script id='fbz61pq'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=jvimedia&button=compact&url=http%3A%2F%2Fpurplapp.eu';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbz61pq');</script>
-  <p>It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently. You can help us improve ADN by <a href='./donate.php'>donating!</a> :)</p>
+
+  <p>
+    Check us out on <a href='http://github.com/purplapp'>Github</a>!
+    <br><br>
+    It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently. You can help us improve ADN by <a href='./donate.php'>donating!</a> :)
+    <br><br>
+    <script id='fbz61pq'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=jvimedia&button=compact&url=http%3A%2F%2Fpurplapp.eu';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbz61pq');</script>
+    <br>
+    <p><strong>We need £30 a month to keep the servers going. Here's the progress towards our goal!</strong></p>
+    <div class="progress progress-striped">
+      <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+        30%
+      </div>
+    </div>
+  </p>
 </div>
 
-<?php include('include/footer.php'); ?>
+<?php 
+  } else {
+    include('./include/header_unauth.php'); 
+?>
+
+<!-- Left Column -->
+<div class="jumbotron">
+  <h1>Welcome!</h1>
+  <p>Purplapp is an app for App.net statistics.</p>
+  <p><a href="./ADN_php/login.php" class="btn btn-primary btn-lg" role="button"><i class="fa fa-sign-in"></i> Login with App.net</a></p>
+</div>
+
+<div class="col-md-6">
+  <h1>Features</h1>
+  <h2>Account Features</h2>
+  <p>
+    <ul>
+      <li>Find details on your account and your PCA Clubs.</li>
+      <li>Find the first mentions between two users.</li>
+    </ul>
+  </p>
+  <h2>Broadcast Features</h2>
+  <ul>
+    <li>See the most recent 5 updates in any Broadcast channel.</li>
+  </ul>
+</div>
+
+<!-- Right Column -->
+<div class="col-md-6">
+  <h1>Like what we've done?</h1>
+
+  <p>
+    Check us out on <a href='http://github.com/purplapp'>Github</a>!
+    <br><br>
+    It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently. You can help us improve ADN by <a href='./donate.php'>donating!</a> :)
+    <br><br>
+    <script id='fbz61pq'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=jvimedia&button=compact&url=http%3A%2F%2Fpurplapp.eu';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbz61pq');</script>
+    <br>
+    <p><strong>We need £30 a month to keep the servers going. Here's the progress towards our goal!</strong></p>
+    <div class="progress progress-striped">
+      <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
+        30%
+      </div>
+    </div>
+  </p>
+</div>
+
+<?php
+  }
+  include('include/footer.php');
+?>
