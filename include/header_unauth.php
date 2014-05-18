@@ -56,7 +56,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/account.php"><i class="fa fa-user fa-fw"></i>Account Tools</a></li>
+					<li><a href="./account.php"><i class="fa fa-user fa-fw"></i>Account Tools</a></li>
 					<li><a href="/broadcast.php"><i class="fa fa-bolt fa-fw"></i>Broadcast Tools</a></li>
 					<li><a href="/donate.php"><i class="fa fa-bitcoin fa-fw"></i>Donate</a></li>
 					<li><a href="/about.php"><i class="fa fa-info fa-fw"></i>About</a></li>

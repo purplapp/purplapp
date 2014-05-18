@@ -1,7 +1,8 @@
 <?php
-    // error_reporting(E_ALL);
-    // ini_set("display_errors", 1);  
-$base_path="..";
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);  
+	
+	$base_path="..";
     require_once($base_path.'/ADN_php/EZAppDotNet.php');
     require($base_path.'/ADN_php/newFunctions.php');
 
