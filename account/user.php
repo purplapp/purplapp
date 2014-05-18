@@ -2,7 +2,7 @@
     // error_reporting(E_ALL);
     // ini_set("display_errors", 1);  
 $base_path="..";
-    require_once($base_path.'/ADN_php/EZAppDotNet.php');
+    require_once $base_path.'/ADN_php/EZAppDotNet.php';
     require($base_path.'/ADN_php/newFunctions.php');
 
     $app = new EZAppDotNet();
@@ -24,7 +24,7 @@ $base_path="..";
 
         //Header
         $title = "User Information Lookup";
-        include('../include/header_auth.php');
+        include($base_path.'/include/header_auth.php');
 
         if ($username == 'me') {
             try {
