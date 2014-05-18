@@ -1,11 +1,11 @@
 <?php
 
 // change these values to your own in order to use EZAppDotNet
-$app_clientId     = 'eQLzaREHPBZ54EFUna68MAN9AnyrLubP';
-$app_clientSecret = 'q279wdrVZmHfNr9uzzzY5Kq4FYXebRSC';
+$app_clientId     = 'XkHDN9ghAzPW6PvxbU5xMAtRtWEEUugX';
+$app_clientSecret = 'gSXtuVMXj7w3fzjeRqmKc2YmaJLDjJHb';
 
 // this must be one of the URLs defined in your App.net application settings
-$app_redirectUri  = 'http://purplapp.eu/ADN_php/callback.php';
+$app_redirectUri  = 'http://localhost/tower/purplapp/ADN_php/callback.php';
 
 // An array of permissions you're requesting from the user.
 // As a general rule you should only request permissions you need for your app.
