@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://jvimedia.org/static/bootstrap/css/bootstrap-fugue-min.css"/>
 
     <!-- Modifications -->
-    <link rel="stylesheet" href="/css/mod.css">
+    <link rel="stylesheet" href="<?php echo $base_path;?>/css/mod.css">
 
     <!-- Humans.TXT -->
     <link rel="author" href="/humans.txt"/>
