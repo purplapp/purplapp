@@ -11,5 +11,5 @@
 	}
 
 	// redirect user after logging in
-	header('Location: /index.php');
+	header('Location: ../index.php');
 ?>
