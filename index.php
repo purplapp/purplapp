@@ -1,6 +1,6 @@
 <?php 
   $title = "Purplapp"; 
-$base_path="..";
+$base_path=".";
 
   require_once $base_path.'/ADN_php/EZAppDotNet.php';
   $app = new EZAppDotNet();
