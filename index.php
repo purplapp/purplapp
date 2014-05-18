@@ -1,12 +1,11 @@
 <?php 
   $title = "Purplapp"; 
-$base_path=".";
 
-  require_once $base_path.'/ADN_php/EZAppDotNet.php';
+  require_once './ADN_php/EZAppDotNet.php';
   $app = new EZAppDotNet();
 
   if ($app->getSession()) {
-    include($base_path.'/include/header_auth.php'); 
+    include('./include/header_auth.php'); 
 ?>
 
 <!-- Left Column -->
