@@ -4,7 +4,8 @@
 
     require_once '../ADN_php/EZAppDotNet.php';
     require('../ADN_php/newFunctions.php');
-
+    require('../ADN_php/nicerank.php');
+        
     $app = new EZAppDotNet();
 
     $user_params = array(
@@ -69,7 +70,17 @@
         
 		// post-date functions
 		$posts = new PostData;
+		
+		// nicerank
+		$nicerank = new NiceRank;
+		
+		$nicerank->setUserID($user_number);
+		$nicerank->getNiceRank();
+		
+		$nice_rank_data = $nicerank->nicerank;
 ?>
+
+<?php echo "<pre>"; print_r($nice_rank_data); echo "</pre>"; ?>
 
 <div class="col-md-12">
     <!-- User Name -->
@@ -117,7 +128,7 @@
 
 <div class="col-md-6">
     <!--Info-->
-    <table class="table">
+    <table class="table table-condensed">
         <tr>
             <td><h4>ADN Data</h4></td>
             <td></td>
@@ -283,7 +294,7 @@
 </div>
 
 <div class="col-md-6">
-    <table class="table">
+    <table class="table table-condensed">
         <?php if ($username != $auth_username) { ?>
         <tr>
             <td><h4>Comparison</h4></td>
@@ -403,7 +414,62 @@
         <?php } ?>
          
         <?php } ?>
-        <?php if ($username != $auth_username) { ?>     
+        
+        <?php if (isset($nice_rank_data[0])) { ?>
+        <tr>
+            <td><h4>NiceRank</h4></td>
+            <td></td>
+        </tr>        
+        <tr>
+        	<td>Rank:</td>
+        	<td><?php echo $nice_rank_data[0]->rank; ?></td>
+        </tr>
+        <tr>
+        	<td>Real Person:</td>
+        	<td>
+        		<?php 
+        			$real_person = $nice_rank_data[0]->account->real_person; 
+	        		
+	        		if ($real_person = '1') {
+		        		echo "Yes";
+	        		} else {
+		        		echo "No";
+	        		}
+        		?>
+        	</td>
+        </tr>
+        <tr>
+        	<td><h5>Past 28 days:</h5></td>
+			<td></td>
+        </tr>
+        <tr>
+        	<td>Robot_Posts:</td>
+        	<td><?php echo $nice_rank_data[0]->stats->robo_posts; ?></td>
+        </tr>
+        <tr>
+        	<td>Posts:</td>
+        	<td><?php echo $nice_rank_data[0]->stats->post_count; ?></td>
+        </tr>
+        <tr>
+        	<td>Conversations:</td>
+        	<td><?php echo $nice_rank_data[0]->stats->conversations; ?></td>
+        </tr>
+        <tr>
+        	<td>Links:</td>
+        	<td><?php echo $nice_rank_data[0]->stats->links; ?></td>
+        </tr>
+        <tr>
+        	<td>Mentions:</td>
+        	<td><?php echo $nice_rank_data[0]->stats->mentions; ?></td>
+        </tr>
+        <tr>
+        	<td>Questions:</td>
+        	<td><?php echo $nice_rank_data[0]->stats->questions; ?></td>
+        </tr>
+        <?php } ?>
+        
+        <!--
+<?php if ($username != $auth_username) { ?>     
         <tr>
             <td><h4>Spam User Check</h4></td>
             <td></td>
@@ -444,6 +510,8 @@
         </tr>
         <?php } ?>
         <?php } ?>
+-->
+        
         <?php if ($clubs->memberclubs == true) { ?>
         <tr>
             <td><h4>User PCA Clubs</h4></td>
