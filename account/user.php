@@ -1,6 +1,6 @@
 <?php
-    // error_reporting(E_ALL);
-    // ini_set("display_errors", 1);  
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);  
 
     require_once '../ADN_php/EZAppDotNet.php';
     require('../ADN_php/newFunctions.php');
@@ -10,6 +10,10 @@
     $user_params = array(
         'include_user_annotations' => true, 
     );
+    
+    //calculate current date for day calc
+    $today = date('Y-m-d H:i:s');
+    $start = new DateTime($today);
 
     // check that the user is signed in
     if ($app->getSession()) {
@@ -44,13 +48,26 @@
             $data = $app->getUser($user_number, $user_params);
 
         }
+        
+        //calculate date created for day calc
+        $createdat= new DateTime($data['created_at']);
+        $adnjoin = $createdat->format('Y-m-d H:i:s');
 
+        //calculate number of days on ADN
+        $date1 = new DateTime($adnjoin);
+        $date2 = new DateTime($today);
+        $interval = $date1->diff($date2);
+		
+		// pca club functions
         $clubs = new PostClubs;
 
         $clubs->setUserPost($data['counts']['posts']);
         $clubs->getClubs();
 
-        $user_clubs = $clubs->memberclubs
+        $user_clubs = $clubs->memberclubs;
+        
+		// post-date functions
+		$posts = new PostData;
 ?>
 
 <div class="col-md-12">
@@ -60,7 +77,7 @@
         <h1>
           <?php echo $data['name'] ?>
           <small>
-            <?php echo "<a class='url' href='http://alpha.jvimedia.org/".$data['username']."'>@".$data['username']."</a>" ?>
+            <?php echo "<a href='".$alpha, $data['username']."' target='_blank'>@".$data['username']."</a>" ?>
           </small>
         </h1>
     </div>
@@ -106,20 +123,42 @@
         </tr>
         <tr>
             <td>Posts:</td>
-            <td><?php echo $data['counts']['posts']; ?></td>
+            <td><?php echo "<a class='url' href='".$alpha, $data['username']."/posts/' target='_blank'>".$data['counts']['posts']."</a> <i>(average ".round(($data['counts']['posts'] / $interval->days), 2)." per day)</i>"; ?></td>
         </tr>
         <tr>
             <td>Starred:</td>
-            <td><?php echo $data['counts']['stars']; ?></td>
+            <td><?php echo "<a class='url' href='".$alpha, $data['username']."/stars/' target='_blank'>".$data['counts']['stars']."</a> <i>(average ".round(($data['counts']['stars'] / $interval->days), 2)." per day)</i>"; ?></td>
         </tr>
+        <?php if ($username != $auth_username) { ?>
         <tr>
             <td>Following:</td>
-            <td><?php echo $data['counts']['following']; ?></td>
+            <td>
+            	<?php
+            		if ($data['follows_you']){ $follows_you = "follows you"; } else { $follows_you = "does not follow you"; }
+            		echo "<a class='url' href='".$alpha, $data['username']."/following/' target='_blank'>".$data['counts']['following']."</a> <i>(".$follows_you.")</i>" 
+            	?>
+            </td>
         </tr>
         <tr>
             <td>Followers:</td>
-            <td><?php echo $data['counts']['followers']; ?></td>
+            <td>
+            	<?php
+            		if ($data['you_follow']){ $you_follow = "you follow"; } else { $you_follow = "you don't follow"; }
+            		echo "<a class='url' href='".$alpha, $data['username']."/followers/' target='_blank'>".$data['counts']['followers']."</a> <i>(".$you_follow.")</i>" 
+            	?>
+            </td>
         </tr>
+
+		<?php } else { ?>
+        <tr>
+            <td>Following:</td>
+            <td><?php echo "<a class='url' href='".$alpha, $data['username']."/following/' target='_blank'>".$data['counts']['following']."</a>" ?></td>
+        </tr>
+        <tr>
+            <td>Followers:</td>
+            <td><?php echo "<a class='url' href='".$alpha, $data['username']."/followers/' target='_blank'>".$data['counts']['followers']."</a>" ?></td>
+        </tr>
+        <?php } ?>
         <tr>
             <td>Account Type:</td>
             <td><?php echo ucfirst($data['type']); ?></td>
@@ -127,6 +166,10 @@
         <tr>
             <td>Location:</td>
             <td><?php echo $data['timezone']; ?></td>
+        </tr>
+        <tr>
+            <td>Locale:</td>
+            <td><?php echo $data['locale']; ?></td>
         </tr>
         <tr>
             <td>User Number:</td>
@@ -137,36 +180,14 @@
             <td>
                 <?php
                     $date = new DateTime($data['created_at']);
-                    //$dateresult = $date->format('Y-m-d H:i:s');
                     $dateresult = $date->format('H:i \o\n d M Y');
                     
-echo $dateresult;
+                    $end = new DateTime($adnjoin);
+			        $adnage = $posts->formatDateDiff($start, $end);
+					
+					echo $dateresult, " <i>(", $adnage, " ago)</i>";
                 ?>
             </td>
-        </tr> 
-        <tr>
-            <td>ADN Age:</td>
-            <td>
-                <?php 
-                    //calculate current date for day calc
-                    $today = date('Y-m-d');
-
-                    //calculate date created for day calc
-                    $createdat= new DateTime($data['created_at']);
-                    $adnjoin = $createdat->format('Y-m-d');
-
-                    //calculate number of days on ADN
-                    $date1 = new DateTime($adnjoin);
-                    $date2 = new DateTime($today);
-                    $interval = $date1->diff($date2);
-                    
-                    echo $interval->days, " days";
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td>Locale:</td>
-            <td><?php echo $data['locale']; ?></td>
         </tr>
         <?php 
             if(isset($data['verified_link'])) {
@@ -174,7 +195,8 @@ echo $dateresult;
             } else {
                 $verified_link = "n";
             }
-        if (($verified_link = "y") and $data['annotations']) { ?>
+	        if (($verified_link = "y") and $data['annotations']) { 
+        ?>
         <tr>
             <td><h4>User Data</h4></td>
             <td></td>
@@ -185,7 +207,7 @@ echo $dateresult;
                 $verified_link = $data['verified_link'];
                 echo "<td>Verified Domain:</td>";
                 echo "<td>";
-                echo "<a class='url' href='".$verified_link."'>".$data['verified_domain']."</a>";
+                echo "<a href='".$verified_link."' target='_blank'>".$data['verified_domain']."</a>";
                 echo "</td>";
             }
             ?>
@@ -197,7 +219,7 @@ echo $dateresult;
                     $blogurl=$annotations['value']['url'];
                     echo "<td>Blog:</td>";
                     echo "<td>";
-                    echo "<a href=".$blogurl.">".parse_url($blogurl, PHP_URL_HOST)."</a>";
+                    echo "<a href=".$blogurl." target='_blank'>".parse_url($blogurl, PHP_URL_HOST)."</a>";
                     echo "</td>"; 
                 }
             }
@@ -208,9 +230,9 @@ echo $dateresult;
             foreach($data['annotations'] as $annotations){
                 if (strpos($annotations['type'],"core.directory.facebook") == true){
                     $facebook_id=$annotations['value']['id'];
-                    echo "<td>Facebook ID:</td>";
+                    echo "<td>Facebook:</td>";
                     echo "<td>";
-                    echo '<a href="http://facebook.com/'.$facebook_id.'">'.$facebook_id.'</a>';
+                    echo '<a href="http://facebook.com/'.$facebook_id.'" target="_blank">'.$facebook_id.'</a>';
                     echo "</td>"; 
                 }
             }
@@ -221,9 +243,9 @@ echo $dateresult;
             foreach($data['annotations'] as $annotations){
                 if (strpos($annotations['type'],"core.directory.twitter") == true){
                     $twitter_id=$annotations['value']['username'];
-                    echo "<td>Twitter ID:</td>";
+                    echo "<td>Twitter:</td>";
                     echo "<td>";
-                    echo '<a href="http://twitter.com/'.$twitter_id.'">@'.$twitter_id.'</a>';
+                    echo '<a href="http://twitter.com/'.$twitter_id.'" target="_blank">@'.$twitter_id.'</a>';
                     echo "</td>"; 
                 }
             }
@@ -265,15 +287,6 @@ echo $dateresult;
         <tr>
             <td><h4>Comparison</h4></td>
             <td></td>
-        </tr>
-        <tr>
-            <td class="">Follows You:</td>
-            <td><?php if ($data['follows_you']){ echo "Yes"; } else { echo "No"; } ?></td>            
-        </tr>
-        <tr>
-            <td class="">You Follow:</td>
-            <td><?php if ($data['you_follow']){ echo "Yes"; } else { echo "No"; } ?></td>            
-        </tr>
         <tr>
             <td class="">Muted:</td>
             <td><?php if ($data['you_muted']){ echo "Yes"; } else { echo "No"; } ?></td>
@@ -299,7 +312,7 @@ echo $dateresult;
                     $firstpost = $app->getUserPosts($user_id="$user_number", $post_params);
 
                     $created_at = new DateTime($firstpost[0]['created_at']);
-                    $firstpost_created_at = $created_at->format('Y-m-d H:i:s');
+                    $firstpost_created_at = $created_at->format('H:i \o\n d M Y');
 
                     $firstpostlink = $firstpost[0]['canonical_url'];
                 ?>
@@ -316,7 +329,7 @@ echo $dateresult;
 
             if ($firstmention) {
                 $created_at = new DateTime($firstmention[0]['created_at']);
-                $firstmention_created_at = $created_at->format('Y-m-d H:i:s');
+                $firstmention_created_at = $created_at->format('H:i \o\n d M Y');
 
                 $firstmentionlink = $firstmention[0]['canonical_url'];
 
@@ -326,7 +339,7 @@ echo $dateresult;
         <tr>
             <td class="">First Mention:</td>
             <td>
-                <a href="<?php echo $firstmentionlink; ?>"><?php echo $firstmention_created_at; ?></a> by <a href="http://alpha.jvimedia.org/<?php echo $firstmention_user; ?>">@<?php echo $firstmention_user; ?></a>
+                <a href="<?php echo $firstmentionlink; ?>" target='_blank'><?php echo $firstmention_created_at; ?></a> <i>(by <a href="http://alpha.jvimedia.org/<?php echo $firstmention_user; ?>" target='_blank'>@<?php echo $firstmention_user; ?>)</i></a>
             </td>
         </tr>               
         <?php } ?>
@@ -345,8 +358,11 @@ echo $dateresult;
                     $lastpost_created_at = $created_at->format('Y-m-d H:i:s');
 
                     $lastpostlink = $lastpost[0]['canonical_url'];
+                    
+                    $end = new DateTime($lastpost_created_at);
+			        $lastpost_ago = $posts->formatDateDiff($start, $end);		        
                 ?>
-                <a href="<?php echo $lastpostlink; ?>"><?php echo $lastpost_created_at; ?></a>
+                <a href="<?php echo $lastpostlink; ?>" target='_blank'><?php echo $lastpost_ago; ?> ago</a>
             </td>
         </tr>
 
@@ -365,23 +381,18 @@ echo $dateresult;
 
                 $lastmention_user = $lastmention[0]['user']['username'];
                 $lastmention_user_link = $lastmention[0]['user']['canonical_url'];
+                
+                $end = new DateTime($lastmention_created_at);
+		        $lastmention_ago = $posts->formatDateDiff($start, $end);
         ?>
         <tr>
             <td class="">Last Mention:</td>
             <td>
-                <a href="<?php echo $lastmentionlink; ?>"><?php echo $lastmention_created_at; ?></a> by <a href="http://alpha.jvimedia.org/<?php echo $lastmention_user; ?>">@<?php echo $lastmention_user; ?></a>
+                <a href="<?php echo $lastmentionlink; ?>" target='_blank'><?php echo $lastmention_ago; ?> ago</a> <i>(by <a href="http://alpha.jvimedia.org/<?php echo $lastmention_user; ?>" target='_blank'>@<?php echo $lastmention_user; ?>)</i></a>
             </td>
-        </tr>               
+        </tr>           
         <?php } ?>
-
-        <tr>
-            <td>Average Daily Posts:</td>
-            <td><?php echo round(($data['counts']['posts'] / $interval->days), 2); ?></td>    
-        </tr>
-        <tr>
-            <td>Average Daily Stars</td>
-            <td><?php echo round(($data['counts']['stars'] / $interval->days), 2); ?></td>    
-        </tr>            
+         
         <?php } ?>
         <?php if ($username != $auth_username) { ?>     
         <tr>
@@ -448,7 +459,7 @@ echo $dateresult;
             </td>
         </tr>
         <tr>
-            <td><a href='http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements'>More info on PCA clubs</a></td>
+            <td><a href='http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements' target='_blank'>More info on PCA clubs</a></td>
             <td></td>
         </tr>
         <?php } ?>
