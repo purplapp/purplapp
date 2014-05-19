@@ -60,7 +60,8 @@
 		
 		// pca club functions
         $clubs = new PostClubs;
-
+		
+		$clubs->setAlpha($alpha);
         $clubs->setUserPost($data['counts']['posts']);
         $clubs->getClubs();
 
@@ -314,9 +315,10 @@
                     $created_at = new DateTime($firstpost[0]['created_at']);
                     $firstpost_created_at = $created_at->format('H:i \o\n d M Y');
 
-                    $firstpostlink = $firstpost[0]['canonical_url'];
+                    $firstpost_post_id = $firstpost[0]['id'];
+                    $firstpost_user = $firstpost[0]['user']['username'];
                 ?>
-                <a href="<?php echo $firstpostlink; ?>"><?php echo $firstpost_created_at; ?></a>
+                <a href="<?php echo $alpha, $firstpost_user, "/post/", $firstpost_post_id; ?>" target="_blank"><?php echo $firstpost_created_at; ?></a>
             </td>
         </tr>
 
@@ -335,11 +337,13 @@
 
                 $firstmention_user = $firstmention[0]['user']['username'];
                 $firstmention_user_link = $firstmention[0]['user']['canonical_url'];
+                
+                $firstmention_post_id = $firstmention[0]['id'];               
         ?>
         <tr>
             <td class="">First Mention:</td>
             <td>
-                <a href="<?php echo $firstmentionlink; ?>" target='_blank'><?php echo $firstmention_created_at; ?></a> <i>(by <a href="http://alpha.jvimedia.org/<?php echo $firstmention_user; ?>" target='_blank'>@<?php echo $firstmention_user; ?>)</i></a>
+                <a href="<?php echo $alpha, $firstmention_user, "/post/", $firstmention_post_id; ?>" target='_blank'><?php echo $firstmention_created_at; ?></a> <i>(by <a href="http://alpha.jvimedia.org/<?php echo $firstmention_user; ?>" target='_blank'>@<?php echo $firstmention_user; ?>)</i></a>
             </td>
         </tr>               
         <?php } ?>
@@ -360,9 +364,12 @@
                     $lastpostlink = $lastpost[0]['canonical_url'];
                     
                     $end = new DateTime($lastpost_created_at);
-			        $lastpost_ago = $posts->formatDateDiff($start, $end);		        
+			        $lastpost_ago = $posts->formatDateDiff($start, $end);	
+
+			        $lastpost_post_id = $lastpost[0]['id'];
+                    $lastpost_user = $lastpost[0]['user']['username'];	        
                 ?>
-                <a href="<?php echo $lastpostlink; ?>" target='_blank'><?php echo $lastpost_ago; ?> ago</a>
+                <a href="<?php echo $alpha, $lastpost_user, "/post/", $lastpost_post_id; ?>" target='_blank'><?php echo $lastpost_ago; ?> ago</a>
             </td>
         </tr>
 
@@ -384,11 +391,13 @@
                 
                 $end = new DateTime($lastmention_created_at);
 		        $lastmention_ago = $posts->formatDateDiff($start, $end);
+
+                $lastmention_post_id = $lastmention[0]['id'];               		        
         ?>
         <tr>
             <td class="">Last Mention:</td>
             <td>
-                <a href="<?php echo $lastmentionlink; ?>" target='_blank'><?php echo $lastmention_ago; ?> ago</a> <i>(by <a href="http://alpha.jvimedia.org/<?php echo $lastmention_user; ?>" target='_blank'>@<?php echo $lastmention_user; ?>)</i></a>
+                <a href="<?php echo $alpha, $lastmention_user, "/post/", $lastmention_post_id; ?>" target='_blank'><?php echo $lastmention_ago; ?> ago</a> <i>(by <a href="http://alpha.jvimedia.org/<?php echo $lastmention_user; ?>" target='_blank'>@<?php echo $lastmention_user; ?>)</i></a>
             </td>
         </tr>           
         <?php } ?>
