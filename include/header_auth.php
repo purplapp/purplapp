@@ -30,6 +30,8 @@
     <link rel="author" href="/humans.txt"/>
   
     <title><?php echo $title; ?></title>   
+    
+    <?php date_default_timezone_set('UTC'); ?>
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->

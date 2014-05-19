@@ -1,6 +1,6 @@
 <?php
-//    error_reporting(E_ALL);
-//    ini_set("display_errors", 1);  
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);  
 
     require_once '../ADN_php/EZAppDotNet.php';
     require('../ADN_php/newFunctions.php');
@@ -376,7 +376,7 @@
 			        $lastpost_ago = $posts->formatDateDiff($start, $end);	
 
 			        $lastpost_post_id = $lastpost[0]['id'];
-                    $lastpost_user = $lastpost[0]['user']['username'];	        
+                    $lastpost_user = $lastpost[0]['user']['username'];	 			
                 ?>
                 <a href="<?php echo $alpha, $lastpost_user, "/post/", $lastpost_post_id; ?>" target='_blank'><?php echo $lastpost_ago; ?> ago</a>
             </td>
