@@ -5,7 +5,10 @@ $app_clientId     = 'XkHDN9ghAzPW6PvxbU5xMAtRtWEEUugX';
 $app_clientSecret = 'gSXtuVMXj7w3fzjeRqmKc2YmaJLDjJHb';
 
 // this must be one of the URLs defined in your App.net application settings
-$app_redirectUri  = 'http://localhost/tower/purplapp/ADN_php/callback.php';
+$app_redirectUri  = 'http://revive.purplapp.eu/ADN_php/callback.php';
+
+// declare the alpha domain to use
+$alpha = 'http://alpha.jvimedia.org/';
 
 // An array of permissions you're requesting from the user.
 // As a general rule you should only request permissions you need for your app.
