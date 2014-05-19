@@ -1,6 +1,6 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);  
+//    error_reporting(E_ALL);
+//    ini_set("display_errors", 1);  
 
     require_once '../ADN_php/EZAppDotNet.php';
     require('../ADN_php/newFunctions.php');
@@ -79,8 +79,6 @@
 		
 		$nice_rank_data = $nicerank->nicerank;
 ?>
-
-<?php echo "<pre>"; print_r($nice_rank_data); echo "</pre>"; ?>
 
 <div class="col-md-12">
     <!-- User Name -->
