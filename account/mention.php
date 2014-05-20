@@ -209,6 +209,9 @@
         $title = "First Mentions Lookup";
         include('../include/header_unauth.php');
 
+		echo "<div class='container'>";
+		echo '<h4>You need to sign in to use Purplapp. Click below to go to the login page.</h4>';
         echo '<a href="../ADN_php/login.php"><h2>Sign in using App.net</h2></a>';
+        echo '</div>';
     }
 ?>

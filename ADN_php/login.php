@@ -18,6 +18,7 @@
 		} else {
 			echo 'Remember me <input type="checkbox" id="rem" value="2" />';
 		}
+		echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
 		echo "</div>";
 	}
 	
