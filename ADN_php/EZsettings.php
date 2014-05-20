@@ -10,6 +10,12 @@ $app_redirectUri  = 'http://revive.purplapp.eu/ADN_php/callback.php';
 // declare the alpha domain to use
 $alpha = 'http://alpha.jvimedia.org/';
 
+// support email
+$support = 'support@jvimedia.org';
+
+// git(hub) url
+$github = 'https://github.com/purplapp/';
+
 // An array of permissions you're requesting from the user.
 // As a general rule you should only request permissions you need for your app.
 // By default all permissions are commented out, meaning you'll have access

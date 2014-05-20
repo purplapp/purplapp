@@ -20,13 +20,13 @@
 
 	<h2>Accepting these Terms</h2>
 
-	<p>If you access or use the Service, it means you agree to be bound by all of the terms below. So, before you use the Service, please read all of the terms. If you don&#8217;t agree to all of the terms below, please do not use the Service. Also, if a term does not make sense to you, please let us know by e-mailing <strong>support@purplapp.eu</strong>.</p>
+	<p>If you access or use the Service, it means you agree to be bound by all of the terms below. So, before you use the Service, please read all of the terms. If you don't agree to all of the terms below, please do not use the Service. Also, if a term does not make sense to you, please let us know by e-mailing <strong>support@jvimedia.org</strong>.</p>
 
 	<h2>Changes to these Terms</h2>
 
 	<p>We reserve the right to modify these Terms at any time. For instance, we may need to change these Terms if we come out with a new feature or for some other reason.</p>
 
-	<p>Whenever we make changes to these Terms, the changes are effective 30 days after we post such revised Terms (indicated by revising the date at the top of these Terms) or upon your acceptance if we provide a mechanism for your immediate acceptance of the revised Terms (such as a click-through confirmation or acceptance button). It is your responsibility to check Purplapp for changes to these Terms.</p>
+	<p>Whenever we make changes to these Terms, the changes are effective <strong>4 weeks</strong> after we post such revised Terms (indicated by revising the date at the top of these Terms) or upon your acceptance if we provide a mechanism for your immediate acceptance of the revised Terms (such as a click-through confirmation or acceptance button). It is your responsibility to check Purplapp for changes to these Terms.</p>
 
 	<p>If you continue to use the Service after the revised Terms go into effect, then you have accepted the changes to these Terms.</p>
 
@@ -52,30 +52,7 @@
 
 	<p>Aside from our limited right to your content, you retain all of your rights to the content you post, link and otherwise make available on or through the Service.</p>
 
-	<p>You can remove the content that you posted by deleting it. Once you delete your content, it will not appear on the Service, but copies of your deleted content may remain in our system or backups for some period of time. We will retain web server access logs for a maximum of 2 days and then delete them.</p>
-
-	<p>You may not post, link and otherwise make available on or through the Service any of the following:</p>
-
-	<ul>
-	<li>Content that is libelous, defamatory, bigoted, fraudulent or deceptive;</li>
-	<li>Content that is illegal or unlawful, that would otherwise create liability;</li>
-	<li>Content that may infringe or violate any patent, trademark, trade secret, copyright, right of privacy, right of publicity or other intellectual or other right of any party;</li>
-	<li>Mass or repeated promotions, political campaigning or commercial messages directed at users who do not follow you (SPAM);</li>
-	<li>Private information of any third party (e.g., addresses, phone numbers, email addresses, Social Security numbers and credit card numbers); and</li>
-	<li>Viruses, corrupted data or other harmful, disruptive or destructive files or code.</li>
-	</ul>
-
-	<p>Also, you agree that you will not do any of the following in connection with the Service or other users:</p>
-
-	<ul>
-	<li>Use the Service in any manner that could interfere with, disrupt, negatively affect or inhibit other users from fully enjoying the Service or that could damage, disable, overburden or impair the functioning of the Service;</li>
-	<li>Impersonate or post on behalf of any person or entity or otherwise misrepresent your affiliation with a person or entity;</li>
-	<li>Collect any personal information about other users, or intimidate, threaten, stalk or otherwise harass other users of the Service;</li>
-	<li>Create an account or post any content if you are not over 13 years of age years of age; and</li>
-	<li>Circumvent or attempt to circumvent any filtering, security measures, rate limits or other features designed to protect the Service, users of the Service, or third parties.</li>
-	</ul>
-
-	<h2>PURPLAPP Materials</h2>
+	<h2>Purplapp Materials</h2>
 
 	<p>We put a lot of effort into creating the Service including, the logo and all designs, text, graphics, pictures, information and other content (excluding your content). This property is owned by us or our licensors and it is protected by U.S. and international copyright laws. We grant you the right to use it.</p>
 
@@ -97,18 +74,6 @@
 
 	<p>You agree to defend, indemnify and hold us harmless from and against any and all costs, damages, liabilities, and expenses (including attorneys&#8217; fees, costs, penalties, interest and disbursements) we incur in relation to, arising from, or for the purpose of avoiding, any claim or demand from a third party relating to your use of the Service or the use of the Service by any person using your account, including any claim that your use of the Service violates any applicable law or regulation, or the rights of any third party, and/or your violation of these Terms.</p>
 
-	<h2>Copyright Complaints</h2>
-
-	<p>We take intellectual property rights seriously. In accordance with the Digital Millennium Copyright Act (&#8220;DMCA&#8221;) and other applicable law, we have adopted a policy of terminating, in appropriate circumstances and, at our sole discretion, access to the service for users who are deemed to be repeat infringers.</p>
-
-	<h2>Governing Law</h2>
-
-	<p>The validity of these Terms and the rights, obligations, and relations of the parties under these Terms will be construed and determined under and in accordance with the laws of Germany, without regard to conflicts of law principles.</p>
-
-	<h2>Jurisdiction</h2>
-
-	<p>You expressly agree that exclusive jurisdiction for any dispute with the Service or relating to your use of it, resides in the courts of Germany and you further agree and expressly consent to the exercise of personal jurisdiction in the courts of Germany in connection with any such dispute including any claim involving Service. You further agree that you and Service will not commence against the other a class action, class arbitration or other representative action or proceeding.</p>
-
 	<h2>Termination</h2>
 
 	<p>If you breach any of these Terms, we have the right to suspend or disable your access to or use of the Service.</p>
@@ -123,7 +88,7 @@
 
 	<h2>Questions &amp; Contact Information</h2>
 
-	<p>Questions or comments about the Service may be directed to us at the email address <strong>support@purplapp.eu</strong>.</p>
+	<p>Questions or comments about the Service may be directed to us at the email address <strong>support@jvimedia.org</strong>.</p>
 </div>
 
 <?php 
@@ -140,19 +105,19 @@
 
 	<h2>Accepting these Terms</h2>
 
-	<p>If you access or use the Service, it means you agree to be bound by all of the terms below. So, before you use the Service, please read all of the terms. If you don&#8217;t agree to all of the terms below, please do not use the Service. Also, if a term does not make sense to you, please let us know by e-mailing <strong>support@purplapp.eu</strong>.</p>
+	<p>If you access or use the Service, it means you agree to be bound by all of the terms below. So, before you use the Service, please read all of the terms. If you don't agree to all of the terms below, please do not use the Service. Also, if a term does not make sense to you, please let us know by e-mailing <strong>support@jvimedia.org</strong>.</p>
 
 	<h2>Changes to these Terms</h2>
 
 	<p>We reserve the right to modify these Terms at any time. For instance, we may need to change these Terms if we come out with a new feature or for some other reason.</p>
 
-	<p>Whenever we make changes to these Terms, the changes are effective 30 days after we post such revised Terms (indicated by revising the date at the top of these Terms) or upon your acceptance if we provide a mechanism for your immediate acceptance of the revised Terms (such as a click-through confirmation or acceptance button). It is your responsibility to check Purplapp for changes to these Terms.</p>
+	<p>Whenever we make changes to these Terms, the changes are effective <strong>4 weeks</strong> after we post such revised Terms (indicated by revising the date at the top of these Terms) or upon your acceptance if we provide a mechanism for your immediate acceptance of the revised Terms (such as a click-through confirmation or acceptance button). It is your responsibility to check Purplapp for changes to these Terms.</p>
 
 	<p>If you continue to use the Service after the revised Terms go into effect, then you have accepted the changes to these Terms.</p>
 
 	<h2>Privacy Policy</h2>
 
-	<p>For information about how we collect and use information about users of the Service, please check out our privacy policy available at <strong>[INSERT LINK]</strong>.</p>
+	<p>For information about how we collect and use information about users of the Service, please check out our privacy policy available at <strong><a href="privacy.php">purplapp.eu/legal/privacy.php</a></strong>.</p>
 
 	<h2>Third-Party Services</h2>
 
@@ -172,30 +137,7 @@
 
 	<p>Aside from our limited right to your content, you retain all of your rights to the content you post, link and otherwise make available on or through the Service.</p>
 
-	<p>You can remove the content that you posted by deleting it. Once you delete your content, it will not appear on the Service, but copies of your deleted content may remain in our system or backups for some period of time. We will retain web server access logs for a maximum of 2 days and then delete them.</p>
-
-	<p>You may not post, link and otherwise make available on or through the Service any of the following:</p>
-
-	<ul>
-	<li>Content that is libelous, defamatory, bigoted, fraudulent or deceptive;</li>
-	<li>Content that is illegal or unlawful, that would otherwise create liability;</li>
-	<li>Content that may infringe or violate any patent, trademark, trade secret, copyright, right of privacy, right of publicity or other intellectual or other right of any party;</li>
-	<li>Mass or repeated promotions, political campaigning or commercial messages directed at users who do not follow you (SPAM);</li>
-	<li>Private information of any third party (e.g., addresses, phone numbers, email addresses, Social Security numbers and credit card numbers); and</li>
-	<li>Viruses, corrupted data or other harmful, disruptive or destructive files or code.</li>
-	</ul>
-
-	<p>Also, you agree that you will not do any of the following in connection with the Service or other users:</p>
-
-	<ul>
-	<li>Use the Service in any manner that could interfere with, disrupt, negatively affect or inhibit other users from fully enjoying the Service or that could damage, disable, overburden or impair the functioning of the Service;</li>
-	<li>Impersonate or post on behalf of any person or entity or otherwise misrepresent your affiliation with a person or entity;</li>
-	<li>Collect any personal information about other users, or intimidate, threaten, stalk or otherwise harass other users of the Service;</li>
-	<li>Create an account or post any content if you are not over 13 years of age years of age; and</li>
-	<li>Circumvent or attempt to circumvent any filtering, security measures, rate limits or other features designed to protect the Service, users of the Service, or third parties.</li>
-	</ul>
-
-	<h2>PURPLAPP Materials</h2>
+	<h2>Purplapp Materials</h2>
 
 	<p>We put a lot of effort into creating the Service including, the logo and all designs, text, graphics, pictures, information and other content (excluding your content). This property is owned by us or our licensors and it is protected by U.S. and international copyright laws. We grant you the right to use it.</p>
 
@@ -217,18 +159,6 @@
 
 	<p>You agree to defend, indemnify and hold us harmless from and against any and all costs, damages, liabilities, and expenses (including attorneys&#8217; fees, costs, penalties, interest and disbursements) we incur in relation to, arising from, or for the purpose of avoiding, any claim or demand from a third party relating to your use of the Service or the use of the Service by any person using your account, including any claim that your use of the Service violates any applicable law or regulation, or the rights of any third party, and/or your violation of these Terms.</p>
 
-	<h2>Copyright Complaints</h2>
-
-	<p>We take intellectual property rights seriously. In accordance with the Digital Millennium Copyright Act (&#8220;DMCA&#8221;) and other applicable law, we have adopted a policy of terminating, in appropriate circumstances and, at our sole discretion, access to the service for users who are deemed to be repeat infringers.</p>
-
-	<h2>Governing Law</h2>
-
-	<p>The validity of these Terms and the rights, obligations, and relations of the parties under these Terms will be construed and determined under and in accordance with the laws of Germany, without regard to conflicts of law principles.</p>
-
-	<h2>Jurisdiction</h2>
-
-	<p>You expressly agree that exclusive jurisdiction for any dispute with the Service or relating to your use of it, resides in the courts of Germany and you further agree and expressly consent to the exercise of personal jurisdiction in the courts of Germany in connection with any such dispute including any claim involving Service. You further agree that you and Service will not commence against the other a class action, class arbitration or other representative action or proceeding.</p>
-
 	<h2>Termination</h2>
 
 	<p>If you breach any of these Terms, we have the right to suspend or disable your access to or use of the Service.</p>
@@ -243,7 +173,7 @@
 
 	<h2>Questions &amp; Contact Information</h2>
 
-	<p>Questions or comments about the Service may be directed to us at the email address <strong>support@purplapp.eu</strong>.</p>
+	<p>Questions or comments about the Service may be directed to us at the email address <strong>support@jvimedia.org</strong>.</p>
 </div>
 
 <?php

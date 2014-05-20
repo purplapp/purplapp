@@ -31,8 +31,6 @@
 		After that, Charlotte and Johannes (who got roped in somehow...) found Hugo (@hu) in November. He wrote the Post Count Achievement thing to be useful! It was pretty good before (it wasn't), but afterwards it was even better! ;)
 		<br><br>
 		We "bootstrapped" it in February 2014. After that, we retired the old site, and switched all our work to the new site. We don't update the old one any more.
-		<br><br>
-		Future ideas and suggestions can be emailed to <a href="mailto:purplapp@hry.jvimedia.co.uk?Subject=I%20have%20an%20idea%20for%20Purplapp%20" target="_top">this address</a>. Alternatively, you could file an issue on our <a href="http://github.com/purplapp/purplapp">GitHub repository</a>.
 	</p>
 </div>
 
@@ -40,26 +38,36 @@
 	<h2>Team</h2>
 	<h4>Lead Team:</h4>
 	<ul class="list-unstyled">
-		<li>Charlotte W. (<a href="https://alpha.app.net/charl">@charl</a>)</li>
-		<li>Johannes V. (<a href="https://alpha.app.net/jvimedia">@jvimedia</a>)</li>
+		<li>Charlotte W. (<a href="<?php echo $alpha; ?>charl" target="_blank">@charl</a>)</li>
+		<li>Johannes V. (<a href="<?php echo $alpha; ?>jvimedia" target="_blank">@jvimedia</a>)</li>
 	</ul>
 	<h4>Contributors:</h4>
 	<ul class="list-unstyled">
-		<li>Hugo (<a href="https://alpha.app.net/hu">@hu</a>)</li>
-		<li>Brandon (<a href="https://alpha.app.net/remus">@remus</a>)</li>
-		<li>Jessica Dennis (<a href="https://alpha.app.net/jessicadennis">@jessicadennis</a>)</li>
+		<li>Hugo (<a href="<?php echo $alpha; ?>hu" target="_blank">@hu</a>)</li>
+		<li>Brandon (<a href="<?php echo $alpha; ?>remus" target="_blank">@remus</a>)</li>
+		<li>Jessica Dennis (<a href="<?php echo $alpha; ?>jessicadennis" target="_blank">@jessicadennis</a>)</li>
 	</ul>
 
 	<h2>Credits</h2>
     <ul class='list-unstyled'>
-    	<li>Font Awesome by Dave Gandy - <a href="http://fontawesome.io">fontawesome.io</a></li>
-		<li>PCA Icons by Yusuke Kamiyamane - <a href="http://p.yusukekamiyamane.com">p.yusukekamiyamane.com</a></li>
-		<li>Glyphicon Halflings by Glyphicons - <a href="http://glyphicons.com">glyphicons.com</a></li>
+    	<li>Font Awesome by Dave Gandy - <a href="http://fontawesome.io" target="_blank">fontawesome.io</a></li>
+		<li>PCA Icons by Yusuke Kamiyamane - <a href="http://p.yusukekamiyamane.com" target="_blank">p.yusukekamiyamane.com</a></li>
+		<li>Glyphicon Halflings by Glyphicons - <a href="http://glyphicons.com" target="_blank">glyphicons.com</a></li>
 	</ul>
 	 
 	<h2>Other Stuff</h2>
 	<ul class='list-unstyled'>
 	    <li>We have to display an imprint, so here is our <a href="images/imprint.png">imprint</a>.</li>
+	</ul>
+</div>
+
+<div class="col-md-12">
+	<h2>Contact</h2>
+	<p>Feel free to drop any suggestions at us via the following methods:</p>
+	<ul>
+		<li><a href="<?php echo $alpha; ?>purplapp" target="_blank">@purplapp on ADN</a></li>
+		<li><a href="mailto:<?php echo $support; ?>" target="_top">Email</a></li>
+		<li><a href="<?php echo $github; ?>" target="_blank">GitHub</a></li>
 	</ul>
 </div>
 
@@ -88,8 +96,6 @@
 		After that, Charlotte and Johannes (who got roped in somehow...) found Hugo (@hu) in November. He wrote the Post Count Achievement thing to be useful! It was pretty good before (it wasn't), but afterwards it was even better! ;)
 		<br><br>
 		We "bootstrapped" it in February 2014. After that, we retired the old site, and switched all our work to the new site. We don't update the old one any more.
-		<br><br>
-		Future ideas and suggestions can be emailed to <a href="mailto:purplapp@hry.jvimedia.co.uk?Subject=I%20have%20an%20idea%20for%20Purplapp%20" target="_top">this address</a>. Alternatively, you could file an issue on our <a href="http://github.com/purplapp/purplapp">GitHub repository</a>.
 	</p>
 </div>
 
@@ -97,26 +103,36 @@
 	<h2>Team</h2>
 	<h4>Lead Team:</h4>
 	<ul class="list-unstyled">
-		<li>Charlotte W. (<a href="https://alpha.app.net/charl">@charl</a>)</li>
-		<li>Johannes V. (<a href="https://alpha.app.net/jvimedia">@jvimedia</a>)</li>
+		<li>Charlotte W. (<a href="<?php echo $alpha; ?>charl" target="_blank">@charl</a>)</li>
+		<li>Johannes V. (<a href="<?php echo $alpha; ?>jvimedia" target="_blank">@jvimedia</a>)</li>
 	</ul>
 	<h4>Contributors:</h4>
 	<ul class="list-unstyled">
-		<li>Hugo (<a href="https://alpha.app.net/hu">@hu</a>)</li>
-		<li>Brandon (<a href="https://alpha.app.net/remus">@remus</a>)</li>
-		<li>Jessica Dennis (<a href="https://alpha.app.net/jessicadennis">@jessicadennis</a>)</li>
+		<li>Hugo (<a href="<?php echo $alpha; ?>hu" target="_blank">@hu</a>)</li>
+		<li>Brandon (<a href="<?php echo $alpha; ?>remus" target="_blank">@remus</a>)</li>
+		<li>Jessica Dennis (<a href="<?php echo $alpha; ?>jessicadennis" target="_blank">@jessicadennis</a>)</li>
 	</ul>
 
 	<h2>Credits</h2>
     <ul class='list-unstyled'>
-    	<li>Font Awesome by Dave Gandy - <a href="http://fontawesome.io">fontawesome.io</a></li>
-		<li>PCA Icons by Yusuke Kamiyamane - <a href="http://p.yusukekamiyamane.com">p.yusukekamiyamane.com</a></li>
-		<li>Glyphicon Halflings by Glyphicons - <a href="http://glyphicons.com">glyphicons.com</a></li>
+    	<li>Font Awesome by Dave Gandy - <a href="http://fontawesome.io" target="_blank">fontawesome.io</a></li>
+		<li>PCA Icons by Yusuke Kamiyamane - <a href="http://p.yusukekamiyamane.com" target="_blank">p.yusukekamiyamane.com</a></li>
+		<li>Glyphicon Halflings by Glyphicons - <a href="http://glyphicons.com" target="_blank">glyphicons.com</a></li>
 	</ul>
 	 
 	<h2>Other Stuff</h2>
 	<ul class='list-unstyled'>
 	    <li>We have to display an imprint, so here is our <a href="images/imprint.png">imprint</a>.</li>
+	</ul>
+</div>
+
+<div class="col-md-12">
+	<h2>Contact</h2>
+	<p>Feel free to drop any suggestions at us via the following methods:</p>
+	<ul>
+		<li><a href="<?php echo $alpha; ?>purplapp" target="_blank">@purplapp on ADN</a></li>
+		<li><a href="mailto:<?php echo $support; ?>" target="_top">Email</a></li>
+		<li><a href="<?php echo $github; ?>" target="_blank">GitHub</a></li>
 	</ul>
 </div>
 
