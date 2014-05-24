@@ -174,11 +174,11 @@
             <td><?php echo ucfirst($data['type']); ?></td>
         </tr>
         <tr>
-            <td>Location:</td>
+            <td>Time-zone:</td>
             <td><?php echo $data['timezone']; ?></td>
         </tr>
         <tr>
-            <td>Locale:</td>
+            <td>Language:</td>
             <td><?php echo $data['locale']; ?></td>
         </tr>
         <tr>
@@ -190,7 +190,7 @@
             <td>
                 <?php
                     $date = new DateTime($data['created_at']);
-                    $dateresult = $date->format('H:i \o\n d M Y');
+                    $dateresult = $date->format('j F Y');
                     
                     $end = new DateTime($adnjoin);
 			        $adnage = $posts->formatDateDiff($start, $end);
@@ -322,7 +322,7 @@
                     $firstpost = $app->getUserPosts($user_id="$user_number", $post_params);
 
                     $created_at = new DateTime($firstpost[0]['created_at']);
-                    $firstpost_created_at = $created_at->format('H:i \o\n d M Y');
+                    $firstpost_created_at = $created_at->format('j F Y');
 
                     $firstpost_post_id = $firstpost[0]['id'];
                     $firstpost_user = $firstpost[0]['user']['username'];
@@ -340,7 +340,7 @@
 
             if ($firstmention) {
                 $created_at = new DateTime($firstmention[0]['created_at']);
-                $firstmention_created_at = $created_at->format('H:i \o\n d M Y');
+                $firstmention_created_at = $created_at->format('j F Y');
 
                 $firstmentionlink = $firstmention[0]['canonical_url'];
 
@@ -413,7 +413,10 @@
          
         <?php } ?>
         
-        <?php if (isset($nice_rank_data[0])) { ?>
+        <?php 
+	    	//if (isset($nice_rank_data[0])) { 
+	    	if (0==1) { 
+		?>
         <tr>
             <td><h4>NiceRank</h4></td>
             <td></td>
