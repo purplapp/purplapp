@@ -29,6 +29,7 @@ class PostClubs {
 		,array("name" => "#WiFiClub", "url" => "WiFiClub", "count" => "80 211")
 		,array("name" => "#PajamaClub", "url" => "PajamaClub", "count" => "90 000")
 		,array("name" => "#TowerOfBabbleClub", "url" => "TowerOfBabbleClub", "count" => "100 000")
+		,array("name" => "#OrbitClub", "url" => "OrbitClub", "count" => "110 000")
 		,array("name" => "#MacClub", "url" => "MacClub", "count" => "128 000")
 		,array("name" => "#TwitterLeaverClub", "url" => "TwitterLeaverClub", "count" => "140 000")
 		,array("name" => "#GetALifeNoSrslyClub", "url" => "GetALifeNoSrslyClub", "count" => "200 000")
@@ -47,6 +48,10 @@ class PostClubs {
 		$this->user_posts = $get;
 	}
 	
+	public function setUserID($get) {
+		$this->user_id = $get;
+	}
+	
 	public function setAlpha($get) {
 		$this->alpha = $get;
 	}
@@ -54,8 +59,17 @@ class PostClubs {
 	public function getClubs() {
 		foreach($this->clubs as $club) {
 			if($this->user_posts > preg_replace("/[^0-9,.]/", "", $club['count'])) {
-				$this->memberclubs[] = "<a href='{$this->alpha}hashtags/{$club['url']}' target='_blank'>{$club['name']}</a> ({$club['count']} posts)";
+				$this->memberclubs[] = "<a href='{$this->alpha}hashtags/{$club['url']}' target='_blank'>{$club['name']}</a> <i>({$club['count']} posts)</i>";
 			}
+		}
+	}
+	
+	public function getOrphanBlackClub() {
+		if($this->user_posts > $this->user_id) {
+			$this->OrphanBlackClub = "Yes <i>(user has more than {$this->user_id} posts)</i>";
+		} else {
+			$untilOrphanBlackClub = $this->user_id - $this->user_posts;
+			$this->OrphanBlackClub = "No <i>({$untilOrphanBlackClub} posts left)</i>";
 		}
 	}
 }

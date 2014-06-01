@@ -64,9 +64,12 @@
 		
 		$clubs->setAlpha($alpha);
         $clubs->setUserPost($data['counts']['posts']);
+        $clubs->setUserID($data['id']);
         $clubs->getClubs();
+        $clubs->getOrphanBlackClub();
 
         $user_clubs = $clubs->memberclubs;
+        $OrphanBlackClub= $clubs->OrphanBlackClub;
         
 		// post-date functions
 		$posts = new PostData;
@@ -278,7 +281,13 @@
             <?php
             foreach($data['annotations'] as $annotations){
                 if (strpos($annotations['type'],"appnetizens.userinput.birthday") == true){
-                    $birthday=$annotations['value']['birthday'];
+                    $birthday=$annotations['value']['birthday'];   
+
+					$subject = $birthday;
+					$search = 'xxxx-';
+					$trimmed = str_replace($search, '', $subject);
+					echo $trimmed;
+               
                     echo "<td>Birthday:</td>";
                     echo "<td>";
                     echo $birthday;
@@ -469,8 +478,7 @@
         </tr>
         <?php } ?>
         
-        <!--
-<?php if ($username != $auth_username) { ?>     
+		<?php if ($username != $auth_username) { ?>     
         <tr>
             <td><h4>Spam User Check</h4></td>
             <td></td>
@@ -511,7 +519,6 @@
         </tr>
         <?php } ?>
         <?php } ?>
--->
         
         <?php if ($clubs->memberclubs == true) { ?>
         <tr>
@@ -531,10 +538,19 @@
             <td>Number of Clubs:</td>
             <td>
                 <?php
-                    $number_of_clubs = count($user_clubs) -1;
+                    $number_of_clubs = count($user_clubs);
                     echo $number_of_clubs;
                 ?>
+                - <a data-toggle="modal" data-target="#PCAModal">Show All Clubs</a>
             </td>
+        </tr>
+        <tr>
+        	<td><a href='<?php echo $alpha; ?>zepfhyr/post/31432149' target='_blank'>OrphanBlackClub</a>:</td>
+        	<td>
+        		<?php
+        			print_r($OrphanBlackClub);
+        		?>
+        	</td>
         </tr>
         <tr>
             <td><a href='http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements' target='_blank'>More info on PCA clubs</a></td>
@@ -542,6 +558,30 @@
         </tr>
         <?php } ?>
     </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="PCAModal" tabindex="-1" role="dialog" aria-labelledby="PCAModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="PCAModal">User's PCA Clubs</h4>
+      </div>
+      <div class="modal-body">
+      	<ul class='list-unstyled'>
+	        <?php
+	        	foreach($clubs->memberclubs as $user_club_list) {
+		        	echo "<li>".$user_club_list."</li>";
+	        	}
+	        ?>
+      	</ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php include "../include/footer.php"; ?>
