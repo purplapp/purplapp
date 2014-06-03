@@ -26,13 +26,13 @@
 
 	<p>We reserve the right to modify these Terms at any time. For instance, we may need to change these Terms if we come out with a new feature or for some other reason.</p>
 
-	<p>Whenever we make changes to these Terms, the changes are effective <strong>4 weeks</strong> after we post such revised Terms (indicated by revising the date at the top of these Terms) or upon your acceptance if we provide a mechanism for your immediate acceptance of the revised Terms (such as a click-through confirmation or acceptance button). It is your responsibility to check Purplapp for changes to these Terms.</p>
+	<p>Whenever we make changes to these Terms, the changes are effective <strong>immediately</strong> after we post such revised Terms (indicated by revising the date at the top of these Terms) or upon your acceptance if we provide a mechanism for your immediate acceptance of the revised Terms (such as a click-through confirmation or acceptance button). It is your responsibility to check PURPLAPP for changes to these Terms.</p>
 
 	<p>If you continue to use the Service after the revised Terms go into effect, then you have accepted the changes to these Terms.</p>
 
 	<h2>Privacy Policy</h2>
 
-	<p>For information about how we collect and use information about users of the Service, please check out our privacy policy available at <strong><a href="privacy.php">purplapp.eu/legal/privacy.php</a></strong>.</p>
+	<p>For information about how we collect and use information about users of the Service, please check out our privacy policy available at <strong><a href="privacy.php">PURPLAPP.eu/legal/privacy.php</a></strong>.</p>
 
 	<h2>Third-Party Services</h2>
 
@@ -52,7 +52,7 @@
 
 	<p>Aside from our limited right to your content, you retain all of your rights to the content you post, link and otherwise make available on or through the Service.</p>
 
-	<h2>Purplapp Materials</h2>
+	<h2>PURPLAPP Materials</h2>
 
 	<p>We put a lot of effort into creating the Service including, the logo and all designs, text, graphics, pictures, information and other content (excluding your content). This property is owned by us or our licensors and it is protected by U.S. and international copyright laws. We grant you the right to use it.</p>
 
@@ -62,7 +62,7 @@
 
 	<p>You may create a hyperlink to the Service. But, you may not use, frame or utilize framing techniques to enclose any of our trademarks, logos or other proprietary information without our express written consent.</p>
 
-	<p>Purplapp makes no claim or representation regarding, and accepts no responsibility for third party websites accessible by hyperlink from the Service or websites linking to the Service. When you leave the Service, you should be aware that these Terms and our policies no longer govern.</p>
+	<p>PURPLAPP makes no claim or representation regarding, and accepts no responsibility for third party websites accessible by hyperlink from the Service or websites linking to the Service. When you leave the Service, you should be aware that these Terms and our policies no longer govern.</p>
 
 	<p>If there is any content on the Service from you and others, we don&#8217;t review, verify or authenticate it, and it may include inaccuracies or false information. We make no representations, warranties, or guarantees relating to the quality, suitability, truth, accuracy or completeness of any content contained in the Service. You acknowledge sole responsibility for and assume all risk arising from your use of or reliance on any content.</p>
 
@@ -80,11 +80,11 @@
 
 	<h2>Entire Agreement</h2>
 
-	<p>These Terms constitute the entire agreement between you and Purplapp regarding the use of the Service, superseding any prior agreements between you and Purplapp relating to your use of the Service.</p>
+	<p>These Terms constitute the entire agreement between you and PURPLAPP regarding the use of the Service, superseding any prior agreements between you and PURPLAPP relating to your use of the Service.</p>
 
 	<h2>Feedback</h2>
 
-	<p>Please let us know what you think of the Service, these Terms and, in general, Purplapp. When you provide us with any feedback, comments or suggestions about the Service, these Terms and, in general, Purplapp, you irrevocably assign to us all of your right, title and interest in and to your feedback, comments and suggestions.</p>
+	<p>Please let us know what you think of the Service, these Terms and, in general, PURPLAPP. When you provide us with any feedback, comments or suggestions about the Service, these Terms and, in general, PURPLAPP, you irrevocably assign to us all of your right, title and interest in and to your feedback, comments and suggestions.</p>
 
 	<h2>Questions &amp; Contact Information</h2>
 
@@ -111,13 +111,13 @@
 
 	<p>We reserve the right to modify these Terms at any time. For instance, we may need to change these Terms if we come out with a new feature or for some other reason.</p>
 
-	<p>Whenever we make changes to these Terms, the changes are effective <strong>4 weeks</strong> after we post such revised Terms (indicated by revising the date at the top of these Terms) or upon your acceptance if we provide a mechanism for your immediate acceptance of the revised Terms (such as a click-through confirmation or acceptance button). It is your responsibility to check Purplapp for changes to these Terms.</p>
+	<p>Whenever we make changes to these Terms, the changes are effective <strong>immediately</strong> after we post such revised Terms (indicated by revising the date at the top of these Terms) or upon your acceptance if we provide a mechanism for your immediate acceptance of the revised Terms (such as a click-through confirmation or acceptance button). It is your responsibility to check PURPLAPP for changes to these Terms.</p>
 
 	<p>If you continue to use the Service after the revised Terms go into effect, then you have accepted the changes to these Terms.</p>
 
 	<h2>Privacy Policy</h2>
 
-	<p>For information about how we collect and use information about users of the Service, please check out our privacy policy available at <strong><a href="privacy.php">purplapp.eu/legal/privacy.php</a></strong>.</p>
+	<p>For information about how we collect and use information about users of the Service, please check out our privacy policy available at <strong><a href="privacy.php">PURPLAPP.eu/legal/privacy.php</a></strong>.</p>
 
 	<h2>Third-Party Services</h2>
 
@@ -137,7 +137,7 @@
 
 	<p>Aside from our limited right to your content, you retain all of your rights to the content you post, link and otherwise make available on or through the Service.</p>
 
-	<h2>Purplapp Materials</h2>
+	<h2>PURPLAPP Materials</h2>
 
 	<p>We put a lot of effort into creating the Service including, the logo and all designs, text, graphics, pictures, information and other content (excluding your content). This property is owned by us or our licensors and it is protected by U.S. and international copyright laws. We grant you the right to use it.</p>
 
@@ -147,7 +147,7 @@
 
 	<p>You may create a hyperlink to the Service. But, you may not use, frame or utilize framing techniques to enclose any of our trademarks, logos or other proprietary information without our express written consent.</p>
 
-	<p>Purplapp makes no claim or representation regarding, and accepts no responsibility for third party websites accessible by hyperlink from the Service or websites linking to the Service. When you leave the Service, you should be aware that these Terms and our policies no longer govern.</p>
+	<p>PURPLAPP makes no claim or representation regarding, and accepts no responsibility for third party websites accessible by hyperlink from the Service or websites linking to the Service. When you leave the Service, you should be aware that these Terms and our policies no longer govern.</p>
 
 	<p>If there is any content on the Service from you and others, we don&#8217;t review, verify or authenticate it, and it may include inaccuracies or false information. We make no representations, warranties, or guarantees relating to the quality, suitability, truth, accuracy or completeness of any content contained in the Service. You acknowledge sole responsibility for and assume all risk arising from your use of or reliance on any content.</p>
 
@@ -165,11 +165,11 @@
 
 	<h2>Entire Agreement</h2>
 
-	<p>These Terms constitute the entire agreement between you and Purplapp regarding the use of the Service, superseding any prior agreements between you and Purplapp relating to your use of the Service.</p>
+	<p>These Terms constitute the entire agreement between you and PURPLAPP regarding the use of the Service, superseding any prior agreements between you and PURPLAPP relating to your use of the Service.</p>
 
 	<h2>Feedback</h2>
 
-	<p>Please let us know what you think of the Service, these Terms and, in general, Purplapp. When you provide us with any feedback, comments or suggestions about the Service, these Terms and, in general, Purplapp, you irrevocably assign to us all of your right, title and interest in and to your feedback, comments and suggestions.</p>
+	<p>Please let us know what you think of the Service, these Terms and, in general, PURPLAPP. When you provide us with any feedback, comments or suggestions about the Service, these Terms and, in general, PURPLAPP, you irrevocably assign to us all of your right, title and interest in and to your feedback, comments and suggestions.</p>
 
 	<h2>Questions &amp; Contact Information</h2>
 
