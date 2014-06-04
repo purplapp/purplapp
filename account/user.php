@@ -1,13 +1,17 @@
 <?php
+	// set error reporting mode status
     error_reporting(E_ALL);
     ini_set("display_errors", 1);  
 
+	// set the required php files
     require_once '../ADN_php/EZAppDotNet.php';
     require('../ADN_php/newFunctions.php');
     require('../ADN_php/nicerank.php');
-        
+       
+    // create new app
     $app = new EZAppDotNet();
-
+	
+	// set the user params to receive
     $user_params = array(
         'include_user_annotations' => true, 
     );
@@ -23,31 +27,29 @@
         } else {
             $username = "me";
         }
-
+		
+		// get the data for the authorised user
         $auth_user_data = $app->getUser();
         $auth_username = $auth_user_data['username'];
 
-        //Header
+        // set title and includes
         $title = "User Information Lookup";
         include('../include/header_auth.php');
 
         if ($username == 'me') {
+        	// if username is the authorised user
             try {
                 $data = $app->getUser('me', $user_params);
             } catch(AppDotNetException $x) {
                 echo 'Caught exception: ', $x->getMessage(), "\n"; 
             }
-
             $user_number = $data['id'];
-
             $username = $data['username'];
-
         } else {
-            $username = ltrim($username, '@');
-            
+        	// if username is not the authorised user
+            $username = ltrim($username, '@');           
             $user_number = $app->getIdByUsername($username);
             $data = $app->getUser($user_number, $user_params);
-
         }
         
         //calculate date created for day calc
@@ -61,29 +63,31 @@
 		
 		// pca club functions
         $clubs = new PostClubs;
-		
 		$clubs->setAlpha($alpha);
         $clubs->setUserPost($data['counts']['posts']);
         $clubs->setUserID($data['id']);
         $clubs->getClubs();
         $clubs->getOrphanBlackClub();
-
         $user_clubs = $clubs->memberclubs;
         $OrphanBlackClub= $clubs->OrphanBlackClub;
         
 		// post-date functions
 		$posts = new PostData;
 		
+		// birthday
+		$birthdate = new BirthdayData;
+		
 		// nicerank
 		$nicerank = new NiceRank;
-		
 		$nicerank->setUserID($user_number);
 		$nicerank->getNiceRank();
-		
 		$nice_rank_data = $nicerank->nicerank;
 ?>
 
 <div class="col-md-12">
+
+	<!-- <?php echo "<pre>"; print_r($nicerank); echo "</pre>"; ?> -->
+	
     <!-- User Name -->
     <div class="page-header">
         <h4>User Lookup</h4>
@@ -123,7 +127,13 @@
 
     <!--User Bio-->
     <p class="bio">
-        <?php echo $data['description']['html']; ?>
+        <?php 
+        	if (isset($data['description']['html'])) {
+        		echo $data['description']['html']; 
+        	} else {
+	        	echo "<i>This user has got no bio set.</i>";
+	        }
+    	?>
     </p>
 </div>
 
@@ -193,7 +203,7 @@
             <td>
                 <?php
                     $date = new DateTime($data['created_at']);
-                    $dateresult = $date->format('j F Y');
+                    $dateresult = $date->format('jS F Y');
                     
                     $end = new DateTime($adnjoin);
 			        $adnage = $posts->formatDateDiff($start, $end);
@@ -282,15 +292,12 @@
             foreach($data['annotations'] as $annotations){
                 if (strpos($annotations['type'],"appnetizens.userinput.birthday") == true){
                     $birthday=$annotations['value']['birthday'];   
-
-					$subject = $birthday;
-					$search = 'xxxx-';
-					$trimmed = str_replace($search, '', $subject);
-					echo $trimmed;
+				
+					$birthday_converted = $birthdate->birthdayDateConverstion($birthday);
                
                     echo "<td>Birthday:</td>";
                     echo "<td>";
-                    echo $birthday;
+                    echo $birthday_converted;
                     echo "</td>"; 
                 }
             }
@@ -304,15 +311,11 @@
     <table class="table table-condensed">
         <?php if ($username != $auth_username) { ?>
         <tr>
-            <td><h4>Comparison</h4></td>
+            <td><h4>Hiding</h4></td>
             <td></td>
         <tr>
             <td class="">Muted:</td>
             <td><?php if ($data['you_muted']){ echo "Yes"; } else { echo "No"; } ?></td>
-        </tr>
-        <tr>
-            <td class="">Blocked:</td>
-            <td><?php if ($data['you_blocked']){ echo "Yes"; } else { echo "No"; } ?></td>
         </tr>
         <?php } ?>
         <?php if ($data['counts']['posts'] > '0') { ?>
@@ -331,7 +334,7 @@
                     $firstpost = $app->getUserPosts($user_id="$user_number", $post_params);
 
                     $created_at = new DateTime($firstpost[0]['created_at']);
-                    $firstpost_created_at = $created_at->format('j F Y');
+                    $firstpost_created_at = $created_at->format('jS F Y');
 
                     $firstpost_post_id = $firstpost[0]['id'];
                     $firstpost_user = $firstpost[0]['user']['username'];
@@ -349,7 +352,7 @@
 
             if ($firstmention) {
                 $created_at = new DateTime($firstmention[0]['created_at']);
-                $firstmention_created_at = $created_at->format('j F Y');
+                $firstmention_created_at = $created_at->format('jS F Y');
 
                 $firstmentionlink = $firstmention[0]['canonical_url'];
 
@@ -365,7 +368,6 @@
             </td>
         </tr>               
         <?php } ?>
-
         <tr>
             <td>Last Post:</td>
             <td>
@@ -422,14 +424,12 @@
          
         <?php } ?>
         
-        <?php 
-	    	//if (isset($nice_rank_data[0])) { 
-	    	if (0==1) { 
-		?>
+        <?php if (isset($nice_rank_data[0])) { ?>
         <tr>
-            <td><h4>NiceRank</h4></td>
+            <td><h4>Statistics</h4></td>
             <td></td>
         </tr>        
+<!--
         <tr>
         	<td>Rank:</td>
         	<td><?php echo $nice_rank_data[0]->rank; ?></td>
@@ -448,33 +448,10 @@
         		?>
         	</td>
         </tr>
+-->
         <tr>
-        	<td><h5>Past 28 days:</h5></td>
-			<td></td>
-        </tr>
-        <tr>
-        	<td>Robot_Posts:</td>
-        	<td><?php echo $nice_rank_data[0]->stats->robo_posts; ?></td>
-        </tr>
-        <tr>
-        	<td>Posts:</td>
-        	<td><?php echo $nice_rank_data[0]->stats->post_count; ?></td>
-        </tr>
-        <tr>
-        	<td>Conversations:</td>
-        	<td><?php echo $nice_rank_data[0]->stats->conversations; ?></td>
-        </tr>
-        <tr>
-        	<td>Links:</td>
-        	<td><?php echo $nice_rank_data[0]->stats->links; ?></td>
-        </tr>
-        <tr>
-        	<td>Mentions:</td>
-        	<td><?php echo $nice_rank_data[0]->stats->mentions; ?></td>
-        </tr>
-        <tr>
-        	<td>Questions:</td>
-        	<td><?php echo $nice_rank_data[0]->stats->questions; ?></td>
+        	<td>Past 28 days:</td>
+			<td><a data-toggle="modal" data-target="#28DaysModal">Show Statistics</a></td>
         </tr>
         <?php } ?>
         
@@ -503,13 +480,13 @@
             <td>
                 <?php
                     if ($posts_per_day > 200) {
-                        if ($data['type'] = "human") {
+                        if ($data['type'] == "human") {
                             echo "No (marked as a human)";
                         } else {
-                            if ($data['type'] = "feed") {
+                            if ($data['type'] == "feed") {
                                 echo "Yes (marked as a feed)";
                             }
-                            if ($data['type'] = "bot") {
+                            if ($data['type'] == "bot") {
                                 echo "Yes (marked as a bot)";
                             }
                         }
@@ -520,7 +497,7 @@
         <?php } ?>
         <?php } ?>
         
-        <?php if ($clubs->memberclubs == true) { ?>
+        <?php if ($clubs->memberclubs == true &&  $data['type'] == "human") { ?>
         <tr>
             <td><h4>User PCA Clubs</h4></td>
             <td></td>
@@ -560,7 +537,7 @@
     </table>
 </div>
 
-<!-- Modal -->
+<!-- PCA Modal -->
 <div class="modal fade" id="PCAModal" tabindex="-1" role="dialog" aria-labelledby="PCAModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -583,6 +560,52 @@
     </div>
   </div>
 </div>
+
+<!-- Past 28 Days Modal -->
+<div class="modal fade" id="28DaysModal" tabindex="-1" role="dialog" aria-labelledby="28DaysModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="28DaysModal">Statistics For Last 28 Days</h4>
+      </div>
+      <div class="modal-body">
+		<p>These statistics are gathered from Jason Irwin's <a href="http://jasonirwin.ca/2014/05/14/thinking-about-nicerank/" target="_blank">NiceRank</a>.</p>
+		<table class="table table-condensed">
+			<!-- <tr>
+				<td>Robot_Posts:</td>
+				<td><?php echo $nice_rank_data[0]->stats->robo_posts; ?></td>
+			</tr> -->
+			<tr>
+				<td>Posts:</td>
+				<td><?php echo $nice_rank_data[0]->stats->post_count; ?></td>
+			</tr>
+			<tr>
+				<td>Conversations:</td>
+				<td><?php echo $nice_rank_data[0]->stats->conversations; ?></td>
+			</tr>
+			<tr>
+				<td>Links:</td>
+				<td><?php echo $nice_rank_data[0]->stats->links; ?></td>
+			</tr>
+			<tr>
+				<td>Mentions:</td>
+				<td><?php echo $nice_rank_data[0]->stats->mentions; ?></td>
+			</tr>
+			<tr>
+				<td>Questions:</td>
+				<td><?php echo $nice_rank_data[0]->stats->questions; ?></td>
+			</tr>
+		</table>
+		<p><i>Statistics for some users are not currently available. This is outside our control and will be rectified shortly.</i></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <?php include "../include/footer.php"; ?>
 
