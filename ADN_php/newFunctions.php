@@ -2,6 +2,7 @@
 
 class PostClubs {
 	public $user_posts = null;
+	public $club_count = null;
 
 	public $clubs = array(
 		array("name" => "#RollClub", "url" => "RollClub", "count" => "500")
@@ -50,6 +51,8 @@ class PostClubs {
 	
 	public function setUserID($get) {
 		$this->user_id = $get;
+		$user_id = $this->user_id;
+		$this->user_id_formatted = number_format($user_id, 0, '.', ' ');
 	}
 	
 	public function setAlpha($get) {
@@ -57,19 +60,16 @@ class PostClubs {
 	}
 
 	public function getClubs() {
+		$orphanblack = true;
 		foreach($this->clubs as $club) {
 			if($this->user_posts > preg_replace("/[^0-9,.]/", "", $club['count'])) {
+				if($this->user_posts > ($this->user_id > preg_replace("/[^0-9,.]/", "", $club['count'])) && $orphanblack) {
+					$this->memberclubs[] = "<a href='{$this->alpha}hashtags/OrphanBlackClub' target='_blank'>#OrphanBlackClub</a> <i>({$this->user_id_formatted} posts)</i>";
+					$orphanblack = false;
+				}
 				$this->memberclubs[] = "<a href='{$this->alpha}hashtags/{$club['url']}' target='_blank'>{$club['name']}</a> <i>({$club['count']} posts)</i>";
+				$this->club_count = $this->club_count + 1;
 			}
-		}
-	}
-	
-	public function getOrphanBlackClub() {
-		if($this->user_posts > $this->user_id) {
-			$this->OrphanBlackClub = "Yes <i>(user has more than {$this->user_id} posts)</i>";
-		} else {
-			$untilOrphanBlackClub = $this->user_id - $this->user_posts;
-			$this->OrphanBlackClub = "No <i>({$untilOrphanBlackClub} posts left)</i>";
 		}
 	}
 }
