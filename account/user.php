@@ -67,9 +67,8 @@
         $clubs->setUserPost($data['counts']['posts']);
         $clubs->setUserID($data['id']);
         $clubs->getClubs();
-        $clubs->getOrphanBlackClub();
+        $club_count = $clubs->club_count;
         $user_clubs = $clubs->memberclubs;
-        $OrphanBlackClub= $clubs->OrphanBlackClub;
         
 		// post-date functions
 		$posts = new PostData;
@@ -86,7 +85,7 @@
 
 <div class="col-md-12">
 
-	<!-- <?php echo "<pre>"; print_r($nicerank); echo "</pre>"; ?> -->
+	<!-- <?php echo "<pre>"; print_r($data); echo "</pre>"; ?> -->
 	
     <!-- User Name -->
     <div class="page-header">
@@ -219,6 +218,7 @@
                 $verified_link = "n";
             }
 	        if (($verified_link = "y") and $data['annotations']) { 
+	        	$annot_data_display = false
         ?>
         <tr>
             <td><h4>User Data</h4></td>
@@ -226,82 +226,96 @@
         </tr>
         <tr>
             <?php
-            if (isset($data['verified_link'])) {
-                $verified_link = $data['verified_link'];
-                echo "<td>Verified Domain:</td>";
-                echo "<td>";
-                echo "<a href='".$verified_link."' target='_blank'>".$data['verified_domain']."</a>";
-                echo "</td>";
-            }
+	            if (isset($data['verified_link'])) {
+	                $verified_link = $data['verified_link'];
+	                echo "<td>Verified Domain:</td>";
+	                echo "<td>";
+	                echo "<a href='".$verified_link."' target='_blank'>".$data['verified_domain']."</a>";
+	                echo "</td>";
+	                $annot_data_display = true;
+	            }
             ?>
         </tr>    
         <tr>
             <?php
-            foreach($data['annotations'] as $annotations){
-                if (strpos($annotations['type'],"core.directory.blog") == true){
-                    $blogurl=$annotations['value']['url'];
-                    echo "<td>Blog:</td>";
-                    echo "<td>";
-                    echo "<a href=".$blogurl." target='_blank'>".parse_url($blogurl, PHP_URL_HOST)."</a>";
-                    echo "</td>"; 
-                }
-            }
+	            foreach($data['annotations'] as $annotations){
+	                if (strpos($annotations['type'],"core.directory.blog") == true){
+	                    $blogurl=$annotations['value']['url'];
+	                    echo "<td>Blog:</td>";
+	                    echo "<td>";
+	                    echo "<a href=".$blogurl." target='_blank'>".parse_url($blogurl, PHP_URL_HOST)."</a>";
+	                    echo "</td>";
+	                    $annot_data_display = true; 
+	                }
+	            }
             ?>
         </tr>
         <tr>
             <?php
-            foreach($data['annotations'] as $annotations){
-                if (strpos($annotations['type'],"core.directory.facebook") == true){
-                    $facebook_id=$annotations['value']['id'];
-                    echo "<td>Facebook:</td>";
-                    echo "<td>";
-                    echo '<a href="http://facebook.com/'.$facebook_id.'" target="_blank">'.$facebook_id.'</a>';
-                    echo "</td>"; 
-                }
-            }
+	            foreach($data['annotations'] as $annotations){
+	                if (strpos($annotations['type'],"core.directory.facebook") == true){
+	                    $facebook_id=$annotations['value']['id'];
+	                    echo "<td>Facebook:</td>";
+	                    echo "<td>";
+	                    echo '<a href="http://facebook.com/'.$facebook_id.'" target="_blank">'.$facebook_id.'</a>';
+	                    echo "</td>";
+	                    $annot_data_display = true;
+	                }
+	            }
             ?>
         </tr>
         <tr>
             <?php
-            foreach($data['annotations'] as $annotations){
-                if (strpos($annotations['type'],"core.directory.twitter") == true){
-                    $twitter_id=$annotations['value']['username'];
-                    echo "<td>Twitter:</td>";
-                    echo "<td>";
-                    echo '<a href="http://twitter.com/'.$twitter_id.'" target="_blank">@'.$twitter_id.'</a>';
-                    echo "</td>"; 
-                }
-            }
+	            foreach($data['annotations'] as $annotations){
+	                if (strpos($annotations['type'],"core.directory.twitter") == true){
+	                    $twitter_id=$annotations['value']['username'];
+	                    echo "<td>Twitter:</td>";
+	                    echo "<td>";
+	                    echo '<a href="http://twitter.com/'.$twitter_id.'" target="_blank">@'.$twitter_id.'</a>';
+	                    echo "</td>"; 
+	                    $annot_data_display = true;
+	                }
+	            }
             ?>
         </tr>    
         <tr>
             <?php
-            foreach($data['annotations'] as $annotations){
-                if (strpos($annotations['type'],"appnetizens.userinput.gender") == true){
-                    $gender=$annotations['value']['gender'];
-                    echo "<td>Gender:</td>";
-                    echo "<td>";
-                    echo ucwords($gender);
-                    echo "</td>"; 
-                }
-            }
+	            foreach($data['annotations'] as $annotations){
+	                if (strpos($annotations['type'],"appnetizens.userinput.gender") == true){
+	                    $gender=$annotations['value']['gender'];
+	                    echo "<td>Gender:</td>";
+	                    echo "<td>";
+	                    echo ucwords($gender);
+	                    echo "</td>"; 
+	                    $annot_data_display = true;
+	                }
+	            }
             ?>
         </tr>
         <tr>
             <?php
-            foreach($data['annotations'] as $annotations){
-                if (strpos($annotations['type'],"appnetizens.userinput.birthday") == true){
-                    $birthday=$annotations['value']['birthday'];   
-				
-					$birthday_converted = $birthdate->birthdayDateConverstion($birthday);
-               
-                    echo "<td>Birthday:</td>";
-                    echo "<td>";
-                    echo $birthday_converted;
-                    echo "</td>"; 
-                }
-            }
+	            foreach($data['annotations'] as $annotations){
+	                if (strpos($annotations['type'],"appnetizens.userinput.birthday") == true){
+	                    $birthday=$annotations['value']['birthday'];   
+					
+						$birthday_converted = $birthdate->birthdayDateConverstion($birthday);
+	               
+	                    echo "<td>Birthday:</td>";
+	                    echo "<td>";
+	                    echo $birthday_converted;
+	                    echo "</td>"; 
+	                    $annot_data_display = true;
+	                }
+	            }
             ?>
+        </tr>
+        <tr>
+        	<?php
+        		if($annot_data_display == false){
+	        		echo "<td>Oops!</td>";
+	        		echo "<td>We don't display all user annotations.<br>That's why there's nothing here.</td>";
+        		}
+        	?>
         </tr>
         <?php } ?>       
     </table>
@@ -516,18 +530,10 @@
             <td>
                 <?php
                     $number_of_clubs = count($user_clubs);
-                    echo $number_of_clubs;
+                    echo $club_count;
                 ?>
                 - <a data-toggle="modal" data-target="#PCAModal">Show All Clubs</a>
             </td>
-        </tr>
-        <tr>
-        	<td><a href='<?php echo $alpha; ?>zepfhyr/post/31432149' target='_blank'>OrphanBlackClub</a>:</td>
-        	<td>
-        		<?php
-        			print_r($OrphanBlackClub);
-        		?>
-        	</td>
         </tr>
         <tr>
             <td><a href='http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements' target='_blank'>More info on PCA clubs</a></td>
