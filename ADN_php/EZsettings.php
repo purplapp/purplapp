@@ -1,20 +1,20 @@
 <?php
 
 // change these values to your own in order to use EZAppDotNet
-$app_clientId     = 'XkHDN9ghAzPW6PvxbU5xMAtRtWEEUugX';
-$app_clientSecret = 'gSXtuVMXj7w3fzjeRqmKc2YmaJLDjJHb';
+$app_clientId     = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+$app_clientSecret = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
 
 // this must be one of the URLs defined in your App.net application settings
-$app_redirectUri  = 'http://revive.purplapp.eu/ADN_php/callback.php';
+$app_redirectUri  = 'http://[YOUR_DOMAIN]/ADN_php/callback.php';
 
 // declare the alpha domain to use
-$alpha = 'http://alpha.jvimedia.org/';
+$alpha = '[ALPHA_CLIENT_DOMAIN]';
 
 // support email
-$support = 'support@jvimedia.org';
+$support = '[SUPPORT_EMAIL]';
 
 // git(hub) url
-$github = 'https://github.com/purplapp/';
+$github = '[GITHUB_URL]';
 
 // An array of permissions you're requesting from the user.
 // As a general rule you should only request permissions you need for your app.
