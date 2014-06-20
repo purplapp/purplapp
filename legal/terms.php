@@ -1,15 +1,29 @@
 <?php 
+    // set the required php files
+    require_once '../ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library
+    require('../ADN_php/newFunctions.php'); // get the functions we added on
+    require('../ADN_php/nicerank.php'); // get the nicerank functions
+    require('../ADN_php/ErrorHandler.php'); // get the error handling functions
+
+    // error reporting 
     error_reporting(E_ALL);
-    ini_set("display_errors", 1);   
+    // ini_set("display_errors", 1); // this should be disabled in production  
+    ini_set('display_errors', 0); // this should be enabled in production   
+ 
 
 	$title = "Terms of Use - Purplapp"; 
 
-	require_once '../ADN_php/EZAppDotNet.php';
 	$app = new EZAppDotNet();
 
 	if ($app->getSession()) {
-		include('../include/header_auth.php');
+		// get the authorised user's data
+		$auth_user_data = $app->getUser();
+		$auth_username = $auth_user_data['username'];
+
+		// get headers
+		include('../include/header_auth.php'); 
 ?>
+
 
 <div class="col-md-12">
 	<div class="page-header">

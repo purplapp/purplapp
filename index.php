@@ -1,10 +1,22 @@
 <?php 
+  require_once './ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
+  require('./ADN_php/ErrorHandler.php'); // get the error handling functions
+
+  // error reporting 
+  error_reporting(E_ALL);
+  // ini_set("display_errors", 1); // this should be disabled in production  
+  ini_set('display_errors', 0); // this should be enabled in production
+
   $title = "Purplapp"; 
 
-  require_once './ADN_php/EZAppDotNet.php';
   $app = new EZAppDotNet();
 
   if ($app->getSession()) {
+    // get the authorised user's data
+    $auth_user_data = $app->getUser();
+    $auth_username = $auth_user_data['username'];
+
+    // get headers
     include('./include/header_auth.php'); 
 ?>
 
@@ -21,6 +33,7 @@
     <ul>
       <li><a href='./account/user.php'>Find details on your account and your PCA Clubs.</a></li>
       <li><a href='./account/mention.php'>Find the first mentions between two users.</a></li>
+      <li><a href='./account/follow_comparison.php'>Compare your followers with that of another user.</a> <span class="label label-primary">New</span></li>
     </ul>
   </p>
   <h2>Broadcast Features</h2>
@@ -42,8 +55,8 @@
     <br>
     <p><strong>We need £30 a month to keep the servers going. Here's the progress towards our goal!</strong></p>
     <div class="progress progress-striped">
-      <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-        30%
+      <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+        10%
       </div>
     </div>
   </p>
@@ -52,13 +65,18 @@
 <?php 
   } else {
     include('./include/header_unauth.php'); 
+    $url = $app->getAuthUrl();
 ?>
 
 <!-- Left Column -->
 <div class="jumbotron">
   <h1>Welcome!</h1>
   <p>Purplapp is an app for App.net statistics.</p>
-  <p><a href="./ADN_php/login.php" class="btn btn-primary btn-lg" role="button"><i class="fa fa-sign-in"></i> Login with App.net</a></p>
+  <p>
+    <a href="<?php echo $url; ?>" class="btn btn-lg btn-social btn-adn">
+      <i class="fa fa-adn"></i> Sign in with App.net
+    </a>
+  </p>
 </div>
 
 <div class="col-md-6">
@@ -68,6 +86,7 @@
     <ul>
       <li>Find details on your account and your PCA Clubs.</li>
       <li>Find the first mentions between two users.</li>
+      <li>Compare your followers with that of another user. <span class="label label-primary">New</span></li>
     </ul>
   </p>
   <h2>Broadcast Features</h2>
@@ -89,8 +108,8 @@
     <br>
     <p><strong>We need £30 a month to keep the servers going. Here's the progress towards our goal!</strong></p>
     <div class="progress progress-striped">
-      <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;">
-        30%
+      <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+        10%
       </div>
     </div>
   </p>

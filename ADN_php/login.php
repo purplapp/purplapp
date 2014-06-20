@@ -12,12 +12,9 @@
 	} else {
 	    $url = $app->getAuthUrl();
 	    echo "<div class='container'>";
-    	echo '<a href="'.$url.'"><h2>Sign in using App.net</h2></a>';
-		if (isset($_SESSION['rem'])) {
-			echo 'Remember me <input type="checkbox" id="rem" value="1" checked/>';
-		} else {
-			echo 'Remember me <input type="checkbox" id="rem" value="2" />';
-		}
+	    echo '<br><a class="btn btn-social btn-adn" href="'.$url.'">
+			    <i class="fa fa-adn"></i> Sign in with App.net
+			  </a>';
 		echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
 		echo "</div>";
 	}

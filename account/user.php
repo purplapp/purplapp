@@ -1,13 +1,15 @@
 <?php
-	// set error reporting mode status
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);  
+    // set the required php files
+    require_once '../ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library
+    require('../ADN_php/newFunctions.php'); // get the functions we added on
+    require('../ADN_php/nicerank.php'); // get the nicerank functions
+    require('../ADN_php/ErrorHandler.php'); // get the error handling functions
 
-	// set the required php files
-    require_once '../ADN_php/EZAppDotNet.php';
-    require('../ADN_php/newFunctions.php');
-    require('../ADN_php/nicerank.php');
-       
+    // error reporting 
+    error_reporting(E_ALL);
+    // ini_set("display_errors", 1); // this should be disabled in production  
+    ini_set('display_errors', 0); // this should be enabled in production
+
     // create new app
     $app = new EZAppDotNet();
 	
@@ -82,6 +84,30 @@
 		$nicerank->getNiceRank();
 		$nice_rank_data = $nicerank->nicerank;
 ?>
+
+<script>
+  function myFollow(userid) {
+    var element = document.getElementById(userid); 
+
+    if (element.getAttribute("status")=="followed"){
+      $.get("../ADN_php/follow.php","id="+userid+"&op=uf");
+
+      element.setAttribute("status", "true"); 
+      element.setAttribute("class", "btn btn-block btn-info"); 
+
+      document.getElementById(userid+"_text").innerHTML='Unfollowed';
+    } else {
+      $.get("../ADN_php/follow.php","id="+userid);
+
+      element.setAttribute("class", "btn btn-block btn-success active"); 
+      element.setAttribute("status", "followed"); 
+
+      document.getElementById(userid+"_text").innerHTML='Succesfully Followed.'; 
+    }
+      
+    //  elementtext.setAttribute("innerHTML", "You already followed!");
+  }
+</script>
 
 <div class="col-md-12">
 
@@ -612,18 +638,19 @@
   </div>
 </div>
 
-
-<?php include "../include/footer.php"; ?>
-
 <?php
     // if not, redirect to sign in
     } else {
         $title = "User Information Lookup";
         include('../include/header_unauth.php');
+        $url = $app->getAuthUrl();
 		
-		echo "<div class='container'>";
-		echo '<h4>You need to sign in to use Purplapp. Click below to go to the login page.</h4>';
-        echo '<a href="../ADN_php/login.php"><h2>Sign in using App.net</h2></a>';
-        echo '</div>';
+        echo "<div class='container'>";
+        echo '<br><a class="btn btn-social btn-adn" href="'.$url.'">
+                <i class="fa fa-adn"></i> Sign in with App.net
+              </a>';
+        echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
+        echo "</div>";
     }
+    include "../include/footer.php";
 ?>

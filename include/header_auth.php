@@ -23,6 +23,9 @@
     <!-- Bootstrap Core Custom CSS -->
     <link rel="stylesheet" href="https://jvimedia.org/static/bootstrap/css/bootstrap-fugue-min.css"/>
 
+    <!-- Bootstrap Social CSS -->
+    <link rel="stylesheet" href="https://jvimedia.org/static/bootstrap/css/bootstrap-social.css"/>
+
     <!-- Modifications -->
     <link rel="stylesheet" href="/css/mod.css">
 
@@ -64,7 +67,14 @@
 					<li><a href="/about.php"><i class="fa fa-info fa-fw"></i>About</a></li>
 				</ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/ADN_php/signout.php"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@<?php echo $auth_username; ?> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo $alpha; echo $auth_username;?>" target="_blank"><i class="fa fa-adn"></i> Alpha Profile</a></li>
+                            <!-- <li class="divider"></li> -->
+                            <li><a href="/ADN_php/signout.php"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                        </ul>
+                    </li>
                 </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>

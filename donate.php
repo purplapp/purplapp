@@ -1,15 +1,25 @@
 <?php 
-  // error_reporting(E_ALL);
-  // ini_set("display_errors", 1);   
-
   $title = "Donate to Purplapp"; 
 
-  require_once './ADN_php/EZAppDotNet.php';
+  require_once './ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
+  require('./ADN_php/ErrorHandler.php'); // get the error handling functions
+
+  // error reporting 
+  error_reporting(E_ALL);
+  // ini_set("display_errors", 1); // this should be disabled in production  
+  ini_set('display_errors', 0); // this should be enabled in production
+
   $app = new EZAppDotNet();
 
   if ($app->getSession()) {
+    // get the authorised user's data
+    $auth_user_data = $app->getUser();
+    $auth_username = $auth_user_data['username'];
+
+    // get headers
     include('./include/header_auth.php'); 
 ?>
+
 <div class="col-md-12">
   <h1>Like what we've done?</h1>
   <p>It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently. You can help us improve ADN by donating! :)</p>
@@ -19,19 +29,19 @@
   <script src="http://coinwidget.com/widget/coin.js"></script>
   <script>
   CoinWidgetCom.go({
-    wallet_address: "1Phr61c451vK5T2iiKn7PfHim6U829foA7"
-    , currency: "bitcoin"
-    , counter: "count"
-    , alignment: "btc"
-    , qrcode: true
-    , auto_show: false
-    , lbl_button: "Donate"
-    , lbl_address: "Our Bitcoin Address:"
-    , lbl_count: "donations"
-    , lbl_amount: "BTC"
+  wallet_address: "1Phr61c451vK5T2iiKn7PfHim6U829foA7"
+  , currency: "bitcoin"
+  , counter: "count"
+  , alignment: "btc"
+  , qrcode: true
+  , auto_show: false
+  , lbl_button: "Donate"
+  , lbl_address: "Our Bitcoin Address:"
+  , lbl_count: "donations"
+  , lbl_amount: "BTC"
   });
   </script>
-  
+
   <br><br>
 
   <h4>Litecoin:</h4>
@@ -40,19 +50,19 @@
   <script src="http://coinwidget.com/widget/coin.js"></script>
   <script>
   CoinWidgetCom.go({
-    wallet_address: "LPXzH5qVbFEHGwWUFCJX6AYwzFm6u6FVnX"
-    , currency: "litecoin"
-    , counter: "count"
-    , alignment: "ltc"
-    , qrcode: true
-    , auto_show: false
-    , lbl_button: "Donate"
-    , lbl_address: "Our Litecoin Address:"
-    , lbl_count: "donations"
-    , lbl_amount: "LTC"
+  wallet_address: "LPXzH5qVbFEHGwWUFCJX6AYwzFm6u6FVnX"
+  , currency: "litecoin"
+  , counter: "count"
+  , alignment: "ltc"
+  , qrcode: true
+  , auto_show: false
+  , lbl_button: "Donate"
+  , lbl_address: "Our Litecoin Address:"
+  , lbl_count: "donations"
+  , lbl_amount: "LTC"
   });
   </script>
-  
+
   <br><br> -->
 
   <h4>Paypal:</h4>
@@ -81,19 +91,19 @@
   <script src="http://coinwidget.com/widget/coin.js"></script>
   <script>
   CoinWidgetCom.go({
-    wallet_address: "1Phr61c451vK5T2iiKn7PfHim6U829foA7"
-    , currency: "bitcoin"
-    , counter: "count"
-    , alignment: "btc"
-    , qrcode: true
-    , auto_show: false
-    , lbl_button: "Donate"
-    , lbl_address: "Our Bitcoin Address:"
-    , lbl_count: "donations"
-    , lbl_amount: "BTC"
+  wallet_address: "1Phr61c451vK5T2iiKn7PfHim6U829foA7"
+  , currency: "bitcoin"
+  , counter: "count"
+  , alignment: "btc"
+  , qrcode: true
+  , auto_show: false
+  , lbl_button: "Donate"
+  , lbl_address: "Our Bitcoin Address:"
+  , lbl_count: "donations"
+  , lbl_amount: "BTC"
   });
   </script>
-  
+
   <br><br>
 
   <h4>Litecoin:</h4>
@@ -102,21 +112,21 @@
   <script src="http://coinwidget.com/widget/coin.js"></script>
   <script>
   CoinWidgetCom.go({
-    wallet_address: "LPXzH5qVbFEHGwWUFCJX6AYwzFm6u6FVnX"
-    , currency: "litecoin"
-    , counter: "count"
-    , alignment: "ltc"
-    , qrcode: true
-    , auto_show: false
-    , lbl_button: "Donate"
-    , lbl_address: "Our Litecoin Address:"
-    , lbl_count: "donations"
-    , lbl_amount: "LTC"
+  wallet_address: "LPXzH5qVbFEHGwWUFCJX6AYwzFm6u6FVnX"
+  , currency: "litecoin"
+  , counter: "count"
+  , alignment: "ltc"
+  , qrcode: true
+  , auto_show: false
+  , lbl_button: "Donate"
+  , lbl_address: "Our Litecoin Address:"
+  , lbl_count: "donations"
+  , lbl_amount: "LTC"
   });
   </script>
-  
+
   <br><br> -->
-  
+
   <h4>Paypal:</h4>
   <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
     <input type="hidden" name="cmd" value="_s-xclick">
