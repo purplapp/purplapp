@@ -25,7 +25,7 @@ $app_scope        =  array(
 	// 'stream', // Read the user's personalized stream
 	// 'email', // Access the user's email address
 	// 'write_post', // Post on behalf of the user
-	// 'follow', // Follow and unfollow other users
+	'follow', // Follow and unfollow other users
 	'public_messages', // Send and receive public messages as this user
 	'messages', // Send and receive public and private messages as this user
 	// 'update_profile', // Update a user’s name, images, and other profile information

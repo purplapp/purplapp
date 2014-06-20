@@ -2,7 +2,7 @@
     
     <!-- footer.php -->
     <div class="container">  
-      <div class="col-md-10">
+      <div class="col-md-12">
         <hr>
         <p>
         	&copy; Purplapp 2014. 

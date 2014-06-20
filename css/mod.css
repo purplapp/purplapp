@@ -22,8 +22,8 @@
   background-color: rgb(173, 140, 222);
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  color: #cc92f8;
-  background-color: rgb(203, 170, 252);
+  color: #f4f7ff;
+  background-color: rgb(60, 50, 74);
 }
 .navbar-default .navbar-toggle {
   border-color: rgb(173, 140, 222);
@@ -131,7 +131,16 @@ a {
 }
 
 
-
 .jumbotron {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+h2 {
+	margin: 0 0 10px 0;
+}
+
+@media (max-width: 767px) {
+  .avatar-following {
+      display: none!important;
+  }
 }

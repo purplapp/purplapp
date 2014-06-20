@@ -1,8 +1,11 @@
 <?php
-    // error_reporting(E_ALL);
-    // ini_set("display_errors", 1);  
+    require_once '../ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
+    require('../ADN_php/ErrorHandler.php'); // get the error handling functions
 
-    require_once '../ADN_php/EZAppDotNet.php';
+    // error reporting 
+    error_reporting(E_ALL);
+    // ini_set("display_errors", 1); // this should be disabled in production  
+    ini_set('display_errors', 0); // this should be enabled in production
 
     $app = new EZAppDotNet();
 
@@ -12,7 +15,11 @@
 
     // check that the user is signed in
     if ($app->getSession()) {
-	    //Header
+	    // get the authorised user's data
+	    $auth_user_data = $app->getUser();
+	    $auth_username = $auth_user_data['username'];
+
+	    // get headers
 	    $title = "First Mentions Lookup"; 
         include('../include/header_auth.php');
 
@@ -199,19 +206,20 @@
 	</form>
 </div>
 
-<?php } ?>  
-
-<?php include "../include/footer.php"; ?>
-
 <?php
+		}
     // if not, redirect to sign in
     } else {
         $title = "First Mentions Lookup";
         include('../include/header_unauth.php');
-
-		echo "<div class='container'>";
-		echo '<h4>You need to sign in to use Purplapp. Click below to go to the login page.</h4>';
-        echo '<a href="../ADN_php/login.php"><h2>Sign in using App.net</h2></a>';
-        echo '</div>';
+        $url = $app->getAuthUrl();
+		
+        echo "<div class='container'>";
+        echo '<br><a class="btn btn-social btn-adn" href="'.$url.'">
+                <i class="fa fa-adn"></i> Sign in with App.net
+              </a>';
+        echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
+        echo "</div>";
     }
+    include "../include/footer.php";
 ?>

@@ -1,14 +1,23 @@
 <?php 
-    // error_reporting(E_ALL);
-    // ini_set("display_errors", 1);   
-
 	$title = "Account Tools - Purplapp"; 
 
-	require_once './ADN_php/EZAppDotNet.php';
+    require_once './ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
+    require('./ADN_php/ErrorHandler.php'); // get the error handling functions
+
+    // error reporting 
+    error_reporting(E_ALL);
+    // ini_set("display_errors", 1); // this should be disabled in production  
+    ini_set('display_errors', 0); // this should be enabled in production
+
 	$app = new EZAppDotNet();
 
 	if ($app->getSession()) {
-		include('include/header_auth.php');
+		// get the authorised user's data
+		$auth_user_data = $app->getUser();
+		$auth_username = $auth_user_data['username'];
+
+		// get headers
+		include('./include/header_auth.php'); 
 ?>
 
 <div class="col-md-12">
@@ -17,7 +26,7 @@
 	</div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-12">
 	<div class="jumbotron">
 	  <h1>User Lookup Tool</h1>
 	  <p>We made a tool for looking up information on users. Enter in the username and hit enter, and we'll give you some info on that user.</p>
@@ -25,11 +34,19 @@
 	</div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-12">
 	<div class="jumbotron">
 	  <h1>First Mention Tool</h1>
 	  <p>Ever wanted to see what the first mentions between two users were? Well, we'll show you the first mentions of each user by the other.</p>
 	  <p><a href="/account/mention.php" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<div class="jumbotron">
+	  <h1>Following Comparison Tool</h1>
+	  <p>Want to follow more people? Enter in a username, and it'll show you up to 20 randomly selected users which they follow, but you don't.</p>
+	  <p><a href="/account/follow_comparison.php" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 	</div>
 </div>
 
@@ -38,25 +55,32 @@
     include('./include/header_unauth.php'); 
 ?>
 
-<div class="col-md-12">
-	<div class="page-header">
-		<h1>Tools for Accounts</h1>
-	</div>
+<div class="page-header">
+	<h1>Tools for Accounts</h1>
 </div>
 
-<div class="col-md-6">
+<p class="lead">
+	Want to use any of these? Hit "Sign in" above and get started!
+</p>
+
+<div class="col-md-12">
 	<div class="jumbotron">
 	  <h1>User Lookup Tool</h1>
 	  <p>We made a tool for looking up information on users. Enter in the username and hit enter, and we'll give you some info on that user.</p>
-	  <p><a href="/account/user.php" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
 	</div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-12">
 	<div class="jumbotron">
 	  <h1>First Mention Tool</h1>
 	  <p>Ever wanted to see what the first mentions between two users were? Well, we'll show you the first mentions of each user by the other.</p>
-	  <p><a href="/account/mention.php" class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<div class="jumbotron">
+	  <h1>Following Comparison Tool</h1>
+	  <p>Want to follow more people? Enter in a username, and it'll show you up to 20 randomly selected users which they follow, but you don't.</p>
 	</div>
 </div>
 
