@@ -1,5 +1,5 @@
 <?php
-	require_once 'EZAppDotNet.php';
+	require_once 'ControlAppDotNet.php';
 
 	$app = new EZAppDotNet();
 
@@ -7,5 +7,5 @@
 	$app->deleteSession();
 
 	// redirect user after logging out
-	header('Location: /index.php');
+	header('Location: ../index.php');
 ?>

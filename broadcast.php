@@ -1,13 +1,7 @@
 <?php 
     $title = "Broadcast Tools - Purplapp"; 
 
-    require_once './ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
-    require('./ADN_php/ErrorHandler.php'); // get the error handling functions
-
-    // error reporting 
-    error_reporting(E_ALL);
-    // ini_set("display_errors", 1); // this should be disabled in production  
-    ini_set('display_errors', 0); // this should be enabled in production
+    require_once './phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
 
     $app = new EZAppDotNet();
 
@@ -17,7 +11,7 @@
 		$auth_username = $auth_user_data['username'];
 
 		// get headers
-		include('./include/header_auth.php'); 
+		include('./static/headers/header_auth.php'); 
 ?>
 
 <div class="col-md-12">
@@ -36,7 +30,7 @@
 
 <?php 
   } else {
-    include('./include/header_unauth.php'); 
+    include('./static/headers/header_unauth.php'); 
 ?>
 
 <div class="col-md-12">
@@ -55,5 +49,5 @@
 
 <?php
   }
-  include('include/footer.php');
+  include('./static/footers/footer.php');
 ?>
