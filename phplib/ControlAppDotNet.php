@@ -1,28 +1,22 @@
 <?php
-/**
- * EZAppDotNet.php
- * Class for easy web development
- * https://github.com/jdolitsky/AppDotNetPHP
- *
- * This class does as much of the grunt work as possible in helping you to
- * access the App.net API. In theory you don't need to know anything about
- * oAuth, tokens, or all the ugly details of how it works, it should "just
- * work". 
- *
- * Note this class assumes you're running a web site, and you'll be 
- * accessing it via a web browser (it expects to be able to do things like
- * cookies and sessions). If you're not using a web browser in your App.net
- * application, or you want more fine grained control over what's being
- * done for you, use the included AppDotNet class, which does much
- * less automatically.
- */
+// set timezone
+date_default_timezone_set('UTC');
 
-// comment these two lines out in production
+// error reporting 
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+if (isset($_SERVER) and preg_match('/^revive/', $_SERVER['HTTP_HOST'])) {
+	ini_set("display_errors", 1);
+	// ini_set('display_errors', 0);
+} else {
+	// ini_set("display_errors", 1);
+	ini_set('display_errors', 0);
+}
 
-require_once 'EZsettings.php';
-require_once 'AppDotNet.php';
+// set requires
+require_once 'PurplappSettings.php'; // get settings
+require_once 'AppDotNetCommand.php'; // get AppDotNet PHP Library
+require_once 'PurplappExtraFunctions.php'; // get Purplapp's custom function library
+require_once 'PurplappErrorHandler.php'; // get Purplapp's custom error handling library
 
 // comment this out if session is started elsewhere
 session_start();
@@ -40,7 +34,7 @@ class EZAppDotNet extends AppDotNet {
 
 			// if it's still the default, warn them
 			if ($app_clientId == 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX') {
-				throw new AppDotNetException('You must change the values defined in EZsettings.php');
+				throw new AppDotNetException('You must change the values defined in PurplappSettings.php');
 			}
 
 			$clientId = $app_clientId;
@@ -231,5 +225,4 @@ class EZAppDotNet extends AppDotNet {
 			}
 		}
 	}
-
 }

@@ -1,11 +1,11 @@
 <?php
   	$title = "Sign in to Purplapp using App.net"; 
 	
-	require_once 'EZAppDotNet.php';
+	require_once 'ControlAppDotNet.php';
 
 	$app = new EZAppDotNet();
 
-    include('../include/header_unauth.php');
+    include('../static/headers/header_unauth.php');
 
 	if ($app->getSession()) {
 	    header('Location: ./index.php');
@@ -19,5 +19,5 @@
 		echo "</div>";
 	}
 	
-    include('../include/footer.php');
+    include('../static/footers/footer.php');
 ?>	    

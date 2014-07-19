@@ -1,11 +1,5 @@
 <?php
-	require_once '../ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
-    require('../ADN_php/ErrorHandler.php'); // get the error handling functions
-
-    // error reporting 
-    error_reporting(E_ALL);
-    // ini_set("display_errors", 1); // this should be disabled in production  
-    ini_set('display_errors', 0); // this should be enabled in production
+    require_once '../phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
 
     $app = new EZAppDotNet();
 

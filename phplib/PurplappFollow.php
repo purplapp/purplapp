@@ -1,9 +1,6 @@
 <?php
-  require_once './EZAppDotNet.php';
-
-  error_reporting(E_ALL);
-  ini_set("display_errors", 1);   
-
+  require_once './ControlAppDotNet.php';
+  
   $app = new EZAppDotNet();
 
   // check that the user is signed in

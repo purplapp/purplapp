@@ -1,11 +1,5 @@
 <?php 
-  require_once './ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
-  require('./ADN_php/ErrorHandler.php'); // get the error handling functions
-
-  // error reporting 
-  error_reporting(E_ALL);
-  // ini_set("display_errors", 1); // this should be disabled in production  
-  ini_set('display_errors', 0); // this should be enabled in production
+  require_once './phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
 
   $title = "Purplapp"; 
 
@@ -17,7 +11,7 @@
     $auth_username = $auth_user_data['username'];
 
     // get headers
-    include('./include/header_auth.php'); 
+    include('./static/headers/header_auth.php'); 
 ?>
 
 <!-- Left Column -->
@@ -33,7 +27,7 @@
     <ul>
       <li><a href='./account/user.php'>Find details on your account and your PCA Clubs.</a></li>
       <li><a href='./account/mention.php'>Find the first mentions between two users.</a></li>
-      <li><a href='./account/follow_comparison.php'>Compare your followers with that of another user.</a> <span class="label label-primary">New</span></li>
+      <li><a href='./account/follow_comparison.php'>Compare your followers with that of another user.</a></li>
     </ul>
   </p>
   <h2>Broadcast Features</h2>
@@ -64,7 +58,7 @@
 
 <?php 
   } else {
-    include('./include/header_unauth.php'); 
+    include('./static/headers/header_unauth.php'); 
     $url = $app->getAuthUrl();
 ?>
 
@@ -86,7 +80,7 @@
     <ul>
       <li>Find details on your account and your PCA Clubs.</li>
       <li>Find the first mentions between two users.</li>
-      <li>Compare your followers with that of another user. <span class="label label-primary">New</span></li>
+      <li>Compare your followers with that of another user.</li>
     </ul>
   </p>
   <h2>Broadcast Features</h2>
@@ -117,5 +111,5 @@
 
 <?php
   }
-  include('include/footer.php');
+  include('./static/footers/footer.php');
 ?>

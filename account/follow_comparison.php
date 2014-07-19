@@ -1,6 +1,5 @@
 <?php
-    require_once '../ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
-    require('../ADN_php/ErrorHandler.php'); // get the error handling functions
+    require_once '../phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
 
     // error reporting 
     error_reporting(E_ALL);

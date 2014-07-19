@@ -1,5 +1,5 @@
 <?php
-	require_once 'EZAppDotNet.php';
+	require_once 'ControlAppDotNet.php';
 
 	$app = new EZAppDotNet();
 
@@ -11,5 +11,5 @@
 	}
 
 	// redirect user after logging in
-	header('Location: /index.php');
+	header('Location: ../index.php');
 ?>

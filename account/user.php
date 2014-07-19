@@ -1,15 +1,8 @@
 <?php
     // set the required php files
-    require_once '../ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library
-    require('../ADN_php/newFunctions.php'); // get the functions we added on
-    require('../ADN_php/nicerank.php'); // get the nicerank functions
-    require('../ADN_php/ErrorHandler.php'); // get the error handling functions
-
-    // error reporting 
-    error_reporting(E_ALL);
-    // ini_set("display_errors", 1); // this should be disabled in production  
-    ini_set('display_errors', 0); // this should be enabled in production
-
+    require_once '../phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
+    require('../phplib/IrwinNiceRank.php'); // get the nicerank functions
+    
     // create new app
     $app = new EZAppDotNet();
 	
@@ -29,14 +22,14 @@
         } else {
             $username = "me";
         }
-		
+        
 		// get the data for the authorised user
         $auth_user_data = $app->getUser();
         $auth_username = $auth_user_data['username'];
 
-        // set title and includes
-        $title = "User Information Lookup";
-        include('../include/header_auth.php');
+       	// set the important stuff the user sees
+		$title = "User Information Lookup";
+		include('../static/headers/header_auth.php');
 
         if ($username == 'me') {
         	// if username is the authorised user
@@ -69,8 +62,11 @@
         $clubs->setUserPost($data['counts']['posts']);
         $clubs->setUserID($data['id']);
         $clubs->getClubs();
+        $clubs->nextClubs();
+        $next_clubs = $clubs->nextclubs;
         $club_count = $clubs->club_count;
         $user_clubs = $clubs->memberclubs;
+        $next_clubs = $clubs->nextclubs;
         
 		// post-date functions
 		$posts = new PostData;
@@ -111,7 +107,7 @@
 
 <div class="col-md-12">
 
-	<!-- <?php echo "<pre>"; print_r($data); echo "</pre>"; ?> -->
+	<!-- <?php echo "<pre>"; print_r($next_clubs); echo "</pre>"; ?> -->
 	
     <!-- User Name -->
     <div class="page-header">
@@ -562,6 +558,14 @@
             </td>
         </tr>
         <tr>
+        	<td>Next Club:</td>
+        	<td>
+        		<?php
+        			echo $next_clubs[0];
+        		?>
+        	</td>
+        </tr>
+        <tr>
             <td><a href='http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements' target='_blank'>More info on PCA clubs</a></td>
             <td></td>
         </tr>
@@ -642,7 +646,7 @@
     // if not, redirect to sign in
     } else {
         $title = "User Information Lookup";
-        include('../include/header_unauth.php');
+        include('../static/headers/header_unauth.php');
         $url = $app->getAuthUrl();
 		
         echo "<div class='container'>";
@@ -652,5 +656,5 @@
         echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
         echo "</div>";
     }
-    include "../include/footer.php";
+    include "../static/footers/footer.php";
 ?>
