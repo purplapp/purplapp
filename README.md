@@ -3,6 +3,15 @@ Purplapp
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
+##Features
+###Account Features
+- Find details on your account and your PCA Clubs.
+- Find the first mentions between two users.
+- Compare your followers with that of another user.
+
+###Broadcast Features
+- See the most recent 5 updates in any Broadcast channel.
+
 ### Configuration
 
 Put it on a server with PHP.
