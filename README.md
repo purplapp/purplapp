@@ -12,7 +12,7 @@ Purplapp
 ###Broadcast Features
 - See the most recent 5 updates in any Broadcast channel.
 
-### Configuration
+## Configuration
 
 Put it on a server with PHP.
 
