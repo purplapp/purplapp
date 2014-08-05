@@ -6,17 +6,15 @@ date_default_timezone_set('UTC');
 error_reporting(E_ALL);
 if (isset($_SERVER) and preg_match('/^revive/', $_SERVER['HTTP_HOST'])) {
 	ini_set("display_errors", 1);
-	// ini_set('display_errors', 0);
 } else {
-	// ini_set("display_errors", 1);
 	ini_set('display_errors', 0);
 }
 
 // set requires
-require_once 'PurplappSettings.php'; // get settings
-require_once 'AppDotNetCommand.php'; // get AppDotNet PHP Library
-require_once 'PurplappExtraFunctions.php'; // get Purplapp's custom function library
-require_once 'PurplappErrorHandler.php'; // get Purplapp's custom error handling library
+require_once 'PurplappSettings.php'; 		// get settings
+require_once 'AppDotNetCommand.php';		// get AppDotNet PHP Library
+require_once 'PurplappExtraFunctions.php'; 	// get Purplapp's custom function library
+require_once 'PurplappErrorHandler.php'; 	// get Purplapp's custom error handling library
 
 // comment this out if session is started elsewhere
 session_start();

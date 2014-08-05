@@ -1,10 +1,7 @@
+<!-- An additional feature I would like to add to this is some basic comparisons of follows. Things like "you both follow more than 400000 users", or "you have 322235 shared following". That would be a pretty useful feature, which would fit here more than on the other page. -->
+
 <?php
     require_once '../phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
-
-    // error reporting 
-    error_reporting(E_ALL);
-    // ini_set("display_errors", 1); // this should be disabled in production  
-    ini_set('display_errors', 0); // this should be enabled in production
 
     $app = new EZAppDotNet();
 
@@ -25,7 +22,7 @@
 				
 	    // declare headers
 	    $title = "Following Comparison Tool"; 
-        include('../include/header_auth.php');
+        include('../static/headers/header_auth.php');
 
         if (isset($_GET['id']) and !empty($_GET['id'])) {	    
         	// set the user id for the selected user
@@ -50,21 +47,8 @@
 		        
 		        // if the user you have selected has more than zero followers
 		        if(count($following_user_2) > 0) {	 
-		        	// if (isset($_POST['userselect'])) {
-			        // 	print_r($_POST['userselect']);
-		        	// 	echo "Yes selected.";
-		        	// 	foreach ($_POST['userselect'] as $to_follow) {
-				       //      $user_id_follow = $to_follow;
-				       //      echo $user_id_follow, "\n";
-				       //      $follow_user = $app->followUser($user_id_follow);
-				       //  } 
-		        	// } else {
-		        	// 	echo "No not selected.";
-		        	// }
-
-		        	$array_merge = array_merge($following_user_1, $following_user_2);
-
-		        	$array_intersect = array_intersect($following_user_2, $following_user_1);
+//		        	$array_merge = array_merge($following_user_1, $following_user_2);
+//		        	$array_intersect = array_intersect($following_user_2, $following_user_1);
 
 		        	// merge the two arrays       	        
 			        $merged_array = array_diff(
@@ -74,15 +58,15 @@
 
 			        $removed_array_1 = array_intersect($following_user_2, $merged_array);
 
-					// echo "<pre>";
-					// print_r($array_merge);
-					// echo "\n \n";
-					// print_r($array_intersect);
-					// echo "\n \n";
-					// print_r($merged_array);
-					// echo "\n \n";
-					// print_r($removed_array_1);
-					// echo "</pre>";
+//					echo "<pre>";
+//					print_r($array_merge);
+//					echo "\n \n";
+//					print_r($array_intersect);
+//					echo "\n \n";
+//					print_r($merged_array);
+//					echo "\n \n";
+//					print_r($removed_array_1);
+//					echo "</pre>";
 
 					// sort the merged array
 					sort($removed_array_1);
@@ -101,31 +85,33 @@
 					
 					// retrieve the users who we want to display below
 					$retrieved_user_ids = $app->getUsers($user_arr); 
+					
+					
+					
+					
+					
+					
+					$array_merge = array_merge($following_user_1, $following_user_2);
+		        	$array_intersect = array_intersect($following_user_2, $following_user_1);
+//
+//		        	// merge the two arrays       	        
+//			        $Amerged_array = array_diff(
+//						array_merge($following_user_1, $following_user_2),
+//						array_intersect($following_user_2, $following_user_1)
+//					);
+//
+//			        $removed_array_1 = array_intersect($following_user_2, $merged_array);
+//			        
+//			        echo "<pre>";
+//					print_r($array_merge);
+//					echo "\n \n";
+//					print_r($array_intersect);
+//					echo "\n \n";
+//					print_r($merged_array);
+//					echo "\n \n";
+//					print_r($removed_array_1);
+//					echo "</pre>";
 ?>
-
-<script>
-  function myFollow(userid) {
-    var element = document.getElementById(userid); 
-
-	if (element.getAttribute("status")=="followed"){
-      $.get("../ADN_php/follow.php","id="+userid+"&op=uf");
-
-      element.setAttribute("status", "true"); 
-      element.setAttribute("class", "btn btn-block btn-info"); 
-
-      document.getElementById(userid+"_text").innerHTML='Unfollowed';
-    } else {
-      $.get("../ADN_php/follow.php","id="+userid);
-
-	  element.setAttribute("class", "btn btn-block btn-success active"); 
-      element.setAttribute("status", "followed"); 
-
-      document.getElementById(userid+"_text").innerHTML='Succesfully Followed.'; 
-    }
-      
-    //  elementtext.setAttribute("innerHTML", "You already followed!");
-  }
-</script>
 
 <!-- Header -->
 <div class="page-header">
@@ -137,7 +123,6 @@
 	</h1>
 </div>
 
-<!--Search Box-->
 <form role="form">
 	<div class="form-group">
 		<label for="id"><em>Enter the Second User ID here:</em></label>
@@ -147,40 +132,154 @@
 </form>
 
 <br>
-
-<!-- Information Text -->
-<p class="lead">Here are some random users that <a href="<?php echo $alpha, $data_2['username']; ?>" target="_blank">@<?php echo $data_2['username']; ?></a> follows but you don't. Maybe you want to check them out and give them a follow?</p>
-
-<!-- User Box Display -->
-<?php 
-	foreach ($retrieved_user_ids as $user) {	
-		$imgData = '<img src="'.$user['avatar_image']['url'].'" class="img-responsive img-rounded full-width avatar-following"/></a>'; 
 		
-		echo "<div class='panel panel-default'>";
-			echo "<div class='panel-body'>";
-				echo "<div class='col-md-2'>";
+<!-- Information Text -->
+<p class="lead">Hello. What's up? Let's do some comparisons pls.</p>
+
+<!-- These are where the cool stuff goes. -->
+<div class="row">
+	<div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+			<img src="http://placehold.it/350x150" alt="...">
+			<div class="caption">
+				<h3>Recommendations</h3>
+				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id.</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+			<img src="http://placehold.it/350x150" alt="...">
+			<div class="caption">
+				<h3>Stuff</h3>
+				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id.</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+			<img src="http://placehold.it/350x150" alt="...">
+			<div class="caption">
+				<h3>Stuff</h3>
+				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" id="navTabs">
+  <li class="active"><a href="#overview" role="tab" data-toggle="tab">Overview</a></li>
+  <li><a href="#recommendations" role="tab" data-toggle="tab">Recommendations</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+	<div class="tab-pane fade in active" id="overview">
+		<br>
+		<div class="row">
+			<div class="col-sm-6 col-md-6">
+				<div class="thumbnail">
+					<canvas id="polar" style="width: 818px; height: 409px;"></canvas>
+					<div class="caption">
+						<p>This graph shows you the number of users you follow compared with how many <a href="<?php echo $alpha, $data_2['username']; ?>" target="_blank">@<?php echo $data_2['username']; ?></a> follows.</p>
+					</div>
+				</div>
+				<script>		    
+					var polarData = [
+					    {
+							// get the current (auth) user's following count			    	
+					        value: <?php echo $data_1['counts']['following']; ?>,
+					        color:"#F7464A",
+					        highlight: "#FF5A5E",
+					        label: "@<?php echo $data_1['username']; ?>'s following count"
+					    },
+					    {
+					        // get the other user's following count
+							value : <?php echo $data_2['counts']['following']; ?>,
+					        color: "#46BFBD",
+					        highlight: "#5AD3D1",
+					        label: "@<?php echo $data_2['username']; ?>'s following count"
+					    },		
+					];
+					var polarOptions = {
+						animateScale: true,
+						responsive: true
+					}
+				    var polargraph = document.getElementById("polar").getContext("2d");
+					new Chart(polargraph). PolarArea(polarData, polarOptions);
+				</script>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="recommendations">
+		<script>
+			function myFollow(userid) {
+				var element = document.getElementById(userid); 
+				
+				if (element.getAttribute("status")=="followed"){
+					$.get("../phplib/PurplappFollow.php","id="+userid+"&op=uf");
+					
+					element.setAttribute("status", "true"); 
+					element.setAttribute("class", "btn btn-block btn-info"); 
+					
+					document.getElementById(userid+"_text").innerHTML='Unfollowed';
+				} else {
+					$.get("../phplib/PurplappFollow.php","id="+userid);
+					
+					element.setAttribute("class", "btn btn-block btn-success active"); 
+					element.setAttribute("status", "followed"); 
+					
+					document.getElementById(userid+"_text").innerHTML='Succesfully Followed.'; 
+				}
+				
+				//  elementtext.setAttribute("innerHTML", "You already followed!");
+			}
+		</script>
+		<br>
+		
+		<!-- Information Text -->
+		<p class="lead">Here are some random users that <a href="<?php echo $alpha, $data_2['username']; ?>" target="_blank">@<?php echo $data_2['username']; ?></a> follows but you don't. Maybe you want to check them out and give them a follow?</p>
+		
+		<!-- User Box Display -->
+		<?php 
+			$displayed_any = false;
+			foreach ($retrieved_user_ids as $user) {	
+				if ($user['id'] != $user_number_1) {
+					$imgData = '<img src="'.$user['avatar_image']['url'].'" class="img-responsive img-rounded full-width avatar-following"/></a>'; 
+					
+					echo "<div class='panel panel-default'>";
+					echo "<div class='panel-body'>";
+					echo "<div class='col-md-2'>";
 					echo $imgData;
-				echo "</div>";
-				echo "<div class='col-md-8'>";
+					echo "</div>";
+					echo "<div class='col-md-8'>";
 					if(isset($user['name'])) {
 						echo "<h2>", $user['name'], " <small>@", $user['username'], "</small></h2>";
 					}
 					if(isset($user['description']['html'])) {
 						echo "<p>", $user['description']['html'], "</p>";	
 					}
-				echo "</div>";
-				echo "<div class='col-md-2'>";
+					echo "</div>";
+					echo "<div class='col-md-2'>";
 					echo '<a href="'.$alpha, $user['username'].'" target="_blank" role="button" class="btn btn-default btn-block">View on Alpha</a>';
 					echo '
 						<text id="'.$user['id'].'" onclick="myFollow('.$user['id'].');" class="btn btn-primary btn-block">
-			              <text id="'.$user['id'].'_text">Follow</text>
-			            </text> 
-			            ';			
-				echo "</div>";
-			echo "</div>";
-		echo "</div>";
-	} 
-?>
+						<text id="'.$user['id'].'_text">Follow</text>
+						</text> 
+					';			
+					echo "</div>";
+					echo "</div>";
+					echo "</div>";
+					$displayed_any = true;
+				} 
+			}
+			if ($displayed_any != true) {
+				echo "<div class='alert alert-warning'>You follow everyone in this random generated list. <strong><a href='#' onclick='reloadPage()' class='alert-link'>Refresh the page</a> or enter another username above.</strong></div>";
+			}
+		?>
+	</div>
+</div>
 
 <?php } else { ?>
 
@@ -255,7 +354,7 @@
     // if not, redirect to sign in
     } else {
         $title = "Following Comparison Tool";
-        include('../include/header_unauth.php');
+        include('../static/headers/header_unauth.php');
         $url = $app->getAuthUrl();
 		
         echo '<br><a class="btn btn-social btn-adn" href="'.$url.'">
@@ -263,5 +362,29 @@
               </a>';
         echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
     }
-    include "../include/footer.php";
 ?>
+
+<!-- <ol class="breadcrumb">
+	<li><a href="./index.php">Home</a></li>
+	<li><a href="./account.php">Account Tools</a></li>
+	<li class="active">Follow Comparison</li>
+</ol> -->
+
+<?php
+    include "../static/footers/footer.php";
+?>
+
+<script>
+	function reloadPage() {
+	    location.reload();
+	}
+
+	$(function () {
+		$('#navTabs a:first').tab('show')
+	})
+	
+	$('#navTabs a').click(function (e) {
+		e.preventDefault()
+		$(this).tab('show')
+	})
+</script>

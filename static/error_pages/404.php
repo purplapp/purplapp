@@ -1,49 +1,18 @@
 <?php 
-  require_once '../../ADN_php/EZAppDotNet.php'; // get the EZAppDotNet.php library 
-  require('../../ADN_php/ErrorHandler.php'); // get the error handling functions
-
-  // error reporting 
-  error_reporting(E_ALL);
-   ini_set("display_errors", 1); // this should be disabled in production  
-//  ini_set('display_errors', 0); // this should be enabled in production
-
-  $title = "Purplapp"; 
-
-  $app = new EZAppDotNet();
-
-  if ($app->getSession()) {
-    // get the authorised user's data
-    $auth_user_data = $app->getUser();
-    $auth_username = $auth_user_data['username'];
+	$title = "Purplapp - 404 Error"; 
+	
+    require_once '../../phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
 
     // get headers
-    include('../headers/header_auth.php'); 
+    include('../headers/header_error.php'); 
 ?>
 
 <!-- Left Column -->
 <div class="jumbotron">
-  <h1>Error 404 - Not Found</h1>
-  <p>Purplapp is an app for App.net statistics, and you just found a flaw in it. Nice one!</p>
+  <h1><i class="fa fa-warning"></i> Error 404 - Page Not Found</h1>
+  <p>Oops. That's not supposed to happen...<br><br><strong>Please refresh the page and try again, or return to the previous page and follow the link again.</strong><br><br>If that doesn't help, please <a href="mailto:<?php echo $support; ?>" target="_top">drop us an email</a> (with the page you're on, and how you reached it) and we'll look into what is wrong. Thanks!</p>
 </div>
 
 <?php 
-  } else {
-    include('../headers/header_unauth.php'); 
-    $url = $app->getAuthUrl();
-?>
-
-<!-- Left Column -->
-<div class="jumbotron">
-  <h1>Welcome!</h1>
-  <p>Purplapp is an app for App.net statistics.</p>
-  <p>
-    <a href="<?php echo $url; ?>" class="btn btn-lg btn-social btn-adn">
-      <i class="fa fa-adn"></i> Sign in with App.net
-    </a>
-  </p>
-</div>
-
-<?php
-  }
-  include('../footers/footer.php');
+	include('../footers/footer.php');
 ?>

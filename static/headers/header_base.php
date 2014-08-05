@@ -25,7 +25,10 @@
     <link rel="stylesheet" href="https://jvimedia.org/static/bootstrap/css/bootstrap-social.css"/>
 
     <!-- Modifications -->
-    <link rel="stylesheet" href="/css/mod.css">
+    <link rel="stylesheet" href="/static/css/mod.css">
+    
+	<!-- Chart JS -->    
+    <script type="text/javascript" src="/static/js/chart.js"></script>
 
     <title><?php echo $title; ?></title>   
 
