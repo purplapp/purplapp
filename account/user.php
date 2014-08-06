@@ -81,30 +81,6 @@
 		$nice_rank_data = $nicerank->nicerank;
 ?>
 
-<script>
-  function myFollow(userid) {
-    var element = document.getElementById(userid); 
-
-    if (element.getAttribute("status")=="followed"){
-      $.get("../ADN_php/follow.php","id="+userid+"&op=uf");
-
-      element.setAttribute("status", "true"); 
-      element.setAttribute("class", "btn btn-block btn-info"); 
-
-      document.getElementById(userid+"_text").innerHTML='Unfollowed';
-    } else {
-      $.get("../ADN_php/follow.php","id="+userid);
-
-      element.setAttribute("class", "btn btn-block btn-success active"); 
-      element.setAttribute("status", "followed"); 
-
-      document.getElementById(userid+"_text").innerHTML='Succesfully Followed.'; 
-    }
-      
-    //  elementtext.setAttribute("innerHTML", "You already followed!");
-  }
-</script>
-
 <div class="col-md-12">
 
 	<!-- <?php echo "<pre>"; print_r($next_clubs); echo "</pre>"; ?> -->
@@ -121,11 +97,11 @@
     </div>
 
     <!--Avatar Image-->
-    <?php echo "<img class='avatar' src=".$data['avatar_image']['url']." alt='avatar' width='180' height='180'/>"; ?> 
+    <?php echo "<img class='avatar' src='https://api.app.net/users/".$data['id']."/avatar?h=180' alt='avatar'/>"; ?> 
 
     <!--Cover Image-->
     <div class="cover">
-        <?php echo "<img class='cover' src=".$data['cover_image']['url']." alt='cover' height='180'/>"; ?> 
+        <?php echo "<img class='cover' src='https://api.app.net/users/".$data['id']."/cover?h=180' alt='cover'/>"; ?> 
     </div>
 
     <br><br>
@@ -167,7 +143,7 @@
         </tr>
         <tr>
             <td>Posts:</td>
-            <td><?php echo "<a class='url' href='".$alpha, $data['username']."/posts/' target='_blank'>".$data['counts']['posts']."</a> <i>(average ".round(($data['counts']['posts'] / $interval->days), 2)." per day)</i>"; ?></td>
+            <td><?php echo "<a class='url' href='".$alpha, $data['username']."/' target='_blank'>".$data['counts']['posts']."</a> <i> (average ".round(($data['counts']['posts'] / $interval->days), 2)." per day)</i>"; ?></td>
         </tr>
         <tr>
             <td>Starred:</td>
@@ -470,6 +446,7 @@
         	<td>Rank:</td>
         	<td><?php echo $nice_rank_data[0]->rank; ?></td>
         </tr>
+-->
         <tr>
         	<td>Real Person:</td>
         	<td>
@@ -484,7 +461,6 @@
         		?>
         	</td>
         </tr>
--->
         <tr>
         	<td>Past 28 days:</td>
 			<td><a data-toggle="modal" data-target="#28DaysModal">Show Statistics</a></td>
@@ -633,7 +609,6 @@
 				<td><?php echo $nice_rank_data[0]->stats->questions; ?></td>
 			</tr>
 		</table>
-		<p><i>Statistics for some users are not currently available. This is outside our control and will be rectified shortly.</i></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -650,10 +625,17 @@
         $url = $app->getAuthUrl();
 		
         echo "<div class='container'>";
-        echo '<br><a class="btn btn-social btn-adn" href="'.$url.'">
+        echo '<br>
+        	  <a class="btn btn-social btn-adn" href="'.$url.'">
                 <i class="fa fa-adn"></i> Sign in with App.net
               </a>';
-        echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
+        echo "<br>
+        	  <br>
+        	  <i>
+        	  	<p>
+        	  		We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.
+        	  	</p>
+        	  </i>";
         echo "</div>";
     }
     include "../static/footers/footer.php";

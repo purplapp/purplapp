@@ -8,7 +8,7 @@
 		
 		public function getNiceRank() {
 			$id = $this->user_id;
-			$url = "http://api.search-adn.net/user/nicerank?ids=".$id."&show_details=Y";
+			$url = "http://api.nice.social/user/nicerank?ids=".$id."&show_details=Y";
 
 			$json = @file_get_contents($url);
 			if($json == false) {
@@ -18,6 +18,5 @@
 				$this->nicerank = $obj->data;
 			}
 		}
-		
 	}
 ?>

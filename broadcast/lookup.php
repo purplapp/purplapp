@@ -38,7 +38,7 @@
 
 	    // declare headers
         $title = "Broadcast Channel Lookup for ".$channel_title."";
-        include('../include/header_auth.php');
+        include('../static/headers/header_auth.php');
 ?>
 
 <?php 
@@ -141,13 +141,19 @@
     		<td>Messages:</td>
     		<td><?php echo $channel_data['counts']['messages']; ?></td>
     	</tr>
-<!--     	<tr>
+     	<?php
+     		if(isset($channel_data['counts']['subscribers'])) {
+     	?>
+     	<tr>
     		<td>Subscribers:</td>
     		<td><?php echo $channel_data['counts']['subscribers']; ?></td>
-    	</tr>    --> 	
+    	</tr>
+    	<?php
+     		}
+     	?>
     	<tr>
     		<td>Owner:</td>
-    		<td><a href="http://alpha.jvimedia.org/<?php echo $channel_data['owner']['username']; ?>">@<?php echo $channel_data['owner']['username']; ?></a></td>
+    		<td><a href="<?php echo $alpha, $channel_data['owner']['username']; ?>">@<?php echo $channel_data['owner']['username']; ?></a></td>
     	</tr>    	
     </table>
 </div>
@@ -207,7 +213,7 @@
     // if not, redirect to sign in
     } else {
         $title = "Broadcast Channel Lookup";
-        include('../include/header_unauth.php');
+        include('../static/headers/header_unauth.php');
         $url = $app->getAuthUrl();
 		
         echo "<div class='container'>";
@@ -217,5 +223,5 @@
         echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
         echo "</div>";
     }
-    include "../include/footer.php";
+    include "../static/footers/footer.php";
 ?>

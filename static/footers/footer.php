@@ -7,7 +7,7 @@
         <p>
         	&copy; Purplapp 2014. 
           <br>
-          <a href="/about.php">About Us</a> &nbsp; - &nbsp; <a href="/images/imprint.png">Imprint</a> &nbsp; - &nbsp; <a href="/legal/privacy.php">Privacy</a> &nbsp; - &nbsp; <a href="/legal/terms.php">Terms of Service</a>
+          <a href="/about.php">About Us</a> &nbsp; - &nbsp; <a href="/static/images/imprint.png">Imprint</a> &nbsp; - &nbsp; <a href="/legal/privacy.php">Privacy</a> &nbsp; - &nbsp; <a href="/legal/terms.php">Terms of Service</a>
         </p>
         </p>
       </div>
