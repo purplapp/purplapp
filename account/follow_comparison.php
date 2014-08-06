@@ -120,13 +120,13 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-6">
 				<div class="thumbnail">
-					<canvas id="polar" style="width: 818px; height: 409px;"></canvas>
+					<canvas id="base_compare" style="width: 818px; height: 409px;"></canvas>
 					<div class="caption">
 						<p>This graph shows you the number of users you follow compared with how many <a href="<?php echo $alpha, $data_2['username']; ?>" target="_blank">@<?php echo $data_2['username']; ?></a> follows.</p>
 					</div>
 				</div>
 				<script>		    
-					var polarData = [
+					var base_compareData = [
 					    {
 							// get the current (auth) user's following count			    	
 					        value: <?php echo $data_1['counts']['following']; ?>,
@@ -142,19 +142,19 @@
 					        label: "@<?php echo $data_2['username']; ?>'s following count"
 					    },		
 					];
-					var polarOptions = {
+					var base_compareOptions = {
 						animateScale: true,
 						responsive: true
 					}
-				    var polargraph = document.getElementById("polar").getContext("2d");
-					new Chart(polargraph). PolarArea(polarData, polarOptions);
+				    var base_compare = document.getElementById("base_compare").getContext("2d");
+					new Chart(base_compare). PolarArea(base_compareData, base_compareOptions);
 				</script>
 			</div>
 			<div class="col-sm-6 col-md-6">
 				<div class="thumbnail">
 					<canvas id="not_shared" style="width: 818px; height: 409px;"></canvas>
 					<div class="caption">
-						<p>This graph shows you the number of followers that are unique to each account.</p>
+						<p>This graph shows you the number of users that <a href="<?php echo $alpha, $data_2['username']; ?>" target="_blank">@<?php echo $data_2['username']; ?></a> follows that you don't follow, and vice versa.</p>
 					</div>
 				</div>
 				<script>		    
