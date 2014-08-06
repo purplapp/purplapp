@@ -47,9 +47,6 @@
 		        
 		        // if the user you have selected has more than zero followers
 		        if(count($following_user_2) > 0) {	 
-//		        	$array_merge = array_merge($following_user_1, $following_user_2);
-//		        	$array_intersect = array_intersect($following_user_2, $following_user_1);
-
 		        	// merge the two arrays       	        
 			        $merged_array = array_diff(
 						array_merge($following_user_1, $following_user_2),
@@ -57,17 +54,6 @@
 					);
 
 			        $removed_array_1 = array_intersect($following_user_2, $merged_array);
-
-//					echo "<pre>";
-//					print_r($array_merge);
-//					echo "\n \n";
-//					print_r($array_intersect);
-//					echo "\n \n";
-//					print_r($merged_array);
-//					echo "\n \n";
-//					print_r($removed_array_1);
-//					echo "</pre>";
-
 					// sort the merged array
 					sort($removed_array_1);
 					
@@ -93,24 +79,26 @@
 					
 					$array_merge = array_merge($following_user_1, $following_user_2);
 		        	$array_intersect = array_intersect($following_user_2, $following_user_1);
-//
-//		        	// merge the two arrays       	        
-//			        $Amerged_array = array_diff(
-//						array_merge($following_user_1, $following_user_2),
-//						array_intersect($following_user_2, $following_user_1)
-//					);
-//
-//			        $removed_array_1 = array_intersect($following_user_2, $merged_array);
-//			        
-//			        echo "<pre>";
+
+		        	// merge the two arrays       	        
+			        $Amerged_array = array_diff(
+						array_merge($following_user_1, $following_user_2),
+						array_intersect($following_user_2, $following_user_1)
+					);
+					sort($Amerged_array);
+
+			        $Aremoved_array_1 = array_intersect($following_user_2, $Amerged_array);
+			        sort($Aremoved_array_1);
+			        
+			        echo "<pre>";
 //					print_r($array_merge);
 //					echo "\n \n";
 //					print_r($array_intersect);
 //					echo "\n \n";
-//					print_r($merged_array);
+//					print_r($Amerged_array);
 //					echo "\n \n";
-//					print_r($removed_array_1);
-//					echo "</pre>";
+					print_r($Aremoved_array_1);
+					echo "</pre>";
 ?>
 
 <!-- Header -->
@@ -137,7 +125,7 @@
 <p class="lead">Hello. What's up? Let's do some comparisons pls.</p>
 
 <!-- These are where the cool stuff goes. -->
-<div class="row">
+<!-- <div class="row">
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail">
 			<img src="http://placehold.it/350x150" alt="...">
@@ -165,7 +153,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist" id="navTabs">
@@ -208,6 +196,37 @@
 					}
 				    var polargraph = document.getElementById("polar").getContext("2d");
 					new Chart(polargraph). PolarArea(polarData, polarOptions);
+				</script>
+			</div>
+			<div class="col-sm-6 col-md-6">
+				<div class="thumbnail">
+					<canvas id="not_shared" style="width: 818px; height: 409px;"></canvas>
+					<div class="caption">
+						<p></p>
+					</div>
+				</div>
+				<script>		    
+					var not_sharedData = [
+					    {
+					        value: <?php echo count($Aremoved_array_1); ?>,
+					        color:"#F7464A",
+					        highlight: "#FF5A5E",
+					        label: "users that @<?php echo $data_2['username']; ?> follows but you don't"
+					    },
+					    {
+					        // get the other user's following count
+							value : <?php echo $data_2['counts']['following']; ?>,
+					        color: "#46BFBD",
+					        highlight: "#5AD3D1",
+					        label: "@<?php echo $data_2['username']; ?>'s following count"
+					    },		
+					];
+					var not_sharedOptions = {
+						animateScale: true,
+						responsive: true
+					}
+				    var not_shared = document.getElementById("not_shared").getContext("2d");
+					new Chart(not_shared). PolarArea(not_sharedData, not_sharedOptions);
 				</script>
 			</div>
 		</div>
