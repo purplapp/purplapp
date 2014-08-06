@@ -1,12 +1,10 @@
-<!-- An additional feature I would like to add to this is some basic comparisons of follows. Things like "you both follow more than 400000 users", or "you have 322235 shared following". That would be a pretty useful feature, which would fit here more than on the other page. -->
-
 <?php
     require_once '../phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
 
     $app = new EZAppDotNet();
 
     $user_params = array(
-        'include_user_annotations' => true, 
+        'include_user_annotations' => false, 
     );
 
     // check that the user is signed in
@@ -57,6 +55,22 @@
 					// sort the merged array
 					sort($removed_array_1);
 					
+					$array_merge = array_merge($following_user_1, $following_user_2);
+		        	$array_intersect = array_intersect($following_user_2, $following_user_1);
+
+		        	// merge the two arrays       	        
+			        $Amerged_array = array_diff(
+						array_merge($following_user_1, $following_user_2),
+						array_intersect($following_user_2, $following_user_1)
+					);
+					sort($Amerged_array);
+
+			        $Aremoved_array_1 = array_intersect($following_user_2, $Amerged_array);
+			        sort($Aremoved_array_1);
+
+			        $Aremoved_array_2 = array_intersect($following_user_1, $Amerged_array);
+			        sort($Aremoved_array_2);
+			        
 					// set the array of users to retrieve
 					$user_arr = array();
 					
@@ -71,34 +85,6 @@
 					
 					// retrieve the users who we want to display below
 					$retrieved_user_ids = $app->getUsers($user_arr); 
-					
-					
-					
-					
-					
-					
-					$array_merge = array_merge($following_user_1, $following_user_2);
-		        	$array_intersect = array_intersect($following_user_2, $following_user_1);
-
-		        	// merge the two arrays       	        
-			        $Amerged_array = array_diff(
-						array_merge($following_user_1, $following_user_2),
-						array_intersect($following_user_2, $following_user_1)
-					);
-					sort($Amerged_array);
-
-			        $Aremoved_array_1 = array_intersect($following_user_2, $Amerged_array);
-			        sort($Aremoved_array_1);
-			        
-			        echo "<pre>";
-//					print_r($array_merge);
-//					echo "\n \n";
-//					print_r($array_intersect);
-//					echo "\n \n";
-//					print_r($Amerged_array);
-//					echo "\n \n";
-					print_r($Aremoved_array_1);
-					echo "</pre>";
 ?>
 
 <!-- Header -->
@@ -120,40 +106,6 @@
 </form>
 
 <br>
-		
-<!-- Information Text -->
-<p class="lead">Hello. What's up? Let's do some comparisons pls.</p>
-
-<!-- These are where the cool stuff goes. -->
-<!-- <div class="row">
-	<div class="col-sm-6 col-md-4">
-		<div class="thumbnail">
-			<img src="http://placehold.it/350x150" alt="...">
-			<div class="caption">
-				<h3>Recommendations</h3>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id.</p>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-6 col-md-4">
-		<div class="thumbnail">
-			<img src="http://placehold.it/350x150" alt="...">
-			<div class="caption">
-				<h3>Stuff</h3>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id.</p>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-6 col-md-4">
-		<div class="thumbnail">
-			<img src="http://placehold.it/350x150" alt="...">
-			<div class="caption">
-				<h3>Stuff</h3>
-				<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id.</p>
-			</div>
-		</div>
-	</div>
-</div> -->
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist" id="navTabs">
@@ -202,23 +154,23 @@
 				<div class="thumbnail">
 					<canvas id="not_shared" style="width: 818px; height: 409px;"></canvas>
 					<div class="caption">
-						<p></p>
+						<p>This graph shows you the number of followers that are unique to each account.</p>
 					</div>
 				</div>
 				<script>		    
 					var not_sharedData = [
 					    {
-					        value: <?php echo count($Aremoved_array_1); ?>,
+					        value: <?php echo count($Aremoved_array_2); ?>,
 					        color:"#F7464A",
 					        highlight: "#FF5A5E",
-					        label: "users that @<?php echo $data_2['username']; ?> follows but you don't"
+					        label: "users that you follow but @<?php echo $data_2['username']; ?> doesn't"
 					    },
 					    {
 					        // get the other user's following count
-							value : <?php echo $data_2['counts']['following']; ?>,
+							value : <?php echo count($Aremoved_array_1); ?>,
 					        color: "#46BFBD",
 					        highlight: "#5AD3D1",
-					        label: "@<?php echo $data_2['username']; ?>'s following count"
+					        label: "users that @<?php echo $data_2['username']; ?> follows but you don't"
 					    },		
 					];
 					var not_sharedOptions = {
@@ -382,12 +334,6 @@
         echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
     }
 ?>
-
-<!-- <ol class="breadcrumb">
-	<li><a href="./index.php">Home</a></li>
-	<li><a href="./account.php">Account Tools</a></li>
-	<li class="active">Follow Comparison</li>
-</ol> -->
 
 <?php
     include "../static/footers/footer.php";
