@@ -89,7 +89,7 @@
     <div class="page-header">
         <h4>User Lookup</h4>
         <h1>
-          <?php echo $data['name'] ?>
+            <?php echo htmlentities($data['name']); ?>
           <small>
             <?php echo "<a href='".$alpha, $data['username']."' target='_blank'>@".$data['username']."</a>" ?>
           </small>

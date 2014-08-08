@@ -120,10 +120,18 @@
 		<div class="row">
 			<div class="col-sm-6 col-md-6">
 				<div class="thumbnail">
-					<canvas id="base_compare" style="width: 818px; height: 409px;"></canvas>
 					<div class="caption">
 						<p>This graph shows you the number of users you follow compared with how many <a href="<?php echo $alpha, $data_2['username']; ?>" target="_blank">@<?php echo $data_2['username']; ?></a> follows.</p>
 					</div>
+					<canvas id="base_compare" style="width: 818px; height: 409px;"></canvas>
+					<table class="table table-condensed">
+						<tr>
+							<td class="ui-helper-center"><span style="color: #46BFBD;">&#9608;</span> @<?php echo $data_2['username']; ?>'s following count</td>
+						</tr>
+						<tr>
+							<td class="ui-helper-center"><span style="color: #F7464A;">&#9608;</span> @<?php echo $data_1['username']; ?>'s following count</td>
+						</tr>
+					</table>
 				</div>
 				<script>		    
 					var base_compareData = [
@@ -132,14 +140,14 @@
 					        value: <?php echo $data_1['counts']['following']; ?>,
 					        color:"#F7464A",
 					        highlight: "#FF5A5E",
-					        label: "@<?php echo $data_1['username']; ?>'s following count"
+					        label: ""
 					    },
 					    {
 					        // get the other user's following count
 							value : <?php echo $data_2['counts']['following']; ?>,
 					        color: "#46BFBD",
 					        highlight: "#5AD3D1",
-					        label: "@<?php echo $data_2['username']; ?>'s following count"
+					        label: ""
 					    },		
 					];
 					var base_compareOptions = {
@@ -152,29 +160,38 @@
 			</div>
 			<div class="col-sm-6 col-md-6">
 				<div class="thumbnail">
-					<canvas id="not_shared" style="width: 818px; height: 409px;"></canvas>
 					<div class="caption">
 						<p>This graph shows you the number of users that <a href="<?php echo $alpha, $data_2['username']; ?>" target="_blank">@<?php echo $data_2['username']; ?></a> follows that you don't follow, and vice versa.</p>
 					</div>
+					<canvas id="not_shared" style="width: 818px; height: 409px;"></canvas>
+					<table class="table table-condensed">
+						<tr>
+							<td class="ui-helper-center"><span style="color: #949FB1;">&#9608;</span> users that @<?php echo $data_2['username']; ?> follows but you don't</td>
+						</tr>
+						<tr>
+							<td class="ui-helper-center"><span style="color: #FDB45C;">&#9608;</span> users that you follow but @<?php echo $data_2['username']; ?> doesn't</td>
+						</tr>
+					</table>
 				</div>
 				<script>		    
 					var not_sharedData = [
 					    {
 					        value: <?php echo count($Aremoved_array_2); ?>,
-					        color:"#F7464A",
-					        highlight: "#FF5A5E",
-					        label: "users that you follow but @<?php echo $data_2['username']; ?> doesn't"
+					        color:"#FDB45C",
+					        highlight: "#FFC870",
+					        label: ""
 					    },
 					    {
 					        // get the other user's following count
 							value : <?php echo count($Aremoved_array_1); ?>,
-					        color: "#46BFBD",
-					        highlight: "#5AD3D1",
-					        label: "users that @<?php echo $data_2['username']; ?> follows but you don't"
+					        color: "#949FB1",
+					        highlight: "#A8B3C5",
+					        label: ""
 					    },		
 					];
 					var not_sharedOptions = {
 						animateScale: true,
+						animateRotate: false,
 						responsive: true
 					}
 				    var not_shared = document.getElementById("not_shared").getContext("2d");
