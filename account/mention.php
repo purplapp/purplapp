@@ -1,11 +1,6 @@
 <?php
     require_once '../phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
 
-    // error reporting 
-    error_reporting(E_ALL);
-    // ini_set("display_errors", 1); // this should be disabled in production  
-    ini_set('display_errors', 0); // this should be enabled in production
-
     $app = new EZAppDotNet();
 
     $user_params = array(
@@ -20,7 +15,7 @@
 
 	    // get headers
 	    $title = "First Mentions Lookup"; 
-        include('../include/header_auth.php');
+        include('../static/headers/header_auth.php');
 
         if (isset($_GET['id1']) and isset($_GET['id1'])) {
 	    	if(!empty($_GET['id1'])) {
@@ -81,9 +76,9 @@
 	<div class="page-header">
 		<h4>Check First Mention Between... <!-- <span class="label label-primary">New</span> --></h4>
 		<h1>
-		  <?php echo $data_1['name']; ?>
+		  <?php echo htmlentities($data_1['name']); ?>
 		  and
-		  <?php echo $data_2['name']; ?>
+		  <?php echo htmlentities($data_2['name']); ?>
 		</h1>
 	</div>
 
@@ -210,7 +205,7 @@
     // if not, redirect to sign in
     } else {
         $title = "First Mentions Lookup";
-        include('../include/header_unauth.php');
+        include('../static/headers/header_unauth.php');
         $url = $app->getAuthUrl();
 		
         echo "<div class='container'>";
@@ -220,5 +215,5 @@
         echo "<br><br><i><p>We ask to see basic information about you, and to allow us to send and receive the following types of messages: <strong>Broadcast Messages</strong>.<br>However, we do not send Broadcast messages for you. That would be against our moral values.</i></p>";
         echo "</div>";
     }
-    include "../include/footer.php";
+    include "../static/footers/footer.php";
 ?>

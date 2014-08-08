@@ -144,3 +144,7 @@ h2 {
     display: none!important;
   }
 }
+
+.ui-helper-center {
+    text-align: center;
+}
