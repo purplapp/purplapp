@@ -195,4 +195,62 @@
 			}
 		}
 	}
+
+	class EntityProcessor {
+		public function BioProcessor($payload) {
+			$html = htmlentities($payload['description']['text'], 0, 'UTF-8');
+
+			foreach ($payload['description']['entities']['hashtags'] as $entity) {
+				$entityText = mb_substr($payload['description']['text'], $entity['pos'], $entity['len']);
+				$html = preg_replace('/'.$entityText.'\b/', '<a href="https://alpha.app.net/hashtags/'.$entity['name'].'" target="_blank">'.$entityText.'</a>', $html, 1);
+			}
+
+			$processed = array();
+			foreach ($payload['description']['entities']['links'] as $entity) {
+				$entityText = htmlentities(mb_substr($payload['description']['text'], $entity['pos'], $entity['len']), 0, 'UTF-8');
+				if (in_array($entityText, $processed)) continue;
+				$processed[] = $entityText;
+				$charAfterText = mb_substr($payload['description']['text'], $entity['pos']+$entity['len'], 1);
+				$html = str_replace($entityText, '<a href="'.htmlspecialchars($entity['url']).'" target="_blank">'.$entityText.'</a>', $html);
+			}
+
+			foreach ($payload['description']['entities']['mentions'] as $entity) {
+				$userUrl = 'https://alpha.app.net/'.$entity['name'];
+				$entityText = mb_substr($payload['description']['text'], $entity['pos'], $entity['len']);
+				$html = preg_replace('/'.$entityText.'\b/', '<a href="'.$userUrl.'" target="_blank">'.$entityText.'</a>', $html, 1);
+			}
+
+			return str_replace("\n", '<br />', $html);
+		}
+
+		public function PostProcessor($payload) {
+			$html = htmlentities($payload['text'], 0, 'UTF-8');
+				
+			// Process Hashtags
+			foreach ($payload['entities']['hashtags'] as $entity) {
+				$entityText = mb_substr($payload['text'], $entity['pos'], $entity['len']);
+				$html = preg_replace('/'.$entityText.'\b/', '<a href="https://alpha.app.net/hashtags/'.$entity['name'].'" target="_blank">'.$entityText.'</a>', $html, 1);
+			}
+				
+			// Process Links
+			$processed = array();
+			foreach ($payload['entities']['links'] as $entity) {
+				$entityText = htmlentities(mb_substr($payload['text'], $entity['pos'], $entity['len']), 0, 'UTF-8');
+				if (in_array($entityText, $processed)) continue;
+				$processed[] = $entityText;
+				$charAfterText = mb_substr($payload['text'], $entity['pos']+$entity['len'], 1);
+				$html = str_replace($entityText, '<a href="'.htmlspecialchars($entity['url']).'" target="_blank">'.$entityText.'</a>', $html);
+			}
+				
+			// Process User Mentions
+			foreach ($payload['entities']['mentions'] as $entity) {
+				//$userUrl = isset($entity['x_user_url']) ? $entity['x_user_url'] : '/redirectToUser/'.$entity['name'];
+				$userUrl = 'https://alpha.app.net/'.$entity['name'];
+				$entityText = mb_substr($payload['text'], $entity['pos'], $entity['len']);
+				$html = preg_replace('/'.$entityText.'\b/', '<a href="'.$userUrl.'" target="_blank">'.$entityText.'</a>', $html, 1);
+			}
+				
+			return str_replace("\n", '<br />', $html);
+		}
+	}
 ?>

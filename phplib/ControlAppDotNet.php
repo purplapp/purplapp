@@ -16,6 +16,10 @@ require_once 'AppDotNetCommand.php';		// get AppDotNet PHP Library
 require_once 'PurplappExtraFunctions.php'; 	// get Purplapp's custom function library
 require_once 'PurplappErrorHandler.php'; 	// get Purplapp's custom error handling library
 
+//calculate current date for day calc
+$today = date('Y-m-d H:i:s');
+$start = new DateTime($today);
+
 // comment this out if session is started elsewhere
 session_start();
 
