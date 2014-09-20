@@ -25,6 +25,7 @@ class RoboFile extends TaskList
     {
         $this->getServer()->background()->run();
 
+        $this->taskExec("./bin/codecept build")->run();
         $this->taskCodecept('./bin/codecept')
             ->args($args)
             ->run();
@@ -36,6 +37,8 @@ class RoboFile extends TaskList
      */
     public function tdd()
     {
+        $this->test();
+
         $self  = $this;
         $files = __DIR__ . "/tests/";
 
