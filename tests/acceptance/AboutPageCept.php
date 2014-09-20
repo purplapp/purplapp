@@ -24,3 +24,10 @@ $see([
     "PCA Icons", "Yusuke Kamiyamane", "p.yusukekamiyamane.com",
     "Glyphicon Halflings", "glyphicons.com"
 ]);
+
+foreach (array("purplapp", "charl", "jvimedia", "hu", "remus", "jessicadennis") as $handle) {
+    $I->seeLink("@{$handle}", "https://alpha.app.net/{$handle}");
+}
+
+$I->seeLink("Email");
+$I->seeLink("GitHub");
