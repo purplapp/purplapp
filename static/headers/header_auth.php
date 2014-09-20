@@ -29,7 +29,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="<?php echo $alpha; echo $auth_username;?>" target="_blank"><i class="fa fa-adn"></i> Alpha Profile</a></li>
                                 <!-- <li class="divider"></li> -->
-                                <li><a href="./phplib/PurplappSignout.php"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                                <li><a href="/phplib/PurplappSignout.php"><i class="fa fa-sign-out"></i> Sign out</a></li>
                             </ul>
                         </li>
                     </ul>
