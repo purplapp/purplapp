@@ -7,6 +7,8 @@
         'include_user_annotations' => false, 
     );
 
+    $posts = new PostData;
+
     // check that the user is signed in
     if ($app->getSession()) {
 		
@@ -79,12 +81,21 @@
 					while($n <= 20) {
 						$value = mt_rand(0, count($removed_array_1) - 1);
 						$add_array = $removed_array_1[$value];
-						$user_arr[] = $add_array;
-						$n++;
+						if($add_array != $user_number_1) {
+							$user_arr[] = $add_array;
+							$n++;
+						}
 					}
 					
 					// retrieve the users who we want to display below
 					$retrieved_user_ids = $app->getUsers($user_arr); 
+
+					// echo "<pre>";
+					// print_r($array_merge);
+					// print_r($array_intersect);
+					// print_r($removed_array_1);
+					// print_r($user_arr);
+					// echo "</pre>";
 ?>
 
 <!-- Header -->
@@ -233,35 +244,45 @@
 		<?php 
 			$displayed_any = false;
 			foreach ($retrieved_user_ids as $user) {	
-				if ($user['id'] != $user_number_1) {
-					$imgData = '<img src="'.$user['avatar_image']['url'].'" class="img-responsive img-rounded full-width avatar-following"/></a>'; 
-					
-					echo "<div class='panel panel-default'>";
-					echo "<div class='panel-body'>";
-					echo "<div class='col-md-2'>";
-					echo $imgData;
-					echo "</div>";
-					echo "<div class='col-md-8'>";
-					if(isset($user['name'])) {
-						echo "<h2>", $user['name'], " <small>@", $user['username'], "</small></h2>";
-					}
-					if(isset($user['description']['html'])) {
-						echo "<p>", $user['description']['html'], "</p>";	
-					}
-					echo "</div>";
-					echo "<div class='col-md-2'>";
-					echo '<a href="'.$alpha, $user['username'].'" target="_blank" role="button" class="btn btn-default btn-block">View on Alpha</a>';
-					echo '
-						<text id="'.$user['id'].'" onclick="myFollow('.$user['id'].');" class="btn btn-primary btn-block">
-						<text id="'.$user['id'].'_text">Follow</text>
-						</text> 
-					';			
-					echo "</div>";
-					echo "</div>";
-					echo "</div>";
-					$displayed_any = true;
-				} 
-			}
+				$imgData = '<img src="'.$user['avatar_image']['url'].'" class="img-responsive img-rounded full-width avatar-following"/></a>'; 
+
+				// This next batch of code will be reactivated at some point, probably when we get a database.
+				// $last_post_params = array(
+                  // 'count' => '1',
+                // );
+                // $lastpost = $app->getUserPosts($user_id = $user['id'], $last_post_params);
+
+                // $created_at = new DateTime($lastpost[0]['created_at']);
+                // $lastpost_created_at = $created_at->format('Y-m-d H:i:s');                    
+                // $end = new DateTime($lastpost_created_at);
+		        // $lastpost_ago = $posts->formatDateDiff($start, $end);
+
+				echo "<div class='panel panel-default'>";
+				echo "<div class='panel-body'>";
+				echo "<div class='col-md-2'>";
+				echo $imgData;
+				echo "</div>";
+				echo "<div class='col-md-8'>";
+				if(isset($user['name'])) {
+					echo "<h2>", $user['name'], " <small>@", $user['username'], "</small></h2>";
+				}
+				if(isset($user['description']['html'])) {
+					echo "<p>", $user['description']['html'], "</p>";	
+				}
+				// echo "<i>@", $user['username'], "'s last post was ", $lastpost_ago, " ago</i>";
+				echo "</div>";
+				echo "<div class='col-md-2'>";
+				echo '<a href="'.$alpha, $user['username'].'" target="_blank" role="button" class="btn btn-default btn-block">View on Alpha</a>';
+				echo '
+					<text id="'.$user['id'].'" onclick="myFollow('.$user['id'].');" class="btn btn-primary btn-block">
+					<text id="'.$user['id'].'_text">Follow</text>
+					</text> 
+				';			
+				echo "</div>";
+				echo "</div>";
+				echo "</div>";
+				$displayed_any = true;
+			} 
 			if ($displayed_any != true) {
 				echo "<div class='alert alert-warning'>You follow everyone in this random generated list. <strong><a href='#' onclick='reloadPage()' class='alert-link'>Refresh the page</a> or enter another username above.</strong></div>";
 			}

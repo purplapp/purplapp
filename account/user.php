@@ -10,10 +10,6 @@
     $user_params = array(
         'include_user_annotations' => true, 
     );
-    
-    //calculate current date for day calc
-    $today = date('Y-m-d H:i:s');
-    $start = new DateTime($today);
 
     // check that the user is signed in
     if ($app->getSession()) {
@@ -79,12 +75,17 @@
 		$nicerank->setUserID($user_number);
 		$nicerank->getNiceRank();
 		$nice_rank_data = $nicerank->nicerank;
+
+        $EntityProcessor = new EntityProcessor;
+        if (isset($data['description']['html'])) {
+            $processed_bio = $EntityProcessor->BioProcessor($data);
+        }
 ?>
 
 <div class="col-md-12">
 
-	<!-- <?php echo "<pre>"; print_r($next_clubs); echo "</pre>"; ?> -->
-	
+	<!-- <?php echo "<pre>"; print_r($data); echo "</pre>"; ?> -->
+
     <!-- User Name -->
     <div class="page-header">
         <h4>User Lookup</h4>
@@ -125,8 +126,8 @@
     <!--User Bio-->
     <p class="bio">
         <?php 
-        	if (isset($data['description']['html'])) {
-        		echo $data['description']['html']; 
+        	if (isset($processed_bio)) {
+        		echo $processed_bio; 
         	} else {
 	        	echo "<i>This user has got no bio set.</i>";
 	        }
@@ -341,6 +342,7 @@
                 <?php 
                     $post_params = array(
                       'count' => '-1',
+                      'include_deleted' => false,
                     );
 
                     $firstpost = $app->getUserPosts($user_id="$user_number", $post_params);
@@ -350,8 +352,10 @@
 
                     $firstpost_post_id = $firstpost[0]['id'];
                     $firstpost_user = $firstpost[0]['user']['username'];
+
+                    $firstpost_content = $firstpost[0]['html'];
                 ?>
-                <a href="<?php echo $alpha, $firstpost_user, "/post/", $firstpost_post_id; ?>" target="_blank"><?php echo $firstpost_created_at; ?></a>
+                <a data-toggle="modal" data-target="#FPModal"><?php echo $firstpost_created_at; ?></a>
             </td>
         </tr>
 
@@ -372,11 +376,13 @@
                 $firstmention_user_link = $firstmention[0]['user']['canonical_url'];
                 
                 $firstmention_post_id = $firstmention[0]['id'];               
+
+                $firstmention_content = $firstmention[0]['html'];
         ?>
         <tr>
             <td class="">First Mention:</td>
             <td>
-                <a href="<?php echo $alpha, $firstmention_user, "/post/", $firstmention_post_id; ?>" target='_blank'><?php echo $firstmention_created_at; ?></a> <i>(by <a href="http://alpha.jvimedia.org/<?php echo $firstmention_user; ?>" target='_blank'>@<?php echo $firstmention_user; ?>)</i></a>
+                <a data-toggle="modal" data-target="#FMModal"><?php echo $firstmention_created_at; ?></a> <i>(by <a href="<?php echo $alpha, $firstmention_user; ?>" target='_blank'>@<?php echo $firstmention_user; ?></i></a>)
             </td>
         </tr>               
         <?php } ?>
@@ -386,6 +392,7 @@
                 <?php 
                     $last_post_params = array(
                       'count' => '1',
+                      'include_deleted' => false,
                     );
 
                     $lastpost = $app->getUserPosts($user_id="$user_number", $last_post_params);
@@ -396,12 +403,14 @@
                     $lastpostlink = $lastpost[0]['canonical_url'];
                     
                     $end = new DateTime($lastpost_created_at);
-			        $lastpost_ago = $posts->formatDateDiff($start, $end);	
+                    $lastpost_ago = $posts->formatDateDiff($start, $end);   
 
-			        $lastpost_post_id = $lastpost[0]['id'];
-                    $lastpost_user = $lastpost[0]['user']['username'];	 			
+                    $lastpost_post_id = $lastpost[0]['id'];
+                    $lastpost_user = $lastpost[0]['user']['username'];   
+
+                    $lastpost_content = $lastpost[0]['html'];           
                 ?>
-                <a href="<?php echo $alpha, $lastpost_user, "/post/", $lastpost_post_id; ?>" target='_blank'><?php echo $lastpost_ago; ?> ago</a>
+                <a data-toggle="modal" data-target="#LPModal"><?php echo $lastpost_ago; ?> ago</a>
             </td>
         </tr>
 
@@ -422,14 +431,16 @@
                 $lastmention_user_link = $lastmention[0]['user']['canonical_url'];
                 
                 $end = new DateTime($lastmention_created_at);
-		        $lastmention_ago = $posts->formatDateDiff($start, $end);
+                $lastmention_ago = $posts->formatDateDiff($start, $end);
 
-                $lastmention_post_id = $lastmention[0]['id'];               		        
+                $lastmention_post_id = $lastmention[0]['id'];    
+
+                $lastmention_content = $lastmention[0]['html'];                         
         ?>
         <tr>
             <td class="">Last Mention:</td>
             <td>
-                <a href="<?php echo $alpha, $lastmention_user, "/post/", $lastmention_post_id; ?>" target='_blank'><?php echo $lastmention_ago; ?> ago</a> <i>(by <a href="http://alpha.jvimedia.org/<?php echo $lastmention_user; ?>" target='_blank'>@<?php echo $lastmention_user; ?>)</i></a>
+                <a data-toggle="modal" data-target="#LMModal"><?php echo $lastmention_ago; ?> ago</a> <i>(by <a href="<?php echo $alpha, $lastmention_user; ?>" target='_blank'>@<?php echo $lastmention_user; ?></i></a>)
             </td>
         </tr>           
         <?php } ?>
@@ -549,6 +560,118 @@
     </table>
 </div>
 
+<!-- First Post Modal -->
+<div class="modal fade" id="FPModal" tabindex="-1" role="dialog" aria-labelledby="FPModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="FPModal">@<?php echo $username; ?>'s First Post</h4>
+      </div>
+      <div class="modal-body">
+      	<blockquote><?php echo $EntityProcessor->PostProcessor($firstpost[0]); ?></blockquote>
+        <br>
+        <table class="table table-condensed">
+            <tr>
+                <td class="ui-helper-center"><i class="fa fa-star"></i> <?php echo $firstpost[0]['num_stars'] ?> stars</td>
+                <td class="ui-helper-center"><i class="fa fa-reply"></i> <?php echo $firstpost[0]['num_replies'] ?> replies</td>
+                <td class="ui-helper-center"><i class="fa fa-retweet"></i> <?php echo $firstpost[0]['num_reposts'] ?> reposts</td>
+            </tr>
+            <tr><td> </td><td> </td><td> </td></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" href="<?php echo $alpha, $firstpost_user, "/post/", $firstpost_post_id; ?>" target="_blank">View on Alpha</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- First Mention Modal -->
+<div class="modal fade" id="FMModal" tabindex="-1" role="dialog" aria-labelledby="FMModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="FMModal">@<?php echo $username; ?>'s First Mention</h4>
+      </div>
+      <div class="modal-body">
+      	<blockquote><?php echo $EntityProcessor->PostProcessor($firstmention[0]); ?></blockquote>
+        <br>
+        <table class="table table-condensed">
+            <tr>
+                <td class="ui-helper-center"><i class="fa fa-star"></i> <?php echo $firstmention[0]['num_stars'] ?> stars</td>
+                <td class="ui-helper-center"><i class="fa fa-reply"></i> <?php echo $firstmention[0]['num_replies'] ?> replies</td>
+                <td class="ui-helper-center"><i class="fa fa-retweet"></i> <?php echo $firstmention[0]['num_reposts'] ?> reposts</td>
+            </tr>
+            <tr><td> </td><td> </td><td> </td></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" href="<?php echo $alpha, $firstmention_user, "/post/", $firstmention_post_id; ?>" target="_blank">View on Alpha</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Last Post Modal -->
+<div class="modal fade" id="LPModal" tabindex="-1" role="dialog" aria-labelledby="LPModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="LPModal">@<?php echo $username; ?>'s Last Post</h4>
+      </div>
+      <div class="modal-body">
+      	<blockquote><?php echo $EntityProcessor->PostProcessor($lastpost[0]); ?></blockquote>
+        <br>
+        <table class="table table-condensed">
+            <tr>
+                <td class="ui-helper-center"><i class="fa fa-star"></i> <?php echo $lastpost[0]['num_stars'] ?> stars</td>
+                <td class="ui-helper-center"><i class="fa fa-reply"></i> <?php echo $lastpost[0]['num_replies'] ?> replies</td>
+                <td class="ui-helper-center"><i class="fa fa-retweet"></i> <?php echo $lastpost[0]['num_reposts'] ?> reposts</td>
+            </tr>
+            <tr><td> </td><td> </td><td> </td></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" href="<?php echo $alpha, $lastpost_user, "/post/", $lastpost_post_id; ?>" target="_blank">View on Alpha</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Last Mention Modal -->
+<div class="modal fade" id="LMModal" tabindex="-1" role="dialog" aria-labelledby="LMModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="LMModal">@<?php echo $username; ?>'s Last Mention</h4>
+      </div>
+      <div class="modal-body">
+        <blockquote><?php echo $EntityProcessor->PostProcessor($lastmention[0]); ?></blockquote>
+        <br>
+        <table class="table table-condensed">
+            <tr>
+                <td class="ui-helper-center"><i class="fa fa-star"></i> <?php echo $lastmention[0]['num_stars'] ?> stars</td>
+                <td class="ui-helper-center"><i class="fa fa-reply"></i> <?php echo $lastmention[0]['num_replies'] ?> replies</td>
+                <td class="ui-helper-center"><i class="fa fa-retweet"></i> <?php echo $lastmention[0]['num_reposts'] ?> reposts</td>
+            </tr>
+            <tr><td> </td><td> </td><td> </td></tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" href="<?php echo $alpha, $lastmention_user, "/post/", $lastmention_post_id; ?>" target="_blank">View on Alpha</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- PCA Modal -->
 <div class="modal fade" id="PCAModal" tabindex="-1" role="dialog" aria-labelledby="PCAModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -584,10 +707,10 @@
       <div class="modal-body">
 		<p>These statistics are gathered from Jason Irwin's <a href="http://jasonirwin.ca/2014/05/14/thinking-about-nicerank/" target="_blank">NiceRank</a>.</p>
 		<table class="table table-condensed">
-			<!-- <tr>
+			<tr>
 				<td>Robot_Posts:</td>
 				<td><?php echo $nice_rank_data[0]->stats->robo_posts; ?></td>
-			</tr> -->
+			</tr>
 			<tr>
 				<td>Posts:</td>
 				<td><?php echo $nice_rank_data[0]->stats->post_count; ?></td>
