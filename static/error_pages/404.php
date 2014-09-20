@@ -1,5 +1,5 @@
 <?php 
-	$title = "Purplapp - 404 Error"; 
+	$title = "Purplapp - Error 404"; 
 	
     require_once '../../phplib/ControlAppDotNet.php'; // get the EZAppDotNet.php library
 
