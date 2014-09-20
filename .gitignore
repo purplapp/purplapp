@@ -3,3 +3,5 @@ README.md
 /vendor/
 /bin/
 /.env
+/tests/_output/*
+/tests/*/*Tester.php

@@ -3,7 +3,10 @@
         "php": ">=5.3.20",
         "vlucas/phpdotenv": "1.0.6"
     },
-    "require-dev": { },
+    "require-dev": {
+        "codegyre/robo": "0.4.5",
+        "codeception/codeception": "~2.0.5"
+    },
     "config": {
         "bin-dir": "bin",
         "preferred-install": "dist"
