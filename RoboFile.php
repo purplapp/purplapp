@@ -46,18 +46,18 @@ class RoboFile extends TaskList
      * @desc watches the directory and reruns the tests when something is
      * changed
      */
-    public function tdd()
+    public function tdd($args = "")
     {
         $this->getServer()->background()->run();
 
-        $this->rebuildAndRunTests();
+        $this->rebuildAndRunTests($args);
 
         $self    = $this;
         $files   = __DIR__ . "/tests/";
         $lastMod = microtime(true);
 
         return $this->taskWatch()
-            ->monitor($files, function ($event) use ($self, $lastMod) {
+            ->monitor($files, function ($event) use ($args, $self, $lastMod) {
                 $path                 = (string) $event->getResource()->getResource();
 
                 $extension            = pathinfo($path, PATHINFO_EXTENSION);
@@ -73,7 +73,7 @@ class RoboFile extends TaskList
                     $lastMod = microtime(true);
                 }
 
-                return $self->getCodecept()->run();
+                return $self->getCodecept()->run($args);
             })
             ->run();
     }
