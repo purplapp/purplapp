@@ -1,0 +1,11 @@
+{
+    "require": {
+        "php": ">=5.3.20",
+        "vlucas/phpdotenv": "1.0.6"
+    },
+    "require-dev": { },
+    "config": {
+        "bin-dir": "bin",
+        "preferred-install": "dist"
+    }
+}

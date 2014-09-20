@@ -1,2 +1,5 @@
 phplib/PurplappSettings.php
 README.md
+/vendor/
+/bin/
+/.env

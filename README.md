@@ -14,13 +14,23 @@ Purplapp
 
 ## Configuration
 
-Put it on a server with PHP.
+```bash
+# clone the repo
+git clone git@github.com:purplapp/purplapp.git && cd purplapp
 
-That's pretty much it. Make sure that you change the `[APP_CLIENT_ID]` and `[APP_CLIENT_SECRET]`... You can change those settings in `phplib/PurplappSettings.php`.
+# Install composer. If you've got it already, skip this step
+curl -sS https://getcomposer.org/installer | php
 
+# install dependencies
+php composer.phar install
+
+# create a .env file with your ADN keys
+cp .env.example .env
+# edit that file
+$EDITOR .env
 ```
-$app_clientId     = '[APP_CLIENT_ID]';
-$app_clientSecret = '[APP_CLIENT_SECRET]';
-```
 
-You need to setup this information using data from from [your app listings](https://account.app.net/developer/apps/). 
+That's all the preparation it needs. Run your server of choice (`php -S
+localhost:4000` is an easy way of starting) and pull up the app in your browser.
+
+You need to setup this information using data from from [your app listings](https://account.app.net/developer/apps/).
