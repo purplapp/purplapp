@@ -1,5 +1,14 @@
 <?php
 
+$contributors = array(
+    "purplapp",
+    "charl",
+    "jvimedia",
+    "hu",
+    "remus",
+    "jessicadennis",
+);
+
 $I = new AcceptanceTester($scenario);
 
 // fix chaining w/ &&
@@ -25,7 +34,7 @@ $see([
     "Glyphicon Halflings", "glyphicons.com"
 ]);
 
-foreach (array("purplapp", "charl", "jvimedia", "hu", "remus", "jessicadennis") as $handle) {
+foreach ($contributors as $handle) {
     $I->seeLink("@{$handle}", "https://alpha.app.net/{$handle}");
 }
 
