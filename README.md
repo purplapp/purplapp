@@ -3,16 +3,21 @@ Purplapp
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
-##Features
-###Account Features
+## Features
+
+### Account Features
+
 - Find details on your account and your PCA Clubs.
 - Find the first mentions between two users.
 - Compare your followers with that of another user.
 
-###Broadcast Features
+### Broadcast Features
+
 - See the most recent 5 updates in any Broadcast channel.
 
-## Configuration
+## Setup
+
+### Getting the code
 
 ```bash
 # clone the repo
@@ -23,23 +28,51 @@ curl -sS https://getcomposer.org/installer | php
 
 # install dependencies
 php composer.phar install
-
-# create a .env file with your ADN keys
-cp .env.example .env
-# edit that file
-$EDITOR .env
 ```
 
-That's all the preparation it needs. Run your server of choice (`php -S
-localhost:4000` is an easy way of starting) and pull up the app in your browser.
+### Configuration
 
-You need to setup this information using data from from [your app listings](https://account.app.net/developer/apps/).
+You'll need to get or create a client ID and client secret. You can get this
+information from [your app listings](https://account.app.net/developer/apps/).
 
-## Tests
+App configuration is handled via a `.env` file in the root. Copy the
+`.env.example` file and fill in your details there.
 
-Tests are written using [Codeception][codecept], but are run through
-[RoboTask][robo]. Once you've run composer you can run `./bin/robo test` to run
-the full test suite.
+
+### Server
+
+Purplapp will run in most servers. It's currently deployed to an Apache
+instance, but nginx or the built-in PHP server should work just as well.
+
+## Development
+
+Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
+to find out which tasks are available, or edit the RoboFile.php directly. Here's
+a brief description of the most common tasks:
+
+### serve
+
+`./bin/robo serve` starts a development server running on <127.0.0.1:8083>.
+
+### test
+
+- `./bin/robo test` runs the full test suite, and handles spinning up the dev
+  server as above.
+
+- `./bin/robo test -- --debug` will run the test suite in debug mode.
+
+### tdd
+
+- `./bin/robo tdd` runs the full test suite whenever any of the source files
+  change.
+
+- `./bin/robo tdd -- --debug` will run the test suite in debug mode.
+
+
+## Testing
+
+Tests are written using the [Codeception][codecept] framework. Check the project
+website for more documentation.
 
 [codecept]: http://codeception.com/
 [robo]: http://robo.li/
