@@ -41,7 +41,7 @@
   <h1>Like what we've done?</h1>
 
   <p>
-    Check us out on <a href='http://github.com/purplapp'>Github</a>!
+    Check us out on <a href="https://github.com/purplapp">GitHub</a>!
     <br><br>
     It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently. You can help us improve ADN by <a href='./donate.php'>donating!</a> :)
     <br><br>
@@ -94,7 +94,7 @@
   <h1>Like what we've done?</h1>
 
   <p>
-    Check us out on <a href='http://github.com/purplapp'>Github</a>!
+    Check us out on <a href="https://github.com/purplapp">GitHub</a>!
     <br><br>
     It costs money to keep Purplapp going, and we want to continue bringing you new features we cannot currently. You can help us improve ADN by <a href='./donate.php'>donating!</a> :)
     <br><br>
