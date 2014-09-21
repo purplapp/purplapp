@@ -22,9 +22,15 @@ function twig()
         return isset($data["username"]) ? $data["username"] : null;
     });
 
-    $alphaDomain = new Twig_SimpleFunction("alpha_domain", function () {
-        return getenv("ALPHA_DOMAIN");
-    });
+    $getenv = function ($name, $var) {
+        return new Twig_SimpleFunction($name, function () use ($var) {
+            return getenv($var);
+        });
+    };
+
+    $alphaDomain  = $getenv("alpha_domain", "ALPHA_DOMAIN");
+    $supportEmail = $getenv("support_email", "SUPPORT_EMAIL");
+    $githubUrl    = $getenv("github_url", "GITHUB_URL");
 
     $hostName = new Twig_SimpleFilter("host_name", function ($url) {
         return parse_url($url, PHP_URL_HOST);
@@ -33,6 +39,8 @@ function twig()
     $twig->addFunction($isGuestFunc);
     $twig->addFunction($getUserHandleFunc);
     $twig->addFunction($alphaDomain);
+    $twig->addFunction($supportEmail);
+    $twig->addFunction($githubUrl);
 
     $twig->addFilter($hostName);
 
