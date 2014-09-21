@@ -1,0 +1,26 @@
+{% extends "user_first_mention.twig" %}
+
+{% block content %}
+<div class="col-md-12">
+    <!-- User Name -->
+    <div class="page-header">
+        <h1>
+            First Mention Lookup
+        </h1>
+    </div>
+
+    <!--Search Box-->
+    <form role="form">
+        <div class="form-group">
+            <label for="id1"><em>Enter the First User ID here:</em></label>
+            <input type="text" class="form-control" name="id1" id="id1" placeholder="User ID 1" value=""/>
+        </div>
+        <div class="form-group">
+            <label for="id2"><em>Enter the Second User ID here:</em></label>
+            <input type="text" class="form-control" name="id2" id="id2" placeholder="User ID 2" value=""/>
+        </div>
+        <p class="help-block">Does not work for accounts who have changed username.</p>
+        <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
+    </form>
+</div>
+{% endblock %}

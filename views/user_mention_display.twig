@@ -1,0 +1,47 @@
+{#
+expects the "mention" variable to be set, as well as the "sender" and
+"receiver"
+#}
+<div class='panel panel-default'>
+    <div class='panel-heading'>
+        <h3 class='panel-title'>
+            First mention of @{{ receiver }} by @{{ sender }}:
+        </h3>
+    </div>
+    <div class='panel-body'>
+        {% autoescape false %}
+            {{ mention.html }}
+
+            {% set img_data = false %}
+            {% for annotation in mention.annotations %}
+                {% if "net.app.core.oembed" in annotation.type %}
+                    {% set img_data = annotation.value.url %}
+                {% endif %}
+            {% endfor %}
+
+            {% if img_data %}
+                <p>
+                    <img src="{{ img_data }}" class="img-responsive img-rounded full-width">
+                </p>
+            {% endif %}
+        {% endautoescape %}
+    </div>
+
+    <div class='panel-footer'>
+        <a class="url" href="{{ mention.canonical_url }}" target="_blank">
+            <i class="fa fa-clock-o fa-fw"></i>
+            {{ mention.created_at|date("Y-m-d H:i:s") }}
+        </a>
+
+        {% if mention.reply_to is defined %}
+        <a class="url" href="{{ mention.canonical_url }}#{{ mention.reply_to }}" target="_blank">
+            <i class="fa fa-comments fa-fw"></i>
+        </a>
+        {% endif %}
+
+        <a class="url" href="{{ mention.source.link }}" target="_blank">
+            <i class="fa fa-external-link fa-fw"></i>
+            via {{ mention.source.name }}
+        </a>
+    </div>
+</div>

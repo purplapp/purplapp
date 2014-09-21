@@ -9,7 +9,7 @@ $user_params = array(
 
 // check that the user is signed in
 if (!$app->getSession()) {
-    echo render("unauth_message.twig");
+    echo render("unauth_message.twig", array("auth_url" => $app->getAuthUrl()));
     return;
 }
 
