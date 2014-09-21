@@ -2,6 +2,14 @@
 
 require __DIR__ . "/vendor/autoload.php";
 
+Dotenv::load(__DIR__);
+
+Dotenv::required(
+    array('CLIENT_ID', 'CLIENT_SECRET', 'ALPHA_DOMAIN', 'SUPPORT_EMAIL', 'GITHUB_URL')
+);
+
+require __DIR__ . "/settings.php";
+
 function app_dir()
 {
     return __DIR__;
@@ -21,10 +29,4 @@ function twig()
 {
     return Container::getTwig();
 }
-
-Dotenv::load(__DIR__);
-
-Dotenv::required(
-    array('CLIENT_ID', 'CLIENT_SECRET', 'ALPHA_DOMAIN', 'SUPPORT_EMAIL', 'GITHUB_URL')
-);
 
