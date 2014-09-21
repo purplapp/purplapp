@@ -6,16 +6,15 @@ require "{$rootDir}/vendor/autoload.php";
 
 Dotenv::load($rootDir);
 
-Dotenv::required(array('CLIENT_ID', 'CLIENT_SECRET'));
+Dotenv::required(
+    array('CLIENT_ID', 'CLIENT_SECRET', 'ALPHA_DOMAIN', 'SUPPORT_EMAIL', 'GITHUB_URL')
+);
 
-// required
 $app_clientId     = getenv("CLIENT_ID");
 $app_clientSecret = getenv("CLIENT_SECRET");
-
-// optional
-$alpha   = getenv("ALPHA_DOMAIN")  ?: "https://alpha.app.net/";             // stick with this unless you have an alternative Alpha install
-$support = getenv("SUPPORT_EMAIL") ?: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";   // add in your support email here
-$github  = getenv("GITHUB_URL")    ?: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";   // if your project is on Github, add that link in here
+$alpha            = getenv("ALPHA_DOMAIN");
+$support          = getenv("SUPPORT_EMAIL");
+$github           = getenv("GITHUB_URL");
 
 $app_redirectUri  = "http://{$_SERVER["HTTP_HOST"]}/phplib/PurplappCallback.php";
 
