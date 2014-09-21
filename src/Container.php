@@ -4,6 +4,8 @@ class Container
 {
     static $instances = array();
 
+    static $params = array();
+
     public static function getSess()
     {
         return static::get("sess") ?: static::set("sess", static::createSess());
@@ -14,12 +16,27 @@ class Container
         return static::get("twig") ?: static::set("twig", static::createTwig());
     }
 
-    private static function get($key)
+    public static function storeEnvParam($var)
     {
-        return isset(static::$instances[$key]) ? static::$instances[$key] : null;
+        static::storeParam($var, getenv($var));
     }
 
-    private static function set($key, $val)
+    public static function storeParam($key, $var)
+    {
+        static::$params[$key] = $var;
+    }
+
+    public static function getParam($key, $default = null)
+    {
+        return isset(static::$params[$key]) ? static::$params[$key] : $default;
+    }
+
+    public static function get($key, $default = null)
+    {
+        return isset(static::$instances[$key]) ? static::$instances[$key] : $default;
+    }
+
+    public static function set($key, $val)
     {
         return static::$instances[$key] = $val;
     }
