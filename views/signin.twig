@@ -1,0 +1,22 @@
+{% extends "document.twig" %}
+
+{% block title %}Sign in to Purplapp using App.net{% endblock %}
+
+{% block content %}
+<div class="container">
+    <p>
+    <a class="btn btn-social btn-adn" href="{{ auth_url }}">
+        <i class="fa fa-adn"></i>
+        Sign in with App.net
+    </a>
+    </p>
+    <p>
+        <i>
+            We ask to see basic information about you, and to allow us to send
+            and receive the following types of messages: <strong>Broadcast
+            Messages</strong>.<br>However, we do not send Broadcast messages
+        for you. That would be against our moral values.
+        </i>
+    </p>
+</div>
+{% endblock %}
