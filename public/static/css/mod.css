@@ -148,3 +148,7 @@ h2 {
 .ui-helper-center {
     text-align: center;
 }
+
+p {
+    margin-bottom: 1.45em;
+}
