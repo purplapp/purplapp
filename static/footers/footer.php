@@ -12,9 +12,10 @@
         </p>
       </div>
     </div>
+
     <!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://jvimedia.org/static/jquery/2.1.1/jquery-2.1.1.min.js"></script>
-    <script src="https://jvimedia.org/static/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -11,29 +11,24 @@
     <link rel="apple-touch-icon" href="/static/images/apple-touch-icon-precomposed.png"/>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://jvimedia.org/static/bootstrap-3.1.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://jvimedia.org/static/bootstrap-3.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
 
     <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://jvimedia.org/static/font-awesome-4.0.3/css/font-awesome.css">
-    <link rel="stylesheet" href="https://jvimedia.org/static/font-awesome-4.0.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css"/>
 
     <!-- Bootstrap Core Custom CSS -->
-    <link rel="stylesheet" href="https://jvimedia.org/static/bootstrap/css/bootstrap-fugue-min.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap-fugue.min.css"/>
 
     <!-- Bootstrap Social CSS -->
-    <link rel="stylesheet" href="https://jvimedia.org/static/bootstrap/css/bootstrap-social.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap-social.css"/>
 
     <!-- Modifications -->
     <link rel="stylesheet" href="/static/css/mod.css">
-    
-	<!-- Chart JS -->    
+
+    <!-- Chart JS -->
     <script type="text/javascript" src="/static/js/chart.js"></script>
 
-    <title><?php echo $title; ?></title>   
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <title><?php echo $title; ?></title>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
