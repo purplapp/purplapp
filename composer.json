@@ -9,8 +9,7 @@
         "codeception/codeception": "~2.0.5"
     },
     "autoload": {
-        "classmap": ["adnlib/"],
-        "files": ["src/session.php", "src/views.php"]
+        "classmap": ["adnlib/", "src/"]
     },
     "config": {
         "bin-dir": "bin",

@@ -9,9 +9,17 @@ function app_dir()
 
 function render($view, array $data = array())
 {
-    $twig = twig();
+    return Container::getTwig()->render($view, $data);
+}
 
-    return $twig->render($view, $data);
+function sess()
+{
+    return Container::getSess();
+}
+
+function twig()
+{
+    return Container::getTwig();
 }
 
 Dotenv::load(__DIR__);
