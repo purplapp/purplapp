@@ -1,6 +1,6 @@
 <?php
 
-$rootDir = __DIR__ . "/..";
+$rootDir = __DIR__ . "/../..";
 
 require "{$rootDir}/vendor/autoload.php";
 

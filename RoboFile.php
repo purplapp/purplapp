@@ -80,7 +80,7 @@ class RoboFile extends TaskList
 
     private function getServer()
     {
-        return $this->taskServer(self::SERVER_PORT)->dir(__DIR__);
+        return $this->taskServer(self::SERVER_PORT)->dir(__DIR__ . "/public");
     }
 
     public function rebuildTesters()
