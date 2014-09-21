@@ -8,7 +8,7 @@
 
   {% if is_guest() %}
   <p>
-    <a href="<?php echo $url; ?>" class="btn btn-lg btn-social btn-adn">
+    <a href="{{ app.getAuthUrl() }}" class="btn btn-lg btn-social btn-adn">
         <i class="fa fa-adn"></i> Sign in with App.net
     </a>
   </p>
