@@ -5,3 +5,4 @@ README.md
 /.env
 /tests/_output/*
 /tests/*/*Tester.php
+/tags
