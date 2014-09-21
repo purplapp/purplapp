@@ -52,7 +52,7 @@ a brief description of the most common tasks:
 
 ### serve
 
-`./bin/robo serve` starts a development server running on <127.0.0.1:8083>.
+- `./bin/robo serve` starts a development server running on <127.0.0.1:8083>.
 
 ### test
 
