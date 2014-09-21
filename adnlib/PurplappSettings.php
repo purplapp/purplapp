@@ -1,15 +1,5 @@
 <?php
 
-$rootDir = __DIR__ . "/../..";
-
-require "{$rootDir}/vendor/autoload.php";
-
-Dotenv::load($rootDir);
-
-Dotenv::required(
-    array('CLIENT_ID', 'CLIENT_SECRET', 'ALPHA_DOMAIN', 'SUPPORT_EMAIL', 'GITHUB_URL')
-);
-
 $app_clientId     = getenv("CLIENT_ID");
 $app_clientSecret = getenv("CLIENT_SECRET");
 $alpha            = getenv("ALPHA_DOMAIN");

@@ -1,0 +1,75 @@
+{% extends "document.twig" %}
+
+{% block title %}Account Tools - Purplapp{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <div class="page-header">
+        <h1>Tools for Accounts</h1>
+    </div>
+</div>
+
+{% if is_guest() %}
+<p class="lead">
+    Want to use any of these? Hit "Sign in" above and get started!
+</p>
+{% endif %}
+
+
+<div class="col-md-12">
+    <div class="jumbotron">
+        <h1>User Lookup Tool</h1>
+        <p>
+            We made a tool for looking up information on users. Enter in the
+            username and hit enter, and we'll give you some info on that user.
+        </p>
+
+        {% if not is_guest() %}
+        <p>
+            <a href="/account/user.php" class="btn btn-primary btn-lg" role="button">
+                Learn more
+            </a>
+        </p>
+        {% endif %}
+
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="jumbotron">
+        <h1>First Mention Tool</h1>
+        <p>
+            Ever wanted to see what the first mentions between two users were?
+            Well, we'll show you the first mentions of each user by the other.
+        </p>
+
+        {% if not is_guest() %}
+        <p>
+            <a href="/account/mention.php" class="btn btn-primary btn-lg" role="button">
+                Learn more
+            </a>
+        </p>
+        {% endif %}
+
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="jumbotron">
+        <h1>Following Comparison Tool</h1>
+        <p>
+            Want to follow more people? Enter in a username, and it'll show you
+            up to 20 randomly selected users which they follow, but you don't.
+        </p>
+
+        {% if not is_guest() %}
+        <p>
+            <a href="/account/follow_comparison.php" class="btn btn-primary btn-lg" role="button">
+                Learn more
+            </a>
+        </p>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

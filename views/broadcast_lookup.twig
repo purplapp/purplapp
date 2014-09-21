@@ -1,0 +1,161 @@
+{% extends "document.twig" %}
+
+{% block title %}Broadcast Channel Lookup for {{ channel_title }}{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+<!-- User Name -->
+<div class="page-header">
+    <h4>Broadcast Channel Lookup</h4>
+    <h1>
+        {% for annotation in channel_data.annotations %}
+            {% if "core.broadcast.metadata" in annotation.type %}
+                {{ annotation.value.title }}
+            {% endif %}
+        {% endfor %}
+
+        <small>
+            {% for annotation in channel_data.annotations %}
+                {% if "core.broadcast.freq" in annotation.type %}
+                    {{ annotation.value.avg_freq }}
+                {% endif %}
+            {% endfor %}
+
+            {% for annotation in channel_data.annotations %}
+                {% if "core.fallback_url" in annotation.type %}
+                    <a href="{{ annotation.value.url }}" class="label label-default" target="_blank">Subscribe</a>
+                {% endif %}
+            {% endfor %}
+        </small>
+    </h1>
+</div>
+
+{# channel logo image #}
+{% for annotation in channel_data.annotations %}
+    {% if "core.broadcast.icon" in annotation.type %}
+        {% set channel_icon = annotation.value.url %}
+        <p>
+            <img src="{{ channel_icon }}" alt="avatar" class="img-rounded" width="120" height="120">
+        </p>
+    {% endif %}
+{% endfor %}
+
+{# channel cover image #}
+{% for annotation in channel_data.annotations %}
+    {% if "core.broadcast.cover" in annotation.type %}
+        {% set channel_cover = annotation.value.url %}
+        <div class="cover">
+            <img src="{{ channel_cover }}" alt="cover" height="120">
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% if channel_logo or channel_cover %}
+    <br><br>
+{% endif %}
+
+{# search box #}
+<div class="row">
+    <form role="form" class="form-inline">
+        <div class="col-lg-3">
+            <p><em>Enter the Channel ID here:</em></p>
+            <div class="input-group">
+                <input type="text" class="form-control" name="id" id="id" placeholder="Channel ID" value="{{ channel_id }}">
+                <span class="input-group-btn">
+                    <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+
+<br>
+
+{# Channel description #}
+<div>
+    {% for annotation in channel_data.annotations %}
+        {% if "core.broadcast.metadata" in annotation.type %}
+            {% set channel_description = annotation.value.description %}
+            {{ channel_description }}
+        {% endif %}
+    {% endfor %}
+
+    <br><br>
+</div>
+
+<div class="col-md-4">
+    <table class="table">
+        <tr>
+            <td>Messages:</td>
+            <td>{{ channel_data.counts.messages }}</td>
+        </tr>
+
+        {% if channel_data.counts.subscribers %}
+            <tr>
+                <td>Subscribers:</td>
+                <td>{{ channel_data.counts.subscribers }}</td>
+            </tr>
+        {% endif %}
+
+        <tr>
+            <td>Owner:</td>
+            <td>
+                <a href="{{ alpha_domain() ~ channel_data.owner.username }}">
+                    @{{ channel_data.owner.username }}
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="col-md-8">
+    {% for messages in channel_messages %}
+        {% if messages.is_deleted %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Deleted Message
+                </div>
+            </div>
+        {% else %}
+            <div class='panel panel-default'>
+                {% for message_annotations in messages.annotations %}
+                    {% if "core.broadcast.message.metadata" in message_annotations.type %}
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                {{ message_annotations.value.subject }}
+                            </h3>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="panel-body">
+                    {% autoescape false %}{{ messages.html }}{% endautoescape %}
+
+                    {% set img_data = false %}
+                    {% for annotation in messages.annotations %}
+                        {% if annotation.type is same as("net.app.core.oembed") %}
+                            {% set img_data = annotation.value.url %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if img_data %}
+                        <img src="{{ img_data }}" class="img-responsive img-rounded full-width">
+                    {% endif %}
+                </div>
+                <div class="panel-footer">
+
+                    {{ messages.created_at|date("Y-m-d H:i:s") }}
+                    {% for message_annotations in messages.annotations %}
+                        {% if "core.crosspost" in message_annotations.type %}
+                            &nbsp; - &nbsp;
+                            <a class="url" href="{{ message_annotations.value.canonical_url }}">
+                                Read more on {{ message_annotations.value.canonical_url|host_name }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

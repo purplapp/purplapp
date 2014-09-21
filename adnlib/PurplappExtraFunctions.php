@@ -2,7 +2,7 @@
 	class PostClubs {
 		public $user_posts = null;
 		public $club_count = null;
-	
+
 		public $clubs = array(
 			array("name" => "#RollClub", "url" => "RollClub", "nicecount" => "500", "count" => "500")
 			,array("name" => "#CrumpetClub", "url" => "CrumpetClub", "nicecount" => "1 000", "count" => "1000")
@@ -40,24 +40,24 @@
 			,array("name" => "#GatesClub", "url" => "GatesClub", "nicecount" => "640 000", "count" => "640000")
 			,array("name" => "#JoyLuckClub", "url" => "JoyLuckClub", "nicecount" => "888 000", "count" => "888000")
 			,array("name" => "#MillionairesClub", "url" => "MillionairesClub", "nicecount" => "1 000 000", "count" => "1000000")
-		); 
-	
+		);
+
 		public $memberclubs = array();
-	
+
 		public function setUserPost($get) {
 			$this->user_posts = $get;
 		}
-		
+
 		public function setUserID($get) {
 			$this->user_id = $get;
 			$user_id = $this->user_id;
 			$this->user_id_formatted = number_format($user_id, 0, '.', ' ');
 		}
-		
+
 		public function setAlpha($get) {
 			$this->alpha = $get;
 		}
-	
+
 		public function getClubs() {
 			$orphanblack = true;
 			foreach($this->clubs as $club) {
@@ -71,7 +71,7 @@
 				}
 			}
 		}
-		
+
 		public function nextClubs() {
 			$orphanblack = true;
 			foreach($this->clubs as $club) {
@@ -82,92 +82,92 @@
 					}
 					$until = $club['count'] - $this->user_posts;
 					$this->nextclubs[] = "<a href='{$this->alpha}hashtags/{$club['url']}' target='_blank'>{$club['name']}</a> <i>({$club['nicecount']} posts - in {$until} posts)</i>";
-				}	
-			}	
+				}
+			}
 		}
 	}
-	
+
 	class PostData {
-	
-		/** 
-			* A sweet interval formatting, will use the two biggest interval parts. 
-			* On small intervals, you get minutes and seconds. 
-			* On big intervals, you get months and days. 
-			* Only the two biggest parts are used. 
-			* 
-			* @param DateTime $start 
-			* @param DateTime|null $end 
-			* @return string 
-		*/ 
-		
-		public function formatDateDiff($start, $end=null) { 
-		    if(!($start instanceof DateTime)) { 
-		        $start = new DateTime($start); 
-		    } 
-		    
-		    if($end === null) { 
-		        $end = new DateTime(); 
-		    } 
-		    
-		    if(!($end instanceof DateTime)) { 
-		        $end = new DateTime($start); 
-		    } 
-		    
-		    $interval = $end->diff($start); 
-		    $doPlural = function($nb,$str){return $nb>1?$str.'s':$str;}; // adds plurals 
-		    
-		    $format = array(); 
-		    if($interval->y !== 0) { 
-		        $format[] = "%y ".$doPlural($interval->y, "year"); 
-		    } 
-		    if($interval->m !== 0) { 
-		        $format[] = "%m ".$doPlural($interval->m, "month"); 
-		    } 
-		    if($interval->d !== 0) { 
-		        $format[] = "%d ".$doPlural($interval->d, "day"); 
-		    } 
-		    if($interval->h !== 0) { 
-		        $format[] = "%h ".$doPlural($interval->h, "hour"); 
-		    } 
-		    if($interval->i !== 0) { 
-		        $format[] = "%i ".$doPlural($interval->i, "minute"); 
-		    } 
-		    if($interval->s !== 0) { 
-		        if(!count($format)) { 
-		            return "less than a minute"; 
-		        } else { 
-		            $format[] = "%s ".$doPlural($interval->s, "second"); 
-		        } 
-		    } 
-		    
-		    // We use the two biggest parts 
-		    if(count($format) > 1) { 
-		        $format = array_shift($format)." and ".array_shift($format); 
-		    } else { 
-		        $format = array_pop($format); 
-		    } 
-		    
-		    // Prepend 'since ' or whatever you like 
-		    return $interval->format($format); 
-		} 
+
+		/**
+			* A sweet interval formatting, will use the two biggest interval parts.
+			* On small intervals, you get minutes and seconds.
+			* On big intervals, you get months and days.
+			* Only the two biggest parts are used.
+			*
+			* @param DateTime $start
+			* @param DateTime|null $end
+			* @return string
+		*/
+
+		public function formatDateDiff($start, $end=null) {
+		    if(!($start instanceof DateTime)) {
+		        $start = new DateTime($start);
+		    }
+
+		    if($end === null) {
+		        $end = new DateTime();
+		    }
+
+		    if(!($end instanceof DateTime)) {
+		        $end = new DateTime($end);
+		    }
+
+		    $interval = $end->diff($start);
+		    $doPlural = function($nb,$str){return $nb>1?$str.'s':$str;}; // adds plurals
+
+		    $format = array();
+		    if($interval->y !== 0) {
+		        $format[] = "%y ".$doPlural($interval->y, "year");
+		    }
+		    if($interval->m !== 0) {
+		        $format[] = "%m ".$doPlural($interval->m, "month");
+		    }
+		    if($interval->d !== 0) {
+		        $format[] = "%d ".$doPlural($interval->d, "day");
+		    }
+		    if($interval->h !== 0) {
+		        $format[] = "%h ".$doPlural($interval->h, "hour");
+		    }
+		    if($interval->i !== 0) {
+		        $format[] = "%i ".$doPlural($interval->i, "minute");
+		    }
+		    if($interval->s !== 0) {
+		        if(!count($format)) {
+		            return "less than a minute";
+		        } else {
+		            $format[] = "%s ".$doPlural($interval->s, "second");
+		        }
+		    }
+
+		    // We use the two biggest parts
+		    if(count($format) > 1) {
+		        $format = array_shift($format)." and ".array_shift($format);
+		    } else {
+		        $format = array_pop($format);
+		    }
+
+		    // Prepend 'since ' or whatever you like
+		    return $interval->format($format);
+		}
 	}
-	
+
 	class BirthdayData {
 		public function isValidTimeStamp($timestamp){
-		    return ((string) (int) $timestamp === $timestamp) 
+		    return ((string) (int) $timestamp === $timestamp)
 		        && ($timestamp <= PHP_INT_MAX)
 		        && ($timestamp >= ~PHP_INT_MAX);
 		}
-		
-		public function strReplaceAssoc(array $replace, $subject) { 
-		   return str_replace(array_keys($replace), array_values($replace), $subject);    
-		} 
-		
+
+		public function strReplaceAssoc(array $replace, $subject) {
+		   return str_replace(array_keys($replace), array_values($replace), $subject);
+		}
+
 		public function birthdayDateConverstion($birthday) {
-			$replace = array( 
-				'xxxx' => '1970', 
-			); 
-			
+			$replace = array(
+				'xxxx' => '1970',
+			);
+
 			if (strpos($birthday,'xxx') !== false) {
 			    $birthday_changed = $this->strReplaceAssoc($replace,$birthday);
 			    $flag = true;
@@ -175,23 +175,23 @@
 				$birthday_changed = $birthday;
 				$flag = false;
 			}
-					
+
 			// convert the changed birthday (if necessary) into unix timestamp
 			$unix_birthday_changed = strtotime($birthday_changed);
 			$unix_birthday_changed_integer = (string) $unix_birthday_changed;
-			
+
 			// check if it is a valid unix timestamp or not
 			$unix_yes_no = $this->isValidTimeStamp($unix_birthday_changed_integer);
-			
+
 			if ($unix_yes_no){
 				if ($flag == false) {
 					$date_changed = date("jS F Y", $unix_birthday_changed);
 				} else {
-					$date_changed = date("jS F ", $unix_birthday_changed);		
+					$date_changed = date("jS F ", $unix_birthday_changed);
 				}
-				return $date_changed;		
+				return $date_changed;
 			} else {
-				return $birthday_changed;		
+				return $birthday_changed;
 			}
 		}
 	}
@@ -225,13 +225,13 @@
 
 		public function PostProcessor($payload) {
 			$html = htmlentities($payload['text'], 0, 'UTF-8');
-				
+
 			// Process Hashtags
 			foreach ($payload['entities']['hashtags'] as $entity) {
 				$entityText = mb_substr($payload['text'], $entity['pos'], $entity['len']);
 				$html = preg_replace('/'.$entityText.'\b/', '<a href="https://alpha.app.net/hashtags/'.$entity['name'].'" target="_blank">'.$entityText.'</a>', $html, 1);
 			}
-				
+
 			// Process Links
 			$processed = array();
 			foreach ($payload['entities']['links'] as $entity) {
@@ -241,7 +241,7 @@
 				$charAfterText = mb_substr($payload['text'], $entity['pos']+$entity['len'], 1);
 				$html = str_replace($entityText, '<a href="'.htmlspecialchars($entity['url']).'" target="_blank">'.$entityText.'</a>', $html);
 			}
-				
+
 			// Process User Mentions
 			foreach ($payload['entities']['mentions'] as $entity) {
 				//$userUrl = isset($entity['x_user_url']) ? $entity['x_user_url'] : '/redirectToUser/'.$entity['name'];
@@ -249,7 +249,7 @@
 				$entityText = mb_substr($payload['text'], $entity['pos'], $entity['len']);
 				$html = preg_replace('/'.$entityText.'\b/', '<a href="'.$userUrl.'" target="_blank">'.$entityText.'</a>', $html, 1);
 			}
-				
+
 			return str_replace("\n", '<br />', $html);
 		}
 	}

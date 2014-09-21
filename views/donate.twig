@@ -1,0 +1,29 @@
+{% extends "document.twig" %}
+
+{% block title %}Donate to Purplapp{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <h1>Like what we've done?</h1>
+    <p>
+        It costs money to keep Purplapp going, and we want to continue bringing
+        you new features we cannot currently. You can help us improve ADN by
+        donating! :)
+    </p>
+
+    <h4>Paypal:</h4>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="GB4MD82Y2XZYN">
+        <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
+        <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+    </form>
+
+    <h4>Flattr:</h4>
+    <script id='fbz61pq'>
+        (function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=jvimedia&button=compact&url=http%3A%2F%2Fpurplapp.eu';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbz61pq');
+    </script>
+
+</div>
+
+{% endblock %}
