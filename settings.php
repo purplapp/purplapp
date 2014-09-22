@@ -1,7 +1,6 @@
 <?php
 
 Container::storeEnvParam("CLIENT_ID");
-Container::storeEnvParam("CLIENT_ID");
 Container::storeEnvParam("CLIENT_SECRET");
 Container::storeEnvParam("ALPHA_DOMAIN");
 Container::storeEnvParam("SUPPORT_EMAIL");

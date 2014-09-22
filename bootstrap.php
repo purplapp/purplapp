@@ -1,32 +1,18 @@
 <?php
 
-require __DIR__ . "/vendor/autoload.php";
-
-Dotenv::load(__DIR__);
-
-Dotenv::required(
-    array('CLIENT_ID', 'CLIENT_SECRET', 'ALPHA_DOMAIN', 'SUPPORT_EMAIL', 'GITHUB_URL')
-);
-
-require __DIR__ . "/settings.php";
+use Purplapp\Application;
 
 function app_dir()
 {
     return __DIR__;
 }
 
-function render($view, array $data = array())
-{
-    return Container::getTwig()->render($view, $data);
-}
+require app_dir() . "/vendor/autoload.php";
 
-function sess()
-{
-    return Container::getSess();
-}
+$app = new Application();
 
-function twig()
-{
-    return Container::getTwig();
-}
+require app_dir() . "/start/init.php";
+require app_dir() . "/start/providers.php";
+require app_dir() . "/start/routes.php";
 
+return $app;

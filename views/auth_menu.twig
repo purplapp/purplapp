@@ -2,10 +2,10 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">@{{ user_handle() }} <b class="caret"></b></a>
 
     <ul class="dropdown-menu">
-        <li><a href="{{ alpha_domain() ~ user_handle() }}" target="_blank"><i class="fa fa-adn"></i> Alpha Profile</a></li>
+        <li><a href="{{ alpha_domain ~ user.username }}" target="_blank"><i class="fa fa-adn"></i> Alpha Profile</a></li>
 
         <!-- <li class="divider"></li> -->
 
-        <li><a href="/signout.php"><i class="fa fa-sign-out"></i> Sign out</a></li>
+        <li><a href="/signout"><i class="fa fa-sign-out"></i> Sign out</a></li>
     </ul>
 </li>
