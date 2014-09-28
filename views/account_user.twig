@@ -8,21 +8,21 @@
     <div class="page-header">
         <h4>User Lookup</h4>
         <h1>
-            {{ data.name|e }}
+            {{ user.name|e }}
           <small>
-              <a href="{{ alpha_domain() ~ data.username }}" target="_blank">
-                  @{{ data.username }}
+              <a href="{{ alpha_domain ~ user.username }}" target="_blank">
+                  @{{ user.username }}
               </a>
           </small>
         </h1>
     </div>
 
     <!--Avatar Image-->
-    <img class="avatar" src="https://api.app.net/users/{{ data.id }}/avatar?h=180" alt="avatar">
+    <img class="avatar" src="{{ user.avatar_image.url }}?h=180" alt="avatar">
 
     <!--Cover Image-->
     <div class="cover">
-        <img class="cover" src="https://api.app.net/users/{{ data.id }}/cover?h=180" alt="cover">
+        <img class="cover" src="{{ user.cover_image.url }}?h=180" alt="cover">
     </div>
 
     <br><br>
@@ -32,7 +32,7 @@
         <form role="form" class="form-inline">
             <div class="col-lg-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="id" id="id" value="{{ username }}">
+                    <input type="text" class="form-control" name="id" id="id" value="{{ user.username }}">
                     <span class="input-group-btn">
                         <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
                     </span>
@@ -46,7 +46,7 @@
     {# bio #}
     <p class="bio">
         {% autoescape false %}
-            {{ processed_bio|default("<i>This user has got no bio set</i>") }}
+            {{ user.htmlBio|default("<i>This user has got no bio set</i>") }}
         {% endautoescape %}
     </p>
 </div>
@@ -61,89 +61,89 @@
         <tr>
             <td>Posts:</td>
             <td>
-                <a class="url" href="{{ alpha_domain() ~ data.username }}/" target="_blank">
-                    {{ data.counts.posts }}
+                <a class="url" href="{{ alpha_domain ~ user.username }}/" target="_blank">
+                    {{ user.counts.posts }}
                 </a>
-                <i>(average {{ (data.counts.posts / interval.days)|round(2) }} per day)</i>
+                <i>(average {{ (user.counts.posts / user.timeSinceCreated.days)|round(2) }} per day)</i>
             </td>
         </tr>
         <tr>
             <td>Starred:</td>
             <td>
-                <a class="url" href="{{ alpha_domain() ~ data.username}}/stars/" target="_blank">
-                    {{ data.counts.stars }}
+                <a class="url" href="{{ alpha_domain ~ user.username}}/stars/" target="_blank">
+                    {{ user.counts.stars }}
                 </a>
-                <i>(average {{ (data.counts.stars / interval.days)|round(2) }} per day)</i>
+                <i>(average {{ (user.counts.stars / user.timeSinceCreated.days)|round(2) }} per day)</i>
             </td>
         </tr>
 
         <tr>
             <td>Following:</td>
             <td>
-                <a class="url" href="{{ alpha_domain() ~ data.username }}/following" target="_blank">
-                    {{ data.counts.following }}
+                <a class="url" href="{{ alpha_domain ~ user.username }}/following" target="_blank">
+                    {{ user.counts.following }}
                 </a>
-                {% if username is not same as(auth_username) %}
-                    <i>({% if data.follows_you %}follows you{% else %}does not follow you{% endif %})</i>
+                {% if user.username is not same as(user_handle()) %}
+                    <i>({% if user.follows_you %}follows you{% else %}does not follow you{% endif %})</i>
                 {% endif %}
             </td>
         </tr>
         <tr>
             <td>Followers:</td>
             <td>
-                <a class="url" href="{{ alpha_domain() ~ data.username }}/followers/" target="_blank">
-                    {{ data.counts.followers }}
+                <a class="url" href="{{ alpha_domain ~ user.username }}/followers/" target="_blank">
+                    {{ user.counts.followers }}
                 </a>
-                {% if username is not same as(auth_username) %}
-                    <i>({% if data.you_follow %}you follow{% else %}you don't follow{% endif %})</i>
+                {% if user.username is not same as(user_handle()) %}
+                    <i>({% if user.you_follow %}you follow{% else %}you don't follow{% endif %})</i>
                 {% endif %}
             </td>
         </tr>
         <tr>
             <td>Account Type:</td>
-            <td>{{ data.type|capitalize }}</td>
+            <td>{{ user.type|capitalize }}</td>
         </tr>
         <tr>
             <td>Time-zone:</td>
-            <td>{{ data.timezone }}</td>
+            <td>{{ user.timezone }}</td>
         </tr>
         <tr>
             <td>Language:</td>
-            <td>{{ data.locale }}</td>
+            <td>{{ user.locale }}</td>
         </tr>
         <tr>
             <td>User Number:</td>
-            <td>{{ data.id }}</td>
+            <td>{{ user.id }}</td>
         </tr>
         <tr>
             <td>Joined:</td>
             <td>
-                {{ data.created_at|date("jS F Y") }}
-                <i>({{ posts.formatDateDiff(data.created_at, "now") }} ago)</i>
+                {{ user.createdAt.format("jS F Y") }}
+                <i>({{ user.timeSinceCreated.diffForHumans() }} ago)</i>
             </td>
         </tr>
 
         {# verified stuff #}
         {% set did_display_annotations = false %}
-        {% if data.verified_link and data.annotations %}
+        {% if user.verified_link and user.annotations %}
             <tr>
                 <td><h4>User Data</h4></td>
                 <td></td>
             </tr>
 
-            {% if data.verified_link %}
+            {% if user.verified_link %}
                 {% set did_display_annotations = true %}
                 <tr>
                     <td>Verified Domain:</td>
                     <td>
-                        <a href="{{ data.verified_link }}" target="_blank">
-                            {{ data.verified_domain }}
+                        <a href="{{ user.verified_link }}" target="_blank">
+                            {{ user.verified_domain }}
                         </a>
                     </td>
                 </tr>
             {% endif %}
 
-            {% for annotation in data.annotations %}
+            {% for annotation in user.annotations %}
                 {% if "core.directory.blog" in annotation.type %}
                     {% set did_display_annotations = true %}
                     <tr>
@@ -157,7 +157,7 @@
                 {% endif %}
             {% endfor %}
 
-            {% for annotation in data.annotations %}
+            {% for annotation in user.annotations %}
                 {% if "core.directory.facebook" in annotation.type %}
                     {% set did_display_annotations = true %}
                     <tr>
@@ -170,7 +170,7 @@
                     </tr>
                 {% endif %}
             {% endfor %}
-            {% for annotation in data.annotations %}
+            {% for annotation in user.annotations %}
                 {% if "core.directory.twitter" in annotation.type %}
                     {% set did_display_annotations = true %}
                     <tr>
@@ -183,7 +183,7 @@
                     </tr>
                 {% endif %}
             {% endfor %}
-            {% for annotation in data.annotations %}
+            {% for annotation in user.annotations %}
                 {% if "appnetizens.userinput.gender" in annotation.type %}
                     {% set did_display_annotations = true %}
                     <tr>
@@ -193,7 +193,7 @@
                 {% endif %}
             {% endfor %}
 
-            {% for annotation in data.annotations %}
+            {% for annotation in user.annotations %}
                 {% if "appnetizens.userinput.birthday" in annotation.type %}
                     {% set did_display_annotations = true %}
                     <tr>
@@ -219,25 +219,19 @@
 
 <div class="col-md-6">
     <table class="table table-condensed">
-        {% if username is not same as(auth_username) %}
+        {% if user.username is not same as(user_handle()) %}
             <tr>
                 <td><h4>Hiding</h4></td>
                 <td></td>
             <tr>
                 <td>Muted:</td>
                 <td>
-                    {{ data.you_muted ? "Yes" : "No" }}
+                    {{ user.you_muted ? "Yes" : "No" }}
                 </td>
             </tr>
         {% endif %}
 
-        {% if data.counts.posts > 0 %}
-            {% set first_post = app.getUserPosts(user_number, {count: -1, include_deleted: false})|first %}
-            {% set last_post = app.getUserPosts(user_number, {count: 1, include_deleted: false})|last %}
-
-            {% set first_mention = app.getUserMentions(user_number, {count: -1})|first %}
-            {% set last_mention = app.getUserMentions(user_number, {count: 1})|last %}
-
+        {% if user.counts.posts > 0 %}
             <tr>
                 <td><h4>Post Data</h4></td>
                 <td></td>
@@ -261,7 +255,7 @@
                         </a>
                         <i>
                             (by
-                            <a href="{{ alpha_domain() ~ first_mention.user.username }}" target="_blank">
+                            <a href="{{ alpha_domain ~ first_mention.user.username }}" target="_blank">
                                 @{{ first_mention.user.username }}
                             </a>
                             )
@@ -274,7 +268,7 @@
                 <td>Last Post:</td>
                 <td>
                     <a data-toggle="modal" data-target="#LPModal">
-                        {{ posts.formatDateDiff(last_post.created_at, "now") }} ago
+                        {{ last_post.timeSinceCreated().diffForHumans() }} ago
                     </a>
                 </td>
             </tr>
@@ -284,11 +278,11 @@
                     <td>Last Mention:</td>
                     <td>
                         <a data-toggle="modal" data-target="#LMModal">
-                            {{ posts.formatDateDiff(last_mention.created_at, "now") }} ago
+                            {{ last_mention.timeSinceCreated().diffForHumans() }} ago
                         </a>
                         <i>
                             (by
-                            <a href="{{ alpha_domain() ~ last_mention.user.username }}" target='_blank'>
+                            <a href="{{ alpha_domain ~ last_mention.user.username }}" target='_blank'>
                                 @{{ last_mention.user.username }}
                             </a>
                             )
@@ -299,7 +293,6 @@
         {% endif %}
         {# end the post count > 0 conditional #}
 
-        {% set nice_rank = nice_rank_data|first %}
         {% if nice_rank %}
             <tr>
                 <td><h4>Statistics</h4></td>
@@ -314,7 +307,7 @@
             <tr>
                 <td>Real Person:</td>
                 <td>
-                    {{ nice_rank.account.real_person ? "Yes" : "No" }}
+                    {{ nice_rank.account.is_human ? "Yes" : "No" }}
                 </td>
             </tr>
             <tr>
@@ -327,7 +320,7 @@
             </tr>
         {% endif %}
 
-        {% if username is not same as(auth_username) %}
+        {% if user.username is not same as(user_handle()) %}
             <tr>
                 <td><h4>Spam User Check</h4></td>
                 <td></td>
@@ -335,7 +328,7 @@
             <tr>
                 <td>Spam User:</td>
                 <td>
-                    {% set posts_per_day = (data.counts.posts / interval.days)|round(2) %}
+                    {% set posts_per_day = (user.counts.posts / user.timeSinceCreated().days)|round(2) %}
                     {{ posts_per_day < 200 ? "No" : "Yes" }}
                 </td>
             </tr>
@@ -343,11 +336,11 @@
                 <tr>
                     <td>Correctly Marked:</td>
                     <td>
-                        {% if data.type is same as("human") %}
+                        {% if user.type is same as("human") %}
                             No (marked as human)
-                        {% elseif data.type is same as("feed") %}
+                        {% elseif user.type is same as("feed") %}
                             Yes (marked as a feed)
-                        {% elseif data.type is same as("bot") %}
+                        {% elseif user.type is same as("bot") %}
                             Yes (marked as a bot)
                         {% endif %}
                     </td>
@@ -355,7 +348,7 @@
             {% endif %}
         {% endif %}
 
-        {% if clubs.memberclubs and data.type is same as("human") %}
+        {% if user.clubs.memberClubs and user.type is same as("human") %}
             <tr>
                 <td><h4>User PCA Clubs</h4></td>
                 <td></td>
@@ -364,21 +357,21 @@
                 <td>Most Recent:</td>
                 <td>
                     {% autoescape false %}
-                        {{ user_clubs|last }}
+                        {{ (user.clubs.memberClubs|last).html() }}
                     {% endautoescape %}
                 </td>
             </tr>
             <tr>
                 <td>Number of Clubs:</td>
                 <td>
-                    {{ user_clubs|length }} - <a data-toggle="modal" data-target="#PCAModal">Show All Clubs</a>
+                    {{ user.clubs.memberClubs|length }} - <a data-toggle="modal" data-target="#PCAModal">Show All Clubs</a>
                 </td>
             </tr>
             <tr>
                 <td>Next Club:</td>
                 <td>
                     {% autoescape false %}
-                        {{ next_clubs|first }}
+                        {{ (user.clubs.nextClubs|first).html() }}
                     {% endautoescape %}
                 </td>
             </tr>
@@ -401,13 +394,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="FPModal">@{{ username }}'s First Post</h4>
+                <h4 class="modal-title" id="FPModal">@{{ user.username }}'s First Post</h4>
             </div>
 
             <div class="modal-body">
                 <blockquote>
                     {% autoescape false %}
-                        {{ EntityProcessor.PostProcessor(first_post) }}
+                        {{ first_post.html() }}
                     {% endautoescape %}
                 </blockquote>
                 <br>
@@ -435,7 +428,7 @@
             </div>
 
             <div class="modal-footer">
-                <a class="btn" href="{{ alpha_domain() ~ first_post.user.username}}/posts/{{ first_post.id }}" target="_blank">
+                <a class="btn" href="{{ alpha_domain ~ first_post.user.username}}/posts/{{ first_post.id }}" target="_blank">
                     View on Alpha
                 </a>
 
@@ -451,12 +444,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="FMModal">@{{ username }}'s First Mention</h4>
+                <h4 class="modal-title" id="FMModal">@{{ user.username }}'s First Mention</h4>
             </div>
             <div class="modal-body">
                 <blockquote>
                     {% autoescape false %}
-                        {{ EntityProcessor.PostProcessor(first_mention) }}
+                        {{ first_mention.html() }}
                     {% endautoescape %}
                 </blockquote>
                 <br>
@@ -484,7 +477,7 @@
             </div>
 
             <div class="modal-footer">
-                <a class="btn" href="{{ alpha_domain() ~ first_mention.user.username }}/post/{{ first_mention.id }}" target="_blank">
+                <a class="btn" href="{{ alpha_domain ~ first_mention.user.username }}/post/{{ first_mention.id }}" target="_blank">
                     View on Alpha
                 </a>
 
@@ -500,12 +493,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="LPModal">@{{ username }}'s Last Post</h4>
+                <h4 class="modal-title" id="LPModal">@{{ user.username }}'s Last Post</h4>
             </div>
             <div class="modal-body">
                 <blockquote>
                     {% autoescape false %}
-                        {{ EntityProcessor.PostProcessor(last_post) }}
+                        {{ last_post.html() }}
                     {% endautoescape %}
                 </blockquote>
                 <br>
@@ -532,7 +525,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <a class="btn" href="{{ alpha_domain() ~ last_post.user.username }}/post/{{ last_post.id }}" target="_blank">
+                <a class="btn" href="{{ alpha_domain ~ last_post.user.username }}/post/{{ last_post.id }}" target="_blank">
                     View on Alpha
                 </a>
 
@@ -548,12 +541,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="LMModal">@{{ username }}'s Last Mention</h4>
+                <h4 class="modal-title" id="LMModal">@{{ user.username }}'s Last Mention</h4>
             </div>
             <div class="modal-body">
                 <blockquote>
                     {% autoescape false %}
-                        {{ EntityProcessor.PostProcessor(last_mention) }}
+                        {{ last_mention.html() }}
                     {% endautoescape %}
                 </blockquote>
                 <br>
@@ -581,7 +574,7 @@
             </div>
 
             <div class="modal-footer">
-                <a class="btn" href="{{ alpha_domain() ~ last_mention.user.username }}/post/{{ last_mention.id }}" target="_blank">
+                <a class="btn" href="{{ alpha_domain ~ last_mention.user.username }}/post/{{ last_mention.id }}" target="_blank">
                     View on Alpha
                 </a>
 
@@ -603,7 +596,7 @@
                 <ul class='list-unstyled'>
                     {% autoescape false %}
                         {% for club in clubs.memberclubs %}
-                            <li>{{ club }}</li>
+                            <li>{{ club.html() }}</li>
                         {% endfor %}
                     {% endautoescape %}
                 </ul>
