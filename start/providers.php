@@ -2,7 +2,9 @@
 
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\MonologServiceProvider;
-use Purplapp\Adn\Client;
+use Purplapp\Adn\NiceRankAwareClient;
+
+use GuzzleHttp\Client as GuzzleClient;
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
@@ -86,10 +88,12 @@ $app["adn.access_token"] = function () use ($app) {
 $app["adn.client"] = function () use ($app) {
     $settings = $app["adn.settings"];
 
-    return new Client(
+    return new NiceRankAwareClient(
         $settings["CLIENT_ID"],
         $settings["CLIENT_SECRET"],
         $settings["REDIRECT_URL"],
-        $app["monolog"]
+        $app["monolog"],
+        new GuzzleClient(),
+        $app["session"]->get("access_token")
     );
 };
