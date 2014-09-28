@@ -1,8 +1,6 @@
 <?php namespace Purplapp\Adn;
 
-use GuzzleHttp\Message\Response;
-
-class AccessTokenResponse
+class NiceRank
 {
     use JsonObjectTrait;
 }
