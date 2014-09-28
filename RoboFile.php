@@ -95,7 +95,9 @@ class RoboFile extends TaskList
 
     private function getServer()
     {
-        return $this->taskServer(self::SERVER_PORT)->dir(__DIR__ . "/public");
+        return $this->taskServer(self::SERVER_PORT)
+            ->dir(__DIR__ . "/public")
+            ->arg(__DIR__ . "/public/index.php");
     }
 
     private function rebuildAndRunTests($args = "")
