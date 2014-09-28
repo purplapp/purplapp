@@ -3,6 +3,10 @@ Purplapp
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
+[![Pull Request Stats](http://issuestats.com/github/purplapp/purplapp/badge/pr)](http://issuestats.com/github/purplapp/purplapp)
+[![Issue Stats](http://issuestats.com/github/purplapp/purplapp/badge/issue)](http://issuestats.com/github/purplapp/purplapp)
+[![Code Climate](https://codeclimate.com/github/purplapp/purplapp/badges/gpa.svg)](https://codeclimate.com/github/purplapp/purplapp)
+
 ## Features
 
 ### Account Features
