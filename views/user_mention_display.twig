@@ -10,7 +10,7 @@ expects the "mention" variable to be set, as well as the "sender" and
     </div>
     <div class='panel-body'>
         {% autoescape false %}
-            {{ mention.html }}
+            {{ mention.html() }}
 
             {% set img_data = false %}
             {% for annotation in mention.annotations %}

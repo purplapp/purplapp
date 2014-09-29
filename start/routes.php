@@ -75,8 +75,33 @@ $app->get("/account/mention", function (Request $req) use ($app) {
         return $app->render("user_first_mention_form.twig");
     }
 
+    $client = $app["adn.client"];
+
     $left  = $req->get("id1", "me");
     $right = $req->get("id2", "me");
+
+    $leftData  = $client->getUser($left);
+    $rightData = $client->getUser($right);
+
+    $leftByRightParams = [
+        "mentions"                 => $leftData->username,
+        "creator_id"               => $rightData->id,
+        "count"                    => -1,
+    ];
+
+    $rightByLeftParams = [
+        "mentions"                 => $rightData->username,
+        "creator_id"               => $leftData->id,
+        "count"                    => -1,
+    ];
+
+    $rightByLeft = $client->searchPosts($rightByLeftParams)->tail();
+    $leftByRight = $client->searchPosts($leftByRightParams)->tail();
+
+    return $app->render(
+        "user_first_mention.twig",
+        compact("leftData", "rightData", "leftByRight", "rightByLeft")
+    );
 })->bind("account_mention");
 
 $app->get("/account/user.php", $redirector("account_user"));
