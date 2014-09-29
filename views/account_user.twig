@@ -119,7 +119,7 @@
             <td>Joined:</td>
             <td>
                 {{ user.createdAt.format("jS F Y") }}
-                <i>({{ user.timeSinceCreated.diffForHumans() }} ago)</i>
+                <i>({{ user.humanFriendlyTimeSinceCreated() }} ago)</i>
             </td>
         </tr>
 
@@ -268,7 +268,7 @@
                 <td>Last Post:</td>
                 <td>
                     <a data-toggle="modal" data-target="#LPModal">
-                        {{ last_post.timeSinceCreated().diffForHumans() }} ago
+                        {{ last_post.humanFriendlyTimeSinceCreated() }} ago
                     </a>
                 </td>
             </tr>
@@ -278,7 +278,7 @@
                     <td>Last Mention:</td>
                     <td>
                         <a data-toggle="modal" data-target="#LMModal">
-                            {{ last_mention.timeSinceCreated().diffForHumans() }} ago
+                            {{ last_mention.humanFriendlyTimeSinceCreated() }} ago
                         </a>
                         <i>
                             (by
@@ -298,12 +298,10 @@
                 <td><h4>Statistics</h4></td>
                 <td></td>
             </tr>
-            <!--
             <tr>
                 <td>Rank:</td>
                 <td>{{ nice_rank.rank }}</td>
             </tr>
-            -->
             <tr>
                 <td>Real Person:</td>
                 <td>
@@ -595,7 +593,7 @@
             <div class="modal-body">
                 <ul class='list-unstyled'>
                     {% autoescape false %}
-                        {% for club in clubs.memberclubs %}
+                        {% for club in user.clubs.memberclubs %}
                             <li>{{ club.html() }}</li>
                         {% endfor %}
                     {% endautoescape %}

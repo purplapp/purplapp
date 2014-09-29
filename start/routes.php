@@ -99,10 +99,10 @@ $app->get("/account/user/{username}", function () use ($app) {
         ["count" => -1, "include_deleted" => false]
     )->head();
     $lastMention = $client->getAuthorizedUserMentions(
-        ["count" => -1, "include_deleted" => false]
+        ["count" => 1, "include_deleted" => false]
     )->tail();
 
-    $niceRank = $client->getAuthorizedUserNiceRank();
+    $niceRank = $client->getAuthorizedUserNiceRank()->head();
 
     return $app->render("account_user.twig", [
         "user"          => $user,
@@ -110,7 +110,7 @@ $app->get("/account/user/{username}", function () use ($app) {
         "last_post"     => $lastPost,
         "first_mention" => $firstMention,
         "last_mention"  => $lastMention,
-        "niceRank"      => $niceRank,
+        "nice_rank"     => $niceRank,
     ]);
 
 })->bind("account_user")->value("username", "me");
