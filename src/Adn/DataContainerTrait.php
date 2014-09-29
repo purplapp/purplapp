@@ -29,7 +29,14 @@ trait DataContainerTrait
 
     private static function wrapResponse(Response $response)
     {
-        return new static($response->json(["object" => true])->data);
+        $payload = $response->json(["object" => true]);
+
+        // strip the envelope
+        if (isset($payload->data) && isset($payload->meta)) {
+            return new static($payload->data);
+        }
+
+        return new static($payload);
     }
 
     private static function wrapArray(array $array)
