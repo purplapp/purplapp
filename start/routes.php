@@ -121,8 +121,14 @@ $app->get("/account/follow_comparison", function () use ($app) {
 })->bind("account_follow_comparison");
 
 $app->get("/broadcast/lookup.php", $redirector("broadcast_lookup"));
-$app->get("/broadcast/lookup", function () use ($app) {
+$app->get("/broadcast/lookup", function (Request $req) use ($app) {
     if (!$app["adn.user"]) {
         return $app->render("unauth_message.twig");
     }
+
+    $identifier = $req->get("id", 34622);
+    $channel    = $app["adn.client"]->getChannel($identifier);
+    $messages   = $app["adn.client"]->getChannelMessages($identifier);
+
+    return $app->render("broadcast_lookup.twig", compact("channel", "messages"));
 })->bind("broadcast_lookup");
