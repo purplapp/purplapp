@@ -41,6 +41,7 @@ $simplePage("/about", "about");
 $simplePage("/legal/privacy", "privacy");
 $simplePage("/legal/terms", "terms");
 
+$app->get("/signin.php", $redirector("signin"));
 $app->get("/signin", function () use ($app) {
     if ($app["adn.user"]) {
         return $app->redirect($app->path("index"));
@@ -55,8 +56,6 @@ $app->get("/signout", function () use ($app) {
     return $app->redirect($app->path("index"));
 })->bind("signout");
 
-$app->get("/signin.php", $redirector("signin"));
-
 $app->get("/adn/callback", function (Request $req) use ($app) {
     $response = $app["adn.client"]->getAccessToken($req->get("code"));
 
@@ -66,6 +65,7 @@ $app->get("/adn/callback", function (Request $req) use ($app) {
     return $app->redirect($app->path("index"));
 });
 
+$app->get("/account/mention.php", $redirector("account_mention"));
 $app->get("/account/mention", function (Request $req) use ($app) {
     if (!$app["adn.user"]) {
         return $app->render("unauth_message.twig");
@@ -79,6 +79,7 @@ $app->get("/account/mention", function (Request $req) use ($app) {
     $right = $req->get("id2", "me");
 })->bind("account_mention");
 
+$app->get("/account/user.php", $redirector("account_user"));
 $app->get("/account/user", function (Request $req) use ($app) {
     if (!$app["adn.user"]) {
         return $app->render("unauth_message.twig");
@@ -114,10 +115,12 @@ $app->get("/account/user", function (Request $req) use ($app) {
 
 })->bind("account_user")->value("username", "me");
 
+$app->get("/account/follow_comparison.php", $redirector("account_follow_comparison"));
 $app->get("/account/follow_comparison", function () use ($app) {
     return $app->render("account_follow_comparison.twig");
 })->bind("account_follow_comparison");
 
+$app->get("/broadcast/lookup.php", $redirector("broadcast_lookup"));
 $app->get("/broadcast/lookup", function () use ($app) {
     if (!$app["adn.user"]) {
         return $app->render("unauth_message.twig");
