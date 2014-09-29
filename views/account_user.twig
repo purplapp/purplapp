@@ -119,7 +119,7 @@
             <td>Joined:</td>
             <td>
                 {{ user.createdAt.format("jS F Y") }}
-                <i>({{ user.humanFriendlyTimeSinceCreated() }} ago)</i>
+                <i>({{ user.humanFriendlyTimeSinceCreated() }})</i>
             </td>
         </tr>
 
@@ -268,7 +268,7 @@
                 <td>Last Post:</td>
                 <td>
                     <a data-toggle="modal" data-target="#LPModal">
-                        {{ last_post.humanFriendlyTimeSinceCreated() }} ago
+                        {{ last_post.humanFriendlyTimeSinceCreated() }}
                     </a>
                 </td>
             </tr>
@@ -278,7 +278,7 @@
                     <td>Last Mention:</td>
                     <td>
                         <a data-toggle="modal" data-target="#LMModal">
-                            {{ last_mention.humanFriendlyTimeSinceCreated() }} ago
+                            {{ last_mention.humanFriendlyTimeSinceCreated() }}
                         </a>
                         <i>
                             (by
