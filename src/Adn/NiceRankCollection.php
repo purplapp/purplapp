@@ -2,10 +2,8 @@
 
 use stdClass;
 
-class NiceRankCollection
+class NiceRankCollection extends Collection
 {
-    use DataCollectionTrait;
-
     protected function transform(stdClass $object)
     {
         return NiceRank::wrap($object);

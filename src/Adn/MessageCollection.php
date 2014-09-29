@@ -2,10 +2,8 @@
 
 use stdClass;
 
-class MessageCollection
+class MessageCollection extends Collection
 {
-    use DataCollectionTrait;
-
     protected function transform(stdClass $object)
     {
         return Message::wrap($object);

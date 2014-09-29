@@ -2,10 +2,8 @@
 
 use stdClass;
 
-class PostCollection
+class PostCollection extends Collection
 {
-    use DataCollectionTrait;
-
     protected function transform(stdClass $object)
     {
         return Post::wrap($object);

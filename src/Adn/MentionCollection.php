@@ -2,10 +2,8 @@
 
 use stdClass;
 
-class MentionCollection
+class MentionCollection extends Collection
 {
-    use DataCollectionTrait;
-
     protected function transform(stdClass $object)
     {
         return Mention::wrap($object);
