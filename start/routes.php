@@ -117,3 +117,9 @@ $app->get("/account/user", function (Request $req) use ($app) {
 $app->get("/account/follow_comparison", function () use ($app) {
     return $app->render("account_follow_comparison.twig");
 })->bind("account_follow_comparison");
+
+$app->get("/broadcast/lookup", function () use ($app) {
+    if (!$app["adn.user"]) {
+        return $app->render("unauth_message.twig");
+    }
+})->bind("broadcast_lookup");
