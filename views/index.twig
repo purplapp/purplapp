@@ -22,17 +22,17 @@
     <p>
         <ul>
             <li>
-                {% if not is_guest() %}<a href='./account/user.php'>{% endif %}
+                {% if not is_guest() %}<a href="/account/user">{% endif %}
                     Find details on your account and your PCA Clubs.
                 {% if not is_guest() %}</a>{% endif %}
             </li>
             <li>
-                {% if not is_guest() %}<a href='./account/mention.php'>{% endif %}
+                {% if not is_guest() %}<a href="/account/mention">{% endif %}
                     Find the first mentions between two users.
                 {% if not is_guest() %}</a>{% endif %}
             </li>
             <li>
-                {% if not is_guest() %}<a href='./account/follow_comparison.php'>{% endif %}
+                {% if not is_guest() %}<a href="/account/follow_comparison">{% endif %}
                     Compare your followers with that of another user.
                 {% if not is_guest() %}</a>{% endif %}
             </li>
@@ -44,7 +44,7 @@
     <p>
         <ul>
             <li>
-                {% if not is_guest() %}<a href='./broadcast/lookup.php'>{% endif %}
+                {% if not is_guest() %}<a href="/broadcast/lookup">{% endif %}
                     See the most recent 5 updates in any Broadcast channel.
                 {% if not is_guest() %}</a>{% endif %}
             </li>
@@ -63,11 +63,11 @@
     <p>
         It costs money to keep Purplapp going, and we want to continue bringing
         you new features we cannot currently. You can help us improve ADN by
-        <a href='./donate.php'>donating!</a> :)
+        <a href="/donate">donating!</a> :)
     </p>
 
     <p>
-    <script id='fbz61pq'>
+    <script id="fbz61pq">
     (function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='http://api.flattr.com/button/view/?uid=jvimedia&button=compact&url=http%3A%2F%2Fpurplapp.eu';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbz61pq');
     </script>
     </p>
