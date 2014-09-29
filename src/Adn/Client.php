@@ -9,6 +9,8 @@ class Client
 
     public $userResourceUrl = "https://api.app.net/users";
 
+    public $postResourceUrl = "https://api.app.net/posts";
+
     public $channelResourceUrl = "https://api.app.net/channels";
 
     /**
@@ -161,6 +163,15 @@ class Client
         return MessageCollection::wrap($this->client->get($url));
     }
 
+    public function searchPosts(array $opts = [])
+    {
+        $base = "{$this->postResourceUrl}/search";
+
+        $url =  $base . $this->buildQuery($this->getDefaultSearchOpts() + $opts);
+
+        return PostCollection::wrap($this->authGet($url));
+    }
+
     protected function authGet($url, array $opts = [])
     {
         return $this->client->get($url, [
@@ -231,6 +242,14 @@ class Client
         return [
             'include_message_annotations' => true,
             'include_user_annotations'    => false,
+        ];
+    }
+
+    private function getDefaultSearchOpts()
+    {
+        return [
+            'include_post_annotations' => true,
+            "order" => "id",
         ];
     }
 }
