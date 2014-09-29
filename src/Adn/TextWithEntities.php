@@ -88,11 +88,13 @@ class TextWithEntities
     {
         list($text, $entities) = $data;
 
+        $originalText = $text;
+
         foreach ($entities->mentions as $mention) {
-            $mentionText = $this->getEntityText($text, $mention);
+            $mentionText = $this->getEntityText($originalText, $mention);
 
             $text = preg_replace(
-                "/" . preg_quote($mentionText) . "\b/",
+                "/" . preg_quote($mentionText, "/") . "\b/",
                 $this->createUserAnchor($mention->name, $mentionText),
                 $text,
                 1
