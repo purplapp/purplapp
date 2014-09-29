@@ -13,7 +13,7 @@ class User
 
     public function init()
     {
-        $this->clubs = new PostClubCollection($this);
+        $this->clubs = PostClubs::forUser($this);
         $this->bio   = new TextWithEntities(
             $this->description->text,
             $this->description->entities

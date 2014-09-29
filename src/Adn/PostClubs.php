@@ -1,6 +1,6 @@
 <?php namespace Purplapp\Adn;
 
-class PostClubCollection
+class PostClubs
 {
     public static $clubs = [
         [
@@ -224,6 +224,11 @@ class PostClubCollection
     private $achievedClubs = [];
 
     private $unachievedClubs = [];
+
+    public static function forUser(User $user)
+    {
+        return new static($user);
+    }
 
     public function __construct(User $user)
     {
