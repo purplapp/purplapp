@@ -79,30 +79,29 @@ $app->get("/account/mention", function (Request $req) use ($app) {
     $right = $req->get("id2", "me");
 })->bind("account_mention");
 
-$app->get("/account/user/{username}", function () use ($app) {
+$app->get("/account/user", function (Request $req) use ($app) {
     if (!$app["adn.user"]) {
         return $app->render("unauth_message.twig");
     }
 
     $client = $app["adn.client"];
 
-    $user = $client->getAuthorizedUser(["include_user_annotations" => true]);
+    if ($req->get("id")) {
+        $user = $client->getUser($req->get("id"), ["include_user_annotations" => true]);
+    } else {
+        $user = $client->getAuthorizedUser(["include_user_annotations" => true]);
+    }
 
-    $firstPost = $client->getAuthorizedUserPosts(
-        ["count" => -1, "include_deleted" => false]
-    )->head();
-    $lastPost = $client->getAuthorizedUserPosts(
-        ["count" => 1, "include_deleted" => false]
-    )->tail();
+    $firstOpts = ["count" => -1, "include_deleted" => false];
+    $lastOpts  = ["count" => 1,  "include_deleted" => false];
 
-    $firstMention = $client->getAuthorizedUserMentions(
-        ["count" => -1, "include_deleted" => false]
-    )->head();
-    $lastMention = $client->getAuthorizedUserMentions(
-        ["count" => 1, "include_deleted" => false]
-    )->tail();
+    $firstPost    = $client->getUserPosts($user, $firstOpts)->head();
+    $lastPost     = $client->getUserPosts($user, $lastOpts)->tail();
 
-    $niceRank = $client->getAuthorizedUserNiceRank()->head();
+    $firstMention = $client->getUserMentions($user, $firstOpts)->head();
+    $lastMention  = $client->getUserMentions($user, $lastOpts)->tail();
+
+    $niceRank = $client->getUserNiceRank($user)->head();
 
     return $app->render("account_user.twig", [
         "user"          => $user,
