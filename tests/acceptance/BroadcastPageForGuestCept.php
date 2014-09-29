@@ -3,12 +3,11 @@ $I = new AcceptanceTester($scenario);
 // $I->amAGuest();
 
 $reset = function () use ($I) {
-    $I->amOnPage("/broadcast.php");
+    $I->amOnPage("/broadcast");
 };
 
 $reset();
 $I->wantTo('see "Tools for Broadcast Channels" in the title');
-$I->amOnPage("/broadcast.php");
 $I->see("Tools for Broadcast Channels", "h1");
 $I->seeInTitle("Broadcast Tools");
 
