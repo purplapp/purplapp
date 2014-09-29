@@ -2,7 +2,7 @@
 
 class PostClub
 {
-    use ArrayObjectTrait;
+    use DataContainerTrait;
 
     public function html()
     {

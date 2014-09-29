@@ -15,6 +15,11 @@ class Client
     protected $cache = [];
 
     /**
+     * @var GuzzleClient
+     */
+    protected $client;
+
+    /**
      * @var string
      */
     private $id;
@@ -28,11 +33,6 @@ class Client
      * @var string
      */
     private $redirect;
-
-    /**
-     * @var GuzzleClient
-     */
-    private $client;
 
     /**
      * @var LoggerInterface
@@ -74,7 +74,7 @@ class Client
 
     public function getAccessToken($code)
     {
-        $resp = AccessTokenResponse::responseWrap($this->client->post($this->accessTokenUrl, [
+        $resp = AccessTokenResponse::wrap($this->client->post($this->accessTokenUrl, [
             "body" => [
                 "client_id"     => $this->id,
                 "client_secret" => $this->secret,
@@ -92,9 +92,13 @@ class Client
     public function getAuthorizedUser(array $opts = [])
     {
         return $this->cache->get("authorized_user", function () use ($opts) {
-            $url = $this->userResourceUrl . "/me" . $this->buildQuery($opts);
+            $url = $this->userResourceUrl . "/me" . $this->buildQuery([
+                "include_annotations"      => true,
+                "include_user_annotations" => true,
+                "include_html"             => true,
+            ] + $opts);
 
-            return User::responseWrap($this->authGet($url));
+            return User::wrap($this->authGet($url));
         });
     }
 
@@ -102,14 +106,14 @@ class Client
     {
         $url = $this->userResourceUrl . "/me/posts" . $this->buildQuery($opts);
 
-        return PostCollection::responseWrap($this->authGet($url));
+        return PostCollection::wrap($this->authGet($url));
     }
 
     public function getAuthorizedUserMentions(array $opts = [])
     {
         $url = $this->userResourceUrl . "/me/mentions" . $this->buildQuery($opts);
 
-        return MentionCollection::responseWrap($this->authGet($url));
+        return MentionCollection::wrap($this->authGet($url));
     }
 
     protected function authGet($url, array $opts = [])
@@ -127,10 +131,14 @@ class Client
 
         $final = [];
 
-        array_walk($opts, function ($value, $key) {
-            $final[$key] = !is_bool($value) ? $value : (int) $value;
-        });
+        foreach ($opts as $key => $value) {
+            if (is_bool($value)) {
+                $final[$key] = $value ? 1 : 0;
+            } else {
+                $final[$key] = $value;
+            }
+        }
 
-        return "?" . implode(",", $final);
+        return "?" . http_build_query($final);
     }
 }

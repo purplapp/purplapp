@@ -1,10 +1,12 @@
 <?php namespace Purplapp\Adn;
 
+use stdClass;
+
 class PostCollection
 {
-    use JsonCollectionTrait;
+    use DataCollectionTrait;
 
-    protected function transform(stdObject $object)
+    protected function transform(stdClass $object)
     {
         return Post::wrap($object);
     }

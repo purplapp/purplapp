@@ -8,6 +8,8 @@ trait TimeSinceCreatedTrait
 
     private $timeSinceCreated;
 
+    private $humanFriendlyTimeSinceCreated;
+
     public function timeSinceCreated()
     {
         if (!$this->timeSinceCreated) {
@@ -15,5 +17,14 @@ trait TimeSinceCreatedTrait
         }
 
         return $this->timeSinceCreated;
+    }
+
+    public function humanFriendlyTimeSinceCreated()
+    {
+        if (!$this->humanFriendlyTimeSinceCreated) {
+            $this->humanFriendlyTimeSinceCreated = $this->createdAt()->diffForHumans(Carbon::now());
+        }
+
+        return $this->humanFriendlyTimeSinceCreated;
     }
 }

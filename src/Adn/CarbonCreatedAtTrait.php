@@ -1,5 +1,7 @@
 <?php namespace Purplapp\Adn;
 
+use Carbon\Carbon;
+
 trait CarbonCreatedAtTrait
 {
     public function createdAt()

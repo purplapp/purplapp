@@ -4,5 +4,5 @@ use GuzzleHttp\Message\Response;
 
 class AccessTokenResponse
 {
-    use JsonObjectTrait;
+    use DataContainerTrait;
 }

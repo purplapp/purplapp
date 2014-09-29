@@ -248,9 +248,9 @@ class PostClubCollection
 
         array_walk(static::$clubs, function ($club) use ($count, $done, $togo) {
             if ($count >= $club["count"]) {
-                $done[] = PostClub::arrayWrap($club);
+                $done[] = PostClub::wrap($club);
             } else {
-                $togo[] = PostClub::arrayWrap($club);
+                $togo[] = PostClub::wrap($club);
             }
         });
     }

@@ -1,6 +1,7 @@
 <?php namespace Purplapp\Adn;
 
-use \stdClass;
+use stdClass;
+use PhpOption\Option;
 
 class TextWithEntities
 {
@@ -27,17 +28,18 @@ class TextWithEntities
             ->map([$this, "processHashtags"])
             ->map([$this, "processLinks"])
             ->map([$this, "processMentions"])
+            ->map("head")
             ->get();
     }
 
-    private function encodeHtmlEntites(array $data)
+    public function encodeHtmlEntities(array $data)
     {
         list($text, $entities) = $data;
 
         return [htmlentities($text, 0, 'UTF-8'), $entities];
     }
 
-    private function processHashtags(array $data)
+    public function processHashtags(array $data)
     {
         list($text, $entities) = $data;
 
@@ -47,7 +49,7 @@ class TextWithEntities
             //FIXME - Why aren't we using str_replace here
             $text = preg_replace(
                 "/" . preg_quote($hashtagText) . "\b/",
-                $this->createHashtagAnchor($entity->name, $hashtagText),
+                $this->createHashtagAnchor($hashtag->name, $hashtagText),
                 $text,
                 1
             );
@@ -56,7 +58,7 @@ class TextWithEntities
         return [$text, $entities];
     }
 
-    private function processLinks(array $data)
+    public function processLinks(array $data)
     {
         list($text, $entities) = $data;
 
@@ -81,7 +83,7 @@ class TextWithEntities
         return [$text, $entities];
     }
 
-    private function processMentions(array $data)
+    public function processMentions(array $data)
     {
         list($text, $entities) = $data;
 
@@ -99,22 +101,22 @@ class TextWithEntities
         return [$text, $entities];
     }
 
-    private function getEntityText($text, $entity)
+    public function getEntityText($text, $entity)
     {
         return mb_substr($text, $entity->pos, $entity->len);
     }
 
-    private function createAnchorTag($url, $text)
+    public function createAnchorTag($url, $text)
     {
         return "<a href=\"{$url}\">{$text}</a>";
     }
 
-    private function createHashtagAnchor($hashtag, $text)
+    public function createHashtagAnchor($hashtag, $text)
     {
         return $this->createAnchorTag("https://alpha.app.net/hashtags/{$hashtag}", $text);
     }
 
-    private function createUserAnchor($username, $text)
+    public function createUserAnchor($username, $text)
     {
         return $this->createAnchorTag("https://alpha.app.net/{$username}", $text);
     }

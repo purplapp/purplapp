@@ -4,7 +4,7 @@ use Carbon\Carbon;
 
 class User
 {
-    use JsonObjectTrait;
+    use DataContainerTrait;
     use TimeSinceCreatedTrait;
 
     private $clubs;

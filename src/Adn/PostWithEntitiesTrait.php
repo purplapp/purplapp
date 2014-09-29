@@ -2,7 +2,7 @@
 
 trait PostWithEntitiesTrait
 {
-    use JsonObjectTrait;
+    use DataContainerTrait;
 
     private $processedText;
 

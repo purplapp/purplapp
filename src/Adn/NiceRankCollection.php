@@ -2,12 +2,12 @@
 
 use stdClass;
 
-class MentionCollection
+class NiceRankCollection
 {
     use DataCollectionTrait;
 
     protected function transform(stdClass $object)
     {
-        return Mention::wrap($object);
+        return NiceRank::wrap($object);
     }
 }

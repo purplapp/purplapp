@@ -2,5 +2,5 @@
 
 class NiceRank
 {
-    use JsonObjectTrait;
+    use DataContainerTrait;
 }
