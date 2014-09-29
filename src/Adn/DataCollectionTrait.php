@@ -10,7 +10,7 @@ trait DataCollectionTrait
 
     public function current()
     {
-        return $this->data[$this->position];
+        return $this->transformIfNotNull($this->data[$this->position] ?: null);
     }
 
     public function key()
@@ -35,16 +35,21 @@ trait DataCollectionTrait
 
     public function tail()
     {
-        return $this->transform(end($this->data));
+        return $this->transformIfNotNull(end($this->data) ?: null);
     }
 
     public function head()
     {
-        return $this->transform(reset($this->data));
+        return $this->transformIfNotNull(reset($this->data) ?: null);
     }
 
     protected function transform(stdClass $object)
     {
         return $object;
+    }
+
+    private function transformIfNotNull(stdClass $object = null)
+    {
+        return $object ? $this->transform($object) : $object;
     }
 }
