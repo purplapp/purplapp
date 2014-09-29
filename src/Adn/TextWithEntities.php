@@ -29,6 +29,7 @@ class TextWithEntities
             ->map([$this, "processLinks"])
             ->map([$this, "processMentions"])
             ->map("head")
+            ->map("nl2br")
             ->get();
     }
 
