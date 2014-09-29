@@ -9,6 +9,8 @@ class Client
 
     public $userResourceUrl = "https://api.app.net/users";
 
+    public $channelResourceUrl = "https://api.app.net/channels";
+
     /**
      * @var Cache
      */
@@ -98,7 +100,7 @@ class Client
         }
 
         $base = $this->userResourceUrl . "/{$key}";
-        $url = $base . $this->buildQuery($this->getDefaultUserOptions() + $opts);
+        $url = $base . $this->buildQuery($this->getDefaultUserOpts() + $opts);
 
         return User::wrap($this->authGet($url));
     }
@@ -107,7 +109,7 @@ class Client
     {
         return $this->cache->get("authorized_user", function () use ($opts) {
             $base = $this->userResourceUrl . "/me";
-            $url = $base . $this->buildQuery($this->getDefaultUserOptions() + $opts);
+            $url = $base . $this->buildQuery($this->getDefaultUserOpts() + $opts);
 
             return User::wrap($this->authGet($url));
         });
@@ -139,6 +141,24 @@ class Client
         $url = "{$this->userResourceUrl}/{$identifier}/mentions" . $this->buildQuery($opts);
 
         return MentionCollection::wrap($this->authGet($url));
+    }
+
+    public function getChannel($identifier, array $opts = [])
+    {
+        $base = "{$this->channelResourceUrl}/{$identifier}";
+
+        $url = $base . $this->buildQuery($this->getDefaultChannelOpts() + $opts);
+
+        return Channel::wrap($this->client->get($url));
+    }
+
+    public function getChannelMessages($identifier, array $opts = [])
+    {
+        $base = "{$this->channelResourceUrl}/{$identifier}/messages";
+
+        $url = $base . $this->buildQuery($this->getDefaultMessageOpts() + $opts);
+
+        return MessageCollection::wrap($this->client->get($url));
     }
 
     protected function authGet($url, array $opts = [])
@@ -188,12 +208,29 @@ class Client
         return "@{$identifier}";
     }
 
-    private function getDefaultUserOptions()
+    private function getDefaultUserOpts()
     {
         return [
             "include_annotations"      => true,
             "include_user_annotations" => true,
             "include_html"             => true,
+        ];
+    }
+
+    private function getDefaultChannelOpts()
+    {
+        return [
+            'include_annotations' => true,
+            'channel_types'       => 'net.app.core.broadcast',
+            'include_inactive'    => true,
+        ];
+    }
+
+    private function getDefaultMessageOpts()
+    {
+        return [
+            'include_message_annotations' => true,
+            'include_user_annotations'    => false,
         ];
     }
 }
