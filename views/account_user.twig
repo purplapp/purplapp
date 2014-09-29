@@ -125,7 +125,7 @@
 
         {# verified stuff #}
         {% set did_display_annotations = false %}
-        {% if user.verified_link and user.annotations %}
+        {% if (user.verified_link is defined)  and (user.annotations is defined) %}
             <tr>
                 <td><h4>User Data</h4></td>
                 <td></td>
