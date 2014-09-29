@@ -15,6 +15,13 @@ class TextWithEntities
      */
     private $entities;
 
+    /**
+     * A list of things to apply
+     *
+     * @var array
+     */
+    private $filters = [];
+
     public function __construct($text, stdClass $entities)
     {
         $this->text = $text;
@@ -24,10 +31,11 @@ class TextWithEntities
     public function html()
     {
         return Option::fromValue([$this->text, $this->entities])
+            ->map([$this, "gatherHashtags"])
+            ->map([$this, "gatherLinks"])
+            ->map([$this, "gatherMentions"])
             ->map([$this, "encodeHtmlEntities"])
-            ->map([$this, "processHashtags"])
-            ->map([$this, "processLinks"])
-            ->map([$this, "processMentions"])
+            ->map([$this, "applyFilters"])
             ->map("head")
             ->map("nl2br")
             ->get();
@@ -37,29 +45,28 @@ class TextWithEntities
     {
         list($text, $entities) = $data;
 
-        return [htmlentities($text, 0, 'UTF-8'), $entities];
+        return [htmlspecialchars($text, ENT_NOQUOTES, 'UTF-8'), $entities];
     }
 
-    public function processHashtags(array $data)
+    public function gatherHashtags(array $data)
     {
         list($text, $entities) = $data;
 
         foreach ($entities->hashtags as $hashtag) {
             $hashtagText = $this->getEntityText($text, $hashtag);
+            $anchor = $this->createHashtagAnchor($hashtag->name, $hashtagText);
 
-            //FIXME - Why aren't we using str_replace here
-            $text = preg_replace(
-                "/" . preg_quote($hashtagText) . "\b/",
-                $this->createHashtagAnchor($hashtag->name, $hashtagText),
-                $text,
-                1
-            );
+            $this->filters[] = function ($text) use ($hashtagText, $anchor) {
+                //FIXME - Why aren't we using str_replace here
+                return preg_replace("/" . preg_quote($hashtagText) . "\b/", $anchor, $text, 1);
+            };
+
         }
 
-        return [$text, $entities];
+        return $data;
     }
 
-    public function processLinks(array $data)
+    public function gatherLinks(array $data)
     {
         list($text, $entities) = $data;
 
@@ -67,6 +74,7 @@ class TextWithEntities
 
         foreach ($entities->links as $link) {
             $linkText = htmlentities($this->getEntityText($text, $link));
+            $anchor = $this->createAnchorTag(htmlspecialchars($link->url), $linkText);
 
             if (in_array($linkText, $processed)) {
                 continue;
@@ -74,17 +82,15 @@ class TextWithEntities
 
             $processed[] = $linkText;
 
-            $text = str_replace(
-                $linkText,
-                $this->createAnchorTag(htmlspecialchars($link->url), $linkText),
-                $text
-            );
+            $this->filters[] = function ($text) use ($linkText, $anchor) {
+                return str_replace($linkText, $anchor, $text);
+            };
         }
 
-        return [$text, $entities];
+        return $data;
     }
 
-    public function processMentions(array $data)
+    public function gatherMentions(array $data)
     {
         list($text, $entities) = $data;
 
@@ -92,13 +98,22 @@ class TextWithEntities
 
         foreach ($entities->mentions as $mention) {
             $mentionText = $this->getEntityText($originalText, $mention);
+            $anchor = $this->createUserAnchor($mention->name, $mentionText);
 
-            $text = preg_replace(
-                "/" . preg_quote($mentionText, "/") . "\b/",
-                $this->createUserAnchor($mention->name, $mentionText),
-                $text,
-                1
-            );
+            $this->filters[] = function ($text) use ($mentionText, $anchor) {
+                return preg_replace("/" . preg_quote($mentionText, "/") . "\b/", $anchor, $text, 1);
+            };
+        }
+
+        return $data;
+    }
+
+    public function applyFilters(array $data)
+    {
+        list($text, $entities) = $data;
+
+        foreach ($this->filters as $filter) {
+            $text = $filter($text);
         }
 
         return [$text, $entities];
@@ -106,7 +121,7 @@ class TextWithEntities
 
     public function getEntityText($text, $entity)
     {
-        return mb_substr($text, $entity->pos, $entity->len);
+        return mb_substr($text, $entity->pos, $entity->len, "UTF-8");
     }
 
     public function createAnchorTag($url, $text)
