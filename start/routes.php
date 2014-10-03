@@ -77,8 +77,8 @@ $app->get("/account/mention", function (Request $req) use ($app) {
 
     $client = $app["adn.client"];
 
-    $left  = $req->get("id1", "me");
-    $right = $req->get("id2", "me");
+    $left  = $req->get("id1") ?: "me";
+    $right = $req->get("id2") ?: "me";
 
     $leftData  = $client->getUser($left);
     $rightData = $client->getUser($right);
