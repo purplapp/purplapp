@@ -95,13 +95,8 @@ class Client
 
     public function getUser($user, array $opts = [])
     {
-        if (is_numeric($user)) {
-            $key = $user;
-        } else {
-            $key = "@{$user}";
-        }
+        $base = $this->userResourceUrl . "/{$this->normalizeUserIdentifier($user)}";
 
-        $base = $this->userResourceUrl . "/{$key}";
         $url = $base . $this->buildQuery($this->getDefaultUserOpts() + $opts);
 
         return User::wrap($this->authGet($url));
