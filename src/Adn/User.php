@@ -11,6 +11,8 @@ class User
 
     private $bio;
 
+    private $htmlBio;
+
     public function init()
     {
         $this->clubs = PostClubs::forUser($this);
@@ -22,7 +24,11 @@ class User
 
     public function htmlBio()
     {
-        return $this->bio->html();
+        if (!$this->htmlBio) {
+            $this->htmlBio = $this->bio->html();
+        }
+
+        return $this->htmlBio;
     }
 
     public function clubs()
