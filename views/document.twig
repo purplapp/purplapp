@@ -18,9 +18,12 @@ This is the base file for all HTML views
         {% endblock %}
 
         {% block stylesheets %}
-        <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/static/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="/static/css/bootstrap-social.css"/>
+        <!-- build:css(.) /css/style.css -->
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="/bower_components/bootstrap-social/bootstrap-social.css"/>
+        <!-- endbuild -->
+
         <link rel="stylesheet" href="/static/css/mod.css">
         {% endblock %}
 
@@ -41,14 +44,14 @@ This is the base file for all HTML views
 
         <div class="container">{% block content %}{% endblock %}</div>
 
-        {% block footer %}
-            {% include "footer.twig" %}
-        {% endblock %}
+        {% block footer %}{% include "footer.twig" %}{% endblock %}
 
+        <!-- build:js(.) /js/vendor.min.js -->
         {% block tail_scripts %}
-        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/static/js/chart.js"></script>
+        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/bower_components/chartjs/Chart.min.js"></script>
         {% endblock %}
+        <!-- endbuild -->
     </body>
 </html>

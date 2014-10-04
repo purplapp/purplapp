@@ -9,7 +9,7 @@ use GuzzleHttp\Client as GuzzleClient;
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->register(new TwigServiceProvider(), [
-    "twig.path" => app_dir() . "/views",
+    "twig.path" => app_dir() . "/out/views",
     "twig.options" => [
         "debug" => true,
         "cache" => app_dir() . "/cache",
