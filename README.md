@@ -1,4 +1,4 @@
-Purplapp
+Purplapp [![Build Status](https://travis-ci.org/purplapp/purplapp.svg?branch=master)](https://travis-ci.org/purplapp/purplapp)
 ========
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
