@@ -3,9 +3,15 @@ Purplapp [![Build Status](https://travis-ci.org/purplapp/purplapp.svg?branch=mas
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
-[![Pull Request Stats](http://issuestats.com/github/purplapp/purplapp/badge/pr)](http://issuestats.com/github/purplapp/purplapp)
-[![Issue Stats](http://issuestats.com/github/purplapp/purplapp/badge/issue)](http://issuestats.com/github/purplapp/purplapp)
-[![Code Climate](https://codeclimate.com/github/purplapp/purplapp/badges/gpa.svg)](https://codeclimate.com/github/purplapp/purplapp)
+[![Pull Request Stats][pr img]][pr link] [![Issue Stats][is img]][is link] [![Code Climate][cc img]][cc link]
+
+[pr img]: https://codeclimate.com/github/purplapp/purplapp/badges/gpa.svg
+[is img]: http://issuestats.com/github/purplapp/purplapp/badge/issue
+[cc img]: http://issuestats.com/github/purplapp/purplapp/badge/pr
+
+[pr link]: http://issuestats.com/github/purplapp/purplapp
+[is link]: http://issuestats.com/github/purplapp/purplapp
+[cc link]: https://codeclimate.com/github/purplapp/purplapp
 
 ## Features
 
