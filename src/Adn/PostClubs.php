@@ -2,7 +2,7 @@
 
 class PostClubs
 {
-    public static $clubs = [
+    private static $clubs = [
         [
             "name"      => "#RollClub",
             "url"       => "RollClub",
@@ -225,6 +225,8 @@ class PostClubs
 
     private $unachievedClubs = [];
 
+    private $user;
+
     public static function forUser(User $user)
     {
         return new static($user);
@@ -232,7 +234,7 @@ class PostClubs
 
     public function __construct(User $user)
     {
-        $this->init($user);
+        $this->init($this->user = $user);
     }
 
     public function memberClubs()
@@ -247,16 +249,32 @@ class PostClubs
 
     private function init(User $user)
     {
-        $done  = &$this->achievedClubs;
-        $togo  = &$this->unachievedClubs;
         $count = $user->counts->posts;
 
-        array_walk(static::$clubs, function ($club) use ($count, $done, $togo) {
+        foreach ($this->getPossibleClubs() as $club) {
             if ($count >= $club["count"]) {
-                $done[] = PostClub::wrap($club);
+                $this->achievedClubs[] = PostClub::wrap($club);
             } else {
-                $togo[] = PostClub::wrap($club);
+                $this->unachievedClubs[] = PostClub::wrap($club);
             }
-        });
+        }
+    }
+
+    private function getPossibleClubs()
+    {
+        $base = static::$clubs;
+
+        // whatever logic charl is using
+        $orphanBlack = PostClub::wrap([
+            "name"      => "#OrphanBlackClub",
+            "url"       => "OrphanBlackClub",
+            "nicecount" => 'TODO',
+            "count"     => 'TODO',
+        ]);
+
+        // $clubs = $base + (USER_IS_SOMEHOW_ELIGIBLE ? $orphanBlack : null);
+        $clubs = $base + (false ? $orphanBlack : []);
+
+        return array_values($clubs);
     }
 }
