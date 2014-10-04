@@ -1,14 +1,16 @@
-Purplapp [![Build Status](https://travis-ci.org/purplapp/purplapp.svg?branch=master)](https://travis-ci.org/purplapp/purplapp)
+Purplapp [![Build Status][ci img]][ci link]
 ========
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
 [![Pull Request Stats][pr img]][pr link] [![Issue Stats][is img]][is link] [![Code Climate][cc img]][cc link]
 
+[ci img]: https://travis-ci.org/purplapp/purplapp.svg?branch=master
 [pr img]: https://codeclimate.com/github/purplapp/purplapp/badges/gpa.svg
 [is img]: http://issuestats.com/github/purplapp/purplapp/badge/issue
 [cc img]: http://issuestats.com/github/purplapp/purplapp/badge/pr
 
+[ci link]: https://travis-ci.org/purplapp/purplapp
 [pr link]: http://issuestats.com/github/purplapp/purplapp
 [is link]: http://issuestats.com/github/purplapp/purplapp
 [cc link]: https://codeclimate.com/github/purplapp/purplapp
