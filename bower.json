@@ -1,0 +1,27 @@
+{
+  "name": "purplapp",
+  "version": "3.1.1",
+  "homepage": "https://github.com/purplapp/purplapp",
+  "authors": [
+    "Charlotte W",
+    "Johannes V"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.2.0",
+    "font-awesome": "~4.2.0",
+    "chartjs": "~0.2.0",
+    "bootstrap-social": "~4.8.0"
+  }
+}

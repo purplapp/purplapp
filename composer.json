@@ -20,7 +20,6 @@
         "psr-4": {
             "Purplapp\\": "src/"
         },
-        "classmap": ["adnlib/"],
         "files": ["src/helpers.php"]
     },
     "config": {
