@@ -21,6 +21,16 @@ class RoboFile extends TaskList
     }
 
     /**
+     * @desc Starts gulp
+     */
+    public function gulp()
+    {
+        $this->say("Starting the gulp process");
+
+        $this->taskExec("./node_modules/.bin/gulp")->run();
+    }
+
+    /**
      * @desc Runs the test suite
      */
     public function test($args = "")
