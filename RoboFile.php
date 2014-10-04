@@ -78,9 +78,9 @@ class RoboFile extends TaskList
             ->run();
     }
 
-    private function getServer()
+    public function tags()
     {
-        return $this->taskServer(self::SERVER_PORT)->dir(__DIR__);
+        return $this->taskExec("phptags")->run();
     }
 
     public function rebuildTesters()
@@ -91,6 +91,13 @@ class RoboFile extends TaskList
     public function getCodecept()
     {
         return $this->taskCodecept('./bin/codecept');
+    }
+
+    private function getServer()
+    {
+        return $this->taskServer(self::SERVER_PORT)
+            ->dir(__DIR__ . "/public")
+            ->arg(__DIR__ . "/public/index.php");
     }
 
     private function rebuildAndRunTests($args = "")

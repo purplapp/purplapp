@@ -1,11 +1,27 @@
 {
     "require": {
         "php": ">=5.3.20",
-        "vlucas/phpdotenv": "1.0.6"
+        "vlucas/phpdotenv": "1.0.6",
+        "twig/twig": "~1.16.0",
+        "silex/silex": "~1.2.1",
+        "monolog/monolog": "~1.10.0",
+        "symfony/twig-bridge": "~2.5.4",
+        "symfony/debug": "~2.5.4",
+        "guzzlehttp/guzzle": "~4.0.0",
+        "psr/log": "*",
+        "phpoption/phpoption": "~1.4.0",
+        "nesbot/Carbon": "~1.13.0"
     },
     "require-dev": {
         "codegyre/robo": "0.4.5",
         "codeception/codeception": "~2.0.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Purplapp\\": "src/"
+        },
+        "classmap": ["adnlib/"],
+        "files": ["src/helpers.php"]
     },
     "config": {
         "bin-dir": "bin",

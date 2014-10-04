@@ -2,13 +2,13 @@
 
 $pages = array(
     "/",
-    "/account.php",
-    "/broadcast.php",
-    "/donate.php",
-    "/about.php",
-    "/phplib/PurplappLogin.php",
-    "/legal/privacy.php",
-    "/legal/terms.php",
+    "/account",
+    "/broadcast",
+    "/donate",
+    "/about",
+    "/signin",
+    "/legal/privacy",
+    "/legal/terms",
 );
 
 $I = new AcceptanceTester($scenario);
@@ -32,7 +32,7 @@ $verifyLinksAvailable = function ($text, $path) use ($testAllPages) {
 };
 
  $I->wantTo("test that navbar links are correct on all pages");
-$verifyLinksAvailable("Account Tools", "/account.php");
-$verifyLinksAvailable("Broadcast Tools", "/broadcast.php");
-$verifyLinksAvailable("Donate", "/donate.php");
-$verifyLinksAvailable("About", "/about.php");
+$verifyLinksAvailable("Account Tools", "/account");
+$verifyLinksAvailable("Broadcast Tools", "/broadcast");
+$verifyLinksAvailable("Donate", "/donate");
+$verifyLinksAvailable("About", "/about");

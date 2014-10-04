@@ -1,0 +1,55 @@
+{#
+This is the base file for all HTML views
+#}
+{% use "flash_messages.twig" %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        {% block icons %}
+        <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico">
+        <link rel="apple-touch-icon" href="/static/images/apple-touch-icon-precomposed.png"/>
+        {% endblock %}
+
+        {% block stylesheets %}
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/static/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="/static/css/bootstrap-fugue.min.css"/>
+        <link rel="stylesheet" href="/static/css/bootstrap-social.css"/>
+        <link rel="stylesheet" href="/static/css/mod.css">
+        {% endblock %}
+
+        <title>{% block title %}Purplapp{% endblock %}</title>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        {% block navbar %}
+            {% include "navbar.twig" %}
+        {% endblock %}
+
+        {% block flash_messages %}{% endblock %}
+
+        <div class="container">{% block content %}{% endblock %}</div>
+
+        {% block footer %}
+            {% include "footer.twig" %}
+        {% endblock %}
+
+        {% block tail_scripts %}
+        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/static/js/chart.js"></script>
+        {% endblock %}
+    </body>
+</html>

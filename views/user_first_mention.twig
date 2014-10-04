@@ -1,0 +1,45 @@
+{% extends "document.twig" %}
+
+{% block title %}First Mentions Lookup{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <div class="page-header">
+        <h4>Check First Mention Between...</h4>
+        <h1>{{ leftData.name|e }} and {{ rightData.name|e }}</h1>
+    </div>
+
+    <!--Search Box-->
+    <form role="form">
+        <div class="form-group">
+            <label for="id1"><em>Enter the First User ID here:</em></label>
+            <input type="text" class="form-control" name="id1" id="id1" placeholder="User ID 1" value="{{ leftData.username }}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="id2"><em>Enter the Second User ID here:</em></label>
+            <input type="text" class="form-control" name="id2" id="id2" placeholder="User ID 2" value="{{ rightData.username }}"/>
+        </div>
+        <p class="help-block">Does not work correctly for accounts who have changed username.</p>
+        <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
+    </form>
+
+    <br>
+
+    <!-- User 1 Mentioning 2 Display -->
+    {% if rightByLeft %}
+        {% include "user_mention_display.twig" with {
+            "mention": rightByLeft,
+            "receiver": rightData.username,
+            "sender": leftData.username
+        } %}
+    {% endif %}
+
+    {% if leftByRight %}
+        {% include "user_mention_display.twig" with {
+            "mention": leftByRight,
+            "receiver": leftData.username,
+            "sender": rightData.username
+        } %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,259 @@
+{% extends "document.twig" %}
+
+{% block title %}Following Comparison Tool{% endblock %}
+
+{% block content %}
+
+{% block comparison_header %}
+<div class="page-header">
+    <h1>
+        Following Comparison Tool
+        <span class="label label-primary">New</span>
+    </h1>
+
+    {% if otherUser is defined %}
+        <h1>You (that's @{{ user.username }}) and @{{ otherUser.username }}</h1>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block comparison_form %}
+<form role="form">
+    <div class="form-group">
+        <label for="id"><em>Enter the Second User ID here:</em></label>
+        <input type="text" class="form-control" name="id" id="id" placeholder="User ID" value="{{ otherUser is defined ? otherUser.username : "" }}">
+    </div>
+    <button type="submit" id="send" class="btn btn-primary">Check</button>
+</form>
+{% endblock %}
+
+<p>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" id="navTabs">
+    <li class="active">
+        <a href="#overview" role="tab" data-toggle="tab">Overview</a>
+    </li>
+    <li>
+        <a href="#recommendations" role="tab" data-toggle="tab">Recommendations</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade in active" id="overview">
+        <br>
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <p>
+                            This graph shows you the number of users you follow
+                            compared with how many
+                            <a href="{{ alpha_domain ~ otherUser.username }}" target="_blank">
+                                @{{ otherUser.username }}
+                            </a>
+                            follows.
+                        </p>
+                    </div>
+
+                    <canvas id="base_compare" style="width: 818px; height: 409px;"></canvas>
+
+                    <table class="table table-condensed">
+                        <tr>
+                            <td class="ui-helper-center">
+                                <span style="color: #46BFBD;"> &#9608;</span>
+                                @{{ otherUser.username }}'s following
+                                count
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ui-helper-center">
+                                <span style="color: #F7464A;"> &#9608;</span>
+                                @{{ user.username }}'s following count
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <p>
+                            This graph shows you the number of users that
+                            <a href="{{ alpha_domain ~ otherUser.username }}" target="_blank">
+                            @{{ otherUser.username }}</a> follows
+                            that you don't follow, and vice versa.
+                        </p>
+                    </div>
+
+                    <canvas id="not_shared" style="width: 818px; height: 409px;"></canvas>
+
+                    <table class="table table-condensed">
+                        <tr>
+                            <td class="ui-helper-center">
+                                <span style="color: #949FB1;">&#9608;</span>
+                                users that @{{ otherUser.username }}
+                                follows but you don't
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ui-helper-center">
+                                <span style="color: #FDB45C;">&#9608;</span>
+                                users that you follow but
+                                @{{ otherUser.username }} doesn't
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="recommendations">
+        <br>
+
+        <!-- Information Text -->
+        <p class="lead">
+            Here are some random users that
+            <a href="{{ alpha_domain ~ otherUser.username }}" target="_blank">
+            @{{ otherUser.username }}</a> follows but you don't.
+            Maybe you want to check them out and give them a follow?
+        </p>
+
+        <!-- User Box Display -->
+        {% for user in retrievedUsers %}
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-2">
+                        <img src="{{ user.avatar_image.url }}" class="img-responsive img-rounded full-width avatar-following">
+                    </div>
+                    <div class="col-md-8">
+                        {% if user.name is defined %}
+                            <h2>{{ user.name }} <small>@{{ user.username }}</small></h2>
+                        {% endif %}
+
+                        {% if user.htmlBio() %}
+                            <p>{% autoescape false %}{{ user.htmlBio() }}{% endautoescape %}</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{{ alpha_domain ~ user.username }}" target="_blank" role="button" class="btn btn-default btn-block">
+                            View on Alpha
+                        </a>
+
+                        <span id="{{ user.id }}" onclick="myFollow('{{ user.id }}')" class="btn btn-primary btn-block">
+                            <span id="{{ user.id }}_text">Follow</span>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% if retrievedUsers|length == 0 %}
+            <div class="alert alert-warning">
+                You follow everyone in this random generated list.
+                <strong>
+                    <a href='#' onclick='reloadPage()' class='alert-link'>
+                        Refresh the page
+                    </a>
+                    or enter another username above.
+                </strong>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block tail_scripts %}
+    {{ parent() }}
+
+    {% if otherUser is defined %}
+    <script>
+    var base_compareData = [{
+            // get the current (auth) user's following count
+            value: {{ user.counts.following }},
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: ""
+        }, {
+            // get the other user's following count
+            value : {{ otherUser.counts.following }},
+            color: "#46BFBD",
+            highlight: "#5AD3D1",
+            label: ""
+    }];
+
+    var base_compareOptions = {
+        animateScale: true,
+        responsive: true
+    };
+
+    var base_compare = document.getElementById("base_compare").getContext("2d");
+
+    var not_sharedData = [{
+            value: {{ currentUserFollowsExclusively|length }},
+            color:"#FDB45C",
+            highlight: "#FFC870",
+            label: ""
+        }, {
+            value: {{ otherUserFollowsExclusively|length }},
+            color: "#949FB1",
+            highlight: "#A8B3C5",
+            label: ""
+    }];
+
+    var not_sharedOptions = {
+        animateScale: true,
+        animateRotate: false,
+        responsive: true
+    };
+
+    var not_shared = document.getElementById("not_shared").getContext("2d");
+
+    new Chart(base_compare).PolarArea(base_compareData, base_compareOptions);
+    new Chart(not_shared).PolarArea(not_sharedData, not_sharedOptions);
+
+    function myFollow(userid) {
+        var element = document.getElementById(userid);
+
+        //FIXME
+        if (element.getAttribute("status") === "followed") {
+            $.get("/user/unfollow", "id=" + userid);
+
+            element.setAttribute("status", "true");
+            element.setAttribute("class", "btn btn-block btn-info");
+
+            document.getElementById(userid+"_text").innerHTML='Unfollowed';
+        } else {
+            $.get("/user/follow", "id=" + userid);
+
+            element.setAttribute("class", "btn btn-block btn-success active");
+            element.setAttribute("status", "followed");
+
+            document.getElementById(userid+"_text").innerHTML='Succesfully Followed.';
+        }
+
+        //  elementtext.setAttribute("innerHTML", "You already followed!");
+    }
+
+    function reloadPage() {
+        location.reload();
+    }
+
+    $(function () {
+        var navTabs = $("#navTabs a");
+
+        navTabs.find(":first").tab('show');
+
+        navTabs.click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    })
+
+    </script>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "user_comparison.twig" %}
+
+{% block content %}
+    {% block comparison_header %}{{ parent() }}{% endblock %}
+
+    {% block error_message %}{% endblock %}
+
+    {% block comparison_form %}{{ parent() }}{% endblock %}
+{% endblock %}
