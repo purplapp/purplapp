@@ -88,7 +88,7 @@ class Client
 
         $opts = $scope ? ["scope" => implode("+", $scope)] + $data : $data;
 
-        $base = $this->authCallbackUrl . ($this->accessToken ? "authorize" : "authenticate");
+        $base = $this->authCallbackUrl . "/" . ($this->accessToken ? "authorize" : "authenticate");
 
         return $base . $this->buildQuery($opts);
     }
@@ -216,6 +216,7 @@ class Client
         $identifier = $this->normalizeUserIdentifier($username);
 
         $url = "{$this->userResourceUrl}/{$identifier}/following/ids" . $this->buildQuery($opts);
+
         return NumberCollection::wrap($this->authGet($url));
     }
 
