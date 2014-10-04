@@ -3,11 +3,3 @@ Options +FollowSymlinks -Multiviews
 # Rewrite
 RewriteEngine on
 RewriteBase /
-
-# Deprecation Fix
-Redirect 301 /user.php /account/user.php
-Redirect 301 /pca.php /account/user.php
-#Redirect 301 /css/ /static/css/
-
-# Errors
-ErrorDocument 404 /static/error_pages/404.php
