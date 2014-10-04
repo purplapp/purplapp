@@ -1,0 +1,59 @@
+The folder structure for Purplapp is as follows:
+
+----
+├── bin
+├── docs
+├── logs
+├── out
+│   └── views
+│       ├── css
+│       └── js
+├── public
+│   ├── css
+│   ├── fonts
+│   └── js
+├── src
+│   └── Adn
+├── start
+├── tests
+│   ├── _data
+│   ├── _output
+│   ├── _support
+│   ├── acceptance
+│   ├── functional
+│   └── unit
+└── views
+
+28 directories
+----
+
+bin::
+This is where the executable php symlinks live, including codecept, phpunit,
+and Robo.
+
+docs::
+Where all the external (i.e. non-API) documentation for the project lives.
+
+logs::
+Where the app writes its log files.
+
+out::
+A temporary folder that acts as a mid-build staging area for twig templates as
+well as JS and CSS files.
+
+public::
+The web root. Almost all asset files are generated from vendor files. The
+.htaccess file in this folder instructs all web traffic to go through the
+index.php file.
+
+src::
+Classes created for use in the project. They all use the Purplapp namespace.
+
+start::
+A set of bootstrapping files that are included on every request.
+
+tests::
+A directory for our tests.
+
+views::
+The twig templates.
