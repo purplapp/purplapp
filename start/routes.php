@@ -105,6 +105,8 @@ $app->get("/account/mention", function (Request $req) use ($app) {
     );
 })->bind("account_mention");
 
+$app->get("/user.php", $redirector("account_user"));
+$app->get("/pca.php", $redirector("account_user"));
 $app->get("/account/user.php", $redirector("account_user"));
 $app->get("/account/user", function (Request $req) use ($app) {
     if (!$app["adn.user"]) {
