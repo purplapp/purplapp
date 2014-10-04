@@ -43,6 +43,21 @@ trait DataCollectionTrait
         return $this->transformIfNotNull(reset($this->data) ?: null);
     }
 
+    public function sort()
+    {
+        return sort($this->data);
+    }
+
+    public function toArray()
+    {
+        return $this->data;
+    }
+
+    public function count($mode = COUNT_NORMAL)
+    {
+        return count($this->data);
+    }
+
     protected function transform(stdClass $object)
     {
         return $object;
