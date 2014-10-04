@@ -7,3 +7,5 @@ README.md
 /tests/*/*Tester.php
 /tags
 composer.phar
+/node_modules/
+/bower_components/
