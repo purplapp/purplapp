@@ -3,7 +3,6 @@
 var gulp         = require("gulp"),
     csso         = require("gulp-csso"),
     uglify       = require("gulp-uglify"),
-    rename       = require("gulp-rename"),
     useref       = require("gulp-useref"),
     autoprefixer = require("gulp-autoprefixer"),
     buildDir     = "./public/static",
@@ -20,13 +19,12 @@ gulp.task("twig", function () {
 });
 
 gulp.task("css", function () {
-    gulp.src("./out/views/css/style.css")
+    gulp.src("./out/views/css/style.min.css")
         .pipe(autoprefixer({
             browsers: ["last 3 versions", "> 5%"],
             cascade: false
         }))
         .pipe(csso())
-        .pipe(rename({ extname: ".min.css" }))
         .pipe(gulp.dest("./public/css/"));
 });
 

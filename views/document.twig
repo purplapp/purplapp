@@ -18,13 +18,12 @@ This is the base file for all HTML views
         {% endblock %}
 
         {% block stylesheets %}
-        <!-- build:css(.) /css/style.css -->
+        <!-- build:css(.) /css/style.min.css -->
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="/bower_components/bootstrap-social/bootstrap-social.css"/>
+        <link rel="stylesheet" href="/public/css/mod.css">
         <!-- endbuild -->
-
-        <link rel="stylesheet" href="/static/css/mod.css">
         {% endblock %}
 
         <title>{% block title %}Purplapp{% endblock %}</title>
