@@ -36,8 +36,12 @@ git clone git@github.com:purplapp/purplapp.git && cd purplapp
 # Install composer. If you've got it already, skip this step
 curl -sS https://getcomposer.org/installer | php
 
-# install dependencies
+# install php dependencies
 php composer.phar install
+# install npm dependencies
+npm install --dev
+# install bower dependencies
+bower install
 ```
 
 ### Configuration
@@ -59,6 +63,10 @@ instance, but nginx or the built-in PHP server should work just as well.
 Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
 to find out which tasks are available, or edit the RoboFile.php directly. Here's
 a brief description of the most common tasks:
+
+### gulp
+
+- `./bin/robo gulp` starts the gulp build process.
 
 ### serve
 
