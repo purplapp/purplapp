@@ -5,11 +5,13 @@ use Psr\Log\LoggerInterface;
 
 class Client
 {
-    public $accessTokenUrl = "https://account.app.net/oauth/access_token";
+    public $accessTokenUrl     = "https://account.app.net/oauth/access_token";
 
-    public $userResourceUrl = "https://api.app.net/users";
+    public $authCallbackUrl    = "https://account.app.net/oauth" ;
 
-    public $postResourceUrl = "https://api.app.net/posts";
+    public $userResourceUrl    = "https://api.app.net/users";
+
+    public $postResourceUrl    = "https://api.app.net/posts";
 
     public $channelResourceUrl = "https://api.app.net/channels";
 
@@ -74,6 +76,21 @@ class Client
         $this->accessToken = $accessToken;
 
         $this->cache = new Cache();
+    }
+
+    public function getAuthUrl($callbackUri, array $scope = [])
+    {
+        $data = [
+            "client_id"     => $this->id,
+            "response_type" => "code",
+            "redirect_uri"  => $callbackUri,
+        ];
+
+        $opts = $scope ? ["scope" => implode("+", $scope)] + $data : $data;
+
+        $base = $this->authCallbackUrl . ($this->accessToken ? "authorize" : "authenticate");
+
+        return $base . $this->buildQuery($opts);
     }
 
     public function getAccessToken($code)

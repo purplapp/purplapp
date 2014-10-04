@@ -52,10 +52,6 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
     return $twig;
 }));
 
-$app["adn"] = function () {
-    return new AppDotNet(getenv("CLIENT_ID"), getenv("CLIENT_SECRET"));
-};
-
 $app["adn.settings"] = [
     "CLIENT_ID" => getenv("CLIENT_ID"),
     "CLIENT_SECRET" => getenv("CLIENT_SECRET"),
@@ -74,7 +70,7 @@ $app["adn.settings"] = [
 $app["adn.auth_url"] = function () use ($app) {
     $settings = $app["adn.settings"];
 
-    return $app["adn"]->getAuthUrl($settings["REDIRECT_URL"], $settings["API_SCOPE"]);
+    return $app["adn.client"]->getAuthUrl($settings["REDIRECT_URL"], $settings["API_SCOPE"]);
 };
 
 $app["adn.user"] = function () use ($app) {
