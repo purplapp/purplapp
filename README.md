@@ -57,7 +57,7 @@ App configuration is handled via a `.env` file in the root. Copy the
 
 ### Server
 
-Purplapp will run in most servers. It's currently deployed to an Apache
+Purplapp will run on most servers. It's currently deployed to an Apache
 instance, but nginx or the built-in PHP server should work just as well.
 
 ## Development
