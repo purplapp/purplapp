@@ -21,9 +21,9 @@
 <form role="form">
     <div class="form-group">
         <label for="id"><em>Enter the Second User ID here:</em></label>
-        <input type="text" class="form-control" name="id" id="id" placeholder="User ID" value="{{ otherUser is defined ? otherUser.id : "" }}">
+        <input type="text" class="form-control" name="id" id="id" placeholder="User ID" value="{{ otherUser is defined ? otherUser.username : "" }}">
     </div>
-    <button type="submit" name="send" id="send" class="btn btn-primary">Check</button>
+    <button type="submit" id="send" class="btn btn-primary">Check</button>
 </form>
 {% endblock %}
 
@@ -49,7 +49,7 @@
                         <p>
                             This graph shows you the number of users you follow
                             compared with how many
-                            <a href="{{ alpha_domain() ~ otherUser.username }}" target="_blank">
+                            <a href="{{ alpha_domain ~ otherUser.username }}" target="_blank">
                                 @{{ otherUser.username }}
                             </a>
                             follows.
@@ -81,7 +81,7 @@
                     <div class="caption">
                         <p>
                             This graph shows you the number of users that
-                            <a href="{{ alpha_domain() ~ otherUser.username }}" target="_blank">
+                            <a href="{{ alpha_domain ~ otherUser.username }}" target="_blank">
                             @{{ otherUser.username }}</a> follows
                             that you don't follow, and vice versa.
                         </p>
@@ -116,7 +116,7 @@
         <!-- Information Text -->
         <p class="lead">
             Here are some random users that
-            <a href="{{ alpha_domain() ~ otherUser.username }}" target="_blank">
+            <a href="{{ alpha_domain ~ otherUser.username }}" target="_blank">
             @{{ otherUser.username }}</a> follows but you don't.
             Maybe you want to check them out and give them a follow?
         </p>
@@ -133,12 +133,12 @@
                             <h2>{{ user.name }} <small>@{{ user.username }}</small></h2>
                         {% endif %}
 
-                        {% if user.description.html is defined %}
-                            <p>{% autoescape false %}{{ user.description.html }}{% endautoescape %}</p>
+                        {% if user.htmlBio() %}
+                            <p>{% autoescape false %}{{ user.htmlBio() }}{% endautoescape %}</p>
                         {% endif %}
                     </div>
                     <div class="col-md-2">
-                        <a href="{{ alpha_domain() ~ user.username }}" target="_blank" role="button" class="btn btn-default btn-block">
+                        <a href="{{ alpha_domain ~ user.username }}" target="_blank" role="button" class="btn btn-default btn-block">
                             View on Alpha
                         </a>
 
@@ -169,6 +169,7 @@
 {% block tail_scripts %}
     {{ parent() }}
 
+    {% if otherUser is defined %}
     <script>
     var base_compareData = [{
             // get the current (auth) user's following count
@@ -192,7 +193,7 @@
     var base_compare = document.getElementById("base_compare").getContext("2d");
 
     var not_sharedData = [{
-            value: {{ userFollowsExclusively|length }},
+            value: {{ currentUserFollowsExclusively|length }},
             color:"#FDB45C",
             highlight: "#FFC870",
             label: ""
@@ -219,14 +220,14 @@
 
         //FIXME
         if (element.getAttribute("status") === "followed") {
-            $.get("../phplib/PurplappFollow.php","id="+userid+"&op=uf");
+            $.get("/user/unfollow", "id=" + userid);
 
             element.setAttribute("status", "true");
             element.setAttribute("class", "btn btn-block btn-info");
 
             document.getElementById(userid+"_text").innerHTML='Unfollowed';
         } else {
-            $.get("../phplib/PurplappFollow.php","id="+userid);
+            $.get("/user/follow", "id=" + userid);
 
             element.setAttribute("class", "btn btn-block btn-success active");
             element.setAttribute("status", "followed");
@@ -253,4 +254,6 @@
     })
 
     </script>
+    {% endif %}
+
 {% endblock %}

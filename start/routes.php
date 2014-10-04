@@ -1,6 +1,7 @@
 <?php // routes.php
 
 use Symfony\Component\HttpFoundation\Request;
+use Purplapp\Adn\NumberCollection;
 
 // helpers
 $redirector = function ($name) use ($app) {
@@ -141,8 +142,91 @@ $app->get("/account/user", function (Request $req) use ($app) {
 })->bind("account_user")->value("username", "me");
 
 $app->get("/account/follow_comparison.php", $redirector("account_follow_comparison"));
-$app->get("/account/follow_comparison", function () use ($app) {
-    return $app->render("account_follow_comparison.twig");
+$app->get("/account/follow_comparison", function (Request $req) use ($app) {
+    if (!$app["adn.user"]) {
+        return $app->render("unauth_message.twig");
+    }
+
+    if (!$otherUsername = trim($req->get("id"), "@ ")) {
+        return $app->render("user_comparison_form.twig");
+    }
+
+    $client = $app["adn.client"];
+    $currentUser = $client->getAuthorizedUser();
+
+    if ($otherUsername === $currentUser->username) {
+        return $app->render(
+            "user_comparison_error.twig",
+            ["message" => "You can't do it with your own username! <strong>Enter
+            another user above.</strong>"]
+        );
+    }
+
+    $otherUser = $client->getUser($otherUsername);
+    $otherUserFollowing   = $client->getUserFollowingIds($otherUsername);
+    if (count($otherUserFollowing) === 0) {
+        return $app->render(
+            "user_comparison_error.twig",
+            ["message" => "The user you have selected doesn't follow anyone.
+                          <strong>Enter another user above.</strong>"]
+        );
+    }
+
+    $currentUserFollowing = $client->getAuthorizedUserFollowingIds();
+
+    $vdiff = function (NumberCollection $left, NumberCollection $right) {
+        return array_values(array_diff($left->toArray(), $right->toArray()));
+    };
+
+    $otherUserFollowing->sort();
+    $currentUserFollowing->sort();
+
+    $otherUserFollowsExclusively   = $vdiff($otherUserFollowing, $currentUserFollowing);
+    $currentUserFollowsExclusively = $vdiff($currentUserFollowing, $otherUserFollowing);
+
+    $usersToFollow = [];
+
+    $goal = 20;
+    while (true) {
+        // if we've hit our goal
+        if (count($usersToFollow) >= $goal) {
+            break;
+        }
+
+        // if we've got no more possiblities
+        if (!$otherUserFollowsExclusively) {
+            break;
+        }
+
+        $guess = mt_rand(0, count($otherUserFollowsExclusively) - 1);
+        if (!isset($otherUserFollowsExclusively[$guess])) {
+            die(var_dump($guess, $otherUserFollowsExclusively));
+        }
+        $nextUser = $otherUserFollowsExclusively[$guess];
+        unset($otherUserFollowsExclusively[$guess]);
+        $otherUserFollowsExclusively = array_values($otherUserFollowsExclusively);
+
+        // if the guess is us, remove and skip it
+        if ($nextUser === $currentUser->id) {
+            continue;
+        }
+
+        $usersToFollow[] = $nextUser;
+    }
+
+    $retrievedUsers = $client->getUsers($usersToFollow);
+
+    return $app->render(
+        "user_comparison.twig",
+        [
+            "currentUser"                   => $currentUser,
+            "otherUser"                     => $otherUser,
+            "retrievedUsers"                => $retrievedUsers,
+            "otherUserFollowsExclusively"   => $otherUserFollowsExclusively,
+            "currentUserFollowsExclusively" => $currentUserFollowsExclusively,
+        ]
+    );
+
 })->bind("account_follow_comparison");
 
 $app->get("/broadcast/lookup.php", $redirector("broadcast_lookup"));
@@ -157,3 +241,20 @@ $app->get("/broadcast/lookup", function (Request $req) use ($app) {
 
     return $app->render("broadcast_lookup.twig", compact("channel", "messages"));
 })->bind("broadcast_lookup");
+
+//TODO: change this to POST / DELETE, not GET
+$app->get("/user/unfollow", function (Request $req) use ($app) {
+    if (!$app["adn.user"]) {
+        return $app->render("unauth_message.twig");
+    }
+
+    return $app->json($app["adn.client"]->unfollowUser($req->get("id"))->json());
+})->bind("unfollow");
+
+$app->get("/user/follow", function (Request $req) use ($app) {
+    if (!$app["adn.user"]) {
+        return $app->render("unauth_message.twig");
+    }
+
+    return $app->json($app["adn.client"]->followUser($req->get("id"))->json());
+})->bind("follow");

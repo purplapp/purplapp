@@ -102,6 +102,15 @@ class Client
         return User::wrap($this->authGet($url));
     }
 
+    public function getUsers(array $users, array $opts = [])
+    {
+        $options = ["ids" => $users] + $this->getDefaultUserOpts() + $opts;
+
+        $url = "{$this->userResourceUrl}/{$this->buildQuery($options)}";
+
+        return UserCollection::wrap($this->authGet($url));
+    }
+
     public function getAuthorizedUser(array $opts = [])
     {
         return $this->cache->get("authorized_user", function () use ($opts) {
@@ -167,9 +176,68 @@ class Client
         return PostCollection::wrap($this->authGet($url));
     }
 
+    public function getAuthorizedUserFollowerIds(array $opts = [])
+    {
+        return $this->getUserFollowerIds("me", $opts);
+    }
+
+    public function getAuthorizedUserFollowingIds(array $opts = [])
+    {
+        return $this->getUserFollowingIds("me", $opts);
+    }
+
+    public function getUserFollowerIds($username, array $opts = [])
+    {
+        $identifier = $this->normalizeUserIdentifier($username);
+
+        $url = "{$this->userResourceUrl}/{$identifier}/follower/ids" . $this->buildQuery($opts);
+        return NumberCollection::wrap($this->authGet($url));
+    }
+
+    public function getUserFollowingIds($username, array $opts = [])
+    {
+        $identifier = $this->normalizeUserIdentifier($username);
+
+        $url = "{$this->userResourceUrl}/{$identifier}/following/ids" . $this->buildQuery($opts);
+        return NumberCollection::wrap($this->authGet($url));
+    }
+
+    public function followUser($user)
+    {
+        $identifier = $this->normalizeUserIdentifier($user);
+
+        $url = "{$this->userResourceUrl}/{$identifier}/follow";
+
+        return $this->authPost($url);
+    }
+
+    public function unfollowUser($user)
+    {
+        $identifier = $this->normalizeUserIdentifier($user);
+
+        $url = "{$this->userResourceUrl}/{$identifier}/follow";
+
+        return $this->authDelete($url);
+    }
+
     protected function authGet($url, array $opts = [])
     {
-        return $this->client->get($url, [
+        return $this->authHttpRequest("get", $url, $opts);
+    }
+
+    protected function authPost($url, array $opts = [])
+    {
+        return $this->authHttpRequest("post", $url, $opts);
+    }
+
+    protected function authDelete($url, array $opts = [])
+    {
+        return $this->authHttpRequest("delete", $url, $opts);
+    }
+
+    protected function authHttpRequest($method, $url, array $opts = [])
+    {
+        return $this->client->$method($url, [
             "headers" => ["Authorization" => "Bearer {$this->accessToken}"],
         ] + $opts);
     }
@@ -184,13 +252,15 @@ class Client
 
         foreach ($opts as $key => $value) {
             if (is_bool($value)) {
-                $final[$key] = $value ? 1 : 0;
+                $final[] .= "{$key}=" . (int) $value;
+            } else if (is_array($value)) {
+                $final[] = "{$key}=" . implode(",", $value);
             } else {
-                $final[$key] = $value;
+                $final[] = "{$key}={$value}";
             }
         }
 
-        return "?" . http_build_query($final);
+        return "?" . implode("&", $final);
     }
 
     protected function normalizeUserIdentifier($identifier)
