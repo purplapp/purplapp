@@ -6,7 +6,7 @@ php:
   - hhvm
 
 install:
-  - npm install --dev
+  - npm install
   - composer install --dev
 
 before_script:
