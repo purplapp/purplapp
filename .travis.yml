@@ -6,6 +6,7 @@ php:
   - hhvm
 
 before_install:
+  - sudo apt-get install nodejs
   - sudo npm install -g bower
 
 install:
