@@ -23,11 +23,11 @@ class RoboFile extends TaskList
     /**
      * @desc Starts gulp
      */
-    public function gulp()
+    public function gulp($args = "")
     {
         $this->say("Starting the gulp process");
 
-        $this->taskExec("./node_modules/.bin/gulp")->run();
+        $this->taskExec("./node_modules/.bin/gulp")->args($args)->run();
     }
 
     /**
@@ -35,21 +35,7 @@ class RoboFile extends TaskList
      */
     public function test($args = "")
     {
-        $this->getServer()->background()->run();
-
-        return $this->rebuildAndRunTests($args);
-    }
-
-    /**
-     * @desc Runs the test suite (for a CI server)
-     */
-    public function ci()
-    {
-        $this->getServer()->background()->run();
-
-        sleep(5);
-
-        return (bool) $this->rebuildAndRunTests("--debug");
+        return $this->taskExec("./bin/phpunit")->args($args)->run();
     }
 
     /**
@@ -60,30 +46,21 @@ class RoboFile extends TaskList
     {
         $this->getServer()->background()->run();
 
-        $this->rebuildAndRunTests($args);
+        $this->test($args);
 
         $self    = $this;
         $files   = __DIR__ . "/tests/";
-        $lastMod = microtime(true);
 
         return $this->taskWatch()
-            ->monitor($files, function ($event) use ($args, $self, $lastMod) {
-                $path                 = (string) $event->getResource()->getResource();
+            ->monitor($files, function ($event) use ($args, $self) {
+                $path = (string) $event->getResource()->getResource();
+                $ext  = pathinfo($path, PATHINFO_EXTENSION);
 
-                $extension            = pathinfo($path, PATHINFO_EXTENSION);
-                $acceptableExtensions = array("php", "twig", "json");
-
-                if (!in_array($extension, $acceptableExtensions)) {
+                if (!in_array($ext, ["php", "twig", "json"])) {
                     return;
                 }
 
-                $isTester = preg_match('/\/\w+Tester\.php$/', $path);
-                if ($isTester && ($lastMod - microtime(true) > 5000)) {
-                    $self->rebuildTesters();
-                    $lastMod = microtime(true);
-                }
-
-                return $self->getCodecept()->run($args);
+                return $self->test($args);
             })
             ->run();
     }
@@ -93,25 +70,10 @@ class RoboFile extends TaskList
         return $this->taskExec("phptags")->run();
     }
 
-    public function rebuildTesters()
-    {
-        return $this->taskExec("./bin/codecept build")->run();
-    }
-
-    public function getCodecept()
-    {
-        return $this->taskCodecept('./bin/codecept');
-    }
-
     private function getServer()
     {
         return $this->taskServer(self::SERVER_PORT)
             ->dir(__DIR__ . "/public")
             ->arg(__DIR__ . "/public/index.php");
-    }
-
-    private function rebuildAndRunTests($args = "")
-    {
-        return $this->rebuildTesters() && $this->getCodecept()->args($args)->run();
     }
 }

@@ -2,9 +2,13 @@
 
 use Purplapp\Application;
 
-function app_dir()
-{
-    return __DIR__;
+defined("APP_DIR") || define("APP_DIR", __DIR__);
+
+if (!function_exists("app_dir")) {
+    function app_dir()
+    {
+        return APP_DIR;
+    }
 }
 
 require app_dir() . "/vendor/autoload.php";

@@ -52,14 +52,24 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
     return $twig;
 }));
 
+$app["http.host"] = function () {
+    if (isset($app["request"])) {
+        return $app["request"]->getHttpHost();
+    } else if (isset($_SERVER["HTTP_HOST"])) {
+        return $_SERVER["HTTP_HOST"];
+    } else {
+        return "localhost";
+    }
+};
+
 $app["adn.settings"] = [
-    "CLIENT_ID" => getenv("CLIENT_ID"),
+    "CLIENT_ID"     => getenv("CLIENT_ID"),
     "CLIENT_SECRET" => getenv("CLIENT_SECRET"),
-    "ALPHA_DOMAIN" => getenv("ALPHA_DOMAIN"),
+    "ALPHA_DOMAIN"  => getenv("ALPHA_DOMAIN"),
     "SUPPORT_EMAIL" => getenv("SUPPORT_EMAIL"),
-    "GITHUB_URL" => getenv("GITHUB_URL"),
-    "REDIRECT_URL" => "http://{$_SERVER["HTTP_HOST"]}/adn/callback",
-    "API_SCOPE" => [
+    "GITHUB_URL"    => getenv("GITHUB_URL"),
+    "REDIRECT_URL"  => "http://{$app["http.host"]}/adn/callback",
+    "API_SCOPE"     => [
         "basic",
         "follow",
         "public_messages",
