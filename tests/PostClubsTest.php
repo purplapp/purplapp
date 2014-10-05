@@ -26,7 +26,8 @@ class PostsClubTest extends UnitTestCase
 
         $clubs = PostClubs::forUser($user);
 
-        $this->assertContainsClub("MysteryScienceClub", $clubs);
+        $this->assertContainsClub("MysteryScienceClub", $clubs->memberClubs());
+        $this->assertNotContainsClub("MysteryScienceClub", $clubs->nextClubs());
     }
 
     /**
@@ -36,7 +37,8 @@ class PostsClubTest extends UnitTestCase
     {
         $clubs = PostClubs::forUser($this->mockUserWithCountAndId(0, 34555));
 
-        $this->assertNotContainsClub("SpinalTapClub", $clubs);
+        $this->assertNotContainsClub("SpinalTapClub", $clubs->memberClubs());
+        $this->assertContainsClub("SpinalTapClub", $clubs->nextClubs());
     }
 
     /**
@@ -46,7 +48,8 @@ class PostsClubTest extends UnitTestCase
     {
         $clubs = PostClubs::forUser($this->mockUserWithCountAndId(4000, 4500));
 
-        $this->assertNotContainsClub("OrphanBlackClub", $clubs);
+        $this->assertNotContainsClub("OrphanBlackClub", $clubs->memberClubs());
+        $this->assertContainsClub("OrphanBlackClub", $clubs->nextClubs());
     }
 
     /**
@@ -56,7 +59,8 @@ class PostsClubTest extends UnitTestCase
     {
         $clubs = PostClubs::forUser($this->mockUserWithCountAndId(20000, 2));
 
-        $this->assertContainsClub("OrphanBlackClub", $clubs);
+        $this->assertContainsClub("OrphanBlackClub", $clubs->memberClubs());
+        $this->assertNotContainsClub("OrphanBlackClub", $clubs->nextClubs());
     }
 
     protected function mockUser(array $details = [])
@@ -77,11 +81,11 @@ class PostsClubTest extends UnitTestCase
         return User::wrap($attributes);
     }
 
-    private function mockUserWithCountAndId($count, $id = 2)
+    private function mockUserWithCountAndId($count, $identifier = 2)
     {
         return $this->mockUser(
             [
-                "id" => $id,
+                "id" => $identifier,
                 "counts" => (object) ["posts" => $count]
             ]
         );
@@ -90,7 +94,7 @@ class PostsClubTest extends UnitTestCase
     private function assertContainsClub($clubName, $clubs)
     {
         $hasClub = false;
-        foreach ($clubs->memberClubs() as $club) {
+        foreach ($clubs as $club) {
             if ($club->url === $clubName) {
                 $hasClub = true;
             }
@@ -101,7 +105,7 @@ class PostsClubTest extends UnitTestCase
 
     private function assertNotContainsClub($clubName, $clubs)
     {
-        foreach ($clubs->memberClubs() as $club) {
+        foreach ($clubs as $club) {
             $this->assertNotEquals($club->url, $clubName);
         }
     }
