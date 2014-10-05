@@ -5,10 +5,13 @@ php:
   - 5.4
   - hhvm
 
-before_script:
+install:
   - npm install --dev
-  - gulp deploy
-  - cp .env.example .env
   - composer install --dev
 
-script: ./bin/robo test
+before_script:
+  - gulp deploy
+  - cp .env.example .env
+
+script:
+  - ./bin/robo test
