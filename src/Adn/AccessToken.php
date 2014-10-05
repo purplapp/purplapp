@@ -2,7 +2,10 @@
 
 use GuzzleHttp\Message\Response;
 
-class AccessTokenResponse
+/**
+ * A representation of an AccessToken as it appears in the API.
+ */
+class AccessToken
 {
     use DataContainerTrait;
 }
