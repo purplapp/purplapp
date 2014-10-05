@@ -39,6 +39,19 @@ class RoboFile extends TaskList
     }
 
     /**
+     * @desc runs the test suite with code coverage turned on
+     */
+    public function coverage($args = "")
+    {
+        return $this
+            ->taskExec("./bin/phpunit")
+            ->arg("--coverage-html")
+            ->arg("./out/coverage/report.html")
+            ->args($args)
+            ->run();
+    }
+
+    /**
      * @desc watches the directory and reruns the tests when something is
      * changed
      */
