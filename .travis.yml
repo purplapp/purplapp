@@ -5,14 +5,11 @@ php:
   - 5.4
   - hhvm
 
-before_install:
-  - sudo apt-get install nodejs
-  - sudo npm install -g bower
-
 install:
+  - sudo npm install -g bower
   - npm install
-  - bower install
   - composer install --dev
+  - bower install
 
 before_script:
   - gulp deploy
