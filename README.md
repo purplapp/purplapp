@@ -42,6 +42,8 @@ curl -sS https://getcomposer.org/installer | php
 php composer.phar install
 # install npm dependencies
 npm install --dev
+# install bower
+npm install -g bower
 # install bower dependencies
 bower install
 ```
