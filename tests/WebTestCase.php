@@ -2,7 +2,7 @@
 
 use Silex\WebTestCase as SilexWebTestCase;
 
-class WebTestCase extends SilexWebTestCase
+abstract class WebTestCase extends SilexWebTestCase
 {
     protected $app;
 

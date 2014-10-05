@@ -1,0 +1,76 @@
+<?php namespace Purplapp\Tests;
+
+use Purplapp\Adn\PostClubs;
+use Purplapp\Adn\User;
+
+class PostsClubTest extends UnitTestCase
+{
+    /**
+     * @test
+     */
+    public function it_should_show_0_clubs_for_a_user_with_no_posts()
+    {
+        $user = $this->mockUserWithCountAndId(0, 200);
+
+        $clubs = PostClubs::forUser($user);
+
+        $this->assertCount(0, $clubs->memberClubs());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_not_show_the_orphan_black_club_if_the_user_hasnt_earned_it()
+    {
+        $clubs = PostClubs::forUser($this->mockUserWithCountAndId(4000, 4500));
+
+        foreach ($clubs->memberClubs() as $club) {
+            $this->assertNotEquals($club->url, "OrphanBlackClub");
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_show_the_orphan_black_club_if_the_user_has_earned_it()
+    {
+        $clubs = PostClubs::forUser($this->mockUserWithCountAndId(20000, 2));
+
+        $hasClub = false;
+        foreach ($clubs->memberClubs() as $club) {
+            if ($club->url === "OrphanBlackClub") {
+                $hasClub = true;
+            }
+        }
+
+        $this->assertEquals($hasClub, true, "User was not given the OrphanBlackClub");
+    }
+
+    protected function mockUser(array $details = [])
+    {
+        $attributes = $details + [
+            "id" => 2,
+            "counts" => (object) [
+                "posts" => 0,
+            ],
+            "description" => (object) [
+                "text" => "lorem ipsum",
+                "entities" => (object) [
+
+                ],
+            ],
+        ];
+
+        return User::wrap($attributes);
+    }
+
+    private function mockUserWithCountAndId($count, $id = 2)
+    {
+        return $this->mockUser(
+            [
+                "id" => $id,
+                "counts" => (object) ["posts" => $count]
+            ]
+        );
+    }
+}

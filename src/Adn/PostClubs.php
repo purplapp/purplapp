@@ -5,147 +5,147 @@ class PostClubs
     private static $clubs = [
         [
             "url"       => "RollClub",
-            "count"     => "500"
+            "count"     => 500
         ],
         [
             "url"       => "CrumpetClub",
-            "count"     => "1000"
+            "count"     => 1000
         ],
         [
             "url"       => "NoonClub",
-            "count"     => "1200"
+            "count"     => 1200
         ],
         [
             "url"       => "BitesizeCookieClub",
-            "count"     => "2000"
+            "count"     => 2000
         ],
         [
             "url"       => "CrunchClub",
-            "count"     => "2600"
+            "count"     => 2600
         ],
         [
             "url"       => "MysteryScienceClub",
-            "count"     => "3000"
+            "count"     => 3000
         ],
         [
             "url"       => "LDRClub",
-            "count"     => "5000"
+            "count"     => 5000
         ],
         [
             "url"       => "IBMPCClub",
-            "count"     => "8088"
+            "count"     => 8088
         ],
         [
             "url"       => "CookieClub",
-            "count"     => "10000"
+            "count"     => 10000
         ],
         [
             "url"       => "SpinalTapClub",
-            "count"     => "11000"
+            "count"     => 11000
         ],
         [
             "url"       => "BreakfastClub",
-            "count"     => "20000"
+            "count"     => 20000
         ],
         [
             "url"       => "CaratClub",
-            "count"     => "24000"
+            "count"     => 24000
         ],
         [
             "url"       => "PeshawarClub",
-            "count"     => "25000"
+            "count"     => 25000
         ],
         [
             "url"       => "MileHighClub",
-            "count"     => "30000"
+            "count"     => 30000
         ],
         [
             "url"       => "PiClub",
-            "count"     => "31416"
+            "count"     => 31416
         ],
         [
             "url"       => "TowelClub",
-            "count"     => "42000"
+            "count"     => 42000
         ],
         [
             "url"       => "HitmanClub",
-            "count"     => "47000"
+            "count"     => 47000
         ],
         [
             "url"       => "BaconClub",
-            "count"     => "50000"
+            "count"     => 50000
         ],
         [
             "url"       => "BrowncoatClub",
-            "count"     => "57000"
+            "count"     => 57000
         ],
         [
             "url"       => "CommodoreClub",
-            "count"     => "64000"
+            "count"     => 64000
         ],
         [
             "url"       => "MotorolaClub",
-            "count"     => "68000"
+            "count"     => 68000
         ],
         [
             "url"       => "TromboneClub",
-            "count"     => "76000"
+            "count"     => 76000
         ],
         [
             "url"       => "WiFiClub",
-            "count"     => "80211"
+            "count"     => 80211
         ],
         [
             "url"       => "PajamaClub",
-            "count"     => "90000"
+            "count"     => 90000
         ],
         [
             "url"       => "TowerOfBabbleClub",
-            "count"     => "100000"
+            "count"     => 100000
         ],
         [
             "url"       => "OrbitClub",
-            "count"     => "110000"
+            "count"     => 110000
         ],
         [
             "url"       => "MacClub",
-            "count"     => "128000"
+            "count"     => 128000
         ],
         [
             "url"       => "TwitterLeaverClub",
-            "count"     => "140000"
+            "count"     => 140000
         ],
         [
             "url"       => "GetALifeNoSrslyClub",
-            "count"     => "200000"
+            "count"     => 200000
         ],
         [
             "url"       => "MeaninglessPostCountClub",
-            "count"     => "231568"
+            "count"     => 231568
         ],
         [
             "url"       => "ADNClub",
-            "count"     => "256000"
+            "count"     => 256000
         ],
         [
             "url"       => "PensionersClub",
-            "count"     => "401000"
+            "count"     => 401000
         ],
         [
             "url"       => "LaughterClub",
-            "count"     => "555000"
+            "count"     => 555000
         ],
         [
             "url"       => "GatesClub",
-            "count"     => "640000"
+            "count"     => 640000
         ],
         [
             "url"       => "JoyLuckClub",
-            "count"     => "888000"
+            "count"     => 888000
         ],
         [
             "url"       => "MillionairesClub",
-            "count"     => "1000000"
+            "count"     => 1000000
         ],
     ];
 
@@ -209,7 +209,6 @@ class PostClubs
             "url"   => "OrphanBlackClub",
             "count" => $this->user->id,
         ];
-
 
         return $clubs;
     }
