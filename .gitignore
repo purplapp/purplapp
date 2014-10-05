@@ -5,9 +5,6 @@
 /tests/_output/*
 /tests/*/*Tester.php
 /out/
-/public/css
-/public/js
-/public/fonts
 
 composer.phar
 .env

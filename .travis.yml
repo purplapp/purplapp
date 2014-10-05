@@ -6,7 +6,7 @@ php:
   - hhvm
 
 install:
-  - sudo npm install -g bower
+  - npm install -g bower
   - npm install
   - composer install --dev
   - bower install
@@ -17,3 +17,7 @@ before_script:
 
 script:
   - ./bin/robo test
+
+matrix:
+  fast_finish: true
+
