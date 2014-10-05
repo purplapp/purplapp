@@ -5,6 +5,9 @@ php:
   - 5.4
   - hhvm
 
+before_install:
+  - sudo npm install -g bower
+
 install:
   - npm install
   - bower install
