@@ -6,6 +6,8 @@ php:
   - hhvm
 
 before_script:
+  - npm install --dev
+  - gulp deploy
   - cp .env.example .env
   - composer install --dev
 

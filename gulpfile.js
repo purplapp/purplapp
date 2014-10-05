@@ -46,4 +46,6 @@ gulp.task("watch", function () {
     gulp.watch("./bower_components/font-awesome/fonts/*", ["fonts"]);
 });
 
+gulp.task("deploy", ["fonts", "twig", "js", "css"]);
+
 gulp.task("default", ["fonts", "twig", "js", "css", "watch"]);
