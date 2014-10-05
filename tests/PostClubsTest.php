@@ -20,13 +20,33 @@ class PostsClubTest extends UnitTestCase
     /**
      * @test
      */
+    public function it_should_show_the_mystery_science_club_to_users_with_3000_posts()
+    {
+        $user = $this->mockUserWithCountAndId(3000, 2);
+
+        $clubs = PostClubs::forUser($user);
+
+        $this->assertContainsClub("MysteryScienceClub", $clubs);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_not_show_the_spinal_tap_to_a_level_0_noob()
+    {
+        $clubs = PostClubs::forUser($this->mockUserWithCountAndId(0, 34555));
+
+        $this->assertNotContainsClub("SpinalTapClub", $clubs);
+    }
+
+    /**
+     * @test
+     */
     public function it_should_not_show_the_orphan_black_club_if_the_user_hasnt_earned_it()
     {
         $clubs = PostClubs::forUser($this->mockUserWithCountAndId(4000, 4500));
 
-        foreach ($clubs->memberClubs() as $club) {
-            $this->assertNotEquals($club->url, "OrphanBlackClub");
-        }
+        $this->assertNotContainsClub("OrphanBlackClub", $clubs);
     }
 
     /**
@@ -36,14 +56,7 @@ class PostsClubTest extends UnitTestCase
     {
         $clubs = PostClubs::forUser($this->mockUserWithCountAndId(20000, 2));
 
-        $hasClub = false;
-        foreach ($clubs->memberClubs() as $club) {
-            if ($club->url === "OrphanBlackClub") {
-                $hasClub = true;
-            }
-        }
-
-        $this->assertEquals($hasClub, true, "User was not given the OrphanBlackClub");
+        $this->assertContainsClub("OrphanBlackClub", $clubs);
     }
 
     protected function mockUser(array $details = [])
@@ -72,5 +85,24 @@ class PostsClubTest extends UnitTestCase
                 "counts" => (object) ["posts" => $count]
             ]
         );
+    }
+
+    private function assertContainsClub($clubName, $clubs)
+    {
+        $hasClub = false;
+        foreach ($clubs->memberClubs() as $club) {
+            if ($club->url === $clubName) {
+                $hasClub = true;
+            }
+        }
+
+        $this->assertEquals($hasClub, true, "User was not given the {$clubName}");
+    }
+
+    private function assertNotContainsClub($clubName, $clubs)
+    {
+        foreach ($clubs->memberClubs() as $club) {
+            $this->assertNotEquals($club->url, $clubName);
+        }
     }
 }
