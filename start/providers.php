@@ -1,5 +1,8 @@
 <?php // providers.php
 
+
+date_default_timezone_set('UTC');
+
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Purplapp\Adn\NiceRankAwareClient;
