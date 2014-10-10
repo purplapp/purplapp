@@ -25,6 +25,8 @@ trait TimeSinceCreatedTrait
             $this->humanFriendlyTimeSinceCreated = $this->createdAt()->diffForHumans(Carbon::now());
         }
 
+        $this->humanFriendlyTimeSinceCreated = str_replace("before", "ago", $this->humanFriendlyTimeSinceCreated);
+
         return $this->humanFriendlyTimeSinceCreated;
     }
 }
