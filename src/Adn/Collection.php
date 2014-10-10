@@ -1,5 +1,6 @@
 <?php namespace Purplapp\Adn;
 
+use stdClass;
 use Iterator;
 use Countable;
 
