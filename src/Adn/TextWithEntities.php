@@ -36,7 +36,9 @@ class TextWithEntities
             ->map([$this, "gatherMentions"])
             ->map([$this, "encodeHtmlEntities"])
             ->map([$this, "applyFilters"])
-            ->map("head")
+            ->map(function ($arr) {
+                return $arr[0];
+            })
             ->map("nl2br")
             ->get();
     }
