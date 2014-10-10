@@ -59,6 +59,22 @@ class PostsClubTest extends UnitTestCase
         $this->assertNotContainsClub("OrphanBlackClub", $clubs->nextClubs());
     }
 
+    /**
+     * @test
+     */
+    public function it_should_show_clubs_in_order()
+    {
+        $clubs = $this->mockUserWithCountAndId(50000, 46000);
+
+        $count = count($clubs);
+
+        for ($i = 1; $i < $count; $i += 1) {
+            if ($clubs[$i - 1]["count"] > $clubs[$i]["count"]) {
+                $this->assertLessThanOrEqualTo($clubs[$i]["count"], $clubs[$i - 1]["count"]);
+            }
+        }
+    }
+
     protected function mockUser(array $details = [])
     {
         $attributes = $details + [

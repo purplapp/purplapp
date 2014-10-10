@@ -210,6 +210,19 @@ class PostClubs
             "count" => $this->user->id,
         ];
 
+        return $this->sort($clubs);
+    }
+
+    private function sort(array $clubs)
+    {
+        usort($clubs, function ($left, $right) {
+            if ($left["count"] === $right["count"]) {
+                return 0;
+            }
+
+            return ($left["count"] > $right["count"]) ? 1 : -1;
+        });
+
         return $clubs;
     }
 }
