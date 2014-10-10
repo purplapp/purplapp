@@ -254,11 +254,7 @@
                             {{ first_mention.created_at|date("jS F Y") }}
                         </a>
                         <i>
-                            (by
-                            <a href="{{ alpha_domain ~ first_mention.user.username }}" target="_blank">
-                                @{{ first_mention.user.username }}
-                            </a>
-                            )
+                            (by <a href="{{ alpha_domain ~ first_mention.user.username }}" target="_blank">@{{ first_mention.user.username }}</a>)
                         </i>
                     </td>
                 </tr>
@@ -281,11 +277,7 @@
                             {{ last_mention.humanFriendlyTimeSinceCreated() }}
                         </a>
                         <i>
-                            (by
-                            <a href="{{ alpha_domain ~ last_mention.user.username }}" target='_blank'>
-                                @{{ last_mention.user.username }}
-                            </a>
-                            )
+                            (by <a href="{{ alpha_domain ~ last_mention.user.username }}" target='_blank'>@{{ last_mention.user.username }}</a>)
                         </i>
                     </td>
                 </tr>
