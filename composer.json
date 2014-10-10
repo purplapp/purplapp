@@ -16,7 +16,8 @@
         "phpunit/phpunit": "~4.3.0",
         "codegyre/robo": "0.4.5",
         "symfony/browser-kit": "~2.5.4",
-        "symfony/css-selector": "~2.5.4"
+        "symfony/css-selector": "~2.5.4",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "autoload": {
         "psr-4": {
