@@ -499,7 +499,7 @@ class Client
             return $identifier;
         }
 
-        return "@{$identifier}";
+        return "@" . trim($identifier, "@ ");
     }
 
     /**

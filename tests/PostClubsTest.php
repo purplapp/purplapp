@@ -10,9 +10,7 @@ class PostsClubTest extends UnitTestCase
      */
     public function it_should_show_0_clubs_for_a_user_with_no_posts()
     {
-        $user = $this->mockUserWithCountAndId(0, 200);
-
-        $clubs = PostClubs::forUser($user);
+        $clubs = $this->mockUserWithCountAndId(0, 200)->clubs();
 
         $this->assertCount(0, $clubs->memberClubs());
     }
@@ -22,9 +20,7 @@ class PostsClubTest extends UnitTestCase
      */
     public function it_should_show_the_mystery_science_club_to_users_with_3000_posts()
     {
-        $user = $this->mockUserWithCountAndId(3000, 2);
-
-        $clubs = PostClubs::forUser($user);
+        $clubs = $this->mockUserWithCountAndId(3000, 2)->clubs();
 
         $this->assertContainsClub("MysteryScienceClub", $clubs->memberClubs());
         $this->assertNotContainsClub("MysteryScienceClub", $clubs->nextClubs());
@@ -35,7 +31,7 @@ class PostsClubTest extends UnitTestCase
      */
     public function it_should_not_show_the_spinal_tap_to_a_level_0_noob()
     {
-        $clubs = PostClubs::forUser($this->mockUserWithCountAndId(0, 34555));
+        $clubs = $this->mockUserWithCountAndId(0, 34555)->clubs();
 
         $this->assertNotContainsClub("SpinalTapClub", $clubs->memberClubs());
         $this->assertContainsClub("SpinalTapClub", $clubs->nextClubs());
@@ -46,7 +42,7 @@ class PostsClubTest extends UnitTestCase
      */
     public function it_should_not_show_the_orphan_black_club_if_the_user_hasnt_earned_it()
     {
-        $clubs = PostClubs::forUser($this->mockUserWithCountAndId(4000, 4500));
+        $clubs = $this->mockUserWithCountAndId(4000, 4500)->clubs();
 
         $this->assertNotContainsClub("OrphanBlackClub", $clubs->memberClubs());
         $this->assertContainsClub("OrphanBlackClub", $clubs->nextClubs());
@@ -57,7 +53,7 @@ class PostsClubTest extends UnitTestCase
      */
     public function it_should_show_the_orphan_black_club_if_the_user_has_earned_it()
     {
-        $clubs = PostClubs::forUser($this->mockUserWithCountAndId(20000, 2));
+        $clubs = $this->mockUserWithCountAndId(20000, 2)->clubs();
 
         $this->assertContainsClub("OrphanBlackClub", $clubs->memberClubs());
         $this->assertNotContainsClub("OrphanBlackClub", $clubs->nextClubs());
