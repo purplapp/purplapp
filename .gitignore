@@ -9,3 +9,5 @@
 composer.phar
 .env
 /tags
+
+npm-debug.log
