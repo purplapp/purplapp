@@ -245,7 +245,7 @@ class Client
      */
     public function getUserMentions($identifier, array $opts = [])
     {
-        $normalized = $this->normalizeUserIdentifier($username);
+        $normalized = $this->normalizeUserIdentifier($identifier);
 
         $url = "{$this->userResourceUrl}/{$normalized}/mentions" . $this->buildQuery($opts);
 
