@@ -78,8 +78,7 @@ a brief description of the most common tasks:
 
 ### test
 
-- `./bin/robo test` runs the full test suite, and handles spinning up the dev
-  server as above.
+- `./bin/robo test` runs the full test suite.
 
 - `./bin/robo test -- --debug` will run the test suite in debug mode.
 
@@ -93,8 +92,6 @@ a brief description of the most common tasks:
 
 ## Testing
 
-Tests are written using the [Codeception][codecept] framework. Check the project
-website for more documentation.
+Tests are written in PHPUnit. Check the `tests` folder for some examples.
 
-[codecept]: http://codeception.com/
 [robo]: http://robo.li/
