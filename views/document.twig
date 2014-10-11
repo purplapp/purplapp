@@ -18,7 +18,7 @@ This is the base file for all HTML views
         {% endblock %}
 
         {% block stylesheets %}
-            {% stylesheets "@styles" filter="cssmin" output="css/style.min.css" %}
+            {% stylesheets "@styles" output="/css/style.min.css" combine=true %}
                 <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
             {% endstylesheets %}
         {% endblock %}
@@ -43,7 +43,7 @@ This is the base file for all HTML views
         {% block footer %}{% include "footer.twig" %}{% endblock %}
 
         {% block tail_scripts %}
-            {% javascripts "@scripts" output="js/app.min.js" %}
+            {% javascripts "@scripts" output="/js/app.min.js" combine=true %}
                 <script type="text/javascript" src="{{ asset_url }}">
             {% endjavascripts %}
         {% endblock %}
