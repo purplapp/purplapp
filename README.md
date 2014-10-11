@@ -64,6 +64,8 @@ instance, but nginx or the built-in PHP server should work just as well.
 
 ## Development
 
+Change the line `$app["debug"] = false;` in `start/init.php` to be `$app["debug"] = false;` when developing.
+
 Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
 to find out which tasks are available, or edit the RoboFile.php directly. Here's
 a brief description of the most common tasks:
@@ -89,6 +91,9 @@ a brief description of the most common tasks:
 
 - `./bin/robo tdd -- --debug` will run the test suite in debug mode.
 
+## Production
+
+Change the line `$app["debug"] = true;` in `start/init.php` to be `$app["debug"] = false;` when running in production.
 
 ## Testing
 
