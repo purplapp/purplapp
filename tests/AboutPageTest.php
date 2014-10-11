@@ -26,6 +26,7 @@ class AboutPageTest extends WebTestCase
         $this->assertRegExpExists(
             "/Charlotte/",
             "/Johannes/",
+            "/Ciaran/"
             "/Hugo/",
             "/Brandon/",
             "/Jessica Dennis/"
@@ -41,7 +42,6 @@ class AboutPageTest extends WebTestCase
 
         $this->assertRegExpExists(
             "/Font Awesome/", "/Dave Gandy/", "/fontawesome\.io/",
-            "/PCA Icons/", "/Yusuke Kamiyamane/", "/p.yusukekamiyamane.com/",
             "/Glyphicon Halflings/", "/glyphicons.com/"
         );
     }
@@ -53,6 +53,7 @@ class AboutPageTest extends WebTestCase
     {
         $contributors = [
             "purplapp",
+            "ciarand",
             "charl",
             "jvimedia",
             "hu",
