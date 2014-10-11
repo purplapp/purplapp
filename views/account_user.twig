@@ -3,6 +3,7 @@
 {% block title %}User Information Lookup{% endblock %}
 
 {% block content %}
+
 <div class="col-md-12">
     <!-- User Name -->
     <div class="page-header">
@@ -125,13 +126,13 @@
 
         {# verified stuff #}
         {% set did_display_annotations = false %}
-        {% if (user.verified_link is defined)  and (user.annotations is defined) %}
+        {% if (user.verified_link is defined) or (user.annotations is defined) %}
             <tr>
                 <td><h4>User Data</h4></td>
                 <td></td>
             </tr>
 
-            {% if user.verified_link %}
+            {% if user.verified_link is defined %}
                 {% set did_display_annotations = true %}
                 <tr>
                     <td>Verified Domain:</td>
@@ -188,7 +189,7 @@
                     {% set did_display_annotations = true %}
                     <tr>
                         <td>Gender:</td>
-                        <td>{{ annotations.value.gender|capitalize }}</td>
+                        <td>{{ annotation.value.gender|capitalize }}</td>
                     </tr>
                 {% endif %}
             {% endfor %}
@@ -196,9 +197,10 @@
             {% for annotation in user.annotations %}
                 {% if "appnetizens.userinput.birthday" in annotation.type %}
                     {% set did_display_annotations = true %}
+                    {% set birthday = "2014" %}
                     <tr>
                         <td>Birthday:</td>
-                        <td>{{ birthdate.birthdayDateConverstion(annotations.value.birthday) }}</td>
+                        <td>{{ birthday.getdate }}</td>
                     </tr>
                 {% endif %}
             {% endfor %}
