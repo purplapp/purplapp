@@ -27,13 +27,13 @@ $app->register(new UrlGeneratorServiceProvider());
 $app->register(new TwigServiceProvider(), [
     "twig.path" => app_dir() . "/views",
     "twig.options" => [
-        "debug" => false,
+        "debug" => $app["debug"],
         "cache" => app_dir() . "/cache/twig",
     ],
 ]);
 
 $app->register(new AsseticServiceProvider());
-$app["assetic.options"] = ["debug" => false];
+$app["assetic.options"] = ["debug" => $app["debug"]];
 $app['assetic.path_to_web'] = APP_DIR . "/public";
 
 $app->register(new SessionServiceProvider(), [
@@ -128,7 +128,6 @@ $app["adn.client"] = function () use ($app) {
 
 $app["assetic.filter_manager"] = $app->share(
     $app->extend('assetic.filter_manager', function($fm, $app) {
-        $fm->set("cssmin", new CssMinFilter());
         $fm->set("jsmin", new CompilerApiFilter());
 
         return $fm;
@@ -142,8 +141,6 @@ $app['assetic.asset_manager'] = $app->share(
             new FileAsset(APP_DIR . "/bower_components/font-awesome/css/font-awesome.min.css"),
             new FileAsset(APP_DIR . "/bower_components/bootstrap-social/bootstrap-social.css"),
             new FileAsset(APP_DIR . "/public/css/mod.css"),
-        ], [
-            $app['assetic.filter_manager']->get("cssmin"),
         ]);
 
         $scripts = new AssetCollection([
@@ -157,9 +154,9 @@ $app['assetic.asset_manager'] = $app->share(
         $cache = new FilesystemCache(APP_DIR . '/cache/assetic');
 
         $am->set('styles', new AssetCache($styles, $cache));
-        $am->set("scripts", new AssetCache($scripts, $cache));
-
         $am->get('styles')->setTargetPath('css/style.min.css');
+
+        $am->set("scripts", new AssetCache($scripts, $cache));
         $am->get('scripts')->setTargetPath('js/app.min.js');
 
         return $am;
