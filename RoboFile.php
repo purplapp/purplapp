@@ -1,8 +1,12 @@
 <?php require __DIR__.'/vendor/autoload.php';
 
 use Symfony\Component\Finder\Finder;
-use \Robo\Tasks as TaskList;
-use \Robo\Task\GenMarkdownDocTask as Doc;
+use Robo\Tasks as TaskList;
+use Robo\Task\GenMarkdownDocTask as Doc;
+use Assetic\AssetWriter;
+use Assetic\Extension\Twig\TwigFormulaLoader;
+use Assetic\Extension\Twig\TwigResource;
+use Assetic\Factory\LazyAssetManager;
 
 class RoboFile extends TaskList
 {
@@ -31,17 +35,25 @@ class RoboFile extends TaskList
     }
 
     /**
-     * @desc Starts gulp
+     * @desc Writes the assets to file
      */
-    public function gulp($args = "")
+    public function assets()
     {
-        $this->say("Starting the server in the background: localhost:" . self::SERVER_PORT);
+        $app = include __DIR__ . "/bootstrap.php";
 
-        $this->getServer()->background()->run();
+        $assetsManager = new LazyAssetManager($app["assetic.factory"]);
 
-        $this->say("Starting the gulp process");
+        // enable loading assets from twig templates
+        $assetsManager->setLoader('twig', new TwigFormulaLoader($app["twig"]));
 
-        $this->taskExec("./node_modules/.bin/gulp")->args($args)->run();
+        // loop through all your templates
+        foreach (array_diff(scandir(__DIR__ . "/views"), [".", ".."]) as $template) {
+            $resource = new TwigResource($app["twig.loader"], $template);
+            $assetsManager->addResource($resource, 'twig');
+        }
+
+        $writer = new AssetWriter($app["assetic.path_to_web"]);
+        $writer->writeManagerAssets($assetsManager);
     }
 
     /**
@@ -60,7 +72,7 @@ class RoboFile extends TaskList
         return $this
             ->taskExec("./bin/phpunit")
             ->arg("--coverage-html")
-            ->arg("./out/coverage/report.html")
+            ->arg("./out/coverage")
             ->args($args)
             ->run();
     }
