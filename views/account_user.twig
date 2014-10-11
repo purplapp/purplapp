@@ -194,16 +194,23 @@
                 {% endif %}
             {% endfor %}
 
-            {% for annotation in user.annotations %}
-                {% if "appnetizens.userinput.birthday" in annotation.type %}
-                    {% set did_display_annotations = true %}
-                    {% set birthday = annotation.value.birthday %}
-                    <tr>
-                        <td>Birthday:</td>
-                        <td>{{ birthday }}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
+            {% if user.birthdate() %}
+                {% set did_display_annotations = true %}
+                {% set birthdate = user.birthdate() %}
+
+                <tr>
+                    <td>Birthday:</td>
+                    <td>
+                        {% if birthdate.hasYear() %}
+                            {# 23 June 2014 #}
+                            {{ birthdate.format("j F Y") }}
+                        {% else %}
+                            {# 23 June #}
+                            {{ birthdate.format("j F") }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
 
             {% if not did_display_annotations %}
                 <tr>
