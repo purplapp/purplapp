@@ -110,6 +110,7 @@
         </div>
     </div>
 
+    {% if otherUser is defined %}
     <div class="tab-pane fade" id="recommendations">
         <br>
 
@@ -142,9 +143,9 @@
                             View on Alpha
                         </a>
 
-                        <!-- <span id="{{ user.id }}" onclick="myFollow('{{ user.id }}')" class="btn btn-primary btn-block">
+                        <span id="{{ user.id }}" onclick="myFollow('{{ user.id }}')" class="btn btn-primary btn-block">
                             <span id="{{ user.id }}_text">Follow</span>
-                        </span> -->
+                        </span>
 
                     </div>
                 </div>
@@ -163,14 +164,16 @@
             </div>
         {% endif %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}
 
 {% block tail_scripts %}
     {{ parent() }}
 
+    <!-- if section -->
     {% if otherUser is defined %}
-    <script>
+    <script type="text/javascript">
     var base_compareData = [{
             // get the current (auth) user's following count
             value: {{ user.counts.following }},
@@ -215,6 +218,7 @@
     new Chart(base_compare).PolarArea(base_compareData, base_compareOptions);
     new Chart(not_shared).PolarArea(not_sharedData, not_sharedOptions);
 
+    debugger
     function myFollow(userid) {
         var element = document.getElementById(userid);
 

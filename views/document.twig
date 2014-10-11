@@ -45,12 +45,12 @@ This is the base file for all HTML views
 
         {% block footer %}{% include "footer.twig" %}{% endblock %}
 
-        <!-- build:js(.) /js/vendor.min.js -->
         {% block tail_scripts %}
+        <!-- build:js(.) /js/vendor.min.js -->
         <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="/bower_components/chartjs/Chart.min.js"></script>
-        {% endblock %}
         <!-- endbuild -->
+        {% endblock %}
     </body>
 </html>
