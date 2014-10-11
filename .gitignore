@@ -1,3 +1,4 @@
+.vimrc.local
 /vendor/
 /bower_components/
 /bin/
