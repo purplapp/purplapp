@@ -197,10 +197,10 @@
             {% for annotation in user.annotations %}
                 {% if "appnetizens.userinput.birthday" in annotation.type %}
                     {% set did_display_annotations = true %}
-                    {% set birthday = "2014" %}
+                    {% set birthday = annotation.value.birthday %}
                     <tr>
                         <td>Birthday:</td>
-                        <td>{{ birthday.getdate }}</td>
+                        <td>{{ birthday }}</td>
                     </tr>
                 {% endif %}
             {% endfor %}

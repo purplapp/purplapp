@@ -6,7 +6,6 @@ class User
 {
     use DataContainerTrait;
     use TimeSinceCreatedTrait;
-    use BirthdayTrait;
 
     private $clubs;
 
