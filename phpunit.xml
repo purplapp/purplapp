@@ -18,7 +18,7 @@
 
     <filter>
         <blacklist>
-            <directory>./cache</directory>
+            <directory>./cache/*</directory>
             <directory>./vendor</directory>
         </blacklist>
     </filter>

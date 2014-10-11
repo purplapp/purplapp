@@ -1,25 +1,42 @@
 <?php // providers.php
 
-
 date_default_timezone_set('UTC');
 
-use Silex\Provider\TwigServiceProvider;
-use Silex\Provider\MonologServiceProvider;
 use Purplapp\Adn\NiceRankAwareClient;
+
+use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\UrlGeneratorServiceProvider;
+use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SessionServiceProvider;
+
+use SilexAssetic\AsseticServiceProvider;
+
+use Assetic\Extension\Twig\AsseticExtension;
+use Assetic\Filter\CssMinFilter;
+use Assetic\Filter\GoogleClosure\CompilerApiFilter;
+use Assetic\Asset\AssetCollection;
+use Assetic\Asset\AssetCache;
+use Assetic\Asset\GlobAsset;
+use Assetic\Asset\FileAsset;
+use Assetic\Cache\FilesystemCache;
 
 use GuzzleHttp\Client as GuzzleClient;
 
-$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+$app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new TwigServiceProvider(), [
-    "twig.path" => app_dir() . "/out/views",
+    "twig.path" => app_dir() . "/views",
     "twig.options" => [
-        "debug" => true,
-        "cache" => app_dir() . "/cache",
+        "debug" => $app["debug"],
+        "cache" => app_dir() . "/cache/twig",
     ],
 ]);
 
-$app->register(new Silex\Provider\SessionServiceProvider(), [
+$app->register(new AsseticServiceProvider());
+$app["assetic.options"] = ["debug" => $app["debug"]];
+$app['assetic.path_to_web'] = APP_DIR . "/public";
+
+$app->register(new SessionServiceProvider(), [
     "session.storage.options" => [
         "name" => "purlpapp_sess",
         "cookie_lifetime" => 60 * 60 * 24 * 7,
@@ -51,6 +68,8 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
     }));
 
     $twig->addExtension(new Twig_Extension_Debug());
+
+    $twig->addExtension(new AsseticExtension($app["assetic.factory"]));
 
     return $twig;
 }));
@@ -106,3 +125,41 @@ $app["adn.client"] = function () use ($app) {
         $app["session"]->get("access_token")
     );
 };
+
+$app["assetic.filter_manager"] = $app->share(
+    $app->extend('assetic.filter_manager', function($fm, $app) {
+        $fm->set("jsmin", new CompilerApiFilter());
+
+        return $fm;
+    })
+);
+
+$app['assetic.asset_manager'] = $app->share(
+    $app->extend('assetic.asset_manager', function($am, $app) {
+        $styles = new AssetCollection([
+            new FileAsset(APP_DIR . "/bower_components/bootstrap/dist/css/bootstrap.min.css"),
+            new FileAsset(APP_DIR . "/bower_components/font-awesome/css/font-awesome.min.css"),
+            new FileAsset(APP_DIR . "/bower_components/bootstrap-social/bootstrap-social.css"),
+            new FileAsset(APP_DIR . "/public/css/mod.css"),
+        ]);
+
+        $scripts = new AssetCollection([
+            new FileAsset(APP_DIR . "/bower_components/jquery/dist/jquery.min.js"),
+            new FileAsset(APP_DIR . "/bower_components/bootstrap/dist/js/bootstrap.min.js"),
+            new FileAsset(APP_DIR . "/bower_components/chartjs/Chart.min.js"),
+        ], [
+            $app["assetic.filter_manager"]->get("jsmin")
+        ]);
+
+        $cache = new FilesystemCache(APP_DIR . '/cache/assetic');
+
+        $am->set('styles', new AssetCache($styles, $cache));
+        $am->get('styles')->setTargetPath('css/style.min.css');
+
+        $am->set("scripts", new AssetCache($scripts, $cache));
+        $am->get('scripts')->setTargetPath('js/app.min.js');
+
+        return $am;
+    })
+);
+

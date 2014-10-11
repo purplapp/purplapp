@@ -11,16 +11,13 @@ Dotenv::required([
     'CLIENT_SECRET',
     'ALPHA_DOMAIN',
     'SUPPORT_EMAIL',
-    'GITHUB_URL'
+    'GITHUB_URL',
+    "DEBUG",
 ]);
 
-$app["debug"] = false;
+$app["debug"] = getenv("DEBUG");
 
 $app->error(function (Exception $e, $code) use ($app) {
-    if ($app["debug"]) {
-        return;
-    }
-
     $message = $e->getMessage();
 
     if ($code === 404) {

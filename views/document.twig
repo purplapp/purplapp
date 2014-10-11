@@ -18,12 +18,9 @@ This is the base file for all HTML views
         {% endblock %}
 
         {% block stylesheets %}
-        <!-- build:css(.) /css/style.min.css -->
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="/bower_components/bootstrap-social/bootstrap-social.css"/>
-        <link rel="stylesheet" href="/public/css/mod.css">
-        <!-- endbuild -->
+            {% stylesheets "@styles" output="/css/style.min.css" combine=true %}
+                <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+            {% endstylesheets %}
         {% endblock %}
 
         <title>{% block title %}Purplapp{% endblock %}</title>
@@ -46,11 +43,9 @@ This is the base file for all HTML views
         {% block footer %}{% include "footer.twig" %}{% endblock %}
 
         {% block tail_scripts %}
-        <!-- build:js(.) /js/vendor.min.js -->
-        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/bower_components/chartjs/Chart.min.js"></script>
-        <!-- endbuild -->
+            {% javascripts "@scripts" output="/js/app.min.js" combine=true %}
+                <script type="text/javascript" src="{{ asset_url }}">
+            {% endjavascripts %}
         {% endblock %}
     </body>
 </html>

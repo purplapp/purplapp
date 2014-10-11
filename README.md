@@ -40,8 +40,6 @@ curl -sS https://getcomposer.org/installer | php
 
 # install php dependencies
 php composer.phar install
-# install npm dependencies
-npm install --dev
 # install bower
 npm install -g bower
 # install bower dependencies
@@ -70,30 +68,49 @@ Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
 to find out which tasks are available, or edit the RoboFile.php directly. Here's
 a brief description of the most common tasks:
 
-### gulp
-
-- `./bin/robo gulp` starts the gulp build process.
-
 ### serve
 
 - `./bin/robo serve` starts a development server running on <127.0.0.1:8083>.
+
+### clean
+
+- `./bin/robo clean` cleans the filesystem cache.
+
+### assets
+
+- `./bin/robo assets` writes all the Twig-specified assets in every template to
+  its appropriate location in the public directory
+
+  NOTE: This uses the Google Closure Compiler web API, so internet access is
+  required
 
 ### test
 
 - `./bin/robo test` runs the full test suite.
 
-- `./bin/robo test -- --debug` will run the test suite in debug mode.
+### coverage
+
+- `./bin/robo coverage` runs the full test suite and generates an HTML coverage
+  report in `./out/coverage/`.
+
+  NOTE: Generating code coverage requires xdebug be installed. It's also really
+  slow, so don't be surprised when it takes > 10x more time.
 
 ### tdd
 
 - `./bin/robo tdd` runs the full test suite whenever any of the source files
   change.
 
-- `./bin/robo tdd -- --debug` will run the test suite in debug mode.
+### tags
+
+- `./bin/robo tags` will generate the ctags file for the project
+
+  NOTE: This requires the phptags binary be available in your $PATH
 
 ## Production
 
-Change the line `$app["debug"] = true;` in `start/init.php` to be `$app["debug"] = false;` when running in production.
+Change the line `$app["debug"] = true;` in `start/init.php` to be `$app["debug"]
+= false;` when running in production.
 
 ## Testing
 

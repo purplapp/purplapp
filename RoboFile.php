@@ -1,8 +1,12 @@
 <?php require __DIR__.'/vendor/autoload.php';
 
 use Symfony\Component\Finder\Finder;
-use \Robo\Tasks as TaskList;
-use \Robo\Task\GenMarkdownDocTask as Doc;
+use Robo\Tasks as TaskList;
+use Robo\Task\GenMarkdownDocTask as Doc;
+use Assetic\AssetWriter;
+use Assetic\Extension\Twig\TwigFormulaLoader;
+use Assetic\Extension\Twig\TwigResource;
+use Assetic\Factory\LazyAssetManager;
 
 class RoboFile extends TaskList
 {
@@ -21,13 +25,59 @@ class RoboFile extends TaskList
     }
 
     /**
-     * @desc Starts gulp
+     * @desc clears the cache
      */
-    public function gulp($args = "")
+    public function clean()
     {
-        $this->say("Starting the gulp process");
+        $except = [
+            "./cache/assetic",
+            "./cache/twig",
+            "./cache/assetic/.gitignore",
+            "./cache/twig/.gitignore",
+        ];
 
-        $this->taskExec("./node_modules/.bin/gulp")->args($args)->run();
+        $files = array_diff(
+            glob("./cache/{assetic/,twig/,}*", GLOB_BRACE),
+            $except
+        );
+
+        $this->say(sprintf("Clearing %d cached files", $files));
+        $this->taskDeleteDir($files)->run();
+
+        $this->say("Clearing compiled CSS / JS");
+
+        $compiledCss = glob(__DIR__ . "/public/css/style.min*.css");
+        $compiledJs  = glob(__DIR__ . "/public/js/app.min*.js");
+
+        $this->taskFileSystemStack()
+            ->remove($compiledCss)
+            ->remove($compiledJs)
+            ->run();
+    }
+
+    /**
+     * @desc Writes the assets to file
+     */
+    public function assets()
+    {
+        $app = include __DIR__ . "/bootstrap.php";
+
+        $assetsManager = new LazyAssetManager($app["assetic.factory"]);
+
+        // enable loading assets from twig templates
+        $assetsManager->setLoader('twig', new TwigFormulaLoader($app["twig"]));
+
+        // loop through all your templates
+        foreach (array_diff(scandir(__DIR__ . "/views"), [".", ".."]) as $template) {
+            $resource = new TwigResource($app["twig.loader"], $template);
+            $assetsManager->addResource($resource, 'twig');
+        }
+
+        $writer = new AssetWriter($app["assetic.path_to_web"]);
+
+        $this->say("Beginning asset dump process. Be patient!");
+
+        $writer->writeManagerAssets($assetsManager);
     }
 
     /**
@@ -46,7 +96,7 @@ class RoboFile extends TaskList
         return $this
             ->taskExec("./bin/phpunit")
             ->arg("--coverage-html")
-            ->arg("./out/coverage/report.html")
+            ->arg("./out/coverage")
             ->args($args)
             ->run();
     }
