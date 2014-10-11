@@ -13,6 +13,11 @@ class User
 
     private $htmlBio;
 
+    /**
+     * @var Birthdate|null
+     */
+    private $birthdate = null;
+
     public function init()
     {
         $this->clubs = PostClubs::forUser($this);
@@ -34,5 +39,18 @@ class User
     public function clubs()
     {
         return $this->clubs;
+    }
+
+    public function birthdate()
+    {
+        if (!$this->birthdate) {
+            foreach ($this->annotations as $annotation) {
+                if ($annotation->type === "com.appnetizens.userinput.birthday") {
+                    $this->birthdate = new Birthdate($annotation->value->birthday);
+                }
+            }
+        }
+
+        return $this->birthdate;
     }
 }
