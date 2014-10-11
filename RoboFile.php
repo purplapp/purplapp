@@ -29,9 +29,30 @@ class RoboFile extends TaskList
      */
     public function clean()
     {
-        $except = ["./cache/assetic/", "./cache/twig/"];
+        $except = [
+            "./cache/assetic",
+            "./cache/twig",
+            "./cache/assetic/.gitignore",
+            "./cache/twig/.gitignore",
+        ];
 
-        $this->taskDeleteDir(array_diff(glob("./cache/*/"), $except))->run();
+        $files = array_diff(
+            glob("./cache/{assetic/,twig/,}*", GLOB_BRACE),
+            $except
+        );
+
+        $this->say(sprintf("Clearing %d cached files", $files));
+        $this->taskDeleteDir($files)->run();
+
+        $this->say("Clearing compiled CSS / JS");
+
+        $compiledCss = glob(__DIR__ . "/public/css/style.min*.css");
+        $compiledJs  = glob(__DIR__ . "/public/js/app.min*.js");
+
+        $this->taskFileSystemStack()
+            ->remove($compiledCss)
+            ->remove($compiledJs)
+            ->run();
     }
 
     /**
@@ -53,6 +74,9 @@ class RoboFile extends TaskList
         }
 
         $writer = new AssetWriter($app["assetic.path_to_web"]);
+
+        $this->say("Beginning asset dump process. Be patient!");
+
         $writer->writeManagerAssets($assetsManager);
     }
 
