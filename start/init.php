@@ -21,13 +21,15 @@ $app->error(function (Exception $e, $code) use ($app) {
         return;
     }
 
-    switch ($code) {
-        case 404:
-            $message = 'The requested page could not be found. <br> Please refresh the page and try again, or return to the previous page.';
-            break;
-        default:
-            $message = 'We are sorry, but something went terribly wrong. <br> Unfortunately we cannot continue: so please refresh the page and try again, or return to the previous page.';
-    }
+    $message = $e->getMessage();
 
-    return new Response($message);
+    if ($code === 404) {
+        return $app->render("404.twig", compact("message", "code"));
+    } else if (400 >= $code && $code < 500) {
+        return $app->render("4xx.twig", compact("message", "code"));
+    } else if (500 >= $code && $code < 600) {
+        return $app->render("5xx.twig", compact("message", "code"));
+    } else {
+        return $app->render("error.twig", compact("message", "code"));
+    }
 });
