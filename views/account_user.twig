@@ -292,7 +292,7 @@
             </tr>
             <tr>
                 <td>Rank:</td>
-                <td>{{ nice_rank.rank }}</td>
+                <td>{{ nice_rank.rank|round(2) }}</td>
             </tr>
             <tr>
                 <td>Real Person:</td>
@@ -609,16 +609,13 @@
             <div class="modal-body">
                 <p>
                     These statistics are gathered from Jason Irwin's
-                    <a href="http://jasonirwin.ca/2014/05/14/thinking-about-nicerank/" target="_blank">
-                        NiceRank</a>.
+                    <a href="http://jasonirwin.ca/2014/05/14/thinking-about-nicerank/" target="_blank">NiceRank</a>.
                 </p>
                 <table class="table table-condensed">
-                    {#
                     <tr>
                         <td>Robot Posts:</td>
                         <td>{{ nice_rank.stats.robo_posts }}</td>
                     </tr>
-                    #}
                     <tr>
                         <td>Posts:</td>
                         <td>{{ nice_rank.stats.post_count }}</td>
