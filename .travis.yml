@@ -11,9 +11,9 @@ install:
   - bower install
 
 before_script:
+  - cp .env.example .env
   - ./bin/robo clean
   - ./bin/robo assets
-  - cp .env.example .env
 
 script:
   - ./bin/robo test
