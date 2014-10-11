@@ -93,7 +93,8 @@ a brief description of the most common tasks:
 - `./bin/robo coverage` runs the full test suite and generates an HTML coverage
   report in `./out/coverage/`.
 
-  NOTE: Generating code coverage requires xdebug be installed.
+  NOTE: Generating code coverage requires xdebug be installed. It's also really
+  slow, so don't be surprised when it takes > 10x more time.
 
 ### tdd
 
@@ -108,7 +109,8 @@ a brief description of the most common tasks:
 
 ## Production
 
-Change the line `$app["debug"] = true;` in `start/init.php` to be `$app["debug"] = false;` when running in production.
+Change the line `$app["debug"] = true;` in `start/init.php` to be `$app["debug"]
+= false;` when running in production.
 
 ## Testing
 
