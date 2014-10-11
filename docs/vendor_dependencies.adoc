@@ -7,11 +7,6 @@ All PHP dependencies are installed and managed via
 https://getcomposer.org[Composer]. `composer.json`, `composer.lock`, `vendor/`,
 and `bin/` are all a part of that process.
 
-NPM dependencies
-----------------
-Building the project's assets is handled by Gulp. `package.json`,
-`gulpfile.json`, and `node_modules/` are all a part of that process.
-
 Front-end dependencies
 ----------------------
 Dependencies like jQuery and Bootstrap are managed by bower. `bower.json` and
