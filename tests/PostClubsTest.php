@@ -75,24 +75,6 @@ class PostsClubTest extends UnitTestCase
         }
     }
 
-    protected function mockUser(array $details = [])
-    {
-        $attributes = $details + [
-            "id" => 2,
-            "counts" => (object) [
-                "posts" => 0,
-            ],
-            "description" => (object) [
-                "text" => "lorem ipsum",
-                "entities" => (object) [
-
-                ],
-            ],
-        ];
-
-        return User::wrap($attributes);
-    }
-
     private function mockUserWithCountAndId($count, $identifier = 2)
     {
         return $this->mockUser(
