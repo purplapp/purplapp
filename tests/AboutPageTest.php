@@ -26,7 +26,7 @@ class AboutPageTest extends WebTestCase
         $this->assertRegExpExists(
             "/Charlotte/",
             "/Johannes/",
-            "/Ciaran/"
+            "/Ciaran/",
             "/Hugo/",
             "/Brandon/",
             "/Jessica Dennis/"
