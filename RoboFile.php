@@ -21,10 +21,24 @@ class RoboFile extends TaskList
     }
 
     /**
+     * @desc clears the cache
+     */
+    public function clean()
+    {
+        $except = ["./cache/assetic/", "./cache/twig/"];
+
+        $this->taskDeleteDir(array_diff(glob("./cache/*/"), $except))->run();
+    }
+
+    /**
      * @desc Starts gulp
      */
     public function gulp($args = "")
     {
+        $this->say("Starting the server in the background: localhost:" . self::SERVER_PORT);
+
+        $this->getServer()->background()->run();
+
         $this->say("Starting the gulp process");
 
         $this->taskExec("./node_modules/.bin/gulp")->args($args)->run();
