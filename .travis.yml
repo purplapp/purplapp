@@ -23,4 +23,5 @@ matrix:
   allow_failures:
     - php: hhvm
 
-
+notifications:
+  slack: restless:HoHWQbIAj4M1g2fm9o2Ba3PR
