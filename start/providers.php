@@ -22,6 +22,8 @@ use Assetic\Cache\FilesystemCache;
 
 use GuzzleHttp\Client as GuzzleClient;
 
+use \Github\Client as GithubClient;
+
 $app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new TwigServiceProvider(), [
@@ -91,6 +93,7 @@ $app["adn.settings"] = [
     "SUPPORT_EMAIL" => getenv("SUPPORT_EMAIL"),
     "GITHUB_URL"    => getenv("GITHUB_URL"),
     "REDIRECT_URL"  => "http://{$app["http.host"]}/adn/callback",
+    "GITHUB_TOKEN"  => getenv("GITHUB_TOKEN"),
     "API_SCOPE"     => [
         "basic",
         "follow",
@@ -140,7 +143,9 @@ $app['assetic.asset_manager'] = $app->share(
             new FileAsset(APP_DIR . "/bower_components/bootstrap/dist/css/bootstrap.min.css"),
             new FileAsset(APP_DIR . "/bower_components/font-awesome/css/font-awesome.min.css"),
             new FileAsset(APP_DIR . "/bower_components/bootstrap-social/bootstrap-social.css"),
+            new FileAsset(APP_DIR . "/bower_components/octicons/octicons/octicons.css"),
             new FileAsset(APP_DIR . "/public/css/mod.css"),
+            new FileAsset(APP_DIR . "/public/css/opensource.css"),
         ]);
 
         $scripts = new AssetCollection([

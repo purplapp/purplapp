@@ -1,5 +1,11 @@
 {% extends "document.twig" %}
 
+{% block container %}container{% endblock %}
+
+{% block navbar %}
+    {% include "navbar.twig" %}
+{% endblock %}
+
 {% block title %}Broadcast Channel Lookup for {{ channel.title() }}{% endblock %}
 
 {% block content %}

@@ -1,5 +1,7 @@
 <?php // routes.php
 
+ini_set("memory_limit", "256M");
+
 use Symfony\Component\HttpFoundation\Request;
 use Purplapp\Adn\NumberCollection;
 
@@ -260,3 +262,66 @@ $app->get("/user/follow", function (Request $req) use ($app) {
 
     return $app->json($app["adn.client"]->followUser($req->get("id"))->json());
 })->bind("follow");
+
+$app->get("/opensource.php", $redirector("opensource"));
+$app->get("/opensource", function (Request $req) use ($app) {
+    $settings = $app["adn.settings"];
+
+    $client = new \Github\Client();
+    $paginator  = new Github\ResultPager($client);
+
+    $client->authenticate($settings["GITHUB_TOKEN"], Github\Client::AUTH_HTTP_TOKEN);
+
+    $github_user = $client->api('organization')->show('purplapp');
+    $github_repositories = $client->api('repo')->show('purplapp', 'purplapp');
+    $github_repo_contributors = $client->api('repo')->contributors('purplapp', 'purplapp', false);
+    $github_repo_language = $client->api('repo')->languages('purplapp', 'purplapp');
+
+    // get the pull requests for the repository
+    $github_repo_pull = $client->api('pull_request')->all('purplapp', 'purplapp', array('state' => 'all'));
+    $github_repo_pull_comments_response = $client->getHttpClient()->get('/repos/purplapp/purplapp/comments');
+    $github_repo_pull_comments = Github\HttpClient\Message\ResponseMediator::getContent($github_repo_pull_comments_response);
+
+    // get the releases from the repository
+    $github_repo_releases = $client->api('repo')->releases()->all('purplapp', 'purplapp');
+
+    // get the statistics from the repository
+    $github_repo_statistics = $client->api('repo')->statistics('purplapp', 'purplapp');
+
+    // get total number of commits
+    $github_commitsApi = $client->repo()->commits();
+    $github_parameters = array('purplapp', 'purplapp', array('sha' => 'master'));
+    $github_repo_commits = $paginator->fetchAll($github_commitsApi, 'all', $github_parameters);
+
+    // get total number of issues
+    $github_issuesApi = $client->issues();
+    $github_parameters = array('purplapp', 'purplapp', array('state' => 'all'));
+    $github_repo_issues = $paginator->fetchAll($github_issuesApi, 'all', $github_parameters);
+
+    // get total number of comments on issues
+    $github_issuesCommentsApi = $client->issues()->comments();
+    $github_parameters = array('purplapp', 'purplapp', '');
+    $github_repo_issues_comments = $paginator->fetchAll($github_issuesCommentsApi, 'all', $github_parameters);
+
+    $github_code_frequency_response = $client->getHttpClient()->get('/repos/purplapp/purplapp/stats/code_frequency');
+    $github_code_frequency = Github\HttpClient\Message\ResponseMediator::getContent($github_code_frequency_response);
+
+    $github_participation_response = $client->getHttpClient()->get('/repos/purplapp/purplapp/stats/participation');
+    $github_participation = Github\HttpClient\Message\ResponseMediator::getContent($github_participation_response);
+
+    return $app->render("opensource.twig", [
+        "github_user"   => $github_user,
+        "github_repositories"    => $github_repositories,
+        "github_repo_contributors"     => $github_repo_contributors,
+        "github_repo_language" => $github_repo_language,
+        "github_repo_pull" => $github_repo_pull,
+        "github_repo_pull_comments"  => $github_repo_pull_comments,
+        "github_repo_releases" => $github_repo_releases,
+        "github_repo_statistics" => $github_repo_statistics,
+        "github_repo_commits" => $github_repo_commits,
+        "github_repo_issues" => $github_repo_issues,
+        "github_repo_issues_comments" => $github_repo_issues_comments,
+        "github_code_frequency" => $github_code_frequency,
+        "github_participation" => $github_participation,
+    ]);
+})->bind("opensource");

@@ -17,6 +17,9 @@ This is the base file for all HTML views
         <link rel="apple-touch-icon" href="/static/images/apple-touch-icon-precomposed.png"/>
         {% endblock %}
 
+        {% block style %}
+        {% endblock %}
+
         {% block stylesheets %}
             {% stylesheets "@styles" output="/css/style.min.css" combine=true %}
                 <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
@@ -25,6 +28,8 @@ This is the base file for all HTML views
 
         <title>{% block title %}Purplapp{% endblock %}</title>
 
+        {% block head_scripts %}{% endblock %}
+
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -32,13 +37,11 @@ This is the base file for all HTML views
         <![endif]-->
     </head>
     <body>
-        {% block navbar %}
-            {% include "navbar.twig" %}
-        {% endblock %}
+        {% block navbar %}{% endblock %}
 
         {% block flash_messages %}{% endblock %}
 
-        <div class="container">{% block content %}{% endblock %}</div>
+        <div class="{% block container %}{% endblock %}">{% block content %}{% endblock %}</div>
 
         {% block footer %}{% include "footer.twig" %}{% endblock %}
 
