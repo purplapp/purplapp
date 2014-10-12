@@ -2,10 +2,12 @@
 
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\HttpFoundation\Response;
+use Whoops\Provider\Silex\WhoopsServiceProvider;
 
 ErrorHandler::register();
 
-Dotenv::load(app_dir());
+Dotenv::load(APP_DIR);
+
 Dotenv::required([
     'CLIENT_ID',
     'CLIENT_SECRET',
@@ -17,6 +19,10 @@ Dotenv::required([
 ]);
 
 $app["debug"] = getenv("DEBUG");
+
+if ($app["debug"]) {
+    $app->register(new WhoopsServiceProvider());
+}
 
 $app->error(function (Exception $e, $code) use ($app) {
     if ($app['debug']) {

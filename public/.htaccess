@@ -1,5 +1,0 @@
-Options +FollowSymlinks -Multiviews
-
-# Rewrite
-RewriteEngine on
-RewriteBase /
