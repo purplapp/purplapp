@@ -31,6 +31,18 @@
 
 <div class="container opensource-content">
 
+    {% set additions = 0 %}
+    {% set deletions = 0 %}
+    {% for week in github_code_frequency|reverse|slice(0,4) %}
+        {% set additions = additions + week.1 %}
+        {% set deletions = deletions - week.2 %}
+    {% endfor %}
+
+    {% set commits = 0 %}
+    {% for week in github_participation.all|reverse|slice(0,4) %}
+        {% set commits = commits + week %}
+    {% endfor %}
+
     <p class="lead">
         During the history of the project, there have been:
     </p>
@@ -65,14 +77,17 @@
     </div>
     <br>
     <p class="lead">
-        The current version of Purplapp is v4.0. Since v3.0, there have been:
+        In the last four weeks, there have been:
     </p>
     <div class="row">
         <div class="col-md-2 col-md-offset-2">
-            <p class="text-center lead"><span class="octicon octicon-diff-added" style="font-size: 60px;"></span><br><strong>X</strong> additions</p>
+            <p class="text-center lead"><span class="octicon octicon-diff-added" style="font-size: 60px;"></span><br><strong>{{ additions }}</strong> additions</p>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <p class="text-center lead"><span class="octicon octicon-diff-removed" style="font-size: 60px;"></span><br><strong>X</strong> deletions</p>
+            <p class="text-center lead"><span class="octicon octicon-diff-removed" style="font-size: 60px;"></span><br><strong>{{ deletions }}</strong> deletions</p>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <p class="text-center lead"><span class="octicon octicon-git-commit" style="font-size: 60px;"></span><br><strong>{{ commits }}</strong> commits</p>
         </div>
     </div>
     <br><br>
