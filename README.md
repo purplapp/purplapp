@@ -49,24 +49,21 @@ bower install
 
 ### Configuration
 
-You'll need to get or create a client ID and client secret. You can get this
-information from [your app listings](https://account.app.net/developer/apps/).
+You'll need to get or create a client ID and client secret. You can get this information from [your app listings](https://account.app.net/developer/apps/).
 
-App configuration is handled via a `.env` file in the root. Copy the
-`.env.example` file and fill in your details there.
+If you want to get statistics from GitHub, you'll need to get or create a GitHub personal access token. Information on scopes required is coming soon, but the defaults are probably good for now. You can get this information from [your applications tab](https://github.com/settings/tokens/new).
+
+App configuration is handled via a `.env` file in the root. Copy the `.env.example` file and fill in your details there.
 
 If you're developing on Purplapp, make sure that in the `.env` file it's set to `DEBUG=1`, not `DEBUG=0`.
 
 ### Server
 
-Purplapp will run on most servers. It's currently deployed to an Apache
-instance, but nginx or the built-in PHP server should work just as well.
+Purplapp will run on most servers. It's currently deployed to an Apache instance, but nginx or the built-in PHP server should work just as well.
 
 ## Development
 
-Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
-to find out which tasks are available, or edit the RoboFile.php directly. Here's
-a brief description of the most common tasks:
+Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo` to find out which tasks are available, or edit the RoboFile.php directly. Here's a brief description of the most common tasks:
 
 ### serve
 
@@ -78,11 +75,9 @@ a brief description of the most common tasks:
 
 ### assets
 
-- `./bin/robo assets` writes all the Twig-specified assets in every template to
-  its appropriate location in the public directory
+- `./bin/robo assets` writes all the Twig-specified assets in every template to its appropriate location in the public directory
 
-  NOTE: This uses the Google Closure Compiler web API, so internet access is
-  required
+  NOTE: This uses the Google Closure Compiler web API, so internet access is required
 
 ### test
 
@@ -90,16 +85,13 @@ a brief description of the most common tasks:
 
 ### coverage
 
-- `./bin/robo coverage` runs the full test suite and generates an HTML coverage
-  report in `./out/coverage/`.
+- `./bin/robo coverage` runs the full test suite and generates an HTML coverage report in `./out/coverage/`.
 
-  NOTE: Generating code coverage requires xdebug be installed. It's also really
-  slow, so don't be surprised when it takes > 10x more time.
+  NOTE: Generating code coverage requires xdebug be installed. It's also really slow, so don't be surprised when it takes > 10x more time.
 
 ### tdd
 
-- `./bin/robo tdd` runs the full test suite whenever any of the source files
-  change.
+- `./bin/robo tdd` runs the full test suite whenever any of the source files change.
 
 ### tags
 
