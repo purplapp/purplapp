@@ -37,8 +37,7 @@ $simplePage = function ($path, $name) use ($app, $renderer, $redirector) {
 };
 
 $simplePage("/", "index");
-$simplePage("/account", "account");
-$simplePage("/broadcast", "broadcast");
+$simplePage("/tools", "tools");
 $simplePage("/donate", "donate");
 $simplePage("/about", "about");
 $simplePage("/legal/privacy", "privacy");
