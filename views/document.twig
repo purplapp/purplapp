@@ -44,7 +44,7 @@ This is the base file for all HTML views
 
         {% block tail_scripts %}
             {% javascripts "@scripts" output="/js/app.min.js" combine=true %}
-                <script type="text/javascript" src="{{ asset_url }}">
+                <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
     </body>
