@@ -3,10 +3,11 @@ Purplapp [![Build Status][ci img]][ci link]
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
-[![Pull Request Stats][pr img]][pr link] [![Issue Stats][is img]][is link] [![Code Climate][cc img]][cc link]
+[![Pull Request Stats][pr img]][pr link] [![Issue Stats][is img]][is link] [![Code Climate][cc img]][cc link] [![Test Coverage][tc img]][cc link]
 
 [ci img]: https://travis-ci.org/purplapp/purplapp.svg?branch=master
 [cc img]: https://codeclimate.com/github/purplapp/purplapp/badges/gpa.svg
+[tc img]: https://codeclimate.com/github/purplapp/purplapp/badges/coverage.svg
 [is img]: http://issuestats.com/github/purplapp/purplapp/badge/issue
 [pr img]: http://issuestats.com/github/purplapp/purplapp/badge/pr
 
@@ -105,6 +106,12 @@ a brief description of the most common tasks:
 - `./bin/robo tags` will generate the ctags file for the project
 
   NOTE: This requires the phptags binary be available in your $PATH
+  
+## Code Climate
+
+If you've got Xdebug installed, you should run `bin/phpunit --coverage-clover build/logs/clover.xml`, and then `CODECLIMATE_REPO_TOKEN=[your_codeclimate_token] ./bin/test-reporter`.
+
+The `CODECLIMATE_REPO_TOKEN` value is provided after you add your repo to your Code Climate account by clicking on "Setup Test Coverage" on the right hand side of the feed.
 
 ## Testing
 
