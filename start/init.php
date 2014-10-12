@@ -16,7 +16,7 @@ Dotenv::required([
     'DEBUG',
 ]);
 
-$app["debug"] = true;
+$app["debug"] = getenv("DEBUG");
 
 $app->error(function (Exception $e, $code) use ($app) {
     if ($app['debug']) {
