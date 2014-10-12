@@ -1,0 +1,17 @@
+.opensource-header-box-header {
+    font-family: "aw-conqueror-carved-one", sans-serif;
+    font-size: 50px;
+    /*font-weight: bold;*/
+}
+
+.opensource-header {
+    background-color: rgb(128, 86, 214);
+    color: #ffffff;
+    padding-bottom: 100px;
+    padding-top: 100px;
+}
+
+.opensource-content {
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
