@@ -54,6 +54,7 @@ information from [your app listings](https://account.app.net/developer/apps/).
 App configuration is handled via a `.env` file in the root. Copy the
 `.env.example` file and fill in your details there.
 
+If you're developing on Purplapp, make sure that in the `.env` file it's set to `DEBUG=1`, not `DEBUG=0`.
 
 ### Server
 
@@ -61,8 +62,6 @@ Purplapp will run on most servers. It's currently deployed to an Apache
 instance, but nginx or the built-in PHP server should work just as well.
 
 ## Development
-
-Change the line `$app["debug"] = false;` in `start/init.php` to be `$app["debug"] = false;` when developing.
 
 Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
 to find out which tasks are available, or edit the RoboFile.php directly. Here's
@@ -106,11 +105,6 @@ a brief description of the most common tasks:
 - `./bin/robo tags` will generate the ctags file for the project
 
   NOTE: This requires the phptags binary be available in your $PATH
-
-## Production
-
-Change the line `$app["debug"] = true;` in `start/init.php` to be `$app["debug"]
-= false;` when running in production.
 
 ## Testing
 
