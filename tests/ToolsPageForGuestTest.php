@@ -1,13 +1,13 @@
 <?php namespace Purplapp\Tests;
 
-class AccountPageForGuestTest extends WebTestCase
+class ToolsPageForGuestTest extends WebTestCase
 {
     /**
      * @test
      */
     public function it_shows_a_signin_invitation_to_guests()
     {
-        $this->call("GET", "/account");
+        $this->call("GET", "/tools");
 
         $this->assertResponseOk();
         $this->assertRegExpExists('/Want to use any of these\? Hit "Sign in" above and get started/');
@@ -19,7 +19,7 @@ class AccountPageForGuestTest extends WebTestCase
      */
     public function it_doesnt_show_tool_links_to_guests()
     {
-        $this->call("GET", "/account");
+        $this->call("GET", "/tools");
 
         $this->assertResponseOk();
         $this->assertNoLinkExists("User Lookup Tool");
