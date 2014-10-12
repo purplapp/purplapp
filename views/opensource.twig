@@ -1,0 +1,84 @@
+{% extends "document.twig" %}
+
+{% block navbar %}{% endblock %}
+
+{% block container %}{% endblock %}
+
+{% block style %}
+        <link href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.1.2/octicons.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+{% block head_scripts %}
+
+<script src="//use.typekit.net/jch6axs.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid opensource-header">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="text-center opensource-header-icon">
+        <span class="octicon octicon-pulse" style="font-size: 80px;"></span>
+      </div>
+      <h1 class="text-center opensource-header-box-header">Purplapp - Open Source</h1>
+      <p class="text-center lead">Here are some statistics on our open source contributions.</p>
+    </div>
+  </div>
+</div>
+
+<div class="container opensource-content">
+
+    <p class="lead">
+        During the history of the project, there have been:
+    </p>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <p class="text-center lead"><span class="octicon octicon-git-commit" style="font-size: 60px;"></span><br><strong>{{ github_repo_commits|length }}</strong> commits</p>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <p class="text-center lead"><span class="octicon octicon-issue-closed" style="font-size: 60px;"></span><br><strong>{{ github_repo_issues|length }}</strong> issues</p>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <p class="text-center lead"><span class="octicon octicon-git-pull-request" style="font-size: 60px;"></span><br><strong>{{ github_repo_pull|length }}</strong> pull requests</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <p class="text-center lead"><span class="octicon octicon-organization" style="font-size: 60px;"></span><br><strong>{{ github_repo_contributors|length }}</strong> contributors</p>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <p class="text-center lead"><span class="octicon octicon-tag" style="font-size: 60px;"></span><br><strong>{{ github_repo_releases|length }}</strong> releases</p>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <p class="text-center lead"><span class="octicon octicon-comment" style="font-size: 60px;"></span><br><strong>{{ github_repo_issues_comments|length + github_repo_pull_comments|length }}</strong> comments</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <p class="text-center lead"><span class="octicon octicon-repo-forked" style="font-size: 60px;"></span><br><strong>{{ github_repositories.forks_count }}</strong> forks</p>
+        </div>
+    </div>
+    <br>
+    <p class="lead">
+        The current version of Purplapp is v4.0. Since v3.0, there have been:
+    </p>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <p class="text-center lead"><span class="octicon octicon-diff-added" style="font-size: 60px;"></span><br><strong>X</strong> additions</p>
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            <p class="text-center lead"><span class="octicon octicon-diff-removed" style="font-size: 60px;"></span><br><strong>X</strong> deletions</p>
+        </div>
+    </div>
+    <br><br>
+    <p class="lead">
+        In terms of programming languages used, here are the standings:
+    </p>
+</div>
+
+{% endblock %}
