@@ -41,10 +41,12 @@ curl -sS https://getcomposer.org/installer | php
 
 # install php dependencies
 php composer.phar install
-# install bower
-npm install -g bower
-# install bower dependencies
-bower install
+
+# run various setup tasks
+./bin/robo clean
+./bin/robo bower
+./bin/robo assets
+./bin/robo tests
 ```
 
 ### Configuration
@@ -63,7 +65,15 @@ Purplapp will run on most servers. It's currently deployed to an Apache instance
 
 ## Development
 
-Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo` to find out which tasks are available, or edit the RoboFile.php directly. Here's a brief description of the most common tasks:
+Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
+to find out which tasks are available, or edit the RoboFile.php directly. Here's
+a brief description of the most common tasks:
+
+### serve
+
+- `./bin/robo bower` will download all the required assets for the project.
+
+   NOTE: This totally does *not* use Bower.
 
 ### serve
 
@@ -98,7 +108,7 @@ Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
 - `./bin/robo tags` will generate the ctags file for the project
 
   NOTE: This requires the phptags binary be available in your $PATH
-  
+
 ## Code Climate
 
 If you've got Xdebug installed, you should run `bin/phpunit --coverage-clover build/logs/clover.xml`, and then `CODECLIMATE_REPO_TOKEN=[your_codeclimate_token] ./bin/test-reporter`.
