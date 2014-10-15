@@ -1,5 +1,6 @@
 Purplapp [![Build Status][ci img]][ci link]
 ========
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/purplapp/purplapp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [Purplapp](http://app.net/purplapp) is an app.net web statistics application.
 
