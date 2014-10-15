@@ -4,6 +4,7 @@ script:
   - composer install
   - cp .env.example .env
   - ./bin/robo clean
+  - ./bin/robo bower
   - ./bin/robo assets
   - ./bin/robo test
 
