@@ -6,12 +6,11 @@ php:
   - hhvm
 
 install:
-  - npm install -g bower
   - composer install --dev
-  - bower install
 
 before_script:
   - cp .env.example .env
+  - ./bin/robo bower
   - ./bin/robo clean
   - ./bin/robo assets
 
