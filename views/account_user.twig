@@ -17,9 +17,15 @@
         <h1>
             {{ user.name|e }}
           <small>
-              <a href="{{ alpha_domain ~ user.username }}" target="_blank">
-                  @{{ user.username }}
-              </a>
+            <a href="{{ alpha_domain ~ user.username }}" target="_blank">
+                @{{ user.username }}
+            </a>
+
+            {% if user.username is not same as(user_handle()) and user.you_follow == false %}
+                <span id="{{ user.id }}" onclick="myFollow('{{ user.id }}')" class="label label-primary">
+                    <span id="{{ user.id }}_text">Follow</span>
+                </span>
+            {% endif %}
           </small>
         </h1>
     </div>
@@ -659,4 +665,34 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block tail_scripts %}
+    {{ parent() }}
+
+    <script>
+    function myFollow(userid) {
+        var element = document.getElementById(userid);
+
+        //FIXME
+        if (element.getAttribute("status") === "followed") {
+            $.get("/user/unfollow", "id=" + userid);
+
+            element.setAttribute("status", "true");
+            element.setAttribute("class", "label label-info");
+
+            document.getElementById(userid+"_text").innerHTML='Unfollowed!';
+        } else {
+            $.get("/user/follow", "id=" + userid);
+
+            element.setAttribute("class", "label label-success");
+            element.setAttribute("status", "followed");
+
+            document.getElementById(userid+"_text").innerHTML='Followed!';
+        }
+
+        //  elementtext.setAttribute("innerHTML", "You already followed!");
+    }
+    </script>
+
 {% endblock %}
