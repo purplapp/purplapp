@@ -1,0 +1,4 @@
+image: php
+script:
+  - composer install
+  - ./bin/robo test
