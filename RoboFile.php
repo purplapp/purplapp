@@ -16,32 +16,32 @@ class RoboFile extends TaskList
 
     public static $assets = [
         [
-            "url" => "git@github.com:github/octicons.git",
+            "url" => "https://github.com/github/octicons.git",
             "component" => "octicons",
             "version" => "v2.1.2",
         ],
         [
-            "url" => "git@github.com:FortAwesome/Font-Awesome.git",
+            "url" => "https://github.com/FortAwesome/Font-Awesome.git",
             "component" => "font-awesome",
             "version" => "v4.2.0",
         ],
         [
-            "url" => "git@github.com:twbs/bootstrap.git",
+            "url" => "https://github.com/twbs/bootstrap.git",
             "component" => "bootstrap",
             "version" => "v3.2.0",
         ],
         [
-            "url" => "git@github.com:jquery/jquery.git",
+            "url" => "https://github.com/jquery/jquery.git",
             "component" => "jquery",
             "version" => "2.1.1",
         ],
         [
-            "url" => "git@github.com:nnnick/Chart.js.git",
+            "url" => "https://github.com/nnnick/Chart.js.git",
             "component" => "chartjs",
             "version" => "v1.0.1-beta.4",
         ],
         [
-            "url" => "git@github.com:lipis/bootstrap-social.git",
+            "url" => "https://github.com/lipis/bootstrap-social.git",
             "component" => "bootstrap-social",
             "version" => "4.8.0",
         ]
