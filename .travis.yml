@@ -25,3 +25,9 @@ matrix:
 
 notifications:
   slack: restless:HoHWQbIAj4M1g2fm9o2Ba3PR
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/d49068202727baee5d58
+    on_success: always
+    on_failure: always
+    on_start: false
