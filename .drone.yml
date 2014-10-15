@@ -1,4 +1,9 @@
-image: php
+image: reinblau/php
 script:
-  - composer install
-  - ./bin/robo test
+  - composer selfupdate
+  - composer install
+  - cp .env.example .env
+  - ./bin/robo clean
+  - ./bin/robo assets
+  - ./bin/robo test
+

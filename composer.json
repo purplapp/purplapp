@@ -1,6 +1,5 @@
 {
     "require": {
-        "php": ">=5.4.20",
         "vlucas/phpdotenv": "1.0.6",
         "twig/twig": "~1.16.0",
         "silex/silex": "~1.2.1",
