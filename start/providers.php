@@ -139,19 +139,27 @@ $app["assetic.filter_manager"] = $app->share(
 
 $app['assetic.asset_manager'] = $app->share(
     $app->extend('assetic.asset_manager', function($am, $app) {
+        $vendor = function ($path) {
+            return new FileAsset(APP_DIR . "/assets/{$path}");
+        };
+
+        $asset = function ($path) {
+            return new FileAsset(APP_DIR . "/public/{$path}");
+        };
+
         $styles = new AssetCollection([
-            new FileAsset(APP_DIR . "/bower_components/bootstrap/dist/css/bootstrap.min.css"),
-            new FileAsset(APP_DIR . "/bower_components/font-awesome/css/font-awesome.min.css"),
-            new FileAsset(APP_DIR . "/bower_components/bootstrap-social/bootstrap-social.css"),
-            new FileAsset(APP_DIR . "/bower_components/octicons/octicons/octicons.css"),
-            new FileAsset(APP_DIR . "/public/css/mod.css"),
-            new FileAsset(APP_DIR . "/public/css/opensource.css"),
+            $vendor("bootstrap/dist/css/bootstrap.min.css"),
+            $vendor("font-awesome/css/font-awesome.min.css"),
+            $vendor("bootstrap-social/bootstrap-social.css"),
+            $vendor("octicons/octicons/octicons.css"),
+            $asset("css/mod.css"),
+            $asset("css/opensource.css"),
         ]);
 
         $scripts = new AssetCollection([
-            new FileAsset(APP_DIR . "/bower_components/jquery/dist/jquery.min.js"),
-            new FileAsset(APP_DIR . "/bower_components/bootstrap/dist/js/bootstrap.min.js"),
-            new FileAsset(APP_DIR . "/bower_components/chartjs/Chart.min.js"),
+            $vendor("jquery/dist/jquery.min.js"),
+            $vendor("bootstrap/dist/js/bootstrap.min.js"),
+            $vendor("chartjs/Chart.min.js"),
         ], [
             $app["assetic.filter_manager"]->get("jsmin")
         ]);

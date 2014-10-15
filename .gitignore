@@ -1,7 +1,7 @@
 /.vimrc.local
 /.env
 /bin/
-/bower_components/
+/assets/
 /composer.phar
 /out/
 /tags
