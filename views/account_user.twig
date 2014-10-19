@@ -409,11 +409,7 @@
             </div>
 
             <div class="modal-body">
-                <blockquote>
-                    {% autoescape false %}
-                        {{ first_post.html() }}
-                    {% endautoescape %}
-                </blockquote>
+                <blockquote>{% autoescape false %}{{ first_post.html() }}{% endautoescape %}</blockquote>
                 <br>
                 <table class="table table-condensed">
                     <tr>
@@ -455,14 +451,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="FMModal">@{{ user.username }}'s First Mention</h4>
+                <h4 class="modal-title" id="FMModal">@{{ user.username }}'s First Mention <i>(by <a href="{{ alpha_domain ~ first_mention.user.username }}" target="_blank">@{{ first_mention.user.username }}</a>)</i></h4>
             </div>
             <div class="modal-body">
-                <blockquote>
-                    {% autoescape false %}
-                        {{ first_mention.html() }}
-                    {% endautoescape %}
-                </blockquote>
+	            <blockquote>{% autoescape false %}{{ first_mention.html() }}{% endautoescape %}</blockquote>
                 <br>
                 <table class="table table-condensed">
                     <tr>
@@ -507,11 +499,7 @@
                 <h4 class="modal-title" id="LPModal">@{{ user.username }}'s Last Post</h4>
             </div>
             <div class="modal-body">
-                <blockquote>
-                    {% autoescape false %}
-                        {{ last_post.html() }}
-                    {% endautoescape %}
-                </blockquote>
+	            <blockquote>{% autoescape false %}{{ last_post.html() }}{% endautoescape %}</blockquote>
                 <br>
                 <table class="table table-condensed">
                     <tr>
@@ -552,14 +540,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="LMModal">@{{ user.username }}'s Last Mention</h4>
+                <h4 class="modal-title" id="LMModal">@{{ user.username }}'s Last Mention <i>(by <a href="{{ alpha_domain ~ last_mention.user.username }}" target='_blank'>@{{ last_mention.user.username }}</a>)</i></h4>
             </div>
             <div class="modal-body">
-                <blockquote>
-                    {% autoescape false %}
-                        {{ last_mention.html() }}
-                    {% endautoescape %}
-                </blockquote>
+	            <blockquote>{% autoescape false %}{{ last_mention.html() }}{% endautoescape %}</blockquote>
                 <br>
                 <table class="table table-condensed">
                     <tr>
