@@ -18,6 +18,11 @@ class User
      */
     private $birthdate = null;
 
+    /**
+     * @var Locale|null
+     */
+    private $locale = null;
+
     public function init()
     {
         $this->clubs = PostClubs::forUser($this);
@@ -52,5 +57,15 @@ class User
         }
 
         return $this->birthdate;
+    }
+
+    public function locale()
+    {
+        $this->locale = new Locale($this->data->locale);
+        
+        // var_dump($this->data->locale);
+        // var_dump($this->locale);
+
+        return $this->locale;
     }
 }
