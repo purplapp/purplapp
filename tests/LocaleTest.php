@@ -12,6 +12,9 @@ class LocaleTest extends UnitTestCase
         $this->assertEquals("English (United States)", $locale);
     }
 
+    /**
+     * @test
+     */
     public function it_should_error_correct_locale()
     {
         $locale = new \Purplapp\Adn\Locale("oh_MY");
