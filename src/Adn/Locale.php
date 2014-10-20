@@ -4,11 +4,15 @@
 
 class Locale
 {
-
-    private $original_locale;
+    /**
+     * Stores the Locale code for this instance
+     *
+     * @var string
+     */
+    private $code;
 
     /**
-     * A list of locales
+     * A list of locale codes and their full names
      *
      * @var array
      */
@@ -167,20 +171,40 @@ class Locale
         "vi"       => "Vietnamese"
     );
 
-    public function __construct($original_locale)
+    public static function fromCode($code)
     {
-        $this->original_locale = $original_locale;
+        return new static($code);
     }
 
+    /**
+     * Retrieves the full name of the Locale
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return isset(static::$locales[$this->code])
+            ? static::$locales[$this->code]
+            : "Unknown Locale";
+    }
+
+    /**
+     * Creates a new Locale
+     *
+     * @param string $code the locale code
+     */
+    protected function __construct($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * Converts the Locale into a string by using its name
+     *
+     * @return string
+     */
     public function __toString()
     {
-        if (static::$locales[$this->original_locale]) {
-            $this->locale = static::$locales[$this->original_locale];
-        } else {
-            $this->locale = "Unknown Locale";
-        }
-        
-        return $this->locale;
+        return $this->name();
     }
-
 }

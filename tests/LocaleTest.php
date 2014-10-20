@@ -1,5 +1,7 @@
 <?php namespace Purplapp\Tests;
 
+use Purplapp\Adn\Locale;
+
 class LocaleTest extends UnitTestCase
 {
     /**
@@ -7,9 +9,9 @@ class LocaleTest extends UnitTestCase
      */
     public function it_should_convert_correct_locale()
     {
-        $locale = new \Purplapp\Adn\Locale("en_US");
+        $locale = Locale::fromCode("en_US");
 
-        $this->assertEquals("English (United States)", $locale);
+        $this->assertEquals("English (United States)", $locale->name());
     }
 
     /**
@@ -17,8 +19,8 @@ class LocaleTest extends UnitTestCase
      */
     public function it_should_error_correct_locale()
     {
-        $locale = new \Purplapp\Adn\Locale("oh_MY");
+        $locale = Locale::fromCode("foobar");
 
-        $this->assertEquals("Unknown Locale", $locale);
+        $this->assertEquals("Unknown Locale", $locale->name());
     }
 }

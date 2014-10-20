@@ -46,6 +46,9 @@ class User
         return $this->clubs;
     }
 
+    /**
+     * @return Birthdate
+     */
     public function birthdate()
     {
         if (!$this->birthdate) {
@@ -59,12 +62,14 @@ class User
         return $this->birthdate;
     }
 
+    /**
+     * @return Locale
+     */
     public function locale()
     {
-        $this->locale = new Locale($this->data->locale);
-        
-        // var_dump($this->data->locale);
-        // var_dump($this->locale);
+        if (!$this->locale) {
+            $this->locale = Locale::fromCode($this->data->locale);
+        }
 
         return $this->locale;
     }
