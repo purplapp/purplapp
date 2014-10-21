@@ -1,6 +1,6 @@
 <?php // routes.php
 
-ini_set("memory_limit", "256M");
+ini_set("memory_limit", "256M");    // this is a horrible way to do this and I apologise
 
 use Symfony\Component\HttpFoundation\Request;
 use Purplapp\Adn\NumberCollection;
@@ -262,6 +262,8 @@ $app->get("/user/follow", function (Request $req) use ($app) {
     return $app->json($app["adn.client"]->followUser($req->get("id"))->json());
 })->bind("follow");
 
+$app->get("/oss", $redirector("opensource"));
+$app->get("/oss.php", $redirector("opensource"));
 $app->get("/opensource.php", $redirector("opensource"));
 $app->get("/opensource", function (Request $req) use ($app) {
     $settings = $app["adn.settings"];
