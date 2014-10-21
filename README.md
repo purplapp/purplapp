@@ -54,23 +54,28 @@ php composer.phar install
 ### Configuration
 
 You'll need to get or create a client ID and client secret. You can get this
-information from [your app listings](https://account.app.net/developer/apps/).
+information from [your App.net app listings](https://account.app.net/developer/apps/).
 
 If you want to get statistics from GitHub, you'll need to get or create a GitHub
 personal access token. Information on scopes required is coming soon, but the
 defaults are probably good for now. You can get this information from [your
-applications tab](https://github.com/settings/tokens/new).
+applications tab](https://github.com/settings/tokens/new). You'll also need to
+change all the mentions of purplapp [in this block of code](https://github.com/purplapp/purplapp/blob/master/start/routes.php#L274-L326)
+to your own organisation/user and repository name.
 
-App configuration is handled via a `.env` file in the root. Copy the
-`.env.example` file and fill in your details there.
+**App configuration is handled via a `.env` file in the root. Copy the
+`.env.example` file and fill in your details there.**
 
 If you're developing on Purplapp, make sure that in the `.env` file it's set to
-`DEBUG=1`, not `DEBUG=0`.
+`DEBUG=1`, not `DEBUG=0`; on a production server, make sure it's set to `DEBUG=0`
+to avoid potential revealing of sensitive data (client secrets, etc.) to the end
+user.
 
 ### Server
 
 Purplapp will run on most servers. It's currently deployed to an Apache
-instance, but nginx or the built-in PHP server should work just as well.
+instance, but nginx or the built-in PHP server should work just as well. The
+built-in PHP server is good for testing.
 
 ## Development
 
@@ -98,7 +103,7 @@ a brief description of the most common tasks:
   its appropriate location in the public directory
 
   NOTE: This uses the Google Closure Compiler web API, so internet access is
-  required
+  required.
 
 ### test
 
@@ -120,9 +125,12 @@ a brief description of the most common tasks:
 
 - `./bin/robo tags` will generate the ctags file for the project
 
-  NOTE: This requires the phptags binary be available in your $PATH
+  NOTE: This requires the phptags binary be available in your $PATH.
 
 ## Code Climate
+
+*This is only going to be for those who want to run their own version of Purplapp
+and have their own Code Climate page for it, etc.*
 
 If you've got Xdebug installed, you should run `bin/phpunit --coverage-clover
 build/logs/clover.xml`, and then
