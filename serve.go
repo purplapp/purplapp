@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -18,9 +17,10 @@ var (
 func main() {
 	// TODO: consistent logging
 	// TODO: investigate golang ADN wrappers
-	// TODO: make this part customizable (CLI flag?)
 	// TODO: abstract fcgi details (esp. env stuff)
 	// TODO: extract the serve static files stuff
+	// TODO: move to better router
+	// TODO: make the ports customizable (CLI flags?)
 	f = cgi.NewFCGI("tcp", "127.0.0.1:9000")
 
 	var err error
@@ -35,9 +35,6 @@ func main() {
 	// all non-matched routes go to php
 	mux.HandleFunc("/", phpHandler)
 
-	// this is a dummy route
-	mux.Handle("/admin", &adminHandler{})
-
 	pubSrv := serveStatic(http.Dir("public"))
 
 	mux.HandleFunc("/css/", pubSrv)
@@ -47,12 +44,6 @@ func main() {
 
 	// listen on 8080
 	log.Fatal(http.ListenAndServe("localhost:8080", mux))
-}
-
-type adminHandler struct{}
-
-func (a *adminHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Admin page!")
 }
 
 func phpHandler(w http.ResponseWriter, r *http.Request) {
