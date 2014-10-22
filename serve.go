@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	cgi "github.com/vanackere/gofcgisrv"
 )
@@ -20,7 +21,6 @@ func main() {
 	// TODO: make this part customizable (CLI flag?)
 	// TODO: abstract fcgi details (esp. env stuff)
 	// TODO: extract the serve static files stuff
-	// TODO: turn off directory indexes
 	f = cgi.NewFCGI("tcp", "127.0.0.1:9000")
 
 	var err error
@@ -38,12 +38,12 @@ func main() {
 	// this is a dummy route
 	mux.Handle("/admin", &adminHandler{})
 
-	pubSrv := http.FileServer(http.Dir("public/"))
+	pubSrv := serveStatic(http.Dir("public"))
 
-	mux.Handle("/css/", pubSrv)
-	mux.Handle("/js/", pubSrv)
-	mux.Handle("/fonts/", pubSrv)
-	mux.Handle("/static/", pubSrv)
+	mux.HandleFunc("/css/", pubSrv)
+	mux.HandleFunc("/js/", pubSrv)
+	mux.HandleFunc("/fonts/", pubSrv)
+	mux.HandleFunc("/static/", pubSrv)
 
 	// listen on 8080
 	log.Fatal(http.ListenAndServe("localhost:8080", mux))
@@ -66,4 +66,17 @@ func phpHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cgi.ServeHTTP(f, env, w, r)
+}
+
+func serveStatic(fs http.FileSystem) http.HandlerFunc {
+	srv := http.FileServer(fs)
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasSuffix(r.URL.Path, "/") {
+			http.NotFound(w, r)
+			return
+		}
+
+		srv.ServeHTTP(w, r)
+	}
 }
