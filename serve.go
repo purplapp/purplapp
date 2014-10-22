@@ -15,6 +15,12 @@ var (
 )
 
 func main() {
+	// TODO: consistent logging
+	// TODO: investigate golang ADN wrappers
+	// TODO: make this part customizable (CLI flag?)
+	// TODO: abstract fcgi details (esp. env stuff)
+	// TODO: extract the serve static files stuff
+	// TODO: turn off directory indexes
 	f = cgi.NewFCGI("tcp", "127.0.0.1:9000")
 
 	var err error
@@ -26,8 +32,10 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	// all non-matched routes go to php
 	mux.HandleFunc("/", phpHandler)
 
+	// this is a dummy route
 	mux.Handle("/admin", &adminHandler{})
 
 	pubSrv := http.FileServer(http.Dir("public/"))
@@ -37,8 +45,7 @@ func main() {
 	mux.Handle("/fonts/", pubSrv)
 	mux.Handle("/static/", pubSrv)
 
-	mux.Handle("/tmp", http.FileServer(http.Dir("/tmp")))
-
+	// listen on 8080
 	log.Fatal(http.ListenAndServe("localhost:8080", mux))
 }
 
