@@ -30,6 +30,15 @@ Purplapp [![Build Status][ci img]][ci link]
 
 - See the most recent 5 updates in any Broadcast channel.
 
+### Want to suggest a feature?
+
+Visit the issue page of this repository and open a new issue 
+with the feature(s) you want to have added to Purplapp!
+
+Alternatively, fork this repo and setup a local version of 
+Purplapp and add a feature! Make sure you add tests, and that
+they pass before you file a pull request!
+
 ## Setup
 
 ### Getting the code
@@ -79,7 +88,7 @@ built-in PHP server is good for testing.
 
 ## Development
 
-Many development tasks are handled by the [Robo][robo]. You can run `./bin/robo`
+Many development tasks are handled by [Robo](http://robo.li/). You can run `./bin/robo`
 to find out which tasks are available, or edit the RoboFile.php directly. Here's
 a brief description of the most common tasks:
 
@@ -108,6 +117,8 @@ a brief description of the most common tasks:
 ### test
 
 - `./bin/robo test` runs the full test suite.
+
+  NOTE: Tests are written in PHPUnit. Check the `tests` folder for some examples.
 
 ### coverage
 
@@ -140,8 +151,14 @@ The `CODECLIMATE_REPO_TOKEN` value is provided after you add your repo to your
 Code Climate account by clicking on "Setup Test Coverage" on the right hand side
 of the feed.
 
-## Testing
+## Contributors
 
-Tests are written in PHPUnit. Check the `tests` folder for some examples.
+* original concept by [charlw](https://github.com/charlw)
+* majority of code written by [charlw](https://github.com/charlw), 
+  [ciarand](https://github.com/ciarand) and [humd](https://github.com/humd)
+* hosting of [purplapp.eu](http://purplapp.eu) by [jvimedia](https://github.com/jvimedia)
+* thanks to everyone else who has contributed to the codebase!
 
-[robo]: http://robo.li/
+## License
+
+Purplapp is licensed under the [MIT License](http://opensource.org/licenses/MIT).
