@@ -189,6 +189,19 @@
                 {% endif %}
             {% endfor %}
             {% for annotation in user.annotations %}
+                {% if "purplapp.ello" in annotation.type %}
+                    {% set did_display_annotations = true %}
+                    <tr>
+                        <td>Ello:</td>
+                        <td>
+                            <a href="https://ello.co/{{ annotation.value.username }}" target="_blank">
+                                @{{ annotation.value.username }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% for annotation in user.annotations %}
                 {% if "appnetizens.userinput.gender" in annotation.type %}
                     {% set did_display_annotations = true %}
                     <tr>
