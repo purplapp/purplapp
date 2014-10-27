@@ -402,6 +402,20 @@ class Client
         return Token::wrap($this->authGet($url));
     }
 
+    public function getUnreadBroadcastChannels()
+    {
+        $url = "{$this->userResourceUrl}/me/channels/broadcast/num_unread";
+
+        return UnreadBroadcastChannels::wrap($this->authGet($url));
+    }
+
+    public function getUnreadPMChannels()
+    {
+        $url = "{$this->userResourceUrl}/me/channels/pm/num_unread";
+
+        return UnreadPMChannels::wrap($this->authGet($url));
+    }
+
     /**
      * Makes an authenticated GET request to the provided URL
      *

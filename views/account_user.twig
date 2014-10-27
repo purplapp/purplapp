@@ -10,7 +10,20 @@
 
 {% block content %}
 
+{{ dump(unreadPMChannels) }}
+{{ dump(unreadPM) }}
+{{ dump(unreadBroadcastChannels) }}
+{{ dump(unreadBroadcast) }}
+
 <div class="col-md-12">
+
+    {% if user.username is same as(user_handle()) %}
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>You have {{ unreadBroadcast }} unread Broadcast channels and {{ unreadPM }} unread PM channels.</strong>
+    </div>
+    {% endif %}
+
     <!-- User Name -->
     <div class="page-header">
         <h4>User Lookup</h4>
