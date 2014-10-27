@@ -9,14 +9,14 @@
 {% block content %}
 <div class="col-md-12">
     <div class="page-header">
-        <h1>About Purplapp <small> &copy; 2013-{{ "now"|date("Y") }}</small></h1>
+        <h1>About Purplapp <small> &copy; 2013 - {{ "now"|date("Y") }}</small></h1>
     </div>
 </div>
 
 <div class="col-md-6">
     <h2>The Idea</h2>
     <p>
-        Purplapp was first conceived by Charlotte (@charl) in September 2013.
+        Purplapp was first conceived by Charlotte in September 2013.
         You can see the posts on App.net about the idea
         <a href="https://alpha.app.net/charl/post/11384578">here</a>.
     </p>
@@ -25,51 +25,52 @@
         debut on Dribbble. You can find this concept <a
         href="http://dribbble.com/shots/1253484-Post-Count-Achievements">here</a>.
 
-        We've not actually developed the iOS app concept into reality, but that's
-        a future goal... when we find an iOS developer.
+        <i>We've not actually expanded on the iOS app concept, but that's
+        a future goal maybe... when we find an iOS developer.</i>
     </p>
     <p>
-        Charlotte kidnapped Johannes (@jvimedia) and made him host the site.
+        Charlotte wrote the original web app in October 2013. It wasn't exactly the 
+        best thing in the world, but it worked. It was originally hosted on a page
+        which you can't see anymore.
     </p>
     <p>
-        We wrote the web app in October 2013. It wasn't exactly the best thing in the world, but it worked.
+        After that, Charlotte and Johannes (who hosted the original and the current
+        versions) found Hugo in November. He wrote the Post Count Achievement 
+        thing to be useful! It was pretty good before (it wasn't), but afterwards 
+        it was even better!
     </p>
     <p>
-        After that, Charlotte and Johannes (who got roped in somehow...) found
-        Hugo (@hu) in November. He wrote the Post Count Achievement thing to be
-        useful! It was pretty good before (it wasn't), but afterwards it was
-        even better! ;)
-    </p>
-    <p>
-        We "bootstrapped" it in February 2014. After that, we retired the old
-        site, and switched all our work to the new site. We don't update the
-        old one any more.
+        The site switched to using Twitter Bootstrap in February 2014. Then, Ciaran 
+        turned up in August 2014, and after we'd convinced him to not rewrite it 
+        in Go, he rewrote the entire site so it used Silex with Twig, Robo and some
+        other stuff. He's pretty cool.
     </p>
 </div>
 
 <div class="col-md-6">
     <h2>Team</h2>
-    <h4>Lead Team:</h4>
+    <h4>Contributors:</h4>
     <ul class="list-unstyled">
         <li>Charlotte W. (<a href="{{ alpha_domain }}charl" target="_blank">@charl</a>)</li>
         <li>Johannes V. (<a href="{{ alpha_domain }}jvimedia" target="_blank">@jvimedia</a>)</li>
         <li>Ciaran Downey (<a href="{{ alpha_domain }}ciarand" target="_blank">@ciarand</a>)</li>
-    </ul>
-    <h4>Contributors:</h4>
-    <ul class="list-unstyled">
         <li>Hugo (<a href="{{ alpha_domain }}hu" target="_blank">@hu</a>)</li>
         <li>Brandon (<a href="{{ alpha_domain }}remus" target="_blank">@remus</a>)</li>
         <li>Jessica Dennis (<a href="{{ alpha_domain }}jessicadennis" target="_blank">@jessicadennis</a>)</li>
     </ul>
 
-    <h2>Credits</h2>
+    <h2>(Icon) Font Credits</h2>
     <ul class='list-unstyled'>
         <li>Font Awesome by Dave Gandy - <a href="http://fontawesome.io" target="_blank">fontawesome.io</a></li>
         <li>Glyphicon Halflings by Glyphicons - <a href="http://glyphicons.com" target="_blank">glyphicons.com</a></li>
+        <li>Ocitcons by GitHub - <a href="https://github.com/github/octicons" target="_blank">github.com/github/octicons</a></li>
+        <li>Fonts on <a href="opensource">the open source page</a> are provided by <a href="https://typekit.com" target=_blank>TypeKit</a></li>
     </ul>
 
-    <h2>Other Stuff</h2>
+    <h2>Legal</h2>
     <ul class='list-unstyled'>
+        <li>Find our privacy policy <a href="legal/privacy">here</a>.</li>
+        <li>Out terms of service can be found <a href="legal/terms">here</a>.</li>
         <li>We have to display an imprint, so here is our <a href="/static/images/imprint.png">imprint</a>.</li>
     </ul>
 </div>
@@ -78,9 +79,9 @@
     <h2>Contact</h2>
     <p>Feel free to drop any suggestions at us via the following methods:</p>
     <ul>
-        <li><a href="{{ alpha_domain }}purplapp" target="_blank">@purplapp on ADN</a></li>
-        <li><a href="mailto:{{ support_email }}" target="_top">Email</a></li>
-        <li><a href="{{ github_url }}" target="_blank">GitHub</a></li>
+        <li><a href="{{ alpha_domain }}purplapp" target="_blank">@purplapp on ADN</a> (mention or PM us)</li>
+        <li><a href="mailto:{{ support_email }}" target="_top">Email</a> (let us know who you are on App.net)</li>
+        <li><a href="{{ github_url }}" target="_blank">GitHub</a> (feel free to file any issues or help contribute to the code)</li>
     </ul>
 </div>
 {% endblock %}
