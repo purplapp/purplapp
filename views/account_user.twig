@@ -74,18 +74,14 @@
         <tr>
             <td>Posts:</td>
             <td>
-                <a class="url" href="{{ alpha_domain ~ user.username }}/" target="_blank">
-                    {{ user.counts.posts }}
-                </a>
+                <a class="url" href="{{ alpha_domain ~ user.username }}/" target="_blank">{{ user.counts.posts }}</a>
                 <i>(average {{ (user.counts.posts / user.timeSinceCreated.days)|round(2) }} per day)</i>
             </td>
         </tr>
         <tr>
             <td>Starred:</td>
             <td>
-                <a class="url" href="{{ alpha_domain ~ user.username}}/stars/" target="_blank">
-                    {{ user.counts.stars }}
-                </a>
+                <a class="url" href="{{ alpha_domain ~ user.username}}/stars/" target="_blank">{{ user.counts.stars }}</a>
                 <i>(average {{ (user.counts.stars / user.timeSinceCreated.days)|round(2) }} per day)</i>
             </td>
         </tr>
@@ -93,9 +89,7 @@
         <tr>
             <td>Following:</td>
             <td>
-                <a class="url" href="{{ alpha_domain ~ user.username }}/following" target="_blank">
-                    {{ user.counts.following }}
-                </a>
+                <a class="url" href="{{ alpha_domain ~ user.username }}/following" target="_blank">{{ user.counts.following }}</a>
                 {% if user.username is not same as(user_handle()) %}
                     <i>({% if user.follows_you %}follows you{% else %}does not follow you{% endif %})</i>
                 {% endif %}
@@ -104,9 +98,7 @@
         <tr>
             <td>Followers:</td>
             <td>
-                <a class="url" href="{{ alpha_domain ~ user.username }}/followers/" target="_blank">
-                    {{ user.counts.followers }}
-                </a>
+                <a class="url" href="{{ alpha_domain ~ user.username }}/followers/" target="_blank">{{ user.counts.followers }}</a>
                 {% if user.username is not same as(user_handle()) %}
                     <i>({% if user.you_follow %}you follow{% else %}you don't follow{% endif %})</i>
                 {% endif %}
@@ -244,10 +236,30 @@
             <tr>
                 <td><h4>Hiding</h4></td>
                 <td></td>
+            </tr>
             <tr>
                 <td>Muted:</td>
                 <td>
                     {{ user.you_muted ? "Yes" : "No" }}
+                </td>
+            </tr>
+        {% endif %}
+
+        {% if user.username is same as(user_handle()) %}
+            <tr>
+                <td><h4>Storage</h4></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Available:</td>
+                <td>
+                    {{ (token.storage.available/(1024*1024*1024))|round(2, 'floor') }} GB
+                </td>
+            </tr>
+            <tr>
+                <td>Used:</td>
+                <td>
+                    {{ (token.storage.used/(1024*1024*1024))|round(2, 'floor') }} GB
                 </td>
             </tr>
         {% endif %}

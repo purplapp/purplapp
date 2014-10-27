@@ -133,6 +133,17 @@ $app->get("/account/user", function (Request $req) use ($app) {
 
     $niceRank = $client->getUserNiceRank($user)->head();
 
+    if ($req->get("id")) {
+        $currentUser = $client->getAuthorizedUser();
+        if ($req->get("id") == $currentUser->username) {
+            $token = $client->getUserToken();
+        } else {
+            $token = "";
+        }
+    } else {
+        $token = $client->getUserToken();
+    }   
+
     return $app->render("account_user.twig", [
         "user"          => $user,
         "first_post"    => $firstPost,
@@ -140,6 +151,7 @@ $app->get("/account/user", function (Request $req) use ($app) {
         "first_mention" => $firstMention,
         "last_mention"  => $lastMention,
         "nice_rank"     => $niceRank,
+        "token"         => $token,
     ]);
 
 })->bind("account_user")->value("username", "me");

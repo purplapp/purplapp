@@ -34,6 +34,11 @@ class Client
     public $channelResourceUrl = "https://api.app.net/channels";
 
     /**
+     * @var string
+     */
+    public $tokenResourceUrl = "https://api.app.net/token";
+
+    /**
      * @var Cache
      */
     protected $cache = [];
@@ -389,6 +394,12 @@ class Client
         $url = "{$this->userResourceUrl}/{$identifier}/follow";
 
         return $this->authDelete($url);
+    }
+
+    public function getUserToken() {
+        $url = "{$this->tokenResourceUrl}";
+
+        return Token::wrap($this->authGet($url));
     }
 
     /**
