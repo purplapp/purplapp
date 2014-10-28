@@ -1,0 +1,13 @@
+{% extends "document.twig" %}
+
+{% block container %}container{% endblock %}
+
+{% block navbar %}
+    {% include "navbar.twig" %}
+{% endblock %}
+
+{% block content %}
+
+{{ dump(authorizedUserIDs) }}
+
+{% endblock %}

@@ -39,6 +39,11 @@ class Client
     public $tokenResourceUrl = "https://api.app.net/token";
 
     /**
+     * @var string
+     */
+    public $appResourceUrl = "https://api.app.net/apps";
+
+    /**
      * @var Cache
      */
     protected $cache = [];
@@ -396,12 +401,18 @@ class Client
         return $this->authDelete($url);
     }
 
+    /**
+     * Gets the token for the authorised user.   
+     */
     public function getUserToken() {
-        $url = "{$this->tokenResourceUrl}";
+        $url = $this->tokenResourceUrl;
 
         return Token::wrap($this->authGet($url));
     }
 
+    /**
+     * Gets the number of unread Broadcast channels for the authorised user.   
+     */
     public function getUnreadBroadcastChannels()
     {
         $url = "{$this->userResourceUrl}/me/channels/broadcast/num_unread";
@@ -409,11 +420,45 @@ class Client
         return UnreadBroadcastChannels::wrap($this->authGet($url));
     }
 
+    /**
+     * Gets the number of unread PM channels for the authorised user.   
+     */
     public function getUnreadPMChannels()
     {
         $url = "{$this->userResourceUrl}/me/channels/pm/num_unread";
 
         return UnreadPMChannels::wrap($this->authGet($url));
+    }
+
+    public function getAppAccessToken() {
+
+        $resp = AccessToken::wrap($this->client->post($this->accessTokenUrl, [
+            "body" => [
+                "client_id"     => $this->id,
+                "client_secret" => $this->secret,
+                "grant_type"    => "client_credentials"
+            ],
+        ]));
+
+        // // store it for later
+        $this->appAccessToken = $resp->access_token;
+
+        return $this->appAccessToken;
+    }
+
+    public function getAuthorizedUserIDs() {
+        // requires appAccessToken
+        $this->getAppAccessToken();
+
+        $url = "{$this->appResourceUrl}/me/tokens/user_ids";
+
+        // $resp = AppUserIDs::wrap($this->client->get($url, [
+        //     "body" => [
+        //         "access_token" => $this->appAccessToken
+        //     ],
+        // ]));
+
+        // return $resp;
     }
 
     /**

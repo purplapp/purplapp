@@ -176,6 +176,21 @@ $app->get("/account/user", function (Request $req) use ($app) {
 
 })->bind("account_user")->value("username", "me");
 
+$app->get("/authorised_users", function (Request $req) use ($app) {
+    if (!$app["adn.user"]) {
+        return $app->render("unauth_message.twig");
+    }
+
+    $client = $app["adn.client"];
+
+    $authorizedUserIDs = $client->getAuthorizedUserIDs();
+
+    return $app->render("user_ids.twig", [
+        "authorizedUserIDs" => $authorizedUserIDs
+    ]);
+
+})->bind("account_user")->value("username", "me");
+
 $app->get("/account/follow_comparison.php", $redirector("account_follow_comparison"));
 $app->get("/account/follow_comparison", function (Request $req) use ($app) {
     if (!$app["adn.user"]) {
