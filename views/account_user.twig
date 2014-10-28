@@ -480,6 +480,7 @@
     </div>
 </div>
 
+{% if first_mention %}
 <!-- First Mention Modal -->
 <div class="modal fade" id="FMModal" tabindex="-1" role="dialog" aria-labelledby="FMModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -524,6 +525,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 <!-- Last Post Modal -->
 <div class="modal fade" id="LPModal" tabindex="-1" role="dialog" aria-labelledby="LPModalLabel" aria-hidden="true">
@@ -569,6 +571,7 @@
     </div>
 </div>
 
+{% if last_mention %}
 <!-- Last Mention Modal -->
 <div class="modal fade" id="LMModal" tabindex="-1" role="dialog" aria-labelledby="LMModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -613,6 +616,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 <!-- PCA Modal -->
 <div class="modal fade" id="PCAModal" tabindex="-1" role="dialog" aria-labelledby="PCAModalLabel" aria-hidden="true">
