@@ -296,7 +296,7 @@
             <tr>
                 <td>First Post:</td>
                 <td>
-                    <a data-toggle="modal" data-target="#FPModal">
+                    <a href="#" data-toggle="modal" data-target="#FPModal">
                         {{ first_post.created_at|date("jS F Y") }}
                     </a>
                 </td>
@@ -306,7 +306,7 @@
                 <tr>
                     <td>First Mention:</td>
                     <td>
-                        <a data-toggle="modal" data-target="#FMModal">
+                        <a href="#" data-toggle="modal" data-target="#FMModal">
                             {{ first_mention.created_at|date("jS F Y") }}
                         </a>
                         <i>
@@ -319,7 +319,7 @@
             <tr>
                 <td>Last Post:</td>
                 <td>
-                    <a data-toggle="modal" data-target="#LPModal">
+                    <a href="#" data-toggle="modal" data-target="#LPModal">
                         {{ last_post.humanFriendlyTimeSinceCreated() }}
                     </a>
                 </td>
@@ -329,7 +329,7 @@
                 <tr>
                     <td>Last Mention:</td>
                     <td>
-                        <a data-toggle="modal" data-target="#LMModal">
+                        <a href="#" data-toggle="modal" data-target="#LMModal">
                             {{ last_mention.humanFriendlyTimeSinceCreated() }}
                         </a>
                         <i>
@@ -359,7 +359,7 @@
             <tr>
                 <td>Past 28 days:</td>
                 <td>
-                    <a data-toggle="modal" data-target="#28DaysModal">
+                    <a href="#" data-toggle="modal" data-target="#28DaysModal">
                         Show Statistics
                     </a>
                 </td>
@@ -410,7 +410,7 @@
             <tr>
                 <td>Number of Clubs:</td>
                 <td>
-                    {{ user.clubs.memberClubs|length }} - <a data-toggle="modal" data-target="#PCAModal">Show All Clubs</a>
+                    {{ user.clubs.memberClubs|length }} - <a href="#" data-toggle="modal" data-target="#PCAModal">Show All Clubs</a>
                 </td>
             </tr>
             <tr>
