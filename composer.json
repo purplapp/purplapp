@@ -13,7 +13,9 @@
         "kriswallsmith/assetic": "~1.1.2",
         "mheap/silex-assetic": "~1.0.4",
         "natxet/CssMin": "~3.0.2",
-        "knplabs/github-api": "~1.2"
+        "knplabs/github-api": "~1.2",
+        "twig/extensions": "~1.1.0",
+        "davedevelopment/twig-inflection": "1.0.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3.0",

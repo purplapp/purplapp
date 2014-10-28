@@ -24,6 +24,8 @@ use GuzzleHttp\Client as GuzzleClient;
 
 use \Github\Client as GithubClient;
 
+use DaveDevelopment\TwigInflection\Twig\Extension;
+
 $app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new TwigServiceProvider(), [
@@ -72,6 +74,8 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
     $twig->addExtension(new Twig_Extension_Debug());
 
     $twig->addExtension(new AsseticExtension($app["assetic.factory"]));
+
+    $twig->addExtension(new \DaveDevelopment\TwigInflection\Twig\Extension\Inflection());
 
     return $twig;
 }));
