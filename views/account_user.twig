@@ -97,7 +97,7 @@
         <tr>
             <td>Following:</td>
             <td>
-                <a class="url" href="{{ alpha_domain ~ user.username }}/following" target="_blank">{{ user.counts.following }}</a>
+                <a class="url" href="{{ alpha_domain ~ user.username }}/following/" target="_blank">{{ user.counts.following }}</a>
                 {% if user.username is not same as(user_handle()) %}
                     <i>({% if user.follows_you %}follows you{% else %}does not follow you{% endif %})</i>
                 {% endif %}
