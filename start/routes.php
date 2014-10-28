@@ -133,20 +133,20 @@ $app->get("/account/user", function (Request $req) use ($app) {
 
     $niceRank = $client->getUserNiceRank($user)->head();
 
-    if ($req->get("id")) {
-        $currentUser = $client->getAuthorizedUser();
-        if ($req->get("id") == $currentUser->username) {
-            $token = $client->getUserToken();
+    $currentUser = $client->getAuthorizedUser();    // set who the current user is
+
+    if ($req->get("id")) {                  // if an ID is being requested as part of the URL
+        if ($req->get("id") === $currentUser->username) {   // if the ID being requested is equal to the authorised user's username
+            $token = $client->getUserToken();   // get the token
         } else {
-            $token = "";
+            $token = "";    // else there's no token to be set
         }
     } else {
-        $token = $client->getUserToken();
+        $token = $client->getUserToken();   // if no user is requested, then it must be the authorised user, hence get the token
     }   
 
     if ($req->get("id")) {
-        $currentUser = $client->getAuthorizedUser();
-        if ($req->get("id") == $currentUser->username) {
+        if ($req->get("id") === $currentUser->username) {
             $unreadBroadcastChannels = $client->getUnreadBroadcastChannels();
             $unreadPMChannels = $client->getUnreadPMChannels();
             $unreadBroadcast = $unreadBroadcastChannels->count();
