@@ -26,19 +26,23 @@ class User
     public function init()
     {
         $this->clubs = PostClubs::forUser($this);
-        $this->bio   = new TextWithEntities(
-            $this->description->text,
-            $this->description->entities
-        );
+        if (isset($this->description)) {
+            $this->bio = new TextWithEntities(
+                $this->description->text,
+                $this->description->entities
+            );
+        }
     }
 
     public function htmlBio()
     {
-        if (!$this->htmlBio) {
-            $this->htmlBio = $this->bio->html();
-        }
+        if (isset($this->description)) {
+            if (!$this->htmlBio) {
+                $this->htmlBio = $this->bio->html();
+            }
 
-        return $this->htmlBio;
+            return $this->htmlBio;
+        }
     }
 
     public function clubs()
