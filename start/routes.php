@@ -149,17 +149,18 @@ $app->get("/account/user", function (Request $req) use ($app) {
         if ($req->get("id") == $currentUser->username) {
             $unreadBroadcastChannels = $client->getUnreadBroadcastChannels();
             $unreadPMChannels = $client->getUnreadPMChannels();
+            $unreadBroadcast = $unreadBroadcastChannels->count();
+            $unreadPM = $unreadPMChannels->count();
         } else {
-            $unreadBroadcastChannels = "";
-            $unreadPMChannels = "";
+            $unreadBroadcast = "";
+            $unreadPM = "";
         }
     } else {
         $unreadBroadcastChannels = $client->getUnreadBroadcastChannels();
         $unreadPMChannels = $client->getUnreadPMChannels();
+        $unreadBroadcast = $unreadBroadcastChannels->count();
+        $unreadPM = $unreadPMChannels->count();
     }   
-
-    $unreadBroadcast = count($unreadBroadcastChannels);
-    $unreadPM = count($unreadPMChannels);
 
     return $app->render("account_user.twig", [
         "user"          => $user,
@@ -169,8 +170,6 @@ $app->get("/account/user", function (Request $req) use ($app) {
         "last_mention"  => $lastMention,
         "nice_rank"     => $niceRank,
         "token"         => $token,
-        "unreadBroadcastChannels" => $unreadBroadcastChannels,
-        "unreadPMChannels" => $unreadPMChannels,
         "unreadBroadcast" => $unreadBroadcast,
         "unreadPM"      => $unreadPM
     ]);

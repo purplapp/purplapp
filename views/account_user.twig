@@ -10,11 +10,6 @@
 
 {% block content %}
 
-{{ dump(unreadPMChannels) }}
-{{ dump(unreadPM) }}
-{{ dump(unreadBroadcastChannels) }}
-{{ dump(unreadBroadcast) }}
-
 <div class="col-md-12">
 
     {% if user.username is same as(user_handle()) %}
@@ -271,21 +266,23 @@
             </tr>
         {% endif %}
 
-        {% if user.username is same as(user_handle()) %}
+        {% if (user.username is same as(user_handle())) and (token.limits.following is not defined) %}
             <tr>
                 <td><h4>Storage</h4></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Available:</td>
                 <td>
-                    {{ (token.storage.available/(1024*1024*1024))|round(2, 'floor') }} GB
                 </td>
             </tr>
             <tr>
-                <td>Used:</td>
+                <td>Out of {{ ((token.storage.used/(1024*1024*1024))|round(2, 'floor')) + ((token.storage.available/(1024*1024*1024))|round(2, 'floor')) }} GB of storage:</td>
                 <td>
-                    {{ (token.storage.used/(1024*1024*1024))|round(2, 'floor') }} GB
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: {{ ((token.storage.used/(1024*1024*1024))|round(0, 'ceil')) * 10 }}%">
+                            {{ (token.storage.used/(1024*1024*1024))|round(2, 'floor') }} GB Used
+                        </div>
+                        <div class="progress-bar progress-bar-success" style="width: {{ ((token.storage.available/(1024*1024*1024))|round(0, 'floor')) * 10 }}%">
+                            {{ (token.storage.available/(1024*1024*1024))|round(2, 'floor') }} GB Free
+                        </div>
+                    </div>
                 </td>
             </tr>
         {% endif %}

@@ -9,6 +9,6 @@ class UnreadPMChannels
 
 	public function count()
 	{
-	  return ((int) $this->data);
+		return $this->data; 
 	}
 }

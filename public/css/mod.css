@@ -130,7 +130,6 @@ a {
   content: "\e080";
 }
 
-
 .jumbotron {
 	margin-bottom: 10px;
 }
@@ -146,9 +145,20 @@ h2 {
 }
 
 .ui-helper-center {
-    text-align: center;
+  text-align: center;
 }
 
 p {
-    margin-bottom: 1.45em;
+  margin-bottom: 1.45em;
 }
+
+/*.progress {
+  background:transparent !important;
+  box-shadow:none !important;
+}*/
+table .progress {
+ margin-bottom: 0; 
+}
+/*.progress-bar {
+  border-radius:4px !important;
+}*/
