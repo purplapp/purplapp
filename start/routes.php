@@ -189,7 +189,7 @@ $app->get("/authorised_users", function (Request $req) use ($app) {
         "authorizedUserIDs" => $authorizedUserIDs
     ]);
 
-})->bind("account_user")->value("username", "me");
+})->bind("authorised_users")->value("username", "me");
 
 $app->get("/account/follow_comparison.php", $redirector("account_follow_comparison"));
 $app->get("/account/follow_comparison", function (Request $req) use ($app) {

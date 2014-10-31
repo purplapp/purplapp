@@ -24,8 +24,6 @@ use GuzzleHttp\Client as GuzzleClient;
 
 use \Github\Client as GithubClient;
 
-use DaveDevelopment\TwigInflection\Twig\Extension;
-
 $app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new TwigServiceProvider(), [
