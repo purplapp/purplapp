@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c9a1bba2f1849b411326f262a8b1c28f",
+    "hash": "cac8610758e0c61c5d9a9a3f915a1b7b",
     "packages": [
         {
             "name": "davedevelopment/twig-inflection",
@@ -125,6 +125,57 @@
                 "string"
             ],
             "time": "2013-01-10 21:49:15"
+        },
+        {
+            "name": "gabrielelana/byte-units",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gabrielelana/byte-units.git",
+                "reference": "823f5bb7052d94e155ed6b5ffb62cf71bab59d41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gabrielelana/byte-units/zipball/823f5bb7052d94e155ed6b5ffb62cf71bab59d41",
+                "reference": "823f5bb7052d94e155ed6b5ffb62cf71bab59d41",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ByteUnits\\": "src/ByteUnits"
+                },
+                "files": [
+                    "src/ByteUnits/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriele Lana",
+                    "email": "gabriele.lana@gmail.com"
+                }
+            ],
+            "description": "Library to parse, format and convert byte units",
+            "homepage": "https://github.com/gabrielelana/byte-units",
+            "keywords": [
+                "byte",
+                "convert",
+                "format",
+                "parse",
+                "size",
+                "units"
+            ],
+            "time": "2014-07-06 21:12:21"
         },
         {
             "name": "guzzle/guzzle",
@@ -3032,6 +3083,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "davedevelopment/twig-inflection": 20,
+        "gabrielelana/byte-units": 20,
         "codeclimate/php-test-reporter": 20
     },
     "prefer-stable": false,

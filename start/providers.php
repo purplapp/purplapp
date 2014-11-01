@@ -75,6 +75,10 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
 
     $twig->addExtension(new \DaveDevelopment\TwigInflection\Twig\Extension\Inflection());
 
+    $twig->addFunction(new Twig_SimpleFunction("human_bytes", function ($size, $format) {
+        return ByteUnits\Metric::bytes($size)->format($format);
+    }));
+
     return $twig;
 }));
 

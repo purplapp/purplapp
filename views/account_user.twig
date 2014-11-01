@@ -273,18 +273,14 @@
                 </td>
             </tr>
             <tr>
-                <td>Out of {{ ((token.storage.used/(1024*1024*1024))|round(2, 'floor')) + ((token.storage.available/(1024*1024*1024))|round(2, 'floor')) }} GB of storage:</td>
+                <td>Out of {{ (human_bytes(token.storage.used, 2)) + (human_bytes(token.storage.available, 2)) }} GB, you have used:</td>
                 <td>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: {{ ((token.storage.used/(1024*1024*1024))|round(0, 'ceil')) * 10 }}%">
-                            {{ (token.storage.used/(1024*1024*1024))|round(2, 'floor') }} GB Used
-                        </div>
-                        <div class="progress-bar progress-bar-success" style="width: {{ ((token.storage.available/(1024*1024*1024))|round(0, 'floor')) * 10 }}%">
-                            {{ (token.storage.available/(1024*1024*1024))|round(2, 'floor') }} GB Free
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ (human_bytes(token.storage.used, 2)) * 10 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ (human_bytes(token.storage.used, 2)) * 10 }}%;">
+                            {{ (human_bytes(token.storage.used, 2)) }}
                         </div>
                     </div>
-                </td>
-            </tr>
+                </tr>
         {% endif %}
 
         {% if user.counts.posts > 0 %}
