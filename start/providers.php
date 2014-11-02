@@ -79,6 +79,14 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
         return ByteUnits\Metric::bytes($size)->format($format);
     }));
 
+    $twig->addFilter( new Twig_SimpleFilter('cast_to_array', function ($stdClassObject) {
+        $response = array();
+        foreach ($stdClassObject as $key => $value) {
+            $response[] = array($key, $value);
+        }
+        return $response;
+    }));
+
     return $twig;
 }));
 

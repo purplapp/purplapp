@@ -10,19 +10,106 @@
 
 {% block content %}
 
+<<<<<<< Updated upstream
+=======
+{% set annotations = user.annotations %}
+<!-- {{ dump(annotations) }} -->
+
+>>>>>>> Stashed changes
 <div class="col-md-12">
 
     <!-- User Name -->
     <div class="page-header">
+<<<<<<< Updated upstream
         <h4>User Lookup</h4>
         <h1>
             Patch annotations for {{ user.name|e }}
         </h1>
     </div>
 
+=======
+        <h4>User Annotations</h4>
+    </div>
+
+</div>
+
+<div class="col-md-8">
+
+    {% for annotation in annotations %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ annotation.type }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-10">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Value Type</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% set annovalue = annotation.value %}
+                            {% for key, value in annovalue|cast_to_array %}
+                                <tr>
+                                    <td>{{ value.0 }}</td>
+                                    <td>
+                                        {% if value.1 is not iterable %}
+                                            {{ value.1 }}
+                                        {% else %}
+                                            {{ dump(value.1) }}
+                                        {% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-2">
+                    <!-- <a href="{{ alpha_domain }}" target="_blank" role="button" class="btn btn-info btn-block">
+                        Amend
+                    </a> -->
+                    <span id="{{ annotation.type }}" onclick="deleteAnno('{{ annotation.type }}', 'delete')" class="btn btn-danger btn-block">
+                        <span id="{{ annotation.type }}_text">Delete</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+>>>>>>> Stashed changes
 {% endblock %}
 
 {% block tail_scripts %}
     {{ parent() }}
 
+<<<<<<< Updated upstream
+=======
+    <script>
+        // function amendAnno(type, content_type, content, process) {
+        //     var element = document.getElementById(userid);
+
+        //     //FIXME
+        //     $.get("/user/patch_annotations", "type=" + type, "content_type=" + content_type, "content=" + content, "process=" + process);
+
+        //     element.setAttribute("class", "btn btn-block btn-success active");
+        //     element.setAttribute("disabled", "disabled");
+
+        //     document.getElementById(type+"_text").innerHTML='Amended';
+        // }
+
+        // function deleteAnno(type, process) {
+        //     var element = document.getElementById(type);
+        //     var element = document.getElementById(process);
+
+        //     $.get("/user/patch_annotations", "type=" + type, "process=" + process);
+
+        //     element.setAttribute("class", "btn btn-block btn-success active");
+        //     element.setAttribute("disabled", "disabled");
+
+        //     // document.getElementById(type+"_text").innerHTML='Deleted';
+        // }
+    </script>
+
+>>>>>>> Stashed changes
 {% endblock %}
