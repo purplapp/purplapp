@@ -105,6 +105,7 @@ $app["adn.settings"] = [
         "follow",
         "public_messages",
         "messages",
+        "update_profile",
     ],
 ];
 
