@@ -462,6 +462,37 @@ class Client
     }
 
     /**
+     * Attempts to patch some annotations
+     *
+     * @param array $opts = []
+     *
+     * @return GuzzleHttp\Message\Response
+     */
+    public function patchAnnotations($type, $content_type, $content)
+    {
+        $url = "{$this->userResourceUrl}/me";
+
+        try {
+            $response = $this->authPatch($url, [
+                "body" => array(
+                    "annotations" => array(
+                        array(
+                            "type" => "net.app.purplapp.test2",
+                            "value" => array(
+                                "field" => "hello"
+                            )
+                        )
+                    )
+                )
+            ]);
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            $response = var_dump($e->getRequest(), $e->getResponse());
+        }
+
+        return $response;
+    }
+
+    /**
      * Makes an authenticated GET request to the provided URL
      *
      * @param $url  string
@@ -471,7 +502,7 @@ class Client
      */
     protected function authGet($url, array $opts = [])
     {
-        return $this->authHttpRequest("get", $url, $opts);
+        return $this->authHttpRequest("GET", $url, $opts);
     }
 
     /**
@@ -484,7 +515,20 @@ class Client
      */
     protected function authPost($url, array $opts = [])
     {
-        return $this->authHttpRequest("post", $url, $opts);
+        return $this->authHttpRequest("POST", $url, $opts);
+    }
+
+    /**
+     * Makes an authenticated PATCH request to the provided URL
+     *
+     * @param $url  string
+     * @param $opts array
+     *
+     * @return GuzzleHttp\Message\Response
+     */
+    protected function authPatch($url, array $opts = [])
+    {
+        return $this->authHttpRequest("PATCH", $url, $opts);
     }
 
     /**
@@ -497,7 +541,7 @@ class Client
      */
     protected function authDelete($url, array $opts = [])
     {
-        return $this->authHttpRequest("delete", $url, $opts);
+        return $this->authHttpRequest("DELETE", $url, $opts);
     }
 
     /**
@@ -512,7 +556,7 @@ class Client
     protected function authHttpRequest($method, $url, array $opts = [])
     {
         return $this->client->$method($url, [
-            "headers" => ["Authorization" => "Bearer {$this->accessToken}"],
+            "headers" => ["Authorization" => "Bearer {$this->accessToken}", "X-ADN-Pretty-JSON" => "1", "Content-Type" => "application/json"],
         ] + $opts);
     }
 

@@ -1,0 +1,28 @@
+{% extends "document.twig" %}
+
+{% block container %}container{% endblock %}
+
+{% block navbar %}
+    {% include "navbar.twig" %}
+{% endblock %}
+
+{% block title %}User Information Lookup{% endblock %}
+
+{% block content %}
+
+<div class="col-md-12">
+
+    <!-- User Name -->
+    <div class="page-header">
+        <h4>User Lookup</h4>
+        <h1>
+            Patch annotations for {{ user.name|e }}
+        </h1>
+    </div>
+
+{% endblock %}
+
+{% block tail_scripts %}
+    {{ parent() }}
+
+{% endblock %}

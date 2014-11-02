@@ -309,6 +309,31 @@ $app->get("/user/follow", function (Request $req) use ($app) {
     return $app->json($app["adn.client"]->followUser($req->get("id"))->json());
 })->bind("follow");
 
+$app->get("/user/patch_annotations", function (Request $req) use ($app) {
+    if (!$app["adn.user"]) {
+        return $app->render("unauth_message.twig");
+    }
+
+    // return $app->json($app["adn.client"]->patchAnnotations($req->get("type"), $req->get("content_type"), $req->get("content"))->json());
+
+    return $app->json($app["adn.client"]->patchAnnotations($req->get("type"), $req->get("content_type"), $req->get("content")));
+})->bind("annotations");
+
+$app->get("/account/annotations", function (Request $req) use ($app) {
+    if (!$app["adn.user"]) {
+        return $app->render("unauth_message.twig");
+    }
+
+    $client = $app["adn.client"];
+
+    $user = $client->getAuthorizedUser(["include_user_annotations" => true]);
+
+    return $app->render("account_annotations.twig", [
+        "user"          => $user
+    ]);
+
+})->bind("account_annotations")->value("username", "me");
+
 $app->get("/oss", $redirector("opensource"));
 $app->get("/oss.php", $redirector("opensource"));
 $app->get("/opensource.php", $redirector("opensource"));
