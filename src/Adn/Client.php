@@ -468,25 +468,33 @@ class Client
      *
      * @return GuzzleHttp\Message\Response
      */
-    public function patchAnnotations($type, $content_type, $content)
+    public function patchAnnotations($type, $content_type, $content, $process)
     {
-        $url = "{$this->userResourceUrl}/me";
+        $url = "{$this->userResourceUrl}/me?include_user_annotations=1";
 
-        try {
+        if ($process != "delete") {
             $response = $this->authPatch($url, [
-                "body" => array(
-                    "annotations" => array(
-                        array(
-                            "type" => "net.app.purplapp.test2",
-                            "value" => array(
-                                "field" => "hello"
-                            )
-                        )
-                    )
-                )
+                "body" => json_encode([
+                    "annotations" => [
+                        [
+                            "type" => $type,
+                            "value" => [
+                                $content_type => $content
+                            ]
+                        ]
+                    ]
+                ])
             ]);
-        } catch (\GuzzleHttp\Exception\RequestException $e) {
-            $response = var_dump($e->getRequest(), $e->getResponse());
+        } else {
+            $response = $this->authPatch($url, [
+                "body" => json_encode([
+                    "annotations" => [
+                        [
+                            "type" => $type
+                        ]
+                    ]
+                ])
+            ]);
         }
 
         return $response;

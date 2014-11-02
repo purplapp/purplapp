@@ -314,9 +314,9 @@ $app->get("/user/patch_annotations", function (Request $req) use ($app) {
         return $app->render("unauth_message.twig");
     }
 
-    // return $app->json($app["adn.client"]->patchAnnotations($req->get("type"), $req->get("content_type"), $req->get("content"))->json());
+    return $app->json($app["adn.client"]->patchAnnotations($req->get("type"), $req->get("content_type"), $req->get("content"), $req->get("process"))->json());
 
-    return $app->json($app["adn.client"]->patchAnnotations($req->get("type"), $req->get("content_type"), $req->get("content")));
+    // return $app->json($app["adn.client"]->patchAnnotations($req->get("type"), $req->get("content_type"), $req->get("content")));
 })->bind("annotations");
 
 $app->get("/account/annotations", function (Request $req) use ($app) {
