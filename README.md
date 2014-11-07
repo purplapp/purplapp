@@ -1,20 +1,22 @@
 Purplapp [![Build Status][ci img]][ci link]
 ===========================================
 
-[Purplapp](http://app.net/purplapp) is an app.net web statistics application.
+[Purplapp](http://app.net/purplapp) is an App.net web statistics application.
 
-[![Pull Request Stats][pr img]][pr link] [![Issue Stats][is img]][is link] [![Code Climate][cc img]][cc link] [![Test Coverage][tc img]][cc link]
+[![Pull Request Stats][pr img]][pr link] [![Issue Stats][is img]][is link] [![Code Climate][cc img]][cc link] [![Test Coverage][tc img]][cc link] [![Stack Share][ss img]][ss link]
 
 [ci img]: https://travis-ci.org/purplapp/purplapp.svg?branch=master
 [cc img]: https://codeclimate.com/github/purplapp/purplapp/badges/gpa.svg
 [tc img]: https://codeclimate.com/github/purplapp/purplapp/badges/coverage.svg
 [is img]: http://issuestats.com/github/purplapp/purplapp/badge/issue
 [pr img]: http://issuestats.com/github/purplapp/purplapp/badge/pr
+[ss img]: http://img.shields.io/badge/tech-stack-0690fa.svg
 
 [ci link]: https://travis-ci.org/purplapp/purplapp
 [is link]: http://issuestats.com/github/purplapp/purplapp
 [pr link]: http://issuestats.com/github/purplapp/purplapp
 [cc link]: https://codeclimate.com/github/purplapp/purplapp
+[ss link]: http://stackshare.io/purplapp/purplapp
 
 ## Features
 
