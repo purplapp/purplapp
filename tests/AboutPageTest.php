@@ -51,20 +51,30 @@ class AboutPageTest extends WebTestCase
      */
     public function it_shows_each_contributors_handle()
     {
+        $alpha = function ($handle) {
+            return "https://alpha.app.net/{$handle}";
+        };
+
+        $twitter = function ($handle) {
+            return "https://twitter.com/{$handle}";
+        };
+
         $contributors = [
-            "purplapp",
-            "ciarand",
-            "charl",
-            "jvimedia",
-            "hu",
-            "remus",
-            "jessicadennis",
+            ["purplapp", $alpha],
+            ["ciarand", $alpha],
+            ["cwelkin", $twitter],
+            ["jvimedia", $alpha],
+            ["hu", $alpha],
+            ["remus", $alpha],
+            ["jessicadennis", $alpha],
         ];
 
         $this->call("GET", "/about");
 
-        foreach ($contributors as $handle) {
-            $this->assertLinkExists("@{$handle}", "https://alpha.app.net/{$handle}");
+        foreach ($contributors as $contrib) {
+            list($handle, $urlgen) = $contrib;
+
+            $this->assertLinkExists("@{$handle}", $urlgen($handle));
         }
     }
 }
