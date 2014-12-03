@@ -6,7 +6,7 @@ use Whoops\Provider\Silex\WhoopsServiceProvider;
 
 ErrorHandler::register();
 
-Dotenv::load(APP_DIR);
+Dotenv::load(APP_DIR, ".config");
 
 Dotenv::required([
     'CLIENT_ID',
