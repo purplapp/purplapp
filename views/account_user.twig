@@ -197,7 +197,7 @@
                 {% endif %}
             {% endfor %}
             {% for annotation in user.annotations %}
-                {% if "purplapp.ello" in annotation.type %}
+                {% if "purplapp.ello" in annotation.type and annotation.value.username is defined %}
                     {% set did_display_annotations = true %}
                     <tr>
                         <td>Ello:</td>
