@@ -1,6 +1,8 @@
 <?php // providers.php
 
-date_default_timezone_set('UTC');
+if (date_default_timezone_get() === "") {
+    date_default_timezone_set('UTC');
+}
 
 use Purplapp\Adn\NiceRankAwareClient;
 
@@ -10,8 +12,6 @@ use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 
 use SilexAssetic\AsseticServiceProvider;
-
-use Monolog\Handler\ErrorLogHandler;
 
 use Assetic\Extension\Twig\AsseticExtension;
 use Assetic\Filter\CssMinFilter;
@@ -23,16 +23,19 @@ use Assetic\Asset\FileAsset;
 use Assetic\Cache\FilesystemCache;
 
 use GuzzleHttp\Client as GuzzleClient;
-
-use \Github\Client as GithubClient;
+use Github\Client as GithubClient;
+use DaveDevelopment\TwigInflection\Twig\Extension\Inflection;
+use ByteUnits\Metric;
+use Monolog\Handler\ErrorLogHandler;
 
 $app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new TwigServiceProvider(), [
     "twig.path" => app_dir() . "/views",
     "twig.options" => [
-        "debug" => $app["debug"],
-        "cache" => app_dir() . "/cache/twig",
+        "debug"            => $app["debug"],
+        "strict_variables" => true,
+        "cache"            => app_dir() . "/cache/twig",
     ],
 ]);
 
@@ -86,10 +89,10 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
 
     $twig->addExtension(new AsseticExtension($app["assetic.factory"]));
 
-    $twig->addExtension(new \DaveDevelopment\TwigInflection\Twig\Extension\Inflection());
+    $twig->addExtension(new Inflection());
 
     $twig->addFunction(new Twig_SimpleFunction("human_bytes", function ($size, $format) {
-        return ByteUnits\Metric::bytes($size)->format($format);
+        return Metric::bytes($size)->format($format);
     }));
 
     return $twig;
