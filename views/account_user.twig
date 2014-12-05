@@ -431,6 +431,7 @@
 </div>
 
 <!-- First Post Modal -->
+{% if first_post %}
 <div class="modal fade" id="FPModal" tabindex="-1" role="dialog" aria-labelledby="FPModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -475,6 +476,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 {% if first_mention %}
 <!-- First Mention Modal -->
@@ -486,7 +488,7 @@
                 <h4 class="modal-title" id="FMModal">@{{ user.username }}'s First Mention <i>(by <a href="{{ alpha_domain ~ first_mention.user.username }}" target="_blank">@{{ first_mention.user.username }}</a>)</i></h4>
             </div>
             <div class="modal-body">
-	            <blockquote>{% autoescape false %}{{ first_mention.html() }}{% endautoescape %}</blockquote>
+                <blockquote>{% autoescape false %}{{ first_mention.html() }}{% endautoescape %}</blockquote>
                 <br>
                 <table class="table table-condensed">
                     <tr>
@@ -524,6 +526,7 @@
 {% endif %}
 
 <!-- Last Post Modal -->
+{% if last_post %}
 <div class="modal fade" id="LPModal" tabindex="-1" role="dialog" aria-labelledby="LPModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -532,7 +535,7 @@
                 <h4 class="modal-title" id="LPModal">@{{ user.username }}'s Last Post</h4>
             </div>
             <div class="modal-body">
-	            <blockquote>{% autoescape false %}{{ last_post.html() }}{% endautoescape %}</blockquote>
+                <blockquote>{% autoescape false %}{{ last_post.html() }}{% endautoescape %}</blockquote>
                 <br>
                 <table class="table table-condensed">
                     <tr>
@@ -566,6 +569,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 {% if last_mention %}
 <!-- Last Mention Modal -->
@@ -577,7 +581,7 @@
                 <h4 class="modal-title" id="LMModal">@{{ user.username }}'s Last Mention <i>(by <a href="{{ alpha_domain ~ last_mention.user.username }}" target='_blank'>@{{ last_mention.user.username }}</a>)</i></h4>
             </div>
             <div class="modal-body">
-	            <blockquote>{% autoescape false %}{{ last_mention.html() }}{% endautoescape %}</blockquote>
+                <blockquote>{% autoescape false %}{{ last_mention.html() }}{% endautoescape %}</blockquote>
                 <br>
                 <table class="table table-condensed">
                     <tr>
@@ -638,6 +642,7 @@
     </div>
 </div>
 
+{% if nice_rank.stats is defined %}
 <!-- Past 28 Days Modal -->
 <div class="modal fade" id="28DaysModal" tabindex="-1" role="dialog" aria-labelledby="28DaysModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -652,30 +657,42 @@
                     <a href="http://jasonirwin.ca/2014/05/14/thinking-about-nicerank/" target="_blank">NiceRank</a>.
                 </p>
                 <table class="table table-condensed">
+                    {% if nice_rank.stats.robo_posts is defined %}
                     <tr>
                         <td>Robot Posts:</td>
                         <td>{{ nice_rank.stats.robo_posts }}</td>
                     </tr>
+                    {% endif %}
+                    {% if nice_rank.stats.post_count is defined %}
                     <tr>
                         <td>Posts:</td>
                         <td>{{ nice_rank.stats.post_count }}</td>
                     </tr>
+                    {% endif %}
+                    {% if nice_rank.stats.conversations is defined %}
                     <tr>
                         <td>Conversations:</td>
                         <td>{{ nice_rank.stats.conversations }}</td>
                     </tr>
+                    {% endif %}
+                    {% if nice_rank.stats.links is defined %}
                     <tr>
                         <td>Links:</td>
                         <td>{{ nice_rank.stats.links }}</td>
                     </tr>
+                    {% endif %}
+                    {% if nice_rank.stats.mentions is defined %}
                     <tr>
                         <td>Mentions:</td>
                         <td>{{ nice_rank.stats.mentions }}</td>
                     </tr>
+                    {% endif %}
+                    {% if nice_rank.stats.questions is defined %}
                     <tr>
                         <td>Questions:</td>
                         <td>{{ nice_rank.stats.questions }}</td>
                     </tr>
+                    {% endif %}
                 </table>
             </div>
             <div class="modal-footer">
@@ -684,6 +701,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block tail_scripts %}
