@@ -11,6 +11,8 @@ use Silex\Provider\SessionServiceProvider;
 
 use SilexAssetic\AsseticServiceProvider;
 
+use Monolog\Handler\ErrorLogHandler;
+
 use Assetic\Extension\Twig\AsseticExtension;
 use Assetic\Filter\CssMinFilter;
 use Assetic\Filter\GoogleClosure\CompilerApiFilter;
@@ -48,6 +50,17 @@ $app->register(new SessionServiceProvider(), [
 $app->register(new MonologServiceProvider(), [
     "monolog.logfile" => app_dir() . "/logs/" . date("Y-m-d") . ".log",
 ]);
+
+$app["monolog"] = $app->share($app->extend("monolog", function ($monolog, $app) {
+    // clear the stack
+    while (count($monolog->getHandlers())) {
+        $monolog->popHandler();
+    }
+
+    $monolog->pushHandler(new ErrorLogHandler());
+
+    return $monolog;
+}));
 
 $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
     $twig->addGlobal("alpha_domain", getenv("ALPHA_DOMAIN"));

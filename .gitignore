@@ -1,5 +1,5 @@
 /.vimrc.local
-/.env
+/.config
 /bin/
 /assets/
 /composer.phar

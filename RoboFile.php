@@ -47,6 +47,13 @@ class RoboFile extends TaskList
         ]
     ];
 
+    public static $fontDirectories = [
+        "/assets/font-awesome/fonts/",
+        "/assets/bootstrap/fonts/",
+        "/assets/bootstrap-social/assets/fonts/",
+        "/assets/octicons/octicons/",
+    ];
+
     /**
      * @desc Start the built-in PHP web server
      */
@@ -64,6 +71,8 @@ class RoboFile extends TaskList
      */
     public function bower()
     {
+        $this->stopOnFail(true);
+
         foreach (static::$assets as $asset) {
             $this->downloadAsset($asset["url"], $asset["component"], $asset["version"]);
         }
@@ -102,6 +111,8 @@ class RoboFile extends TaskList
      */
     public function clean()
     {
+        $this->stopOnFail(true);
+
         $except = [
             "./cache/assetic",
             "./cache/twig",
@@ -133,6 +144,8 @@ class RoboFile extends TaskList
      */
     public function assets()
     {
+        $this->stopOnFail(true);
+
         $app = include __DIR__ . "/bootstrap.php";
 
         $assetsManager = new LazyAssetManager($app["assetic.factory"]);
@@ -151,6 +164,15 @@ class RoboFile extends TaskList
         $this->say("Beginning asset dump process. Be patient!");
 
         $writer->writeManagerAssets($assetsManager);
+
+        $this->say("Copying fonts over");
+
+        foreach (static::$fontDirectories as $dir) {
+            $this->taskFileSystemStack()
+                ->mirror(APP_DIR . $dir, APP_DIR . "/public/fonts")
+                ->run();
+        }
+
     }
 
     /**
@@ -166,6 +188,8 @@ class RoboFile extends TaskList
      */
     public function coverage($args = "")
     {
+        $this->stopOnFail(true);
+
         return $this
             ->taskExec("./bin/phpunit")
             ->arg("--coverage-html")
@@ -204,6 +228,20 @@ class RoboFile extends TaskList
     public function tags()
     {
         return $this->taskExec("phptags")->run();
+    }
+
+    public function init()
+    {
+        $this->stopOnFail(true);
+
+        foreach ([__DIR__ . "/logs", __DIR__ . "/cache"] as $dir) {
+            $this->taskFileSystemStack()
+                // dir, perms, umask, recurse
+                ->chmod($dir, 0777, 0000, true)
+                // dir, user
+                ->chown($dir, "nobody")
+                ->run();
+        }
     }
 
     private function getServer()

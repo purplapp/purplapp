@@ -34,10 +34,10 @@ Purplapp [![Build Status][ci img]][ci link]
 
 ### Want to suggest a feature?
 
-Visit the issue page of this repository and open a new issue 
+Visit the issue page of this repository and open a new issue
 with the feature(s) you want to have added to Purplapp!
 
-Alternatively, fork this repo and setup a local version of 
+Alternatively, fork this repo and setup a local version of
 Purplapp and add a feature! Make sure you add tests, and that
 they pass before you file a pull request!
 
@@ -67,20 +67,21 @@ php composer.phar install
 You'll need to get or create a client ID and client secret. You can get this
 information from [your App.net app listings](https://account.app.net/developer/apps/).
 
-If you want to get statistics from GitHub, you'll need to get or create a GitHub
-personal access token. Information on scopes required is coming soon, but the
-defaults are probably good for now. You can get this information from [your
-applications tab](https://github.com/settings/tokens/new). You'll also need to
-change all the mentions of purplapp [in this block of code](https://github.com/purplapp/purplapp/blob/master/start/routes.php#L274-L326)
+If you want to get statistics from GitHub, you'll need to get or create
+a GitHub personal access token. Information on scopes required is coming soon,
+but the defaults are probably good for now. You can get this information from
+[your applications tab](https://github.com/settings/tokens/new). You'll also
+need to change all the mentions of purplapp [in this block of
+code](https://github.com/purplapp/purplapp/blob/master/start/routes.php#L274-L326)
 to your own organisation/user and repository name.
 
-**App configuration is handled via a `.env` file in the root. Copy the
-`.env.example` file and fill in your details there.**
+**App configuration is handled via a `.config` file in the root. Copy the
+`.config.example` file and fill in your details there.**
 
-If you're developing on Purplapp, make sure that in the `.env` file it's set to
-`DEBUG=1`, not `DEBUG=0`; on a production server, make sure it's set to `DEBUG=0`
-to avoid potential revealing of sensitive data (client secrets, etc.) to the end
-user.
+If you're developing on Purplapp, make sure that in the `.config` file it's set
+to `DEBUG=1`, not `DEBUG=0`; on a production server, make sure it's set to
+`DEBUG=0` to avoid potential revealing of sensitive data (client secrets, etc.)
+to the end user.
 
 ### Server
 
@@ -156,9 +157,12 @@ of the feed.
 ## Contributors
 
 * original concept by [charlw](https://github.com/charlw)
-* majority of code written by [charlw](https://github.com/charlw), 
+
+* majority of code written by [charlw](https://github.com/charlw),
   [ciarand](https://github.com/ciarand) and [humd](https://github.com/humd)
+
 * hosting of [purplapp.eu](http://purplapp.eu) by [jvimedia](https://github.com/jvimedia)
+
 * thanks to everyone else who has contributed to the codebase!
 
 ## License
