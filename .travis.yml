@@ -9,7 +9,7 @@ install:
   - composer install --dev
 
 before_script:
-  - cp .env.example .env
+  - cp .config.example .config
   - ./bin/robo bower
   - ./bin/robo clean
   - ./bin/robo assets
