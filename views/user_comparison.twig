@@ -229,14 +229,18 @@
 
         //FIXME
         if (element.getAttribute("status") === "followed") {
-            $.get("/user/unfollow", "id=" + userid);
+            $.ajax({
+                url: "/user/follow",
+                data: {id: userid},
+                type: "DELETE"
+            });
 
             element.setAttribute("status", "true");
             element.setAttribute("class", "btn btn-block btn-info");
 
-            document.getElementById(userid+"_text").innerHTML='Unfollowed';
+            document.getElementById(userid+"_text").innerHTML = 'Unfollowed';
         } else {
-            $.get("/user/follow", "id=" + userid);
+            $.post("/user/follow", "id=" + userid);
 
             element.setAttribute("class", "btn btn-block btn-success active");
             element.setAttribute("status", "followed");

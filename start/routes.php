@@ -291,8 +291,7 @@ $app->get("/broadcast/lookup", function (Request $req) use ($app) {
     return $app->render("broadcast_lookup.twig", compact("channel", "messages"));
 })->bind("broadcast_lookup");
 
-//TODO: change this to POST / DELETE, not GET
-$app->get("/user/unfollow", function (Request $req) use ($app) {
+$app->delete("/user/follow", function (Request $req) use ($app) {
     if (!$app["adn.user"]) {
         return $app->render("unauth_message.twig");
     }
@@ -300,7 +299,7 @@ $app->get("/user/unfollow", function (Request $req) use ($app) {
     return $app->json($app["adn.client"]->unfollowUser($req->get("id"))->json());
 })->bind("unfollow");
 
-$app->get("/user/follow", function (Request $req) use ($app) {
+$app->post("/user/follow", function (Request $req) use ($app) {
     if (!$app["adn.user"]) {
         return $app->render("unauth_message.twig");
     }
