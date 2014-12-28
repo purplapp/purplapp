@@ -40,9 +40,11 @@
     {% endfor %}
 
     {% set commits = 0 %}
-    {% for week in github_participation.all|reverse|slice(0,4) %}
-        {% set commits = commits + week %}
-    {% endfor %}
+    {% if github_participation.all is defined %}
+        {% for week in github_participation.all|reverse|slice(0,4) %}
+            {% set commits = commits + week %}
+        {% endfor %}
+    {% endif %}
 
     <p class="lead">
         During the history of the project, there have been:
