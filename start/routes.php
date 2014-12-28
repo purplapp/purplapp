@@ -38,7 +38,6 @@ $simplePage = function ($path, $name) use ($app, $renderer, $redirector) {
 
 $simplePage("/", "index");
 $simplePage("/tools", "tools");
-$simplePage("/donate", "donate");
 $simplePage("/about", "about");
 $simplePage("/legal/privacy", "privacy");
 $simplePage("/legal/terms", "terms");
@@ -143,7 +142,7 @@ $app->get("/account/user", function (Request $req) use ($app) {
         }
     } else {
         $token = $client->getUserToken();   // if no user is requested, then it must be the authorised user, hence get the token
-    }   
+    }
 
     if ($req->get("id")) {
         if ($req->get("id") === $currentUser->username) {
@@ -160,7 +159,7 @@ $app->get("/account/user", function (Request $req) use ($app) {
         $unreadPMChannels = $client->getUnreadPMChannels();
         $unreadBroadcast = $unreadBroadcastChannels->count();
         $unreadPM = $unreadPMChannels->count();
-    }   
+    }
 
     return $app->render("account_user.twig", [
         "user"          => $user,

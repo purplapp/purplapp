@@ -12,7 +12,7 @@ class RoboFile extends TaskList
 {
     const SECONDS = 1000000;
 
-    const SERVER_PORT = 8083;
+    const SERVER_PORT = 8080;
 
     public static $assets = [
         [
@@ -172,7 +172,6 @@ class RoboFile extends TaskList
                 ->mirror(APP_DIR . $dir, APP_DIR . "/public/fonts")
                 ->run();
         }
-
     }
 
     /**

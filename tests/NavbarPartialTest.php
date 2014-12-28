@@ -9,10 +9,9 @@ class NavbarPartialTest extends WebTestCase
     public function it_should_test_the_site_titles_are_always_links_home($url)
     {
         $pages = [
-            "Tools"   => "/tools",
-            "Open Source"   => "/opensource",
-            "Donate"          => "/donate",
-            "About"           => "/about",
+            "Tools"       => "/tools",
+            "Open Source" => "/opensource",
+            "About"       => "/about",
         ];
 
         $this->call("GET", $url);
@@ -29,7 +28,6 @@ class NavbarPartialTest extends WebTestCase
         return [
             "home"      => ["/"],
             "tools"   => ["/tools"],
-            "donate"    => ["donate"],
             "about"     => ["about"],
             "signin"    => ["signin"],
             "privacy"   => ["/legal/privacy"],
