@@ -238,10 +238,10 @@ class RoboFile extends TaskList
     {
         $this->stopOnFail(true);
 
-        foreach ([__DIR__ . "/logs", __DIR__ . "/cache"] as $dir) {
+        foreach ([$storage = __DIR__ . "/storage", "{$storage}/logs", "{$storage}/cache"] as $dir) {
             $this->taskFileSystemStack()
                 // dir, perms, umask, recurse
-                ->chmod($dir, 0777, 0000, true)
+                ->chmod($dir, 0755, 0000, true)
                 // dir, user
                 ->chown($dir, "nobody")
                 ->run();
