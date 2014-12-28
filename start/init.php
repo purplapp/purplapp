@@ -30,18 +30,20 @@ if ($app["debug"]) {
 
 $app->error(function (Exception $e, $code) use ($app) {
     if ($app['debug']) {
+        // Whoops'll get it
         return;
     }
 
-    $message = $e->getMessage();
-
     if ($code === 404) {
-        return $app->render("404.twig", compact("message", "code"));
+        $view = "404.twig";
     } else if (400 >= $code && $code < 500) {
-        return $app->render("4xx.twig", compact("message", "code"));
+        $view = "4xx.twig";
     } else if (500 >= $code && $code < 600) {
-        return $app->render("5xx.twig", compact("message", "code"));
+        $view = "5xx.twig";
     } else {
-        return $app->render("error.twig", compact("message", "code"));
+        $view = "error.twig";
     }
+
+    $data = ["code" => $code, "message" => $e->getMessage()];
+    return $app->render($view, $data);
 });
