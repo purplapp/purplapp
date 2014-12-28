@@ -4,10 +4,6 @@
 
 {% block container %}{% endblock %}
 
-{% block style %}
-        <link href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.1.2/octicons.css" type="text/css" rel="stylesheet" />
-{% endblock %}
-
 {% block head_scripts %}
 
 <script src="//use.typekit.net/jch6axs.js"></script>
@@ -17,65 +13,92 @@
 
 {% block content %}
 
+{% set additions = 0 %}
+{% set deletions = 0 %}
+{% for week in github_code_frequency|reverse|slice(0,4) %}
+    {% set additions = additions + week.1 %}
+    {% set deletions = deletions - week.2 %}
+{% endfor %}
+
+{% set commits = 0 %}
+{% if github_participation.all is defined %}
+    {% for week in github_participation.all|reverse|slice(0,4) %}
+        {% set commits = commits + week %}
+    {% endfor %}
+{% endif %}
+
 <div class="container-fluid opensource-header">
-  <div class="container">
-    <div class="col-md-12">
-      <div class="text-center opensource-header-icon">
-        <span class="octicon octicon-pulse" style="font-size: 80px;"></span>
-      </div>
-      <h1 class="text-center opensource-header-box-header">Purplapp - Open Source</h1>
-      <p class="text-center lead">Here are some statistics on our open source contributions.</p>
-      <p class="text-center lead">Check out our <a href="{{ url("tools") }}" style="color: #FFFFFF;"><i class="fa fa-wrench fa-fw"></i> tools</a>.</p>
+    <div class="container">
+        <div class="col-md-12">
+            <div class="text-center opensource-header-icon">
+                <span class="octicon octicon-pulse" style="font-size: 80px;"></span>
+            </div>
+            <h1 class="text-center opensource-header-box-header">Purplapp - Open Source</h1>
+            <p class="text-center lead">Here are some statistics on our open source contributions.</p>
+            <p class="text-center lead">Check out our <a href="{{ url("tools") }}" style="color: #FFFFFF;"><i class="fa fa-wrench fa-fw"></i> tools</a>.</p>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="container opensource-content">
-
-    {% set additions = 0 %}
-    {% set deletions = 0 %}
-    {% for week in github_code_frequency|reverse|slice(0,4) %}
-        {% set additions = additions + week.1 %}
-        {% set deletions = deletions - week.2 %}
-    {% endfor %}
-
-    {% set commits = 0 %}
-    {% if github_participation.all is defined %}
-        {% for week in github_participation.all|reverse|slice(0,4) %}
-            {% set commits = commits + week %}
-        {% endfor %}
-    {% endif %}
-
     <p class="lead">
         During the history of the project, there have been:
     </p>
     <div class="row">
         <div class="col-md-2 col-md-offset-2">
-            <p class="text-center lead"><span class="octicon octicon-git-commit" style="font-size: 60px;"></span><br><strong>{{ github_repo_commits|length }}</strong> commits</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-git-commit" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ github_repo_commits|length }}</strong> commits
+            </p>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <p class="text-center lead"><span class="octicon octicon-issue-closed" style="font-size: 60px;"></span><br><strong>{{ github_repo_issues|length }}</strong> issues</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-issue-closed" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ github_repo_issues|length }}</strong> issues
+            </p>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <p class="text-center lead"><span class="octicon octicon-git-pull-request" style="font-size: 60px;"></span><br><strong>{{ github_repo_pull|length }}</strong> pull requests</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-git-pull-request" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ github_repo_pull|length }}</strong> pull requests
+            </p>
         </div>
     </div>
     <br>
     <div class="row">
         <div class="col-md-2 col-md-offset-2">
-            <p class="text-center lead"><span class="octicon octicon-organization" style="font-size: 60px;"></span><br><strong>{{ github_repo_contributors|length }}</strong> contributors</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-organization" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ github_repo_contributors|length }}</strong> contributors
+            </p>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <p class="text-center lead"><span class="octicon octicon-tag" style="font-size: 60px;"></span><br><strong>{{ github_repo_releases|length }}</strong> releases</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-tag" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ github_repo_releases|length }}</strong> releases
+            </p>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <p class="text-center lead"><span class="octicon octicon-comment" style="font-size: 60px;"></span><br><strong>{{ github_repo_issues_comments|length + github_repo_pull_comments|length }}</strong> comments</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-comment" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ github_repo_issues_comments|length + github_repo_pull_comments|length }}</strong> comments
+            </p>
         </div>
     </div>
     <br>
     <div class="row">
         <div class="col-md-2 col-md-offset-2">
-            <p class="text-center lead"><span class="octicon octicon-repo-forked" style="font-size: 60px;"></span><br><strong>{{ github_repositories.forks_count }}</strong> forks</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-repo-forked" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ github_repositories.forks_count }}</strong> forks
+            </p>
         </div>
     </div>
     <br>
@@ -84,19 +107,27 @@
     </p>
     <div class="row">
         <div class="col-md-2 col-md-offset-2">
-            <p class="text-center lead"><span class="octicon octicon-diff-added" style="font-size: 60px;"></span><br><strong>{{ additions }}</strong> additions</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-diff-added" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ additions }}</strong> additions
+            </p>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <p class="text-center lead"><span class="octicon octicon-diff-removed" style="font-size: 60px;"></span><br><strong>{{ deletions }}</strong> deletions</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-diff-removed" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ deletions }}</strong> deletions
+            </p>
         </div>
         <div class="col-md-2 col-md-offset-1">
-            <p class="text-center lead"><span class="octicon octicon-git-commit" style="font-size: 60px;"></span><br><strong>{{ commits }}</strong> commits</p>
+            <p class="text-center lead">
+                <span class="octicon octicon-git-commit" style="font-size: 60px;"></span>
+                <br>
+                <strong>{{ commits }}</strong> commits
+            </p>
         </div>
     </div>
-    <!-- <br><br>
-    <p class="lead">
-        In terms of programming languages used, here are the standings:
-    </p> -->
 </div>
 
 {% endblock %}

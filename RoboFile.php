@@ -48,10 +48,10 @@ class RoboFile extends TaskList
     ];
 
     public static $fontDirectories = [
-        "/assets/font-awesome/fonts/",
-        "/assets/bootstrap/fonts/",
-        "/assets/bootstrap-social/assets/fonts/",
-        "/assets/octicons/octicons/",
+        ["from" => "/assets/font-awesome/fonts",            "to" => "fonts"],
+        ["from" => "/assets/bootstrap/fonts",               "to" => "fonts"],
+        ["from" => "/assets/bootstrap-social/assets/fonts", "to" => "fonts"],
+        ["from" => "/assets/octicons/octicons",             "to" => "css"],
     ];
 
     /**
@@ -167,11 +167,16 @@ class RoboFile extends TaskList
 
         $this->say("Copying fonts over");
 
-        foreach (static::$fontDirectories as $dir) {
-            $this->taskFileSystemStack()
-                ->mirror(APP_DIR . $dir, APP_DIR . "/public/fonts")
-                ->run();
+        $stack = $this->taskFileSystemStack();
+        foreach (static::$fontDirectories as $fontconf) {
+            foreach (glob(APP_DIR . $fontconf["from"] . "/*.{woff,eot,ttf,otf,svg}", GLOB_BRACE) as $file) {
+                $stack->copy(
+                    $file,
+                    APP_DIR . "/public/" . $fontconf["to"] . "/" . pathinfo($file, PATHINFO_BASENAME)
+                );
+            }
         }
+        $stack->run();
     }
 
     /**
