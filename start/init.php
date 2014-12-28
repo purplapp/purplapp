@@ -4,6 +4,10 @@ use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\HttpFoundation\Response;
 use Whoops\Provider\Silex\WhoopsServiceProvider;
 
+if (date_default_timezone_get() === "") {
+    date_default_timezone_set('UTC');
+}
+
 ErrorHandler::register();
 
 Dotenv::load(APP_DIR, ".config");

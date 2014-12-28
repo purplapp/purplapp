@@ -1,32 +1,27 @@
 <?php // providers.php
 
-if (date_default_timezone_get() === "") {
-    date_default_timezone_set('UTC');
-}
-
-use Purplapp\Adn\NiceRankAwareClient;
-
-use Silex\Provider\TwigServiceProvider;
-use Silex\Provider\UrlGeneratorServiceProvider;
-use Silex\Provider\MonologServiceProvider;
-use Silex\Provider\SessionServiceProvider;
-
-use SilexAssetic\AsseticServiceProvider;
-
+use Assetic\Asset\AssetCache;
+use Assetic\Asset\AssetCollection;
+use Assetic\Asset\AssetInterface;
+use Assetic\Asset\FileAsset;
+use Assetic\Asset\GlobAsset;
+use Assetic\Cache\FilesystemCache;
 use Assetic\Extension\Twig\AsseticExtension;
+use Assetic\Filter\CallablesFilter;
 use Assetic\Filter\CssMinFilter;
 use Assetic\Filter\GoogleClosure\CompilerApiFilter;
-use Assetic\Asset\AssetCollection;
-use Assetic\Asset\AssetCache;
-use Assetic\Asset\GlobAsset;
-use Assetic\Asset\FileAsset;
-use Assetic\Cache\FilesystemCache;
-
-use GuzzleHttp\Client as GuzzleClient;
-use Github\Client as GithubClient;
-use DaveDevelopment\TwigInflection\Twig\Extension\Inflection;
+use Assetic\Util\CSsUtils;
 use ByteUnits\Metric;
+use DaveDevelopment\TwigInflection\Twig\Extension\Inflection;
+use Github\Client as GithubClient;
+use GuzzleHttp\Client as GuzzleClient;
 use Monolog\Handler\ErrorLogHandler;
+use Purplapp\Adn\NiceRankAwareClient;
+use SilexAssetic\AsseticServiceProvider;
+use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\UrlGeneratorServiceProvider;
 
 $app->register(new UrlGeneratorServiceProvider());
 
@@ -184,7 +179,7 @@ $app['assetic.asset_manager'] = $app->share(
             $vendor("bootstrap/dist/js/bootstrap.min.js"),
             $vendor("chartjs/Chart.min.js"),
         ], [
-            $app["assetic.filter_manager"]->get("jsmin")
+            $app["assetic.filter_manager"]->get("jsmin"),
         ]);
 
         $cache = new FilesystemCache(APP_DIR . '/cache/assetic');
