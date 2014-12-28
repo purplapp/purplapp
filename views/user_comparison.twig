@@ -146,8 +146,8 @@
                             View on Alpha
                         </a>
 
-                        <span id="{{ user.id }}" onclick="myFollow('{{ user.id }}')" class="btn btn-primary btn-block">
-                            <span id="{{ user.id }}_text">Follow</span>
+                        <span id="js-user-{{ user.id }}" onclick="follow('{{ user.id }}')" data-followed="0" class="btn btn-primary btn-block">
+                            <span id="js-user-{{ user.id }}-text">Follow</span>
                         </span>
 
                     </div>
@@ -221,31 +221,42 @@
     new Chart(base_compare).PolarArea(base_compareData, base_compareOptions);
     new Chart(not_shared).PolarArea(not_sharedData, not_sharedOptions);
 
-    function myFollow(userid) {
-        var element = document.getElementById(userid);
+    function follow(userid) {
+        var button = document.getElementById("js-user-" + userid),
+            text   = document.getElementById("js-user-" + userid + "-text"),
+            change = function(newText) {
+                text.innerHTML = newText;
+            };
 
-        //FIXME
-        if (element.getAttribute("status") === "followed") {
+        change("Loading…");
+
+        if (button.getAttribute("data-followed") === "1") {
+
             $.ajax({
                 url: "/user/follow",
                 data: {id: userid},
                 type: "DELETE"
+            }).done(function() {
+                change("Unfollowed");
+                button.setAttribute("data-followed", "0");
+                button.setAttribute("class", "btn btn-block btn-info");
+            }).fail(function() {
+                change("An error occurred");
+                button.setAttribute("class", "btn btn-block btn-danger");
             });
 
-            element.setAttribute("status", "true");
-            element.setAttribute("class", "btn btn-block btn-info");
-
-            document.getElementById(userid+"_text").innerHTML = 'Unfollowed';
-        } else {
-            $.post("/user/follow", "id=" + userid);
-
-            element.setAttribute("class", "btn btn-block btn-success active");
-            element.setAttribute("status", "followed");
-
-            document.getElementById(userid+"_text").innerHTML='Succesfully Followed.';
+            return;
         }
 
-        //  elementtext.setAttribute("innerHTML", "You already followed!");
+        $.post("/user/follow", "id=" + userid)
+            .done(function() {
+                change("Successfully followed")
+                button.setAttribute("class", "btn btn-block btn-success active");
+                button.setAttribute("data-followed", "1");
+            }).fail(function() {
+                change("An error occurred");
+                button.setAttribute("class", "btn btn-block btn-danger");
+            });
     }
 
     function reloadPage() {
