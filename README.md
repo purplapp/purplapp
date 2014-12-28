@@ -1,22 +1,14 @@
-Purplapp [![Build Status][ci img]][ci link]
-===========================================
+Purplapp [![Build Status][ci img]][ci link] [![Code Climate][cc img]][cc link] [![Test Coverage][tc img]][cc link]
+==================================================================================================================
 
-[Purplapp](http://app.net/purplapp) is an App.net web statistics application.
-
-[![Pull Request Stats][pr img]][pr link] [![Issue Stats][is img]][is link] [![Code Climate][cc img]][cc link] [![Test Coverage][tc img]][cc link] [![Stack Share][ss img]][ss link]
-
-[ci img]: https://travis-ci.org/purplapp/purplapp.svg?branch=master
-[cc img]: https://codeclimate.com/github/purplapp/purplapp/badges/gpa.svg
-[tc img]: https://codeclimate.com/github/purplapp/purplapp/badges/coverage.svg
-[is img]: http://issuestats.com/github/purplapp/purplapp/badge/issue
-[pr img]: http://issuestats.com/github/purplapp/purplapp/badge/pr
-[ss img]: http://img.shields.io/badge/tech-stack-0690fa.svg
+[ci img]: https://img.shields.io/travis/purplapp/purplapp/master.svg?style=flat
+[cc img]: https://img.shields.io/codeclimate/github/purplapp/purplapp.svg?style=flat
+[tc img]: https://img.shields.io/codeclimate/coverage/github/purplapp/purplapp.svg?style=flat
 
 [ci link]: https://travis-ci.org/purplapp/purplapp
-[is link]: http://issuestats.com/github/purplapp/purplapp
-[pr link]: http://issuestats.com/github/purplapp/purplapp
 [cc link]: https://codeclimate.com/github/purplapp/purplapp
-[ss link]: http://stackshare.io/purplapp/purplapp
+
+>An [App.net](https://app.net/) statistics application.
 
 ## Features
 
@@ -141,19 +133,6 @@ a brief description of the most common tasks:
 
   NOTE: This requires the phptags binary be available in your $PATH.
 
-## Code Climate
-
-*This is only going to be for those who want to run their own version of Purplapp
-and have their own Code Climate page for it, etc.*
-
-If you've got Xdebug installed, you should run `bin/phpunit --coverage-clover
-build/logs/clover.xml`, and then
-`CODECLIMATE_REPO_TOKEN=[your_codeclimate_token] ./bin/test-reporter`.
-
-The `CODECLIMATE_REPO_TOKEN` value is provided after you add your repo to your
-Code Climate account by clicking on "Setup Test Coverage" on the right hand side
-of the feed.
-
 ## Contributors
 
 * original concept by [charlw](https://github.com/charlw)
@@ -161,7 +140,8 @@ of the feed.
 * majority of code written by [charlw](https://github.com/charlw),
   [ciarand](https://github.com/ciarand) and [humd](https://github.com/humd)
 
-* hosting of [purplapp.eu](http://purplapp.eu) by [jvimedia](https://github.com/jvimedia)
+* hosting of [purplapp.eu](http://purplapp.eu) by
+  [jvimedia](https://github.com/jvimedia)
 
 * thanks to everyone else who has contributed to the codebase!
 
