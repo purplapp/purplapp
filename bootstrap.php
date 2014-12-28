@@ -11,6 +11,13 @@ if (!function_exists("app_dir")) {
     }
 }
 
+if (!function_exists("storage_dir")) {
+    function storage_dir()
+    {
+        return APP_DIR . "/storage";
+    }
+}
+
 require app_dir() . "/vendor/autoload.php";
 
 $app = new Application();

@@ -30,7 +30,7 @@ $app->register(new TwigServiceProvider(), [
     "twig.options" => [
         "debug"            => $app["debug"],
         "strict_variables" => true,
-        "cache"            => app_dir() . "/cache/twig",
+        "cache"            => storage_dir() . "/cache/twig",
     ],
 ]);
 
@@ -46,7 +46,7 @@ $app->register(new SessionServiceProvider(), [
 ]);
 
 $app->register(new MonologServiceProvider(), [
-    "monolog.logfile" => app_dir() . "/logs/" . date("Y-m-d") . ".log",
+    "monolog.logfile" => storage_dir() . "/logs/" . date("Y-m-d") . ".log",
 ]);
 
 $app["monolog"] = $app->share($app->extend("monolog", function ($monolog, $app) {
@@ -182,7 +182,7 @@ $app['assetic.asset_manager'] = $app->share(
             $app["assetic.filter_manager"]->get("jsmin"),
         ]);
 
-        $cache = new FilesystemCache(APP_DIR . '/cache/assetic');
+        $cache = new FilesystemCache(storage_dir() . '/cache/assetic');
 
         $am->set('styles', new AssetCache($styles, $cache));
         $am->get('styles')->setTargetPath('css/style.min.css');

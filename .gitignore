@@ -3,11 +3,7 @@
 /bin/
 /assets/
 /composer.phar
-/out/
 /tags
-/tests/*/*Tester.php
-/tests/_output/*
 /vendor/
 /public/css/style.*.css
 /public/js/app.*.js
-/build
