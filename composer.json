@@ -61,9 +61,6 @@
                 "./bin/robo init",
                 "./bin/robo clean",
                 "./bin/robo assets"
-            ],
-            "log-files": [
-                "storage/logs/error.log"
             ]
         },
         "asset-installer-paths": {
