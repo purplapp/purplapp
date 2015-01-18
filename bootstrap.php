@@ -32,18 +32,14 @@ ini_set("expose_php", "Off");
 
 defined("APP_DIR") || define("APP_DIR", __DIR__);
 
-if (!function_exists("app_dir")) {
-    function app_dir()
-    {
-        return APP_DIR;
-    }
+function app_dir()
+{
+    return APP_DIR;
 }
 
-if (!function_exists("storage_dir")) {
-    function storage_dir()
-    {
-        return APP_DIR . "/storage";
-    }
+function storage_dir()
+{
+    return APP_DIR . "/storage";
 }
 
 require app_dir() . "/vendor/autoload.php";
@@ -129,9 +125,10 @@ $app->register(new SessionServiceProvider(), [
     ],
 ]);
 
+$stderr = defined("STDERR") ? STDERR : fopen("php://stderr", "w");
 $app->register(new MonologServiceProvider(), [
-    "monolog.logfile" => storage_dir() . "/logs/" . date("Y-m-d") . ".log",
-    "monolog.name" => "purplapp",
+    "monolog.logfile" => $stderr,
+    "monolog.name"    => "purplapp",
 ]);
 
 $app["monolog"] = $app->share($app->extend("monolog", function (Logger $monolog, $app) {
