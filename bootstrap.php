@@ -16,6 +16,7 @@ use DaveDevelopment\TwigInflection\Twig\Extension\Inflection;
 use Github\Client as GithubClient;
 use GuzzleHttp\Client as GuzzleClient;
 use Monolog\Handler\ErrorLogHandler;
+use Monolog\Logger;
 use Purplapp\Adn\NiceRankAwareClient;
 use Purplapp\Adn\NumberCollection;
 use Purplapp\Application;
@@ -69,11 +70,15 @@ Dotenv::required([
 
 $app["debug"] = getenv("DEBUG");
 
+// Whoops is great in debug modes
 if ($app["debug"]) {
     $app->register(new WhoopsServiceProvider());
 }
 
+// otherwise we need to handle errors in a sane way
 $app->error(function (Exception $e, $code) use ($app) {
+    $app->log("exception occurred", ["exception" => $e, "code" => $code], Logger::ERROR);
+
     if ($app['debug']) {
         // Whoops'll get it
         return;
@@ -90,6 +95,7 @@ $app->error(function (Exception $e, $code) use ($app) {
     }
 
     $data = ["code" => $code, "message" => $e->getMessage()];
+
     return $app->render($view, $data);
 });
 
@@ -608,7 +614,7 @@ $app->get("/opensource", function (Request $req) use ($app) {
     $github_repo_language = $client->api('repo')->languages('purplapp', 'purplapp');
 
     // get the pull requests for the repository
-    $github_repo_pull = $client->api('pull_request')->all('purplapp', 'purplapp', array('state' => 'all'));
+    $github_repo_pull = $client->api('pull_request')->all('purplapp', 'purplapp', ['state' => 'all']);
     $github_repo_pull_comments_response = $client->getHttpClient()->get('/repos/purplapp/purplapp/comments');
     $github_repo_pull_comments = Github\HttpClient\Message\ResponseMediator::getContent($github_repo_pull_comments_response);
 
@@ -620,17 +626,17 @@ $app->get("/opensource", function (Request $req) use ($app) {
 
     // get total number of commits
     $github_commitsApi = $client->repo()->commits();
-    $github_parameters = array('purplapp', 'purplapp', array('sha' => 'master'));
+    $github_parameters = ['purplapp', 'purplapp', ['sha' => 'master']];
     $github_repo_commits = $paginator->fetchAll($github_commitsApi, 'all', $github_parameters);
 
     // get total number of issues
     $github_issuesApi = $client->issues();
-    $github_parameters = array('purplapp', 'purplapp', array('state' => 'all'));
+    $github_parameters = ['purplapp', 'purplapp', ['state' => 'all']];
     $github_repo_issues = $paginator->fetchAll($github_issuesApi, 'all', $github_parameters);
 
     // get total number of comments on issues
     $github_issuesCommentsApi = $client->issues()->comments();
-    $github_parameters = array('purplapp', 'purplapp', '');
+    $github_parameters = ['purplapp', 'purplapp', ''];
     $github_repo_issues_comments = $paginator->fetchAll($github_issuesCommentsApi, 'all', $github_parameters);
 
     $github_code_frequency_response = $client->getHttpClient()->get('/repos/purplapp/purplapp/stats/code_frequency');
