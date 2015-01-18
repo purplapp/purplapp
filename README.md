@@ -49,7 +49,6 @@ php composer.phar install
 
 # run various setup tasks
 ./bin/robo clean
-./bin/robo bower
 ./bin/robo assets
 ./bin/robo tests
 ```
@@ -89,12 +88,6 @@ built-in PHP server is good for testing.
 Many development tasks are handled by [Robo](http://robo.li/). You can run `./bin/robo`
 to find out which tasks are available, or edit the RoboFile.php directly. Here's
 a brief description of the most common tasks:
-
-### serve
-
-- `./bin/robo bower` will download all the required assets for the project.
-
-   NOTE: This totally does *not* use Bower.
 
 ### serve
 
