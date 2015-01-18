@@ -1,3 +1,9 @@
 {% extends "error.twig" %}
 
 {% block title %}{{ code }} - Something went wrong{% endblock %}
+
+{%  block content %}
+    {# print the error message in the comments #}
+    <!-- {{ message|replace({"--", "–"}) }} -->
+    {{  parent() }}
+{%  endblock %}
