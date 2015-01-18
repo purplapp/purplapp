@@ -7,17 +7,19 @@
 {% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-    <h1><i class="fa fa-warning"></i> {{ block("title") }}</h1>
-    {% block message %}
-    <p>
-        We are sorry, but something went terribly wrong.
-    </p>
+    {# print the error message in the comments #}
+    <!-- {{ message|replace({"--", "–"}) }} -->
+    <div class="jumbotron">
+        <h1><i class="fa fa-warning"></i> {{ block("title") }}</h1>
+        {% block message %}
+        <p>
+            We are sorry, but something went terribly wrong.
+        </p>
 
-    <p>
-        Unfortunately we cannot continue: so please refresh the
-        page and try again, or return to the previous page.
-    </p>
-    {% endblock %}
-</div>
+        <p>
+            Unfortunately we cannot continue: so please refresh the
+            page and try again, or return to the previous page.
+        </p>
+        {% endblock %}
+    </div>
 {% endblock %}
