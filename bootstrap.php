@@ -75,19 +75,15 @@ if ($app["debug"]) {
 
 // otherwise we need to handle errors in a sane way
 $app->error(function (Exception $e, $code) use ($app) {
-    $app->log("exception occurred", ["exception" => $e, "code" => $code], Logger::ERROR);
-
-    if ($app['debug']) {
-        // Whoops'll get it
-        return;
-    }
-
     if ($code === 404) {
         $view = "404.twig";
+        $level = Logger::ERROR;
     } else {
         if (400 >= $code && $code < 500) {
             $view = "4xx.twig";
+            $level = Logger::ERROR;
         } else {
+            $level = Logger::CRITICAL;
             if (500 >= $code && $code < 600) {
                 $view = "5xx.twig";
             } else {
@@ -96,9 +92,14 @@ $app->error(function (Exception $e, $code) use ($app) {
         }
     }
 
-    $response = $app->render($view, ["code" => $code, "error_message" => $e->getMessage()]);
+    $app->log("exception occurred", ["exception" => $e, "code" => $code], $level);
 
-    $response->headers->set("X-Debug-Error-Message", $e->getMessage());
+    if ($app['debug'] && $level >= Loger::CRITICAL) {
+        // Whoops'll get it
+        return;
+    }
+
+    $response = $app->render($view, ["code" => $code, "error_message" => $e->getMessage()]);
 
     return $response;
 });
@@ -130,7 +131,7 @@ $app->register(new SessionServiceProvider(), [
 ]);
 
 $app->register(new MonologServiceProvider(), [
-    "monolog.logfile" => storage_dir() . "/logs/" . date("Y-m-d") . ".log",
+    "monolog.logfile" => storage_dir() . "/logs/error.log",
     "monolog.name" => "purplapp",
 ]);
 
@@ -142,7 +143,7 @@ $app["monolog"] = $app->share($app->extend("monolog", function (Logger $monolog,
             $app["pushover.api_key"],
             $app["pushover.user_id"],
             "Purplapp error occurred",
-            Logger::ERROR
+            Logger::CRITICAL
         ));
     }
 
