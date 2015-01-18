@@ -34,6 +34,8 @@ if (date_default_timezone_get() === "") {
     date_default_timezone_set('UTC');
 }
 
+ini_set("expose_php", "Off");
+
 defined("APP_DIR") || define("APP_DIR", __DIR__);
 
 if (!function_exists("app_dir")) {
@@ -94,9 +96,11 @@ $app->error(function (Exception $e, $code) use ($app) {
         $view = "error.twig";
     }
 
-    $data = ["code" => $code, "message" => $e->getMessage()];
+    $response = $app->render($view, ["code" => $code, "error_message" => $e->getMessage()]);
 
-    return $app->render($view, $data);
+    $response->headers->set("X-Debug-Error-Message", $e->getMessage());
+
+    return $response;
 });
 
 $app->register(new UrlGeneratorServiceProvider());
