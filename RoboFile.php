@@ -38,11 +38,12 @@ class RoboFile extends TaskList
     {
         $this->stopOnFail(true);
 
+        $cache = __DIR__ . "/storage/cache";
         $except = [
-            "./cache/assetic",
-            "./cache/twig",
-            "./cache/assetic/.gitignore",
-            "./cache/twig/.gitignore",
+            "{$cache}/assetic",
+            "{$cache}/twig",
+            "{$cache}/assetic/.gitignore",
+            "{$cache}/twig/.gitignore",
         ];
 
         $files = array_diff(
