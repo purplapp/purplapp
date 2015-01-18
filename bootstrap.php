@@ -16,6 +16,7 @@ use DaveDevelopment\TwigInflection\Twig\Extension\Inflection;
 use Github\Client as GithubClient;
 use GuzzleHttp\Client as GuzzleClient;
 use Monolog\Handler\ErrorLogHandler;
+use Monolog\Handler\PushoverHandler;
 use Monolog\Logger;
 use Purplapp\Adn\NiceRankAwareClient;
 use Purplapp\Adn\NumberCollection;
@@ -71,6 +72,8 @@ Dotenv::required([
 ]);
 
 $app["debug"] = getenv("DEBUG");
+$app["pushover.api_key"] = getenv("PUSHOVER_API_KEY");
+$app["pushover.user_id"] = getenv("PUSHOVER_USER_ID");
 
 // Whoops is great in debug modes
 if ($app["debug"]) {
@@ -114,9 +117,9 @@ $app->register(new TwigServiceProvider(), [
     ],
 ]);
 
-$app->register(new AsseticServiceProvider());
-$app["assetic.options"] = ["debug" => $app["debug"]];
-$app['assetic.path_to_web'] = APP_DIR . "/public";
+$app->register(new AsseticServiceProvider(), [
+    'assetic.path_to_web' => APP_DIR . "/public",
+]);
 
 $app->register(new SessionServiceProvider(), [
     "session.storage.options" => [
@@ -129,13 +132,17 @@ $app->register(new MonologServiceProvider(), [
     "monolog.logfile" => storage_dir() . "/logs/" . date("Y-m-d") . ".log",
 ]);
 
-$app["monolog"] = $app->share($app->extend("monolog", function ($monolog, $app) {
-    // clear the stack
-    while (count($monolog->getHandlers())) {
-        $monolog->popHandler();
-    }
-
+$app["monolog"] = $app->share($app->extend("monolog", function (Logger $monolog, $app) {
     $monolog->pushHandler(new ErrorLogHandler());
+
+    if ($app["pushover.api_key"]) {
+        $monolog->pushHandler(new PushoverHandler(
+            $app["pushover.api_key"],
+            $app["pushover.user_id"],
+            "Purplapp error occurred",
+            Logger::ERROR
+        ));
+    }
 
     return $monolog;
 }));
@@ -160,8 +167,6 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
         return $app["session"]->get("user") === null;
     }));
 
-    $twig->addExtension(new Twig_Extension_Debug());
-
     $twig->addExtension(new AsseticExtension($app["assetic.factory"]));
 
     $twig->addExtension(new Inflection());
@@ -169,6 +174,10 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
     $twig->addFunction(new Twig_SimpleFunction("human_bytes", function ($size, $format) {
         return Metric::bytes($size)->format($format);
     }));
+
+    if ($app["debug"]) {
+        $twig->addExtension(new Twig_Extension_Debug());
+    }
 
     return $twig;
 }));
