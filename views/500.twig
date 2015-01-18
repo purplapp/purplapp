@@ -4,6 +4,6 @@
 
 {%  block content %}
     {# print the error message in the comments #}
-    <!-- {{ message|replace({"--", "–"}) }} -->
+    <!-- {{ message|replace({"--": "–"}) }} -->
     {{  parent() }}
 {%  endblock %}

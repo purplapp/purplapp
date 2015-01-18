@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . "/init.php";
+
 use Assetic\Asset\AssetCache;
 use Assetic\Asset\AssetCollection;
 use Assetic\Asset\FileAsset;
@@ -20,45 +22,10 @@ use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use SilexAssetic\AsseticServiceProvider;
-use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Whoops\Provider\Silex\WhoopsServiceProvider;
 
-if (date_default_timezone_get() === "") {
-    date_default_timezone_set('UTC');
-}
-
-ini_set("expose_php", "Off");
-
-defined("APP_DIR") || define("APP_DIR", __DIR__);
-
-function app_dir()
-{
-    return APP_DIR;
-}
-
-function storage_dir()
-{
-    return APP_DIR . "/storage";
-}
-
-require app_dir() . "/vendor/autoload.php";
-
 $app = new Application();
-
-ErrorHandler::register();
-
-Dotenv::load(APP_DIR, ".config");
-
-Dotenv::required([
-    'CLIENT_ID',
-    'CLIENT_SECRET',
-    'ALPHA_DOMAIN',
-    'SUPPORT_EMAIL',
-    'GITHUB_URL',
-    'GITHUB_TOKEN',
-    'DEBUG',
-]);
 
 $app["debug"]            = getenv("DEBUG");
 $app["pushover.api_key"] = getenv("PUSHOVER_API_KEY");
@@ -125,17 +92,16 @@ $app->register(new SessionServiceProvider(), [
     ],
 ]);
 
-$stderr = defined("STDERR") ? STDERR : fopen("php://stderr", "w");
 $app->register(new MonologServiceProvider(), [
-    "monolog.logfile" => $stderr,
+    "monolog.logfile" => STDERR,
     "monolog.name"    => "purplapp",
 ]);
 
-$app["monolog"] = $app->share($app->extend("monolog", function (Logger $monolog, $app) {
-    $monolog->pushHandler(new ErrorLogHandler());
+$app["monolog"] = $app->share($app->extend("monolog", function (Logger $logger, $app) {
+    $logger->pushHandler(new ErrorLogHandler());
 
     if ($app["pushover.api_key"]) {
-        $monolog->pushHandler(new PushoverHandler(
+        $logger->pushHandler(new PushoverHandler(
             $app["pushover.api_key"],
             $app["pushover.user_id"],
             "Purplapp error occurred",
@@ -143,10 +109,10 @@ $app["monolog"] = $app->share($app->extend("monolog", function (Logger $monolog,
         ));
     }
 
-    return $monolog;
+    return $logger;
 }));
 
-$app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
+$app["twig"] = $app->share($app->extend("twig", function (Twig_Environment $twig, $app) {
     $twig->addGlobal("alpha_domain", getenv("ALPHA_DOMAIN"));
     $twig->addGlobal("support_email", getenv("SUPPORT_EMAIL"));
     $twig->addGlobal("github_url", getenv("GITHUB_URL"));
@@ -184,13 +150,13 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
 $app["http.host"] = function () {
     if (isset($app["request"])) {
         return $app["request"]->getHttpHost();
-    } else {
-        if (isset($_SERVER["HTTP_HOST"])) {
-            return $_SERVER["HTTP_HOST"];
-        } else {
-            return "localhost";
-        }
     }
+
+    if (isset($_SERVER["HTTP_HOST"])) {
+        return $_SERVER["HTTP_HOST"];
+    }
+
+    return "localhost";
 };
 
 $app["adn.settings"] = [
@@ -452,20 +418,6 @@ $app->get("/account/user", function (Request $req) use ($app) {
         "unreadPM"        => $unreadPM
     ]);
 })->bind("account_user")->value("username", "me");
-
-$app->get("/authorised_users", function (Request $req) use ($app) {
-    if (!$app["adn.user"]) {
-        return $app->render("unauth_message.twig");
-    }
-
-    $client = $app["adn.client"];
-
-    $authorizedUserIDs = $client->getAuthorizedUserIDs();
-
-    return $app->render("user_ids.twig", [
-        "authorizedUserIDs" => $authorizedUserIDs
-    ]);
-})->bind("authorised_users")->value("username", "me");
 
 $app->get("/account/follow_comparison.php", $redirector("account_follow_comparison"));
 $app->get("/account/follow_comparison", function (Request $req) use ($app) {

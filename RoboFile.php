@@ -164,13 +164,15 @@ class RoboFile extends TaskList
     {
         $this->stopOnFail(true);
 
-        foreach ([$storage = __DIR__ . "/storage", "{$storage}/logs", "{$storage}/cache"] as $dir) {
-            $this->taskFileSystemStack()
-                // dir, perms, umask, recurse
-                ->chmod($dir, "0777", 0000, true)
-                // dir, user
-                ->chown($dir, "nobody")
-                ->run();
+        $app = $this->app();
+
+        /** @var Twig_Environment $twig */
+        $twig = $app["twig"];
+        $twig->clearCacheFiles();
+
+        // precompile twig stuff
+        foreach (glob(__DIR__ . "/views/*.twig") as $template) {
+            $twig->loadTemplate(basename($template));
         }
     }
 
@@ -179,5 +181,10 @@ class RoboFile extends TaskList
         return $this->taskServer(self::SERVER_PORT)
             ->dir(__DIR__ . "/public")
             ->arg(__DIR__ . "/public/index.php");
+    }
+
+    private function app()
+    {
+        return require __DIR__ . "/bootstrap.php";
     }
 }
