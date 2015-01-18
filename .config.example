@@ -12,3 +12,5 @@ GITHUB_URL=https://github.com/purplapp/purplapp
 GITHUB_TOKEN=whatever
 # debug mode? 1 or 0
 DEBUG=0
+#PUSHOVER_API_KEY = KEY_HERE
+#PUSHOVER_USER_ID = USER_ID

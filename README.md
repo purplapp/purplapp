@@ -75,6 +75,9 @@ to `DEBUG=1`, not `DEBUG=0`; on a production server, make sure it's set to
 `DEBUG=0` to avoid potential revealing of sensitive data (client secrets, etc.)
 to the end user.
 
+If you'd like push notifications via Pushover, fill out the appropriate settings
+in `.config`.
+
 ### Server
 
 Purplapp will run on most servers. It's currently deployed to an Apache
