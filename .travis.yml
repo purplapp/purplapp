@@ -10,7 +10,6 @@ install:
 
 before_script:
   - cp .config.example .config
-  - ./bin/robo bower
   - ./bin/robo clean
   - ./bin/robo assets
 
