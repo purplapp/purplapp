@@ -2,18 +2,12 @@
 
 use Assetic\Asset\AssetCache;
 use Assetic\Asset\AssetCollection;
-use Assetic\Asset\AssetInterface;
 use Assetic\Asset\FileAsset;
-use Assetic\Asset\GlobAsset;
 use Assetic\Cache\FilesystemCache;
 use Assetic\Extension\Twig\AsseticExtension;
-use Assetic\Filter\CallablesFilter;
-use Assetic\Filter\CssMinFilter;
 use Assetic\Filter\GoogleClosure\CompilerApiFilter;
-use Assetic\Util\CSsUtils;
 use ByteUnits\Metric;
 use DaveDevelopment\TwigInflection\Twig\Extension\Inflection;
-use Github\Client as GithubClient;
 use GuzzleHttp\Client as GuzzleClient;
 use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\PushoverHandler;
@@ -21,14 +15,13 @@ use Monolog\Logger;
 use Purplapp\Adn\NiceRankAwareClient;
 use Purplapp\Adn\NumberCollection;
 use Purplapp\Application;
-use SilexAssetic\AsseticServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
+use SilexAssetic\AsseticServiceProvider;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Whoops\Provider\Silex\WhoopsServiceProvider;
 
 if (date_default_timezone_get() === "") {
@@ -71,7 +64,7 @@ Dotenv::required([
     'DEBUG',
 ]);
 
-$app["debug"] = getenv("DEBUG");
+$app["debug"]            = getenv("DEBUG");
 $app["pushover.api_key"] = getenv("PUSHOVER_API_KEY");
 $app["pushover.user_id"] = getenv("PUSHOVER_USER_ID");
 
@@ -91,12 +84,16 @@ $app->error(function (Exception $e, $code) use ($app) {
 
     if ($code === 404) {
         $view = "404.twig";
-    } else if (400 >= $code && $code < 500) {
-        $view = "4xx.twig";
-    } else if (500 >= $code && $code < 600) {
-        $view = "5xx.twig";
     } else {
-        $view = "error.twig";
+        if (400 >= $code && $code < 500) {
+            $view = "4xx.twig";
+        } else {
+            if (500 >= $code && $code < 600) {
+                $view = "5xx.twig";
+            } else {
+                $view = "error.twig";
+            }
+        }
     }
 
     $response = $app->render($view, ["code" => $code, "error_message" => $e->getMessage()]);
@@ -109,7 +106,7 @@ $app->error(function (Exception $e, $code) use ($app) {
 $app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new TwigServiceProvider(), [
-    "twig.path" => app_dir() . "/views",
+    "twig.path"    => app_dir() . "/views",
     "twig.options" => [
         "debug"            => $app["debug"],
         "strict_variables" => true,
@@ -119,11 +116,15 @@ $app->register(new TwigServiceProvider(), [
 
 $app->register(new AsseticServiceProvider(), [
     'assetic.path_to_web' => APP_DIR . "/public",
+    'assetic.options'     => [
+        'debug'            => $app["debug"],
+        'auto_dump_assets' => false,
+    ],
 ]);
 
 $app->register(new SessionServiceProvider(), [
     "session.storage.options" => [
-        "name" => "purlpapp_sess",
+        "name"            => "purlpapp_sess",
         "cookie_lifetime" => 60 * 60 * 24 * 7,
     ],
 ]);
@@ -185,10 +186,12 @@ $app["twig"] = $app->share($app->extend("twig", function ($twig, $app) {
 $app["http.host"] = function () {
     if (isset($app["request"])) {
         return $app["request"]->getHttpHost();
-    } else if (isset($_SERVER["HTTP_HOST"])) {
-        return $_SERVER["HTTP_HOST"];
     } else {
-        return "localhost";
+        if (isset($_SERVER["HTTP_HOST"])) {
+            return $_SERVER["HTTP_HOST"];
+        } else {
+            return "localhost";
+        }
     }
 };
 
@@ -237,7 +240,7 @@ $app["adn.client"] = function () use ($app) {
 };
 
 $app["assetic.filter_manager"] = $app->share(
-    $app->extend('assetic.filter_manager', function($fm, $app) {
+    $app->extend('assetic.filter_manager', function ($fm, $app) {
         $fm->set("jsmin", new CompilerApiFilter());
 
         return $fm;
@@ -245,7 +248,7 @@ $app["assetic.filter_manager"] = $app->share(
 );
 
 $app['assetic.asset_manager'] = $app->share(
-    $app->extend('assetic.asset_manager', function($am, $app) {
+    $app->extend('assetic.asset_manager', function ($am, $app) {
         $vendor = function ($path) {
             return new FileAsset(APP_DIR . "/assets/{$path}");
         };
@@ -363,15 +366,15 @@ $app->get("/account/mention", function (Request $req) use ($app) {
     $rightData = $client->getUser($right);
 
     $leftByRightParams = [
-        "mentions"                 => $leftData->username,
-        "creator_id"               => $rightData->id,
-        "count"                    => -1,
+        "mentions"   => $leftData->username,
+        "creator_id" => $rightData->id,
+        "count"      => -1,
     ];
 
     $rightByLeftParams = [
-        "mentions"                 => $rightData->username,
-        "creator_id"               => $leftData->id,
-        "count"                    => -1,
+        "mentions"   => $rightData->username,
+        "creator_id" => $leftData->id,
+        "count"      => -1,
     ];
 
     $rightByLeft = $client->searchPosts($rightByLeftParams)->tail();
@@ -400,10 +403,10 @@ $app->get("/account/user", function (Request $req) use ($app) {
     }
 
     $firstOpts = ["count" => -1, "include_deleted" => false];
-    $lastOpts  = ["count" => 1,  "include_deleted" => false];
+    $lastOpts  = ["count" => 1, "include_deleted" => false];
 
-    $firstPost    = $client->getUserPosts($user, $firstOpts)->head();
-    $lastPost     = $client->getUserPosts($user, $lastOpts)->tail();
+    $firstPost = $client->getUserPosts($user, $firstOpts)->head();
+    $lastPost  = $client->getUserPosts($user, $lastOpts)->tail();
 
     $firstMention = $client->getUserMentions($user, $firstOpts)->head();
     $lastMention  = $client->getUserMentions($user, $lastOpts)->tail();
@@ -425,32 +428,31 @@ $app->get("/account/user", function (Request $req) use ($app) {
     if ($req->get("id")) {
         if ($req->get("id") === $currentUser->username) {
             $unreadBroadcastChannels = $client->getUnreadBroadcastChannels();
-            $unreadPMChannels = $client->getUnreadPMChannels();
-            $unreadBroadcast = $unreadBroadcastChannels->count();
-            $unreadPM = $unreadPMChannels->count();
+            $unreadPMChannels        = $client->getUnreadPMChannels();
+            $unreadBroadcast         = $unreadBroadcastChannels->count();
+            $unreadPM                = $unreadPMChannels->count();
         } else {
             $unreadBroadcast = "";
-            $unreadPM = "";
+            $unreadPM        = "";
         }
     } else {
         $unreadBroadcastChannels = $client->getUnreadBroadcastChannels();
-        $unreadPMChannels = $client->getUnreadPMChannels();
-        $unreadBroadcast = $unreadBroadcastChannels->count();
-        $unreadPM = $unreadPMChannels->count();
+        $unreadPMChannels        = $client->getUnreadPMChannels();
+        $unreadBroadcast         = $unreadBroadcastChannels->count();
+        $unreadPM                = $unreadPMChannels->count();
     }
 
     return $app->render("account_user.twig", [
-        "user"          => $user,
-        "first_post"    => $firstPost,
-        "last_post"     => $lastPost,
-        "first_mention" => $firstMention,
-        "last_mention"  => $lastMention,
-        "nice_rank"     => $niceRank,
-        "token"         => $token,
+        "user"            => $user,
+        "first_post"      => $firstPost,
+        "last_post"       => $lastPost,
+        "first_mention"   => $firstMention,
+        "last_mention"    => $lastMention,
+        "nice_rank"       => $niceRank,
+        "token"           => $token,
         "unreadBroadcast" => $unreadBroadcast,
-        "unreadPM"      => $unreadPM
+        "unreadPM"        => $unreadPM
     ]);
-
 })->bind("account_user")->value("username", "me");
 
 $app->get("/authorised_users", function (Request $req) use ($app) {
@@ -465,7 +467,6 @@ $app->get("/authorised_users", function (Request $req) use ($app) {
     return $app->render("user_ids.twig", [
         "authorizedUserIDs" => $authorizedUserIDs
     ]);
-
 })->bind("authorised_users")->value("username", "me");
 
 $app->get("/account/follow_comparison.php", $redirector("account_follow_comparison"));
@@ -478,7 +479,7 @@ $app->get("/account/follow_comparison", function (Request $req) use ($app) {
         return $app->render("user_comparison_form.twig");
     }
 
-    $client = $app["adn.client"];
+    $client      = $app["adn.client"];
     $currentUser = $client->getAuthorizedUser();
 
     if ($otherUsername === $currentUser->username) {
@@ -489,8 +490,8 @@ $app->get("/account/follow_comparison", function (Request $req) use ($app) {
         );
     }
 
-    $otherUser = $client->getUser($otherUsername);
-    $otherUserFollowing   = $client->getUserFollowingIds($otherUsername);
+    $otherUser          = $client->getUser($otherUsername);
+    $otherUserFollowing = $client->getUserFollowingIds($otherUsername);
     if (count($otherUserFollowing) === 0) {
         return $app->render(
             "user_comparison_error.twig",
@@ -553,7 +554,6 @@ $app->get("/account/follow_comparison", function (Request $req) use ($app) {
             "currentUserFollowsExclusively" => $currentUserFollowsExclusively,
         ]
     );
-
 })->bind("account_follow_comparison");
 
 $app->get("/broadcast/lookup.php", $redirector("broadcast_lookup"));
@@ -591,7 +591,6 @@ $app->get("/user/patch_annotations", function (Request $req) use ($app) {
     }
 
     return $app->json($app["adn.client"]->patchAnnotations($req->get("type"), $req->get("content_type"), $req->get("content"), $req->get("process"))->json());
-
     // return $app->json($app["adn.client"]->patchAnnotations($req->get("type"), $req->get("content_type"), $req->get("content")));
 })->bind("annotations");
 
@@ -605,9 +604,8 @@ $app->get("/account/annotations", function (Request $req) use ($app) {
     $user = $client->getAuthorizedUser(["include_user_annotations" => true]);
 
     return $app->render("account_annotations.twig", [
-        "user"          => $user
+        "user" => $user
     ]);
-
 })->bind("account_annotations")->value("username", "me");
 
 $app->get("/oss", $redirector("opensource"));
@@ -616,20 +614,20 @@ $app->get("/opensource.php", $redirector("opensource"));
 $app->get("/opensource", function (Request $req) use ($app) {
     $settings = $app["adn.settings"];
 
-    $client = new \Github\Client();
-    $paginator  = new Github\ResultPager($client);
+    $client    = new \Github\Client();
+    $paginator = new Github\ResultPager($client);
 
     $client->authenticate($settings["GITHUB_TOKEN"], Github\Client::AUTH_HTTP_TOKEN);
 
-    $github_user = $client->api('organization')->show('purplapp');
-    $github_repositories = $client->api('repo')->show('purplapp', 'purplapp');
+    $github_user              = $client->api('organization')->show('purplapp');
+    $github_repositories      = $client->api('repo')->show('purplapp', 'purplapp');
     $github_repo_contributors = $client->api('repo')->contributors('purplapp', 'purplapp', false);
-    $github_repo_language = $client->api('repo')->languages('purplapp', 'purplapp');
+    $github_repo_language     = $client->api('repo')->languages('purplapp', 'purplapp');
 
     // get the pull requests for the repository
-    $github_repo_pull = $client->api('pull_request')->all('purplapp', 'purplapp', ['state' => 'all']);
+    $github_repo_pull                   = $client->api('pull_request')->all('purplapp', 'purplapp', ['state' => 'all']);
     $github_repo_pull_comments_response = $client->getHttpClient()->get('/repos/purplapp/purplapp/comments');
-    $github_repo_pull_comments = Github\HttpClient\Message\ResponseMediator::getContent($github_repo_pull_comments_response);
+    $github_repo_pull_comments          = Github\HttpClient\Message\ResponseMediator::getContent($github_repo_pull_comments_response);
 
     // get the releases from the repository
     $github_repo_releases = $client->api('repo')->releases()->all('purplapp', 'purplapp');
@@ -638,40 +636,40 @@ $app->get("/opensource", function (Request $req) use ($app) {
     $github_repo_statistics = $client->api('repo')->statistics('purplapp', 'purplapp');
 
     // get total number of commits
-    $github_commitsApi = $client->repo()->commits();
-    $github_parameters = ['purplapp', 'purplapp', ['sha' => 'master']];
+    $github_commitsApi   = $client->repo()->commits();
+    $github_parameters   = ['purplapp', 'purplapp', ['sha' => 'master']];
     $github_repo_commits = $paginator->fetchAll($github_commitsApi, 'all', $github_parameters);
 
     // get total number of issues
-    $github_issuesApi = $client->issues();
-    $github_parameters = ['purplapp', 'purplapp', ['state' => 'all']];
+    $github_issuesApi   = $client->issues();
+    $github_parameters  = ['purplapp', 'purplapp', ['state' => 'all']];
     $github_repo_issues = $paginator->fetchAll($github_issuesApi, 'all', $github_parameters);
 
     // get total number of comments on issues
-    $github_issuesCommentsApi = $client->issues()->comments();
-    $github_parameters = ['purplapp', 'purplapp', ''];
+    $github_issuesCommentsApi    = $client->issues()->comments();
+    $github_parameters           = ['purplapp', 'purplapp', ''];
     $github_repo_issues_comments = $paginator->fetchAll($github_issuesCommentsApi, 'all', $github_parameters);
 
     $github_code_frequency_response = $client->getHttpClient()->get('/repos/purplapp/purplapp/stats/code_frequency');
-    $github_code_frequency = Github\HttpClient\Message\ResponseMediator::getContent($github_code_frequency_response);
+    $github_code_frequency          = Github\HttpClient\Message\ResponseMediator::getContent($github_code_frequency_response);
 
     $github_participation_response = $client->getHttpClient()->get('/repos/purplapp/purplapp/stats/participation');
-    $github_participation = Github\HttpClient\Message\ResponseMediator::getContent($github_participation_response);
+    $github_participation          = Github\HttpClient\Message\ResponseMediator::getContent($github_participation_response);
 
     return $app->render("opensource.twig", [
-        "github_user"   => $github_user,
-        "github_repositories"    => $github_repositories,
-        "github_repo_contributors"     => $github_repo_contributors,
-        "github_repo_language" => $github_repo_language,
-        "github_repo_pull" => $github_repo_pull,
-        "github_repo_pull_comments"  => $github_repo_pull_comments,
-        "github_repo_releases" => $github_repo_releases,
-        "github_repo_statistics" => $github_repo_statistics,
-        "github_repo_commits" => $github_repo_commits,
-        "github_repo_issues" => $github_repo_issues,
+        "github_user"                 => $github_user,
+        "github_repositories"         => $github_repositories,
+        "github_repo_contributors"    => $github_repo_contributors,
+        "github_repo_language"        => $github_repo_language,
+        "github_repo_pull"            => $github_repo_pull,
+        "github_repo_pull_comments"   => $github_repo_pull_comments,
+        "github_repo_releases"        => $github_repo_releases,
+        "github_repo_statistics"      => $github_repo_statistics,
+        "github_repo_commits"         => $github_repo_commits,
+        "github_repo_issues"          => $github_repo_issues,
         "github_repo_issues_comments" => $github_repo_issues_comments,
-        "github_code_frequency" => $github_code_frequency,
-        "github_participation" => $github_participation,
+        "github_code_frequency"       => $github_code_frequency,
+        "github_participation"        => $github_participation,
     ]);
 })->bind("opensource");
 
