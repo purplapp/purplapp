@@ -18,7 +18,14 @@
         "davedevelopment/twig-inflection": "1.0.*@dev",
         "codegyre/robo": "0.4.5",
         "gabrielelana/byte-units": "dev-master",
-        "filp/whoops": "~1.1.2"
+        "filp/whoops": "~1.1.2",
+        "fxp/composer-asset-plugin": "1.0.*@dev",
+        "bower-asset/octicons": "~2.1.2",
+        "bower-asset/font-awesome": "~4.2.0",
+        "bower-asset/bootstrap": "~3.0.0",
+        "bower-asset/jquery": "~2.1.1",
+        "bower-asset/chartjs": "1.0.1-beta.4",
+        "bower-asset/bootstrap-social": "~4.8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.3.0",
@@ -42,6 +49,8 @@
         "bin-dir": "bin",
         "preferred-install": "dist"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "heroku": {
             "document-root": "public",
@@ -51,9 +60,11 @@
                 "touch .config",
                 "./bin/robo init",
                 "./bin/robo clean",
-                "./bin/robo bower",
                 "./bin/robo assets"
             ]
+        },
+        "asset-installer-paths": {
+            "bower-asset-library": "assets"
         }
     }
 }

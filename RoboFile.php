@@ -14,39 +14,6 @@ class RoboFile extends TaskList
 
     const SERVER_PORT = 8080;
 
-    public static $assets = [
-        [
-            "url" => "https://github.com/github/octicons.git",
-            "component" => "octicons",
-            "version" => "v2.1.2",
-        ],
-        [
-            "url" => "https://github.com/FortAwesome/Font-Awesome.git",
-            "component" => "font-awesome",
-            "version" => "v4.2.0",
-        ],
-        [
-            "url" => "https://github.com/twbs/bootstrap.git",
-            "component" => "bootstrap",
-            "version" => "v3.2.0",
-        ],
-        [
-            "url" => "https://github.com/jquery/jquery.git",
-            "component" => "jquery",
-            "version" => "2.1.1",
-        ],
-        [
-            "url" => "https://github.com/nnnick/Chart.js.git",
-            "component" => "chartjs",
-            "version" => "v1.0.1-beta.4",
-        ],
-        [
-            "url" => "https://github.com/lipis/bootstrap-social.git",
-            "component" => "bootstrap-social",
-            "version" => "4.8.0",
-        ]
-    ];
-
     public static $fontDirectories = [
         ["from" => "/assets/font-awesome/fonts",            "to" => "fonts"],
         ["from" => "/assets/bootstrap/fonts",               "to" => "fonts"],
@@ -62,48 +29,6 @@ class RoboFile extends TaskList
         $this->say("Starting the built-in server on localhost:" . self::SERVER_PORT);
 
         return $this->getServer()->run();
-    }
-
-    /**
-     * @desc Downloads all the front-end assets required
-     *
-     * NOTE: totally does NOT use bower
-     */
-    public function bower()
-    {
-        $this->stopOnFail(true);
-
-        foreach (static::$assets as $asset) {
-            $this->downloadAsset($asset["url"], $asset["component"], $asset["version"]);
-        }
-    }
-
-    private function downloadAsset($url, $component, $version)
-    {
-        $path = $this->getAssetPath($component);
-
-        if (!file_exists($path)) {
-            $this->taskGitStack()
-                ->stopOnFail()
-                ->cloneRepo($url, $path)
-                ->run();
-        }
-
-        $this->say("handling asset checkout for {$component}");
-
-        chdir($path);
-
-        $this->taskGitStack()
-            ->stopOnFail()
-            ->checkout($version)
-            ->run();
-
-        chdir(__DIR__);
-    }
-
-    private function getAssetPath($name)
-    {
-        return __DIR__ . "/assets/{$name}";
     }
 
     /**
