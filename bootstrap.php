@@ -131,6 +131,7 @@ $app->register(new SessionServiceProvider(), [
 
 $app->register(new MonologServiceProvider(), [
     "monolog.logfile" => storage_dir() . "/logs/" . date("Y-m-d") . ".log",
+    "monolog.name" => "purplapp",
 ]);
 
 $app["monolog"] = $app->share($app->extend("monolog", function (Logger $monolog, $app) {
