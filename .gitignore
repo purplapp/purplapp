@@ -7,3 +7,4 @@
 /vendor/
 /public/css/style.*.css
 /public/js/app.*.js
+/.idea/
