@@ -98,16 +98,14 @@ $app->register(new MonologServiceProvider(), [
 ]);
 
 $app["monolog"] = $app->share($app->extend("monolog", function (Logger $logger, $app) {
-    $logger->pushHandler(new ErrorLogHandler());
-
-    if ($app["pushover.api_key"]) {
-        $logger->pushHandler(new PushoverHandler(
-            $app["pushover.api_key"],
-            $app["pushover.user_id"],
-            "Purplapp error occurred",
-            Logger::ERROR
-        ));
-    }
+    $app["pushover.api_key"] && !$app["debug"] && $logger->pushHandler(new PushoverHandler(
+        $app["pushover.api_key"],
+        $app["pushover.user_id"],
+        "Purplapp error occurred",
+        Logger::CRITICAL,
+        // bubble
+        true
+    ));
 
     return $logger;
 }));
