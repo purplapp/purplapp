@@ -31,6 +31,13 @@ class RoboFile extends TaskList
         return $this->getServer()->run();
     }
 
+    private function getServer()
+    {
+        return $this->taskServer(self::SERVER_PORT)
+            ->dir(__DIR__ . "/public")
+            ->arg(__DIR__ . "/public/index.php");
+    }
+
     /**
      * @desc clears the cache
      */
@@ -106,14 +113,6 @@ class RoboFile extends TaskList
     }
 
     /**
-     * @desc Runs the test suite
-     */
-    public function test($args = "")
-    {
-        return $this->taskExec("./bin/phpunit")->args($args)->run();
-    }
-
-    /**
      * @desc runs the test suite with code coverage turned on
      */
     public function coverage($args = "")
@@ -155,6 +154,14 @@ class RoboFile extends TaskList
             ->run();
     }
 
+    /**
+     * @desc Runs the test suite
+     */
+    public function test($args = "")
+    {
+        return $this->taskExec("./bin/phpunit")->args($args)->run();
+    }
+
     public function tags()
     {
         return $this->taskExec("phptags")->run();
@@ -168,19 +175,13 @@ class RoboFile extends TaskList
 
         /** @var Twig_Environment $twig */
         $twig = $app["twig"];
+        $this->say("Clearing twig cache files");
         $twig->clearCacheFiles();
 
-        // precompile twig stuff
+        $this->say("Precompiling twig templates");
         foreach (glob(__DIR__ . "/views/*.twig") as $template) {
             $twig->loadTemplate(basename($template));
         }
-    }
-
-    private function getServer()
-    {
-        return $this->taskServer(self::SERVER_PORT)
-            ->dir(__DIR__ . "/public")
-            ->arg(__DIR__ . "/public/index.php");
     }
 
     private function app()
