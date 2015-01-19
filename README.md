@@ -50,7 +50,7 @@ php composer.phar install
 # run various setup tasks
 ./bin/robo clean
 ./bin/robo assets
-./bin/robo tests
+./bin/robo test
 ```
 
 ### Configuration
