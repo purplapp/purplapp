@@ -1,24 +1,23 @@
-<?php require __DIR__.'/vendor/autoload.php';
+<?php require __DIR__ . '/vendor/autoload.php';
 
-use Symfony\Component\Finder\Finder;
-use Robo\Tasks as TaskList;
-use Robo\Task\GenMarkdownDocTask as Doc;
 use Assetic\AssetWriter;
 use Assetic\Extension\Twig\TwigFormulaLoader;
 use Assetic\Extension\Twig\TwigResource;
 use Assetic\Factory\LazyAssetManager;
+use Robo\Tasks as TaskList;
 
 class RoboFile extends TaskList
 {
-    const SECONDS = 1000000;
+
+    const SECONDS     = 1000000;
 
     const SERVER_PORT = 8080;
 
     public static $fontDirectories = [
-        ["from" => "/assets/font-awesome/fonts",            "to" => "fonts"],
-        ["from" => "/assets/bootstrap/fonts",               "to" => "fonts"],
+        ["from" => "/assets/font-awesome/fonts", "to" => "fonts"],
+        ["from" => "/assets/bootstrap/fonts", "to" => "fonts"],
         ["from" => "/assets/bootstrap-social/assets/fonts", "to" => "fonts"],
-        ["from" => "/assets/octicons/octicons",             "to" => "css"],
+        ["from" => "/assets/octicons/octicons", "to" => "css"],
     ];
 
     /**
@@ -45,7 +44,7 @@ class RoboFile extends TaskList
     {
         $this->stopOnFail(true);
 
-        $cache = __DIR__ . "/storage/cache";
+        $cache  = __DIR__ . "/tmp/cache";
         $except = [
             "{$cache}/assetic",
             "{$cache}/twig",
@@ -137,8 +136,8 @@ class RoboFile extends TaskList
 
         $this->test($args);
 
-        $self    = $this;
-        $files   = __DIR__ . "/tests/";
+        $self  = $this;
+        $files = __DIR__ . "/tests/";
 
         return $this->taskWatch()
             ->monitor($files, function ($event) use ($args, $self) {
@@ -173,19 +172,38 @@ class RoboFile extends TaskList
 
         $app = $this->app();
 
+        $this->resetPermissionsOnTmpDir();
+
         /** @var Twig_Environment $twig */
         $twig = $app["twig"];
         $this->say("Clearing twig cache files");
         $twig->clearCacheFiles();
 
         $this->say("Precompiling twig templates");
-        foreach (glob(__DIR__ . "/views/*.twig") as $template) {
+        foreach (glob($app["twig.path"] . "/*.twig") as $template) {
             $twig->loadTemplate(basename($template));
         }
+
+        $this->resetPermissionsOnTmpDir();
     }
 
     private function app()
     {
         return require __DIR__ . "/bootstrap.php";
+    }
+
+    private function resetPermissionsOnTmpDir()
+    {
+        $this->say("resetting permissions on tmp dir");
+        $this->taskFileSystemStack()
+            ->mkdir([
+                $tmp = __DIR__ . "/tmp",
+                $cache = "{$tmp}/cache",
+                "{$cache}/twig",
+                "{$cache}/assetic",
+            ])
+            ->chown($tmp, getenv("USER") ?: "nobody", true)
+            ->chmod($tmp, 0777, 0022, true)
+            ->run();
     }
 }

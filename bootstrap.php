@@ -101,7 +101,7 @@ $app["monolog"] = $app->share($app->extend("monolog", function (Logger $logger, 
     $app["pushover.api_key"] && !$app["debug"] && $logger->pushHandler(new PushoverHandler(
         $app["pushover.api_key"],
         $app["pushover.user_id"],
-        "Purplapp error occurred",
+        "Purplapp error occurred (user = " . `whoami` . ")",
         Logger::CRITICAL,
         // bubble
         true

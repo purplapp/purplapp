@@ -8,3 +8,4 @@
 /public/css/style.*.css
 /public/js/app.*.js
 /.idea/
+/tmp

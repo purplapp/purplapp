@@ -58,8 +58,8 @@
             "framework": "silex",
             "compile": [
                 "touch .config",
-                "./bin/robo init",
                 "./bin/robo clean",
+                "./bin/robo init",
                 "./bin/robo assets"
             ]
         },

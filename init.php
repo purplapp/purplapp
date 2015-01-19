@@ -18,7 +18,7 @@ function app_dir()
 
 function storage_dir()
 {
-    return APP_DIR . "/storage";
+    return APP_DIR . "/tmp";
 }
 
 require app_dir() . "/vendor/autoload.php";
