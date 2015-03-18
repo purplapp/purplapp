@@ -40,6 +40,10 @@ class PostClubs
             "count"     => 10000
         ],
         [
+            "url"       => "CookieButterClub",
+            "count"     => 15000
+        ],
+        [
             "url"       => "SpinalTapClub",
             "count"     => 11000
         ],
