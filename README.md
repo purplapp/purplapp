@@ -134,24 +134,36 @@ a brief description of the most common tasks:
 
   NOTE: This requires the phptags binary be available in your $PATH.
 
+## Authors
+
+### Present
+
+The Purplapp development team currently consists of:
+
+- [@ciarand][] - Current maintainer, responsible for most recent rewrite and
+  hosting purplapp.eu.
+
+### Past
+
+In the past, the Purplapp development team has consisted of:
+
+- [@charlw][], who had the initial idea and who much of the original code.
+- [@humd][], who performed the first major refactoring of the codebase.
+
 ## Contributors
 
-* original concept by [charlw](https://github.com/charlw)
+The project has additionally been helped out by the following people:
 
-* majority of code written by [@charlw][], [@ciarand][] and [@humd][]
-
-* hosting of [purplapp.eu](http://purplapp.eu) originally generously provided
-  by [@jvimedia][]
-
-* continued maintenance and hosting by [@ciarand][]
-
-* thanks to everyone else who has contributed to the codebase!
+- [@jvimedia][], who previously ran the purplapp.eu web server.
+- [@jessicadennis][], who provided usability improvements.
 
 ## License
 
 Purplapp is licensed under the [MIT License](http://opensource.org/licenses/MIT).
 
 [@charlw]: https://github.com/charlw
+[pca]: http://appdotnetwiki.net/w/index.php?title=Post_Count_Achievements
 [@ciarand]: https://github.com/ciarand
 [@humd]: https://github.com/humd
 [@jvimedia]: https://github.com/jvimedia
+[@jessicadennis]: https://github.com/jessicadennis
