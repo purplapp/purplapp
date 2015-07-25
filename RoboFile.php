@@ -44,12 +44,22 @@ class RoboFile extends TaskList
     {
         $this->stopOnFail(true);
 
-	$this->say("whoami = " . `whoami`);
-	$this->say('$USER = ' . getenv("USER"));
+        $dir = sys_get_temp_dir();
+        $cache  = "{$dir}/tmp/cache";
+        $except = [
+            "{$cache}/assetic",
+            "{$cache}/twig",
+            "{$cache}/assetic/.gitignore",
+            "{$cache}/twig/.gitignore",
+        ];
 
-        $cache  = __DIR__ . "/tmp/cache";
-	$this->taskDeleteDir($cache)->run();
-	$this->taskFileSystemStack()
+        $files = array_diff(
+            glob("./cache/{assetic/,twig/,}*", GLOB_BRACE),
+            $except
+        );
+
+        $this->taskDeleteDir($cache)->run();
+        $this->taskFileSystemStack()
                 ->mkdir($cache)
                 ->mkdir("{$cache}/assetic")
                 ->mkdir("{$cache}/twig")
