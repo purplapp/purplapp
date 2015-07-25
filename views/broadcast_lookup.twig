@@ -103,14 +103,16 @@
             </tr>
         {% endif %}
 
-        <tr>
-            <td>Owner:</td>
-            <td>
-                <a href="{{ alpha_domain ~ channel.owner.username }}">
-                    @{{ channel.owner.username }}
-                </a>
-            </td>
-        </tr>
+	{% if channel.owner.username is defined %}
+            <tr>
+                <td>Owner:</td>
+                <td>
+                    <a href="{{ alpha_domain ~ channel.owner.username }}">
+                        @{{ channel.owner.username }}
+                    </a>
+                </td>
+            </tr>
+        {% endif %}
     </table>
 </div>
 
