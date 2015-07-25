@@ -66,16 +66,16 @@ need to change all the mentions of purplapp [in this block of
 code](https://github.com/purplapp/purplapp/blob/master/start/routes.php#L274-L326)
 to your own organisation/user and repository name.
 
-**App configuration is handled via a `.config` file in the root. Copy the
-`.config.example` file and fill in your details there.**
+**App configuration is handled via a `.env` file in the root. Copy the
+`.env.example` file and fill in your details there.**
 
-If you're developing on Purplapp, make sure that in the `.config` file it's set
+If you're developing on Purplapp, make sure that in the `.env` file it's set
 to `DEBUG=1`, not `DEBUG=0`; on a production server, make sure it's set to
 `DEBUG=0` to avoid potential revealing of sensitive data (client secrets, etc.)
 to the end user.
 
 If you'd like push notifications via Pushover, fill out the appropriate settings
-in `.config`.
+in `.env`.
 
 ### Server
 

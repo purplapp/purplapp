@@ -25,7 +25,7 @@ require app_dir() . "/vendor/autoload.php";
 
 ErrorHandler::register();
 
-Dotenv::load(APP_DIR, ".config");
+Dotenv::load(APP_DIR);
 
 Dotenv::required([
     'CLIENT_ID',
