@@ -93,7 +93,7 @@ $app->register(new SessionServiceProvider(), [
 ]);
 
 $app->register(new MonologServiceProvider(), [
-    "monolog.logfile" => STDERR,
+    "monolog.logfile" => "php://stderr",
     "monolog.name"    => "purplapp",
 ]);
 

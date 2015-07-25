@@ -51,18 +51,14 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "scripts": {
+        "compile": [
+            "./bin/robo clean",
+            "./bin/robo init",
+            "./bin/robo assets"
+        ]
+    },
     "extra": {
-        "heroku": {
-            "document-root": "public",
-            "index-document": "index.php",
-            "framework": "silex",
-            "compile": [
-                "touch .config",
-                "./bin/robo clean",
-                "./bin/robo init",
-                "./bin/robo assets"
-            ]
-        },
         "asset-installer-paths": {
             "bower-asset-library": "assets"
         }

@@ -44,21 +44,16 @@ class RoboFile extends TaskList
     {
         $this->stopOnFail(true);
 
+	$this->say("whoami = " . `whoami`);
+	$this->say('$USER = ' . getenv("USER"));
+
         $cache  = __DIR__ . "/tmp/cache";
-        $except = [
-            "{$cache}/assetic",
-            "{$cache}/twig",
-            "{$cache}/assetic/.gitignore",
-            "{$cache}/twig/.gitignore",
-        ];
-
-        $files = array_diff(
-            glob("./cache/{assetic/,twig/,}*", GLOB_BRACE),
-            $except
-        );
-
-        $this->say(sprintf("Clearing %d cached files", $files));
-        $this->taskDeleteDir($files)->run();
+	$this->taskDeleteDir($cache)->run();
+	$this->taskFileSystemStack()
+                ->mkdir($cache)
+                ->mkdir("{$cache}/assetic")
+                ->mkdir("{$cache}/twig")
+                ->run();
 
         $this->say("Clearing compiled CSS / JS");
 
@@ -172,8 +167,6 @@ class RoboFile extends TaskList
 
         $app = $this->app();
 
-        $this->resetPermissionsOnTmpDir();
-
         /** @var Twig_Environment $twig */
         $twig = $app["twig"];
         $this->say("Clearing twig cache files");
@@ -183,27 +176,10 @@ class RoboFile extends TaskList
         foreach (glob($app["twig.path"] . "/*.twig") as $template) {
             $twig->loadTemplate(basename($template));
         }
-
-        $this->resetPermissionsOnTmpDir();
     }
 
     private function app()
     {
         return require __DIR__ . "/bootstrap.php";
-    }
-
-    private function resetPermissionsOnTmpDir()
-    {
-        $this->say("resetting permissions on tmp dir");
-        $this->taskFileSystemStack()
-            ->mkdir([
-                $tmp = __DIR__ . "/tmp",
-                $cache = "{$tmp}/cache",
-                "{$cache}/twig",
-                "{$cache}/assetic",
-            ])
-            ->chown($tmp, getenv("USER") ?: "nobody", true)
-            ->chmod($tmp, 0777, 0022, true)
-            ->run();
     }
 }
