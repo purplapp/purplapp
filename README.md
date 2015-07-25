@@ -8,7 +8,12 @@ Purplapp [![Build Status][ci img]][ci link] [![Code Climate][cc img]][cc link] [
 [ci link]: https://travis-ci.org/purplapp/purplapp
 [cc link]: https://codeclimate.com/github/purplapp/purplapp
 
->An [App.net](https://app.net/) statistics application.
+An [App.net](https://app.net/) statistics application.
+
+## Status
+
+Maintenance mode. If something is broken, open an issue here or let @ciarand
+know.
 
 ## Features
 
@@ -133,14 +138,20 @@ a brief description of the most common tasks:
 
 * original concept by [charlw](https://github.com/charlw)
 
-* majority of code written by [charlw](https://github.com/charlw),
-  [ciarand](https://github.com/ciarand) and [humd](https://github.com/humd)
+* majority of code written by [@charlw][], [@ciarand][] and [@humd][]
 
-* hosting of [purplapp.eu](http://purplapp.eu) by
-  [jvimedia](https://github.com/jvimedia)
+* hosting of [purplapp.eu](http://purplapp.eu) originally generously provided
+  by [@jvimedia][]
+
+* continued maintenance and hosting by [@ciarand][]
 
 * thanks to everyone else who has contributed to the codebase!
 
 ## License
 
 Purplapp is licensed under the [MIT License](http://opensource.org/licenses/MIT).
+
+[@charlw]: https://github.com/charlw
+[@ciarand]: https://github.com/ciarand
+[@humd]: https://github.com/humd
+[@jvimedia]: https://github.com/jvimedia
