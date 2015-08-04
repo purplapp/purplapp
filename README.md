@@ -147,7 +147,8 @@ The Purplapp development team currently consists of:
 
 In the past, the Purplapp development team has consisted of:
 
-- [@charlw][], who had the initial idea and wrote much of the original code.
+- [@charlw][], who had the initial idea, wrote the original implementation, and
+  continued to make improvements after the first major refactoring.
 - [@humd][], who performed the first major refactoring of the codebase.
 
 ## Contributors
