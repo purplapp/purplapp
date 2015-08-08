@@ -13,7 +13,7 @@ An [App.net](https://app.net/) statistics application.
 ## Status
 
 Maintenance mode. If something is broken, open an issue here or let 
-[@ciarand]() know.
+[@ciarand][] know.
 
 ## Features
 
