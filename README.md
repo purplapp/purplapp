@@ -12,8 +12,8 @@ An [App.net](https://app.net/) statistics application.
 
 ## Status
 
-Maintenance mode. If something is broken, open an issue here or let @ciarand
-know.
+Maintenance mode. If something is broken, open an issue here or let 
+[@ciarand][] know.
 
 ## Features
 
@@ -155,7 +155,8 @@ In the past, the Purplapp development team has consisted of:
 
 The project has additionally been helped out by the following people:
 
-- [@jvimedia][], who previously ran the purplapp.eu web server.
+- [@jvimedia][], who previously ran the purplapp.eu web server and helped with 
+  some aspects of development.
 - [@jessicadennis][], who provided usability improvements.
 
 ## License

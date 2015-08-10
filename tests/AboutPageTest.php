@@ -62,7 +62,6 @@ class AboutPageTest extends WebTestCase
         $contributors = [
             ["purplapp", $alpha],
             ["ciarand", $alpha],
-            ["cwelkin", $twitter],
             ["jvimedia", $alpha],
             ["hu", $alpha],
             ["remus", $alpha],
