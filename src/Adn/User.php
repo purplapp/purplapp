@@ -36,7 +36,7 @@ class User
 
     public function htmlBio()
     {
-        if (isset($this->description)) {
+        if (isset($this->bio)) {
             if (!$this->htmlBio) {
                 $this->htmlBio = $this->bio->html();
             }
